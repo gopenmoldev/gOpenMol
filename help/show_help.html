@@ -1,0 +1,823 @@
+<HTML>
+<HEAD>
+<TITLE>show command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<pre>
+**************************************************************************
+                             show command
+                        Leif Laaksonen CSC 2001
+                        Timm Uhlmann       2003
+                        Eero H&auml;kkinen  CSC 2005
+**************************************************************************
+
+<a name="cputime">#
+# Show used cpu time (not on Windows 95)
+#
+<b>
+show   cputime
+</b>
+<a name="process">#
+# Show process information (not on Windows)
+#
+<b>
+       process
+</b>
+<a name="time">#
+# Show current time
+#
+<b>
+       time
+</b>
+<a name="savestatus">#
+# Show save status (if program needs saving of structure
+# before exit)
+#
+<b>
+show   savestatus
+</b><a name="end1">
+
+# These commands return values which can be used as input to new commands.
+
+<a name="graphics">#
+# Return a value showing the user if the graphics is available
+# Return value == 0 means no graphics, != 0 means X-Windows is on
+#
+<b>
+       graphics
+</b>
+<a name="redisplay">#
+# Return redisplay method (returns slow or fast).
+#
+<b>
+       redisplay
+</b>
+<a name="mlinewidth">#
+# Return molecule stick display line width
+#
+<b>
+       mlinewidth
+</b>
+<a name="bindirectory">#
+# Return directory where the binary files are
+#
+<b>
+       bindirectory
+</b>
+<a name="datadirectory">#
+# Return directory where the data files are
+#
+<b>
+       datadirectory
+</b>
+<a name="helpdirectory">#
+# Return directory where the help files are
+#
+<b>
+       helpdirectory
+</b>
+<a name="homedirectory">#
+# Return login directory
+#
+<b>
+       homedirectory
+</b>
+<a name="bgcolour"><a name="bgcolor">#
+# Return background colour as a rgb triplet float float float
+#
+<b>
+       bgcolour
+       bgcolor
+</b>
+<a name="colourmapping"><a name="colormapping">#
+# Return colour mapping type. The two types are: "texture" (1D texture) and
+# "rainbow".
+#
+<b>
+       colourmapping
+       colormapping
+</b>
+<a name="nearplane">#
+# Return distance to near clipping plane
+#
+<b>
+       nearplane   step
+                   value
+</b>
+<a name="farplane">#
+# Return distance to far clipping plane
+#
+<b>
+       farplane    step
+                   value
+</b>
+<a name="viewangle">#
+# return perspective projection viewing angle
+#
+<b>
+       viewangle
+</b>
+<a name="drawbuffer">#
+# Return drawing buffer (back/front)
+#
+<b>
+       drawbuffer
+</b>
+<a name="cylinderquality">#                    
+# Return cylinder quality factor
+#
+<b>
+       cylinderquality
+</b>
+<a name="spherequality">#
+# Return sphere quality factor
+#
+<b>
+       spherequality
+</b>
+<a name="colourtype"><a name="colortype">#
+# Return color type (returns either colour or gray)
+#
+<b>
+       colourtype
+       colortype
+</b>
+<a name="colormapping"><a name="colourmapping">#
+# Return color mapping (returns either texture or rainbow)
+#
+<b>
+       colourmapping
+       colormapping
+</b>
+<a name="rainbow">#
+# Return a "rainbow" colour from a scale factor (blue ... green ... red)
+#
+<b>
+       rainbow Fvalue
+</b>
+<a name="molstructures">#
+# Return number of molecular structures defined
+#
+<b>
+       molstructures
+</b>
+<a name="numatoms">#
+# Return number of atoms in atom structure Istructure
+#
+<b>
+       numatoms         Istructureindex
+</b>
+<a name="atomnumber">#
+# Return atom number for Seg Res Atm
+#
+<b>
+       atomnumber       Seg Res Atm Istruct
+</b>
+<a name="licosphere">#
+# Return licorice sphere radius
+#
+<b>
+       licosphere
+</b>
+<a name="licocylinder">#
+# Return licorice cylinder radius
+#
+<b>
+       licocylinder
+</b>
+<a name="numframes">#
+# Return number of frames in the trajectory file
+#
+<b>
+       numframes
+</b>
+<a name="rmsfluctuation">#
+# Return number of root mean square fluctuation 
+# atoms in the list
+#
+<b>
+       rmsfluctuation   length
+</b>
+#
+# Return root mean square fluctuation (total,x,y,z) for 
+# index Irmsfluctuation
+#
+<b>
+                         Irmsfluctuation index
+</b>
+#
+# Return real atom index from rmsf list for Irmsfatomindex
+#
+<b>
+                         atomindex  Irmsfatomindex
+</b>
+<a name="system">#
+# Return the system translation state (translation on or off)
+# If on the system will be translated around origo
+#
+<b>
+       system           translation
+</b>
+<a name="status">#
+# Return structure selection status (= 0 , not selected , = 1 , selected)
+#
+<b>
+       status IStructureNumber
+</b>
+<a name="selection">#
+# Show if the selected coordinates are ative or not (returns on or off)
+#
+<b>
+       selection
+</b>
+<a name="ldpstatus">#
+# Show ldp status if the LDP plot is on or off
+#
+<b>
+       ldpstatus
+</b>
+<a name="displaylists">#
+# Show display list usage status (0 = not in use/1 = in use)
+#
+<b>
+       displaylists
+</b>
+#
+# Return a display list type name list
+#
+<b>
+       displaylists types
+</b>
+#
+# Show type specific display list usage status
+# (0 = not in use/1 = in use)
+#
+<b>
+       displaylists default
+       displaylists TypeName
+</b>
+<a name="atom">#
+# For Iatomindex in Istructureindex:
+#
+# Return segment, residue and atom names 
+#        residue number
+#        coordinates (x y z)
+<b>
+       atom   segmentname    Iatomindex Istructureindex
+              residuename    Iatomindex Istructureindex
+              atomname       Iatomindex Istructureindex
+              resnumber      Iatomindex Istructureindex
+              coordinates    Iatomindex Istructureindex
+</b>
+# Return atom partial charge
+#        nuclear charge
+#        covalent radius
+#        B value
+#        gbasis set
+<b>
+              charge         Iatomindex Istructureindex
+              nuclearcharge  Iatomindex Istructureindex
+              covar          Iatomindex Istructureindex
+              bvalue         Iatomindex Istructureindex
+              gbasis         Iatomindex Istructureindex
+</b>
+# Return bond list
+#        hydrogen bond list
+<b>
+              connectivity   Iatomindex Istructureindex
+              hbconnectivity Iatomindex Istructureindex
+</b>
+# atom display state
+#
+# Return atom display  state (0 = atom will not be shown, 1 = will be shown)
+#        atom cpk      state (0 = cpk not be shown,       1 = will be shown)
+#        atom cpk      scale
+#        atom licorice state (0 = licorice not be shown,  1 = will be shown)
+#        atom colour
+<b>
+              displaystate   Iatomindex Istructureindex
+              cpkstate       Iatomindex Istructureindex
+              cpkscale       Iatomindex Istructureindex
+              licoricestate  Iatomindex Istructureindex
+              colour         Iatomindex Istructureindex
+              color          Iatomindex Istructureindex
+</b>
+# atom parameter file data connected to an atom
+#
+# Return atom type number
+#        bonding radius
+#        van der Waals spheres radius
+#        sphere radius
+#        value used in global search for bonds
+#        value (emin,rmin) used in the calculation of
+#          van der Waals and electrostatic energy
+#        atom polarizabilities
+#        hydrogen bond identity
+#          acceptor            (A)
+#          donor               (D,E)
+#          not hydrogen bonded (N)
+#        CHARMm atom type
+<b>
+              type           Iatomindex Istructureindex
+              bnd            Iatomindex Istructureindex
+              vdw            Iatomindex Istructureindex
+              plu            Iatomindex Istructureindex
+              global         Iatomindex Istructureindex
+              rmin           Iatomindex Istructureindex
+              emin           Iatomindex Istructureindex
+              patom          Iatomindex Istructureindex
+              mass           Iatomindex Istructureindex
+              cnct           Iatomindex Istructureindex
+              hbond          Iatomindex Istructureindex
+              atype          Iatomindex Istructureindex
+</b>
+# Return atom force
+#        atom velocity
+<b>
+              force          Iatomindex Istructureindex
+              velocity       Iatomindex Istructureindex
+</b>
+# general data
+#
+# Return cross length used for atom display
+#        atom neighbour search window in atoms
+#        atom selection mode (residue/atom)
+#        atom reconnectivity
+#          0 = bonds are not recalculated between frames
+#          1 = bonds are recalculated between frames
+#        atom hydrogen bond reconnectivity
+#        maximum number of connections (bonds) an atom can have
+<b>
+              cross
+              window
+              selection
+              reconnectivity
+              hbreconnectivity
+              maxconnectivity
+</b>
+# Return list of atom symbol name, element index, colour,
+# basis set and covar radius.
+<b>
+              info           AtomName
+
+</b>
+<a name="atom_identify">#
+# show atom identify stage on/off (1/0)
+#
+<b>
+              identify
+</b>
+<a name="atom_structure">#
+# Show atom structure related information
+#
+# Return number of atom structures
+# For Istructureindex,
+# return number of atom in the structure
+#        structure filename
+#        strucrure name
+#        
+<b>
+              structure define
+                        atoms    Istructureindex
+                        filename Istructureindex
+                        name     Istructureindex
+<a name="bondstyle">#
+# show bond style (smooth/half)
+#
+<B>
+       bondstyle
+</B>
+<a name="contour">#
+# Show various contour related information
+#
+# Return number of contours
+# For Icontourindex,
+# return contour file name
+#        contour name
+#        header information (xdim ydim zdim xmin xmax ymin ymax zmin zmax)
+#        cell dimension (xmin xmax ymin ymax zmin zmax xdim ydim zdim)
+#          where the xdim, ydim and zdim are the number of points in
+#          the x, y and z direction.
+#        number of levels
+#        contour type
+#        contour transparency
+#        minimum and maximum values for the contour data
+#        show display state
+#        smoothing state (1 = on , 0 = off)
+#        structure the contour is combined (glued) to
+#        mapping
+#          {ContourName 0} if not mapped
+#          {ContourName n min_1 max_1 min_2 max_2 ... min_n max_n}
+#          where n is the number of levels if mapped
+#  
+<b>
+       contour          defined
+                        filename     Icontourindex
+                        name         Icontourindex
+                        header       Icontourindex
+                        cube         Icontourindex
+                        cell         Icontourindex
+                        levels       Icontourindex
+                        type         Icontourindex
+                        transparency Icontourindex
+                        minimum      Icontourindex
+                        maximum      Icontourindex
+                        display      Icontourindex
+                        smooth       Icontourindex
+                        structure    Icontourindex
+                        mapping      Icontourindex
+</b>
+#
+# Return contour level cullface state (on, off)
+#                      value (value red green blue)
+#
+<b>
+                        values       IContour IContourLevel
+                        cullface     IContour IContourLevel
+</b>
+#
+# Show a direction of clip plane normal of a line type contour.
+# Can be <b>x</b>, <b>y</b> or <b>z</b>.
+# Show a position of clip plane of a line type contour on the axis.
+#
+<b>
+                         clipplane direction IContour IContourLevel
+                                   position  IContour IContourLevel
+</b>
+#
+# It is possible to extract the polygon data from the <b>last</b>
+# displayed surface(s) using the <b>polygon</b> command.
+# The first command gives the number of polygons (triangles)
+# and the second gives:
+# x1,y1,z1,nx1,ny1,nz1,x2,y2,z2,nx2,ny2,nz2,x3,y3,z3,nx3,ny3,nz3,
+# c1,c2,c3
+# where xi,yi,zi are the corned points of the triangle,
+# nxi,nyi,nzi are the surface normals at the corners and
+# c1, c2 and c3 are a colour value between 0.0 and 1.0,
+# which goes from blue to red through green. The entry number
+# EntryIndex is the index to the data structure.
+# The method option gives either <b>direct</b> or <b>save</b>
+# where <b>direct</b> means that the polygons are are not saved
+# and <b>save</b> means that the polygons are saved to be retried
+# using the <b>data</b> option 
+#
+<b>
+                         polygon   entries         IContourLevel IContour
+                                   data     IEntry IContourLevel IContour
+                                   method
+</b>
+<a name="cutplane">#
+# Show cutplane properties
+#
+# shows cutplane smoothing for the yz, xz and xy planes
+#                damping or the constant with which the value between 0.0 and 1.0 
+#                is multiplied
+#                type returns the current type for the yz, xz and xy planes.
+#                The return value can be 2d or 3d.
+#                xyzN return xyz clipping plane state
+#
+<b>
+       cutplane         smooth   yz
+                                 xz
+                                 xy
+                        damping
+                        type
+                        xyz1
+                        xyz2
+                        xyz3
+</b>
+<a name="cell">#
+# Return cell colour
+#             dimensions (a b c alpha beta gamma)
+#             line width in pixels
+#             translation or position (x y z)
+#
+<b>
+       cell              colour
+                         color
+                         dimensions
+                         linewidth
+                         translation
+                         position
+</b>
+<a name="gbasis">#
+# Return Gaussian basis sets
+#                 tag name for Ivalue index
+#                 entry    for Ivalue index
+#
+<b>
+       gbasis           sets
+                        tag       Ivalue
+                        entry     Ivalue
+</b>
+<a name="plumber">#
+# Display information about plumbers.
+#  Show total number of plumbers
+#  Show plumber display state (0 = off, 1 = on)
+#  Show plumber colour (three floats, red, green and blue)
+#  Show index of structure to which the plumber is tied to
+#  Show indeces of plumber atoms (comma separated range list, empty
+#      list for unglued plumbers)
+#  Show plumber type (one of ribbon, tube, fhelix, shelix, arrow,
+#      strand, trace)
+#
+<b>
+       plumber           count
+                         dislaystate
+                         colour       IPlumber
+                         color        IPlumber
+                         structure    IPlumber
+                         atoms        IPlumber
+                         type         IPlumber
+</b>
+<a name="material">#
+# Return material specular
+# Return material shininess
+#
+<b>
+       material         specular   red
+                                   green
+                                   blue
+                        shininess
+</b>
+<a name="light">#
+# Return light diffuse
+# Return light position (result will be one of c, n, ne, e, se, s, sw, w, nw)
+#
+<b>
+       light            diffuse   red
+                                  green
+                                  blue
+                        position
+</b>
+<a name="monitor">#
+# Return monitor distance state 
+#                         colour for Index
+#        list of atoms defining the list
+#        number of distance time series
+#
+<b> 
+       monitor          distance  state
+                                  colour Index
+                                  color  Index
+                                  type    Index
+                                  list
+                                  timeseries
+</b>
+#
+# Return monitor angle    state 
+#                         colour for Index
+#        list of atoms defining the list
+#        number of distance time series
+#
+<b>
+       monitor          angle     state
+                                  colour Index
+                                  color  Index
+                                  type    Index
+                                  list
+                                  timeseries
+</b>
+#
+# Return monitor torsion  state 
+#                         colour for Index
+#        list of atoms defining the list
+#        number of distance time series
+#
+<b>
+       monitor          torsion   state
+                                  colour Index
+                                  color  Index
+                                  type    Index
+                                  list
+                                  timeseries
+</b>
+<a name="output">#
+# Display text stack containing all printed messages.
+#
+<b>
+       output
+</b>
+<a name="rdf">#
+# Return radial distribution function
+# calculate and return average from collected entries
+# return number of discrete observations (bins)
+# return status
+<b>
+       rdf               average
+                         observations
+                         points
+                         status
+</b>
+<a name="trajectory">#
+# Return number of trajectory frames
+# return status value to see if there is a trajectory defined
+# return trajectory file name
+# return trajectory file type string
+# return trajectory display parameters (first frame, last frame, step frame)
+# return number of current displayed frame
+# display frame number (on) or turn frame number display off
+# return fast (0) or slow (1) retrieve mode for formatted trajectory files
+#
+<b>
+       trajectory       frames
+                        defined
+                        filename                         
+                        type
+                        display
+                        current
+                        fid
+                        action
+</b>
+<a name="gromos96">#
+# Return the Gromos96 coordinate amplifier with which the coordinate
+# values will be multiplied
+#
+<b>
+       gromos96          coordamplifier
+</b>
+<a name="traces">#
+# Return number of trace sets defined
+#
+<b>
+       traces
+</b>
+<a name="rotation">#
+# Return rotations state
+#
+<b>
+       rotation         state
+</b>
+<a name="translation">#
+# Return translation array (x, y , z) and state  (1 == on , 0 == off)
+#
+<b>
+       translation      array
+                        state 
+</b>
+<a name="scaling">#
+# Return scaling type applied. It is possible to scale local
+# objects and thus break the chemistry/physics. This can be used purely
+# for display purposes. 
+# The scaling states are: "global" apply same scaling to all objects
+#                         "local" the scaling is applied only on 
+#                         the selected objects
+#
+<b>
+       scaling           type
+</b>
+<a name="projection">#
+# Show the used projection method
+# 0 = perspective
+# 1 = orthographic
+#
+<b>
+        projection
+</b>
+<a name="window">#
+# Show window style. Result is either single or multi.
+# Show window defined. Result is currently active/defined number of windows.
+# Show window redraw/update method. Result is either automatic or manual.
+# Show window parameters for window WinID.
+# Returns a four item list of the window location (x, y) and
+# window width and height.
+#
+<b>
+        window    style
+                  defined
+                  redraw
+                  update
+                  parameters WinID
+</b>
+<a name="spair">#
+# Show pairwise (crossedeye stereo) parameters
+# status returns either "on" or "off" depending on if the display is on or off
+# angle returnes the angle in which the pair is "tilted"
+# distance gives the distance with which the pair is translated to each other
+#
+<b>
+       spair      angle
+                  distance
+                  state
+</b>
+<a name="quadstereo">#
+# Hardware stereo is currently available only on a small number
+# of display devices. Inside gOpenMol it's called quadstereo.
+#
+# Angle is the half angle with which the structures are tilted.
+# State gives the status of the quadstereo. The return values are
+# "on" and "off".
+# Available gives a value "1" if hardware stereo is availabel and 
+# "0" if it is not.
+# 
+<b>
+       quadstereo angle
+                  state
+                  available
+</b>
+<a name="gtext">#
+#
+# show global text string
+#
+<b>
+       gtext
+</b>
+<a name="release">#
+# show gopenmol release
+#
+<b>
+       release
+</b>
+<a name="version">#
+# show gopenmol version
+#
+<b>
+       version
+</b>
+<a name="os">#
+# show operating system name
+#
+<b>
+       os
+</b>
+<a name="output">#
+# display output in widget
+#
+<b>
+       output
+</b>
+<a name="status">
+#
+#
+#
+#
+<b>
+       status struct
+</b>
+<a name="cscale">
+#
+# 
+# show colorscale
+#
+<b>
+        cscale     bins
+                   mininum
+                   maximum
+                   state
+</b>
+<a name="transformation">
+#
+#
+# current transformation type (local/global)
+#
+<b>
+       transformation    type
+</b>
+<a name="atomstack">#
+#
+# show atom stack
+#
+<b>
+         atom            stack
+</b>
+<a name="rediduestack">#
+#
+# show residue stack
+#
+<b>
+         residue         stack
+</b>
+<a name="segmentstack">#
+#
+# show segment stack
+#
+<b>
+          segment        stack
+</b>
+<a name="vector">#
+# show vector info
+#
+<b>
+        vector
+</b>
+<a name="cluster">#
+# show cluster status
+#
+<b>
+        cluster status
+</b>
+<a name="sizeofsystem">#
+# show size of the system
+#
+<b>
+        sizeofsystem
+</b>
+<a name="end">
+**************************************************************************
+LUL/2005
+**************************************************************************
+</pre>
+</BODY>
+</HTML>
+

@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<TITLE>Export command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                             export command
+                        Leif Laaksonen CSC 1996
+**************************************************************************
+
+<a name="bbdihedrals">#
+# export dihedral (backbone) angles for a protein
+#
+<b>
+expo$rt  bbdi$hedrals     File.Name
+</b>
+#
+# export coordinates in various format
+# the structure number (Istruct) need also to be defined
+# (1) Ball & Stick, (2) CHARMM/CHARMm, (3) CHARMM free,
+# (4) Karplus = CHARMM, (5) OPENMOL, (6) PDB,
+# (7) PDBQ (AutoDock), (8) TINKER xyz, (9) UHBD (qcd), 
+# (10) User definable, (11) Simple xyz
+#
+<b>
+         coor$dinates  Istruct   bands$tick File.Name 
+                                            File.Name  disp$laymask
+                                 char$mm    File.Name
+                                            File.Name  disp$laymask
+                                 free       File.Name
+                                            File.Name  disp$laymask
+                                 karp$lus   File.Name
+                                            File.Name  disp$laymask
+                                 open$mol   File.Name
+                                            File.Name  disp$laymask
+                                 pdb        File.Name
+                                            File.Name  disp$laymask
+                                 pdbq       File.Name
+                                            File.Name  disp$laymask
+                                 txyz       File.Name
+                                            File.Name  disp$laymask
+                                 uhbd       File.Name
+                                            File.Name  disp$laymask
+                                 user       File.Name
+                                            File.Name  disp$laymask
+                                 xyz        File.Name
+                                            File.Name  disp$laymask
+</b>
+<a name="input">#
+# export input (raw) input to external programs
+# GAMESS, extended Huckel program ICON8, MOPAC,
+# OpenMol and Probesurf
+#
+<b>
+         inpu$t    game$ss     IStrNum  File.name
+                   icon$8      IStrNum  File.name
+                   mopa$c      IStrNum  File.name
+                   open$mol    IStrNum  File.name
+                   prob$esurf  IStrNum  File.name
+</b>
+<a name="cluster">#
+# export cluster matrix
+#
+<b>
+         clus$ter         File.Name  "File label text"
+</b>
+<a name="correlation">#
+# export correlation array
+#
+<b>
+         corr$elation     File.Name
+</b>
+<a name="model">#
+# export model file (default gOpenMol structure file)
+#
+<b>
+         mode$l           File.Name
+</b>
+<a name="distance">#
+# export distance time series (index and file name)
+#
+<b>
+         dist$ance        list       Ivalue   File.Name
+         dist$ance        seri$es    Ivalue   File.Name
+</b>
+<a name="angle">#
+# export angle time series (index and file name)
+#
+<b>
+         angl$e           list       Ivalue   File.Name
+         angl$e           seri$es    Ivalue   File.Name
+</B>
+<a name="torsion">#
+# export torsion time series (index and file name)
+#
+<b>
+         tors$ion         list       Ivalue   File.Name
+         tors$ion         seri$es    Ivalue   File.Name
+</b>
+<a name="rdf">#
+# export radial distribution function 
+#
+<b>
+         rdf              File.name
+</b>
+<a name="msdisplacement">#
+# export mean square displacement data
+#
+<b>
+         msdi$splacement  File.Name
+</b>
+<a name="rmsfluctuation">#
+# export root mean square fluctuation data
+#
+<b>
+         rmsf$luctuation  File.name
+</b><a name="end">
+**************************************************************************
+LUL/1996
+**************************************************************************
+</PRE>
+</BODY>
+</HTML>
+

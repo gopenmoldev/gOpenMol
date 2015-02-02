@@ -1,0 +1,22 @@
+##############################################################################
+#                        Copyright (c) 2003 - 2004 by:
+#          Leif Laaksonen, CSC - Scientific Computing Ltd, ESPOO, FINLAND 
+#                      Confidential unpublished property of 
+#                              Leif Laaksonen   
+#                            All rights reserved
+#
+#          Coded by: Eero Häkkinen
+##############################################################################
+
+top_builddir    = .
+top_srcdir      = @top_srcdir@
+builddir        = @builddir@
+srcdir          = @srcdir@
+
+all: objects depends gomapi ;
+
+# Some make systems do not support empty target lists.
+OBJECTS  = gom_dummy_1
+OBJLISTS = gom_dummy_2
+
+# Files config.mk and unix/make/compile will be appended to this.

@@ -1,0 +1,114 @@
+<HTML>
+<HEAD>
+<TITLE>Contour Manager Widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+<P>
+**************************************************************************<BR>
+<B>
+Contour Manager Widget<BR>
+Leif Laaksonen CSC 1996<BR>
+</B>
+**************************************************************************<BR>
+
+<P>
+This is the main contour display widget. Through this widget you can control 
+the contour files, isosurface values, colours, surface smoothing and many 
+more things. The data is defined as scalar values in a grid box. 
+Before you can display any isosurface contour you have to read in 
+the molecular system for which the grid data has been generated 
+(this is usually a coordinate data file).
+</P>
+<P>The steps to do:</P>
+<OL>
+
+<LI>Read the atom coordinate information (through import coordinates) for 
+    your molecular system.</LI>
+<LI>Open the contour manager widget (if it is not open alredy).</LI>
+<LI>The contour data files are usually *.plt files (you can of course 
+    use your own file name extension). Click on the "Browse" button
+    to open the file browser to see the *.plt files. 
+    Double click on the file (or a single click and then 
+    press the "Open" button) to select the file.</LI>
+<LI>Press the "Import file" button to read in the grid data to gOpenMol.</LI>
+</ol>
+
+<P><IMG SRC="pict/contour_control1.gif"></P>
+<P>
+File browser widget used to select a plot (*.plt) file:
+</P>
+<P><IMG SRC="pict/contour_control2.gif" WIDTH=424 HEIGHT=263></P>
+
+<p>After importing the plot file:</p>
+
+<P><IMG SRC="pict/contour_control11.gif"></P>
+
+<ol>
+<LI>Write the isocontour value into the input field (starting upwards).</LI>
+<LI>Click on the "Colour(number)" button to choose a colour for the surface</LI>
+<LI>If you want to map (colour) the surface according to the grid values
+    of an other grid (*.plt) file press the <a href="contour_mapping_widget.html">"Mapping" button</a>.
+<LI>The contour surface renderer can be used in three different modes:
+    <ul>
+	<li><b>direct</b> mode where the polygons are drawn directly on the screen,</li>
+    <li><b>cached</b> mode where the polygons are saved into memory drawn from 
+    memory,</li>
+    <li><b>display</b> lists are used for the display of the polygons.</li>
+    <li>the last displayed contour polygon
+	    data information is saved in an array and can be retrieved with the
+		<a href="show_help.html">show command</a> in <b>direct</b> and <b>cached</b> 
+    modes.</li>
+	</ul>
+<LI>Press the "Apply" button"!</LI>
+</OL>
+<P>
+After defining the individual contour calues it is possible to change the surface details:
+</P>
+
+<P><IMG SRC="pict/contour_control12.gif"></P>
+
+<UL>
+<LI>If you want the surface to be smoothed press the "Details" button.</LI>
+<LI>If you want to make the surface transparent press the "Details" button.</LI>
+<LI>If you want to switch between mesh and solid type of surfaces press 
+    the "Details" button.</LI>
+<LI>If you want to turn a particular surface off press the "Details" button</LI>
+</UL>
+
+<P>
+You can change either the isocontour value, colour, smoothing by
+pressing the "Details" button for the chosen isocontour value.
+</P>
+<P>
+You can also manipulate your mesh data files with the "contman" program. 
+With the "contman" program you can add or sustract two contour files 
+(A = B + C) or you can make a smooth transition from one contour file 
+to an other using A = w * B + (1 - w) C, where w is a mixing constant 
+( 0.0 ... 1.0). To have a look at the input to the "contman" 
+program write "contman -h".
+</P>
+
+<P>
+Widget to select the colour for a surface:
+</P>
+<P><IMG SRC="pict/contour_control3.gif" WIDTH=453 HEIGHT=322></P>
+<P>
+Widget to change detailed contour parameters:
+</P>
+<UL>
+<li>Click to set the display state, smoothing state, 
+    contour type (mesh/solid).</li>
+<li>Change the transparency of the surface.</li>
+<li><b>Remember to press the "Apply" button to apply the selection.</b></li>
+</ul>
+
+<P><IMG SRC="pict/contour_control4.gif" WIDTH=258 HEIGHT=270></P>
+<P>
+Line command: see <b><a href="contour_help.html">contour command</a></b>
+</P>
+<P>
+**************************************************************************<br>
+LUL/1996<br>
+**************************************************************************<br>
+</BODY>
+</HTML>

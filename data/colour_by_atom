@@ -1,0 +1,10 @@
+
+# script to colour atoms by their default colouring 
+
+set atom colo *:*:*  cyan     # default
+set atom colo *:*:h* white    # hydrogen
+set atom colo *:*:c* green    # carbon
+set atom colo *:*:o* red      # oxygen
+set atom colo *:*:s* yellow   # sulphur
+set atom colo *:*:n* blue     # nitrogen  
+

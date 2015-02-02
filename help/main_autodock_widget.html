@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<TITLE>AutoDock tools</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+**************************************************************************<br>
+<b>
+AutoDock tools<br>
+Leif Laaksonen CSC 2001<br>
+</b>
+**************************************************************************<br>
+<P>
+This is the main widget for the <b>AutoDock</b> trajectory display and 
+analysis facility.
+<p>
+There are first 4 file readers:
+<p>
+<ul>
+   <li>Read a *.pdbq file or several files(ligans)</li>
+   <li>Read a *.pdbq file (system into which the ligand is docked)</li>
+   <li>Read the AutoDock trajectory (a .tout file)</li>
+   <li>Read an AutoDock log file to extract the included initial
+       and docked coordinate sets. The cruncher creates a set of files
+	   with the coordinates</li>
+</ul>
+<p>
+With an AutoDock trajectory I mean the "ligand.tout" file as in the following:
+<p>
+The traj command which is used in the trajectory output, creates trajectories 
+in two formats, one in PDB format which is written to the log file specified 
+by the -l flag, and one in a raw ASCII format which is written to 
+the standard output. For example, if the command issued was: 
+<p>
+<b>autodock -p ligand.dpf -l ligand.trj.conv.log -c < trj.conv.com > ligand.tout</b> 
+<p>
+the file ligand.trj.conv.log will contain a PDB formatted list of all 
+the trajectory steps, while the ligand.tout file will contain raw ASCII 
+data, with one row for each atom in the ligand, and each column 
+containing data. The command file trj.conv.com contains only the commands:
+<p><em>
+traj ligand.trj<br>
+stop
+</em><p>
+This was taken from Web pages and manuals at: <br>
+http://www.scripps.edu/pub/olson-web/doc/autodock/ 
+<p>
+
+gOpenMol is again calling this .tout file a .trj file but it should
+not be mixed with the original .trj file. A bit confusing I agree!
+To read and display a trajectory from the AutoDock do the following:
+<p>
+<ol>
+<li>First define the file name of the ligand either by directly writing
+    the file and or by using the file browser. Then press the "Import"
+	button to apply the file. It is possible to read several
+    conformations of the ligand by clicking the "Append structure".</li>
+<li>If you also want to include the system (into which the ligand is
+    docked) do the same as in the previous section but for the system.</li>
+<li>Last but not least define the trajectory file. Use the same approach
+    as in the previous sections. Remember to press the "Import" button.</li>
+</ol>
+<p>
+After this you should be able to see the number of frames displayed.
+<p>
+By default the display goes from the first frame to the last with the
+step 1. This can be changed by supplying new values in the respective
+fields.
+<p>
+It is possible to display the trajectory in a loop, one frame at the
+the backwards and forwards or go to the first and last frames.
+<p>
+Frame control:
+<p>
+<UL>
+     <li> <b>|&lt;</b>... go to first frame</li>
+     <li> <b>&lt;</b>... back one frame</li>
+     <li> <b>[]</b>... halt display loop</li>
+     <li> <b>|&gt;</b>... play forward one frame at the time in a loop</li>
+     <li> <b>&gt;</b>... forward one frame</li>
+     <li> <b>&gt;|</b>... go to last frame</li>
+</UL>
+<p>
+There are two trajectory retrieval methods available:
+<ol>
+<il>The <b>fast</b> method uses a pre-calculated index (jump) vector
+    into the trajectory file for the various frames. This method is
+	capable of retrieving a frame at a speed independent of the
+	frame position in the file. However, be careful
+	with this if you move files between Unix and Windows systems!</il>
+<il>The slow method is a "stupid" read process that always reads all 
+    the frames up to the needed frame. This process becomes very
+	slow for big files but it is not sensitive to the characters
+	at the end of the line.</li>
+</ol>
+<p>
+At the bottom of the widget there is also a file writer to write out
+the ligand and system coordinates as *.pdbq files. This is very handy 
+in case you import the atom partial charges and want to write a *.pdbq
+file with the new charges.    
+<p> 
+<img src="pict/autodock_main.gif">
+<p>
+**************************************************************************<br>
+LUL/2001<br>
+**************************************************************************<br>
+</BODY>
+</HTML>

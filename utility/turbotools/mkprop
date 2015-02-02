@@ -1,0 +1,102 @@
+#!/usr/local/bin/perl 
+# 
+# Script for extracting maximum and minimum coord values from TURBOMOLE
+# coord files (in a.u.), useful for constructing plot grids for moloch.
+#
+# Written by Jonas Juselius, 1998
+#
+# $Id: $
+#
+
+	$collect=0;
+
+	$xmin=0.0;
+	$ymin=0.0;
+	$zmin=0.0;
+	$xmax=0.0;
+	$ymax=0.0;
+	$zmax=0.0;
+#
+# How much wider than the min/max values 
+# do we want out box to be?
+#
+	$xwin=3.0;
+	$ywin=3.0;
+	$zwin=3.0;
+#
+# grid density
+#
+	$dens=1.5;
+
+	while (<>) {
+		@_=split;
+		
+		if ( $collect == 0 ) {
+			if ( $_[0]=~/\$coord/ ) {
+				$collect=1;
+			}
+		}
+		else {
+			if ( $_[0]=~/\$.*/ ) {
+				last;
+			}
+			else {
+				if ($_[0] < $xmin) {
+					$xmin = $_[0];
+				}
+				elsif ($_[0] > $xmax) {
+		    		$xmax = $_[0];
+				}
+			
+				if ($_[1] < $ymin) {
+					$ymin = $_[1];
+				}
+				elsif ($_[1] > $ymax) {
+		    		$ymax = $_[1];
+				}	
+			
+				if ($_[2] < $zmin) {
+					$zmin = $_[2];
+				}
+				elsif ($_[2] > $zmax) {
+		    		$zmax = $_[2];
+				}
+			}
+		}
+			
+	}
+
+	
+	$xmax+=$xwin;
+	$xmin-=$xwin;
+	$ymax+=$ywin;
+	$ymin-=$ywin;
+	$zmax+=$zwin;
+	$zmin-=$zwin;
+	
+
+print "\$properties\n";
+print "    trace                              off\n";
+print "    moments                            off\n";
+print "    potential                          off\n";
+print "    cowan-griffin                      off\n";
+print "    localization                       off\n";
+print "    population analyses                off\n";
+print "    plot                               active\n";
+print "    firstorder                         off\n";
+print "    fit                                off\n";
+print "\$grid\n";
+print "    mo density\n";
+print "    origin        .0000  .0000  .0000\n";
+print "    vector1      1.0000  .0000  .0000\n";
+print "    vector2       .0000 1.0000  .0000\n";
+print "    vector3       .0000  .0000 1.0000\n";
+printf("    grid1 points %d range %f %f\n", ($xmax-$xmin)*$dens, $xmin, $xmax);
+printf("    grid2 points %d range %f %f\n", ($ymax-$ymin)*$dens, $ymin, $ymax);
+printf("    grid3 points %d range %f %f\n", ($zmax-$zmin)*$dens, $zmin, $zmax);
+print "    infile=mos\n";
+print "    outfile=grid.dat\n";
+print "\$end\n";
+
+
+# EOF

@@ -1,0 +1,10 @@
+extern int          gomp_SetSelectionCenter(float , float , float);
+extern int          gomp_MoveSelectionCenter(float , float , float);
+extern const float *gomp_GetSelectionCenter(void);
+extern int          gomp_CalcSelectionCenter(void);
+extern int          gomp_UpdateSelectionList(int , int , const int *);
+extern int          gomp_DeleteSelectionList(void);
+extern int          gomp_IsSelectionListEmpty(void);
+extern int          gomp_GetSelectionListLength(int);
+extern const int   *gomp_GetSelectionList(int);
+extern int          gomp_PlotSelectedAtoms(void*,int,int);

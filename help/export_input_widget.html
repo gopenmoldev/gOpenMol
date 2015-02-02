@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<TITLE>export input for external porgrams widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>
+**************************************************************************<br>
+                    export input for external porgrams<br>
+                        Leif Laaksonen CSC 1999<br>
+**************************************************************************<br>
+<P>
+Using this widget it is possible to export (mostly very raw) input files for the
+following programs:
+</P>
+<ul>
+
+   <li> <b>GAMESS</b> (raw input)</li>
+   <li> <b>ICON8</b> Extended Huckel program (quite complete)</li>
+   <li> <b>MOPAC</b> (raw input)</li>
+   <li> <a href="appendix.html#PROBESURF">Probesurf</a>, a Connolly type of program 
+        (complete)</li> 
+   <li> <b>User defined</b>. To use this part one needs to program the output
+        rules (Tcl/Tk coding) into the <b>lulMakeUSERinput</b> procedure in the 
+        gopenmolrc.tcl script in the data directory</li>
+</ul>
+<P>
+<h2>ProbeSurf program input</h2>
+
+ProbeSurf program is the program to generate Connolly type of surfaces.
+<P>
+The probe surface program PROBESURF generates a mesh with 
+grid values from 0 to 100. The value 100 is at the vdW value 
+and value 0 is at the vdW + max. probe diameter value. 
+</P>
+<P>
+There are two methods available to calculate the values between 0.0 and 100.0.
+<ul>
+   <li> Direct distance (r) where the value is direct proportional to distance r and</li>
+   <li> Squared distance (r**2) where the value is proportional to the square r**2 of
+        the distance.</li>
+</ul>
+<P>
+It is possible to generate the surface for different probe values. 
+The method is based on the article by R. Voorintholt et al.
+(Voorintholt R., Koster M.T. , Vegter G. , Vriend G.  and 
+Hol W.G.J., "A very fast program for visualizing protein 
+surfaces, channels and cavities", J. Mol. Graphics  7 
+(1989) 243-245) 
+</P>
+<P>
+Currently onlu the <b>Probesurf</b> program has some extra options available. It is 
+possible to define the max and min x-, y- and z- values to define the place of the box
+for which the grid values are calculated. It is also possible to define the number of grid
+points in the x-, y- and z-directions. The max probe radius defines the largest probe
+radius that can be displayed using the current grid values.  
+</P>
+<hr>
+<P>
+Choose the output option and file name (or click the <b>Browse</b> button to browse).
+</P>
+<P>
+<IMG SRC="pict/export_input.gif">
+</P>
+After pressing the <b>Apply</b> button the file is written to disk and a widget containg
+the file input is shown. It is possible to edit the data in the widget and save the new 
+content to disk by clicking the <b>Save</b> button. The file will always have the same 
+name as the original file had.
+<P>
+<IMG SRC="pict/export_input_file.gif">
+</P>
+<P>
+Line command : see <b><a href="export_help.html">export command</a></b>
+<p>
+**************************************************************************<br>
+LUL/1999<br>
+**************************************************************************<br>
+</BODY>
+</HTML>

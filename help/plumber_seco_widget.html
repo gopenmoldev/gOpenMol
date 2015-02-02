@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+<TITLE>Plumber secondary structure widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>
+**************************************************************************<BR>
+<B>
+Protein secondary structure widget<BR>
+Eero H&auml;kkinen CSC 2002<BR>
+</B>
+**************************************************************************<BR>
+
+<P>
+<P>
+This widget display a list of detected secondary structures.
+<ul>
+<li>Helixes and sheet are shown only if PDB file contains appropriate
+SHEET and HELIX lines.</li>
+<li>Protein chain parts which are not part of any helix or sheet are listed as
+LOOPs.</li>
+<li>A trace (shown as TRACE) contains all atoms which are in the same protein chain.</li>
+</ul>
+</P>
+<P><IMG src="pict/plumber_seco.gif"></P>
+<P>
+Select button will extract atom information from secondary structure description
+and insert it into <a href="plumber_widget.html">Plumber widget</a>. It will also
+set the plumber type but there is no restrictions of freedom of choice. So you can
+change the type if you like.
+</P>
+<P>
+The &quot;Create all plumbers of this kind&quot; will create a new plumber for each
+secondary structure description of the same kind. So in situation of the screen-shot
+three helixes would be created.
+<br>
+Plumber options in Plumber widget are left untouched and plumbers are created immediately.
+So you should set the plumber options before clicking this button.
+</P>
+</BODY>
+</HTML>

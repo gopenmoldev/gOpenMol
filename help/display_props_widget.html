@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<TITLE>Display Properties</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>
+**************************************************************************<BR>
+<B>
+Define display properties of the system<BR>
+Leif Laaksonen CSC 1997<BR>
+</B>
+**************************************************************************<BR>
+<P>
+Define a variety of properties connected to how the molecular system
+is displayed on the screen.
+</P>
+<ol>
+<li> Define the background colour. To change colour click at the coloured
+     button.</li>
+
+<li> Define the way how the molecular bonds are displayed.</li>
+     <ul>
+	 <li> Half of the bond distance is displayed in the atom colour
+	      <b>(half)</b>.</li>
+	 <li> The bond is coloured smoothly from one atom colour to the
+	      other atom colour <b>(smooth)</b>.</li>
+	 </ul>
+<li> Define the way the solid surfaces (polygons) are coloured. This
+     property is used when a surface is coloured according to a scale
+	 value between 0.0 and 1.0, where 0.0 is blue, 1.0 is red and 0.5
+	 is green. The two possibilities are:
+	 <ul>
+	 <li>Choose <b>texture</b> to use an one dimensional texture mapping.</li>
+	 <li>or <b>rainbow</b> to use a simple interpolation scheme.</li>
+	 </ul>
+<li> Control into which buffer the drawing is directed. Usually the drawing
+     is directed to the back buffer and the buffers are swapped when
+	 the scene is drawn. Sometimes it is useful to follow the display of the objects
+	 while they are drawn. This vcan be done by directing the draw into the
+	 front buffer. The two possibilities are:
+     <ul>
+	 <li> Draw into the front buffer. This is good for tracing bugs
+	      in the display driver.</li>
+	 <li> Draw into the back buffer. Normal drawing.</li>
+	 </ul>
+
+<li> Facility to control the near clipping plane.</li>
+     <ul>
+     <li> Define the distance to the near clipping plane. 
+	      Press the  <b>-</b> and <b>+</b> buttons to decreases 
+		  or increases the distance to the 
+	      near clipping plane using the defined step length.</li>
+	 <li> The new view will not be displayed before the <b>Display</b> 
+	      command is applyed or the <b>gOpenMol</b> logo is pressed.<br>
+	      To update the display after the changed value click 
+	      the "Instant update" button or press the <b>Apply</b> button..
+          </li>
+	 </ul>
+
+<li> Facility to control the projection type. The two possible
+     projections are:
+	 <ul>
+	 <li>in <b>perspective</b> projection objects further away are
+     are smaller than those in the front</li>
+	 <li>and in <b>orthographic</b> projection object size is independent
+	 of distance.</li>
+	 </ul>
+     For the perspective projection it is also possible to define the viewing
+     angle. Write ne value and press the "Apply" button.</li>
+<li> Define the pixel width of the molecular stick display.</li>
+
+<li> When a new scene is drawn into the buffer the scene can be
+     update automaticly or it can wait until the command <b>display</b>
+	 is requested. Moving windows can blur the display. Then window
+	 can now be redrawn automaticly or it can wait for the (manual) 
+	 display command.</li>
+
+<li> It is possible to display some properties in multi windows.
+     Turn the multi window display on to display both a structure 
+	 and a ldp map at the same time. 
+	 </li>
+	  
+</ol>
+
+<p><IMG SRC="pict/display_props.gif"></p>
+
+<P>
+Line command: see <b><a href="define_help.html">define command</a></b>
+</P>
+
+<p>
+**************************************************************************<BR>
+LUL/1997<BR>
+**************************************************************************<BR>
+</p>
+</BODY>
+</HTML>

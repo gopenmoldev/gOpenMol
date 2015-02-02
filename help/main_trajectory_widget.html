@@ -1,0 +1,146 @@
+<HTML>
+<HEAD>
+<TITLE>Trajectory Manager Widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+<P>
+*****************************************************************<BR>
+<B>
+Trajectory Manager Widget<BR>
+Leif Laaksonen CSC 2002<BR>
+</B>
+*****************************************************************<BR>
+<P>
+This is the main trajectory control widget. Before you can process a
+trajectory file you have to import a coordinate file to define the
+molecule topology and the atom labels because some trajectories contain
+only atom coordinate information.
+</P>
+<P>
+Steps to do:
+<OL>
+<LI> Click of the button for the trajectory type you will analyze or
+     look at. The buttons are on the right.</LI>
+
+<LI> Select a file from using file browser (Browse button).</LI>
+
+<LI> Press the "Import file" button to read the trajectory information.</LI>
+
+<LI> When the file has properly been processes you can reed the number
+    of frames in the file down on the page. There will also be display
+    information about from which frame the display will start and at which
+    frame it will stop and the frame step. Usually you don't have to touch
+    this information att all.
+
+<LI> To display the frames as loop starting from the first defined to the
+    last click at the button with a triangle. To stop the display press
+    the button with a square.
+</OL>
+<P>
+The supported trajectory formats are:
+
+<DL>
+<DT>AMBER
+<DD><b>Unformatted</b> Amber trajectory file. In the utility directory there is
+    program for the conversion of a formatted trajector into a unformatted
+	one. More information can be found from the AMBER Web pages 
+	http://www.amber.ucsf.edu/amber/formats.html.
+<DT>AMBER(F)
+<DD><b>Formatted</b> Amber trajectory file. It is recommended that only
+    unformatted trajectories are used. In the utility directory there is
+    program for the conversion of a formatted trajector into a unformatted
+	one. More information can be found from the AMBER Web pages 
+	http://www.amber.ucsf.edu/amber/formats.html.
+<DT>CERIUS2
+<DD>Unformatted binary CERIUS2 trajectory file.
+<DT>CHARMM/CHARMm
+<DD>Unformatted binary CHARMM/CHARMm trajectory file.
+<DT>DISCOVER
+<DD>Unformatted binary DISCOVER trajectory file.
+<DT>GROMOS
+<DD>Unformatted GROMOS trajectory file.
+<DT>GROMOS96
+<DD>Formatted ascii GROMOS96 trajectory file.
+<DT>HYPERCHEM
+<DD>Unformatted binary HyperChem trajectory file.
+<DT>MUMOD
+<DD>Unformatted binary MUMOD trajectory file. The MUMOD program is
+    developed by Dr. Olle Teleman.
+<DT>TINKER
+<DD>Formatted TINKER trajectory file.
+<DT>XMOL
+<DD><a href="xmol_file.html">Formatted ascii XMOL (multiset) trajectory file.</a>
+<DT>XPLOR
+<DD>Unformatted binary XPLOR trajectory file.
+<DT>YASP
+<DD>Unformatted binary YASP trajectory file. The YASP program is developed
+    by Dr. Florian Muller-Plathe (.
+</DL>
+
+<p>
+Trajectory display control:
+</P>
+<UL>
+     <li> <b>|&lt;</b>... go to first frame</li>
+     <li> <b>&lt;</b>... back one frame</li>
+     <li> <b>[]</b>... halt display loop</li>
+     <li> <b>|&gt;</b>... play forward one frame at the time in a loop</li>
+     <li> <b>&gt;</b>... forward one frame</li>
+     <li> <b>&gt;|</b>... go to last frame</li>
+</UL>
+<p>
+By default the atom connection table is NOT recalculated in between the
+different frames. However, sometimes it's preferable to recalculate
+the connection table. This can be done by clicking the "Atom reconnection"
+to "ON".
+</p>
+<p>
+The same is true for atom hydrogen bond table except that then
+"Hbond recalculation" is turned "ON" not all hydrogen bonds are recalculated.
+Only following connections are recalculated:
+<ul>
+<li>If you have calculated hydrogen bonds after loading a coordinate file
+    in <a href="hydrogen_bonds_widget.html">Hydrogen bond widget</a> or using
+	corresponding line command, then bonds between those atoms are
+	considered to be recalculated.
+	<br>
+	If you have calculated hydrogen bonds multiple times only
+	the last creations is counted.</li>
+<li>If you haven't calculated any hydrogen bond after loading a coordinate file
+    or you have removed them then all hydrogen bonds are considered to be
+	created and recalculated.</li>
+<li>In both cases the <a href="hydrogen_bonds_widget.html">search subset</a>
+    can be used to limit the set of atoms
+    those hydrogen bonds are really recalculated.</li>
+</ul>
+</p>
+<p>
+For the formatted trajectory files there are two methods available:
+<ul>
+<li>Sequential reading of frames. Very robust but quite inefficient 
+    and slow.</li>
+<li>Random access of the frames. Efficient but can cause problems,
+    specially if you don't know that there is a different between Unix
+	and Windows ascii files.</li>
+</ul>
+
+<P>
+It's possible to display the frame number of the current frame. To display
+the frame number click "Display frame number: <b>on</b>" or <b>off</b>
+to turn it off.
+<p>
+<IMG SRC="pict/trajectory_control1.gif">
+
+<P>File browser to select a trajectory file.</p>
+<p>
+<IMG SRC="pict/trajectory_control2.gif" WIDTH=425 HEIGHT=263>
+
+<P>
+Line command: see <b><a href="trajectory_help.html">trajectory command</a></b>
+</P>
+<P>
+**************************************************************************<BR>
+LUL/2002<BR>
+**************************************************************************<BR>
+</BODY>
+</HTML>

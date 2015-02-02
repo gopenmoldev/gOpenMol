@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>Import coordinates widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>
+**************************************************************************<BR>
+<B>
+Import coordinates widget<BR>
+Leif Laaksonen & Eero H&auml;kkinen CSC 2002<BR>
+</B>
+**************************************************************************<BR>
+<P>This is the main facility to import atom information (including coordinates) 
+into gOpenMol. This is almost always the first step because gOpenMol has to 
+know the molecular topology of the system before it can plot properties or 
+analyze trajectory information.</P>
+
+<P>
+The supported file types can bee seen on the right side with the 
+radio buttons. There is also a button 
+to indicate that the next structure is added (appended) to the current 
+display. This new structure goes into e new data structure and it is not 
+possible to make bonds between atoms in different data structures.</P>
+
+<P>With the file browser it is possible to change the directory and filter 
+the files with special file extensions. If the user has not done any 
+reconfiguration the default file extensions are applied. The file extensions 
+can be changed with the <a href="define_help.html">define command</a>.</P>
+
+<h2>Supported file formats</h2>
+
+gOpenMol support a variety of coordinate input files. Most are fully
+readable formatted files. The supported file formats are:
+
+<DL>
+<DT>ADF
+<DD>Amsterdam Density Functional (ADF) output log file
+<DT>CHARMm/CHARMM
+<DD><a href="crd_file.html">CHARMM coordinate (crd) file.</a> For the format please look into your
+    QUANTA/CHARMM documentation or the source code.
+<DT>CML
+<DD>Coordinate information in the Chemical Markup Language (CML, http://www.xml-cml.org/).
+<DT>Chem3D
+<DD>Binary Chem3D coordinate file (the plugin must be enabled)
+<DT>DL_Poly
+<DD>Coordinate information from the DL_Poly program.
+<DT>Frame
+<DD>The coordinates are taken from a trajectory file.
+<DT>GAMESS
+<DD>The GAMESS PUNCH file (dat) containing the MOLPLT infromation produced
+    with the MOLPLT=.TRUE. option.
+<DT>Gaussian
+<DD>The coordinates are imported from a GAUSSIANXX formatted checkpoint
+    file.
+<DT>GROMACS
+<DD>GROMACS coordinate data file.
+<DT>GROMOS96
+<DD>GROMOS96 coordinate data file.
+<DT>HYPERCHEM
+<DD>HyperChem input coordinate (hin) file.
+<DT>INSIGHT
+<DD>Insight coordinate (car) file.
+<DT>JAGUAR
+<DD>Coordinates from the Jaguar program.
+<DT>Mol2
+<DD>Mol2 coordinate file format.
+<DT>MOPAC
+<DD>Coordinates are imported from a MOPAC unformatted graphics output file.
+<DT>MUMOD
+<DD>Coordinate format used by the MUMOD program by Dr. Olle Teleman.
+<DT>OPENMOL
+<DD>Formatted coordinate input file to OpenMol.
+<DT>PDB
+<DD>The standard <a href="pdb_file.html">Brookhaven Protein Data Bank format</a>.
+<DT>Spartan
+<DD>Spartan binary coordinate file (the plugin must be enabled)
+<DT>TINKER
+<DD>The Tinker coordinate input format.
+<DT>TURBOMOLE
+<DD>Coordinates from the TurboMole program.
+<DT>UHBD
+<DD>University of Houston Brownian Dynamics (UHBD) qcd coordinate reader.
+<DT>USER
+<DD>The user defined coordinate input reader.
+<DT>XMOL
+<DD><a href="xmol_file.html">Xmol coordinate file format.</a> The file can contain multiple entries
+    but gOpenMol reads only the first entry.
+<DT>XYZ
+<DD><a href="xyz_file.html">Simple xyz coordinate input format.</a>
+<DT>YASP
+<DD>Coordinate input file to the YASP program by Dr. Florian Muller-Plathe.
+</DL>
+
+<P>A file is selected to be processed by gOpenMol either by a 
+rapid double click on the file name or a single click on the 
+file name and a click at the <b>Open</b> button.</P>
+
+<P>It is possible to "Peek" or look into a file before it is imported by
+pressing the <b>Peek</b> button when a file name is defined.
+</P>
+
+<P><IMG SRC="pict/import_coords1.gif"></P>
+
+<P>The file browser is started by clicking on the <b>Browse</b> button.</P>
+
+<P><IMG SRC="pict/import_coords2.gif"></P>
+
+If you are using a file extension that is not by default
+known to gOpenMol you can unclick the "Select file format by extension"
+and you get the list of supported gOpenMol input readers.
+
+<P><IMG SRC="pict/import_coords3.gif"></P>
+
+<h2>User defined input filter</h2>
+<p>
+The <b>USER</b> option for the input filters is a user defined Tcl script
+that reads a user defined input format.  
+<p>
+The called Tcl procedure is: <b>lulReadUSERCoordinates <em>FileName</em> <em>Action</em></b>
+<p>
+Where the <em>FileName</em> is the name of the file and 
+the variable <em>Action</em> must be either <b>0</b> (=no append) or
+<b>1</b> (=append). Depending on if the structure will be appended to the
+structure list of if it will be only one.
+</p>
+<P>
+The code is in the /data/gopenmolrc.tcl file.
+</P>
+<P>Line command: see <b><a href="import_help.html">import command</a></b>
+</P>
+**************************************************************************<BR>
+LUL/2002/09<BR>
+**************************************************************************<BR>
+</BODY>
+</HTML>

@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+<TITLE>Import dictionary widget</TITLE>
+</HEAD>
+
+**************************************************************************<br>
+<B>
+import dictionary widget<br>
+Leif Laaksonen CSC 1996<br>
+</B>
+**************************************************************************<br>
+
+<P>
+This facility imports a dictionary file. A dictionary file defines the mapping 
+between a residue and atom name into the atom type space (and atom partial charge).</P>
+
+<P><IMG SRC="pict/read_dict.gif" WIDTH=425 HEIGHT=264></P>
+<P>
+The dictionary file can look like the following:</P>
+
+<PRE>*Atom dictionary file
+ALA  N    32     -0.35
+ALA  HN   1       0.25
+ALA  CA   10      0.00
+ALA  HA   3       0.10
+ALA  CB   10     -0.30
+</PRE>
+<P>It contains a residue name, an atom name and maps these into an atom type 
+in the used force field (CHARMM in this case) and an atom partial charge.</P>
+
+<P>This is one of the possibilities to assign an atom type and an atom partial 
+charge to the atoms.</P>
+
+<P>Line command: see <b><a href="import_help.html">import command</a></b>
+</P>
+<P>
+**************************************************************************<BR>
+LUL/1996<BR>
+**************************************************************************<BR>
+</BODY>
+</HTML>

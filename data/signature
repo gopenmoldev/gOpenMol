@@ -1,0 +1,26 @@
+#
+# this is a demo input file to demonstrate some of the features of
+# scarecrow 1990 Leif Laaksonen
+# 
+# put some text in lower righ corner
+# 
+# ScareCrow started: (?date)
+# on node:           (?node) 
+# by user:           (?username)
+# 
+
+
+read text
+Leif Laaksonen
+Helvetica
+10.
+cyan
+0.85 0.05
+CSC (1992)
+Helvetica
+10.
+cyan
+0.85 0.03
+end
+set text mode on
+display

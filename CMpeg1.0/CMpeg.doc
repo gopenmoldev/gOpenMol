@@ -1,0 +1,484 @@
+
+                              CMPEG V1.0
+
+                          MPEG Encoder for PC
+
+                           by Stefan Eckart
+
+                               June 1993
+
+
+    CMPEG converts a series of images into an MPEG sequence. MPEG is a
+    compressed (typically by a factor of 30 to 60) standardized storage
+    format for video. The files compressed by CMPEG can be played by
+    several publicly available MPEG decoders (see Appendix A).
+
+
+1. Features
+===========
+
+ - input formats (detected automatically):
+
+     .PPM (PBMPLUS),
+     .TGA (Targa 16/24 Bit)
+     .RAW (Image Alchemy Raw Format)
+
+ - image size up to about 512x320 (with 640 KB RAM)
+
+ - generates 'real' MPEG sequences containing I,P and B frames
+
+ - can also produce files playable by Xing software decoders
+
+ - runs under DOS / 640KB / 8086 (no '386 or Windows required)
+
+ - many coding parameters under user control
+
+ - loadable quantization matrices
+
+ - choice between several motion estimation algorithms and matching
+   criteria
+
+
+This program is copyrighted (C) Stefan Eckart, 1993. You can use, copy
+and distribute this program at no charge but you may not modify or sell
+it. I don't take any responsibility regarding its fitness, usefulness
+etc. (#include <your_favourite_disclaimer>). Comments, bug reports,
+questions to:
+
+  Stefan Eckart
+  Kagerstr. 4
+  D-81669 Muenchen
+  Germany
+
+  email: stefan@lis.e-technik.tu-muenchen.de
+
+Any feedback is welcome.
+
+
+2. Introduction
+===============
+
+CMPEG converts a sequence of images into MPEG format. MPEG is a standard
+format for compressed storage of video (and audio), similar in concept
+to JPEG for individual images. It, however, provides higher compression
+by exploiting the similarity of consecutive images of a sequence, so
+called interframe coding. As with JPEG, the compression factor depends
+on the source material and the desired quality of the coded sequence. A
+compression to less than 5% of the original material is not uncommon. It
+is thus a convenient method to keep the heavy storage requirements of
+ray-traced or digitized sequences under control. The compressed
+sequences can later be played back by either decompressing them in
+real-time or by decoding them to an uncompressed intermediate format.
+Real-time decoding is only possible for rather small image sizes,
+otherwise the frame rate becomes too low. Some players/decoders are
+mentioned in appendix A.
+
+
+3. Usage
+========
+
+    cmpeg [options] [intra.mat] [inter.mat] ctlfile framelist output.mpg
+
+intra.mat  a textfile defining the quantization matrix for
+           intraframe-coded data (optional)
+
+inter.mat  a textfile defining the quantization matrix for
+           interframe-coded data (optional)
+
+ctlfile    a textfile specifying coding parameters
+
+framelist  either a textfile containing a list of image filenames or
+           a template string in C 'printf' format (e.g. sample%d.tga)
+
+output.mpg the MPEG file to be generated
+
+
+Options:
+
+  -vn  determines textual output produced during encoding
+       n=0: none (default)
+       n=1: summaries only
+       n=2: detailed information (voluminous and cryptic, for debugging)
+  -dn  selects cost function to be minimized by block-matching
+       n=0: sum of difference magnitudes (Manhattan distance, default)
+       n=1: sum of squared differences (Euclidian distance)
+  -m0  selects logarithmic block-matching
+  -m1  selects full-search block-matching
+  -tn  framelist is template starting with number n
+  -x   generate Xing compatible sequences (use i.ctl as ctlfile!)
+  -fn  set picture rate code:
+
+       n  pictures per second
+      ------------------------
+       1  23.976
+       2  24
+       3  25
+       4  29.97
+       5  30
+       6  50
+       7  59.94
+       8  60
+
+Examples:
+
+To convert the Targa files sample0.tga, sample1.tga, ... sample7.tga
+into an MPEG sequence sample.mpg run CMPEG with the following command
+line:
+
+  cmpeg -v1 -t0 ipb.ctl sample%d.tga sample.mpg
+
+The -v1 option enables display of the current frame number, the
+number of bits for the encoded frame and the time required for encoding
+the frame. -t0 informs cmpeg that it should interpret the framelist
+parameter (sample%d.tga) as a template string and that it should start
+with frame 0, proceeding through all successively numbered frames found.
+The %d in sample%d.tga is the (C stdlib) notation for a decimal integer.
+ipb.ctl is one of the control files coming with CMPEG.
+
+You could also have created a file sample.lst explicitly listing the
+names of the files. This is more flexible but requires some typing
+effort. If you want to create a forward/backward loop, for example, you
+would use the following sample.lst:
+
+sample0.tga
+sample1.tga
+sample2.tga
+sample3.tga
+sample4.tga
+sample5.tga
+sample6.tga
+sample7.tga
+sample6.tga
+sample5.tga
+sample4.tga
+sample3.tga
+sample2.tga
+sample1.tga
+
+and run cmpeg with modified options:
+
+  cmpeg -v1 ipb.ctl sample.lst sample.mpg
+
+To increase the compression factor somewhat you can switch to full
+search block matching (-m1) and mean square error criterion (-d1):
+
+  cmpeg -v1 -m1 -d1 ipb.ctl sample.lst sample.mpg
+
+This usually doesn't pay because the gain is often only in the order
+of 1 or 2% and the encoding time is considerably higher.
+
+You can also combine options:
+
+  cmpeg -v1m1d1 ipb.ctl sample.lst sample.mpg
+
+To create a Xing compatible file from the same Targa files, which now
+must be of size 160x120, call CMPEG with these options:
+
+  cmpeg -v1 -x i.ctl sample.lst sample_x.mpg
+
+Please note that the sample files included in the distribution
+(sample0.tga ... sample7.tga) are not very typical MPEG material
+because they can also be efficiently compressed by conventional
+archivers and the advantages of MPEG might not become too obvious from
+these examples. I just didn't want to blow up the archive by including
+a more realistic sequence.
+
+
+4. File Formats
+===============
+
+CMPEG comes with three example control files: ipb.ctl, pvrg.ctl and
+i.ctl.
+
+You can simply use these files without modification. ipb.ctl is for real
+MPEG files, whereas i.ctl has to be used to create Xing-compatible files
+in conjunction with the -x option. pvgr.ctl is similar to ipb.ctl and
+imitates the default coding parameters of the PVRG MPEG encoder (see
+Appendix A). Use this file if you want to compare results.
+
+The following description of the ctlfile format assumes some familiarity
+with MPEG. You only need to read it if you want to create your own
+control files.
+
+
+4.1 Ctlfile
+===========
+
+MPEG leaves many degrees of freedom of how to encode a sequence. Some of
+these choices are built into CMPEG (e.g. the decision criteria between
+different block types), some are selectable by options (algorithms and
+cost functions for determining the motion vectors) and some (those which
+may differ from frame to frame) are defined through ctlfile.
+
+MPEG divides a sequence into groups of pictures, containing an arbitrary
+amount of pictures (but at least one). Each line in the ctlfile
+corresponds to exactly one frame in each group of pictures. The first
+character of this line determines the frame type: I, P or B. I frames,
+or intracoded frames, are self contained, they don't depend on the
+content of other frames. P frames, or predicted frames, depend on the
+previous I or P frame, only the difference between the predicted and the
+actual content is stored. B frames, or bidirectionally predicted frames
+or interpolated frames, depend on both a previous and a subsequent
+frame.
+
+There are some rules, restricting the choice of frame type:
+
+- the first non-B frame must be of type I
+- the last frame must be of type I or P
+
+There are also two additional rules imposed by the implementation:
+
+- no more than eight consecutive B frames
+- not more than 32 frames in total per group of pictures
+
+The list is repeated as often as necessary to code all frames. Thus the
+list can be much shorter than the sequence itself. The simplest list is
+just one I frame, which produces a sequence of I frames only. This is
+the mode required for Xing compatible files. Leading B frame entries are
+skipped for the first group of pictures, because there is no previous I
+or P frame available for interpolation. The lines are in display order,
+not in decoding order.
+
+The example ctlfile ipb.mpg defines the following pattern:
+
+bbibbpbbpbbp
+
+The generated MPEG stream will look like (in decoding order):
+
+ipbbpbbpbb ibbpbbpbbpbb ibbpbbpbbpbb ...
+
+or in display order:
+
+ibbpbbpbbp bbibbpbbpbbp bbibbpbbpbbp ...
+
+
+Remark: Decoding order is the order in which the frames are transmitted
+        which differs from display order in that B frames are
+        transmitted after the frames on which they depend.
+
+
+The type character is followed by one to four parameters, depending on
+the type:
+
+I quant
+P quant forward_r_size full_pel_forward
+B quant forward_r_size full_pel_forward backward_r_size full_pel_backw.
+
+quant determines how fine or coarse the image information is to be
+quantized. The larger quant is, the larger are the quantization steps
+and coding noise increases. The range of allowed values is 1 to 31.
+
+The other parameters determine the range and accuracy of the motion
+vectors which represent the relative position from which a particular
+block of the current frame is predicted. forward_r_size and
+backward_r_size are integers between 0 and 6 (inclusive), restricting
+the length of the motion vectors according to the following table:
+
+  r_size     range
+  -------------------
+  0       -7.5..+7.5
+  1      -15.5..15.5
+  2      -31.5..31.5
+  3      -63.5..63.5
+  4     -127.5..127.5
+  5     -255.5..255.5
+  6     -511.5..511.5
+
+If the full_pel flags are set to one, the ranges double and half pel
+motions are excluded. This speeds up decoding somewhat at the expense of
+a higher bit-rate.
+
+
+4.2 Intra.mat and Inter.mat
+===========================
+
+MPEG allows the use of quantization matrices different from the default
+ones defined in the standard. In this manner the quantization noise can
+be tailored to the particular application. CMPEG can read non-default
+matrices from the files intra.mat and inter.mat. Both files have to
+contain a list of 64 integers each in the range 1 to 255 (inclusive).
+The integers must be separated by white space (space, tab, newline). If
+not specified, the matrices default to:
+
+intra.mat:
+
+ 8 16 19 22 26 27 29 34
+16 16 22 24 27 29 34 37
+19 22 26 27 29 34 34 38
+22 22 26 27 29 34 37 40
+22 26 27 29 32 35 40 48
+26 27 29 32 35 40 48 58
+26 27 29 34 38 46 56 69
+27 29 35 38 46 56 69 83
+
+inter.mat:
+
+16 16 16 16 16 16 16 16
+16 16 16 16 16 16 16 16
+16 16 16 16 16 16 16 16
+16 16 16 16 16 16 16 16
+16 16 16 16 16 16 16 16
+16 16 16 16 16 16 16 16
+16 16 16 16 16 16 16 16
+16 16 16 16 16 16 16 16
+
+inter.mat can be specified only if intra.mat is specified also.
+
+It is neither necessary nor recommended to include the default matrices
+explicitly, it merely increases the size of the MPEG file by 64 or 128
+bytes.
+
+
+4.3 Infile
+==========
+
+This textfile lists the names of the images to be coded in display
+order. Each line should contain exactly one filename. All specified
+image files have to be of the same type and size.
+
+In conjunction with the -t parameter, infile is interpreted as a
+template string in C library syntax. This template string has to contain
+exactly one % character at the position of the frame number field in the
+filenames followed by one or more figures and a 'd'. Here is a list of
+examples:
+
+  infile       frames
+  ------------------------------------------------------------
+  f%d.tga   -> f0.tga,   f1.tga,   ... f9.tga,   f10.tga,  ...
+  f.%02d    -> f.00,     f.01,         f.09,     f.10,,    ...
+  f%03d.tga -> f000.tga, f001.tga, ... f009.tga, f010.tga, ...
+
+The 03 in the last example stands for: field width 3, zero padded from
+the left. You could also use octal or hexadecimal numbering (o and x
+instead of d).
+
+
+4.4 Image Files
+===============
+
+MPEG works best for 24 bit TrueColor images. CMPEG uses Targa (Targa and
+.TGA are trademarks of Truevision Inc.) format files (usually identified
+by a .TGA suffix). Both top-down and bottom-up scan order is supported.
+Run-length encoded files are not supported. The files can have a
+resolution of 24 bit or 15 bit per pixel. Keep in mind that a 24 bit
+representation of a sequence usually yields a smaller MPEG file than a
+15 bit representation of the same sequence. You should use 15 bit only
+when your source material doesn't have a higher resolution or if you run
+out of space otherwise (24 bit Targa files are 50% larger than 15 bit
+files).
+
+CMPEG also reads the Portable Bitmap Format of Jef Poskanzers PBMPLUS
+package (see Appendix A). Only the raw PPM format with 256 levels is
+supported. Another format the encoder accepts is the Raw format used by
+the shareware program Image Alchemy (see Appendix A) as intermediate
+format. These formats were chosen because PBMPLUS and Image Alchemy
+cover most image formats you will ever have as input and it is generally
+faster to convert into the format used by the conversion programs
+internally than into a different format, like Targa.
+
+The file type and size is determined automatically from the first file
+listed in infile. All files of a sequence have to be of the same type
+and size.
+
+If your source material is in a different format (e.g TIFF, JPEG, GIF)
+you have to convert it first to one of the above formats by using
+conversion programs like PBMPLUS or Image Alchemy.
+
+
+5. Technical Information
+========================
+
+A major design goal for CMPEG was to keep it small enough to permit
+coding of reasonable sized files on a 640 KB '286 PC (AT) without a need
+for intermediate storage files. During encoding of a bidirectionally
+predicted image, two reference images have to be kept in memory, which
+limits maximum image size to about 512x320. This includes CIF format
+(352x288).
+
+A Xing compatible mode was implemented which creates files that can be
+played on Xing MPEG players. These players are extremely fast but they
+are restricted to a limited subset of valid MPEG streams. Since I don't
+have information what exactly the requirements are for Xing
+compatibility, the program just imitates some but not all of the
+peculiarities found in files produced with Xing encoders:
+
+- I-frames only
+- only one group_of_pictures header (doesn't seem to be required but
+  reduces filesize)
+- some additional optional fields (user data / extension data) which are
+  required by the decoder, probably for alignment purposes only
+- temporal_reference starting with 1 instead of 0
+  (this is not imitated because it is a violation of the MPEG standard
+  and is not required by the decoder anyway)
+
+The program was compiled into 8086 code. This makes it a bit slower than
+it could be on a '386/'486. It is however still nearly twice as fast as
+the PVRG code compiled with GNU GCC.
+
+
+5. Known Bugs
+=============
+
+ - variable bitrate streams only (no buffer feedback control)
+ - constrained_parameters_flag is always set irrespective of the actual
+   coding parameters
+
+
+6. Further Reading
+==================
+
+1. Coding of moving pictures and associated audio for digital storage
+   media up to about 1,5 Mbit/s, Draft International Standard ISO/IEC
+   DIS 11172, 1992.
+
+2. Frequently Asked Questions (FAQ) of the alt.binaries.pictures
+   newsgroup: contains an introduction to MPEG.
+
+3. Documentation of the PVRG MPEG software: a thorough overview
+   covering many aspects of MPEG
+
+
+Appendix A: Related Software
+============================
+
+This list is probably incomplete, but it's all I'm aware of. Of course
+there are programs for other systems as well (Mac, Amiga etc.).
+
+dmpeg*.zip     Offline MPEG decoder, written by me. Available from
+               ftp.rahul.net:/pub/bryanw/mpeg/...
+
+mpeg_play      MPEG Video Software Decoder (Version 2.0; Jan 27, 1993)
+               Authors: Lawrence A. Rowe, Ketan Patel, and Brian Smith
+               Computer Science Division-EECS, Univ. of Calif. at
+               Berkeley
+               toe.cs.berkeley.edu:/pub/multimedia/mpeg/mpeg-2.0.tar.Z
+
+mpegwin        Online port of mpeg_play for MS-Windows
+               by: Michael Simmons, msimmons@ecel.uwa.edu.au
+               toe.cs.berkeley.edu:/pub/multimedia/mpeg/Ports/mpegw*
+               (HiColor & TrueColor support, Shareware)
+
+mplay.exe,
+mpeg.exe       DOS MPEG players from Xing Technologies
+               (very high speed, but decodes only a small subset of the
+                MPEG standard)
+
+MPEGv1.1/1.2alpha
+               MPEG Software Encoder/Decoder
+               Authors: Portable Video Research Group (PVRG)
+               havefun.stanford.edu:/pub/mpeg/MPEGv*.tar.Z
+
+mpgcodec       PVRG encoder/decoder for PC compiled with GNU gcc
+               ('386 required)
+               posted in alt.binaries.pictures.utilities
+
+PBMPLUS        Portable Bit Map file conversion utilities
+               Author: Jef Poskanzer
+               garbo.uwasa.fi:/pc/graphics/pbmplus.zoo
+
+Image Alchemy  Shareware file conversion program
+               Author: Handmade Software Inc.
+               wuarchive.wustl.edu:/msdos/graphics/alch*
+
+--
+Stefan Eckart, stefan@lis.e-technik.tu-muenchen.de, June 1993.

@@ -1,0 +1,15 @@
+extern       int   gomp_GetNumberOfAtomParameters(void);
+extern       int   gomp_GetAtomPointerForIndex(int);
+extern       int   gomp_GetAtomPointerForSymbol(const char *);
+extern       int   gomp_GetAtom_type(int);
+extern       float gomp_GetAtom_bndrad(int);
+extern       float gomp_GetAtom_vdwrad(int);
+extern       float gomp_GetAtom_plurad(int);
+extern       char  gomp_GetAtom_global(int);
+extern       float gomp_GetAtom_emin(int);
+extern       float gomp_GetAtom_rmin(int);
+extern       float gomp_GetAtom_patom(int);
+extern       float gomp_GetAtom_mass(int);
+extern       int   gomp_GetAtom_cnct(int);
+extern       char  gomp_GetAtom_hbond(int);
+extern const char *gomp_GetAtom_atype(int);

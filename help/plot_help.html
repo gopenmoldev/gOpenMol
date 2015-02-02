@@ -1,0 +1,188 @@
+<HTML>
+<HEAD>
+<TITLE>plot command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+
+**************************************************************************
+                             plot command
+                        Leif Laaksonen CSC 2001
+**************************************************************************
+
+#
+# Plot various things
+#
+
+<a name="arrow">#
+# plot an arrow
+#
+<b>
+plot  arro$w     Xc1 Yc1 Zc1 Xc2 Yc2 Zc2 Radius Colour appe$nd
+                 Xc1 Yc1 Zc1 Xc2 Yc2 Zc2 Radius Colour
+     -arro$w
+</b>
+<a name="cutplane">#
+# Plot a cut plane through the contour data 
+# Choose through which axis the plane goes (x,y or z)
+# Give the tag name for the contour
+# Give the coordinate on the axis, through which the plane goes
+# Give max and min scale (blue -> red)
+# Define if the cutplane will be in 2d (flat) or 3d for the respective plane
+#
+<b>
+      cutp$lane  x  ContourName Xcoord
+                 x  ContourName Xcoord Fmin Fmax
+                 x  ContourName Xcoord Fmin Fmax log10/log
+                 y  ContourName Ycoord
+                 y  ContourName Ycoord Fmin Fmax
+                 y  ContourName Ycoord Fmin Fmax log10/log
+                 z  ContourName Zcoord
+                 z  ContourName Zcoord Fmin Fmax
+                 z  ContourName Zcoord Fmin Fmax log10/log
+                 2dx
+		         3dx
+		         2dy
+		         3dy
+		         2dz
+		         3dz
+#
+# Define (3 possible) arbitrary cutplanes by defining three points and a 
+# ScaleMin and ScaleMax values. A plane is calculated from the defined
+# 3 points.
+#
+<b>
+                 xyz1 ContourName x1 y1 z1 x2 y2 z2 x3 y3 z3 Fmin Fmax
+                 xyz2 ContourName x1 y1 z1 x2 y2 z2 x3 y3 z3 Fmin Fmax
+                 xyz3 ContourName x1 y1 z1 x2 y2 z2 x3 y3 z3 Fmin Fmax
+</b>
+#
+# Show a profile of the grid data in the x-, y- or z-direction
+# The data is sampled in Ibins using the Fmin Fmax scaling
+# 
+                 prof$ile ContourName x Ibins Fmin Fmax
+                                      y Ibins Fmin Fmax
+                                      z Ibins Fmin Fmax
+
+     -cutp$lane  x
+                 y
+                 z
+</b>
+<a name="sphere">#
+# Plot a sphere at the defined coordinate
+#
+<b>
+      sphe$re    Xc Yc Zc Radius Colour appe$nd
+                 Xc Yc Zc Radius Colour
+                 Xc Yc Zc Radius Colour Xscale Yscale Zscale
+                 Xc Yc Zc Radius Colour Xscale Yscale Zscale appe$nd
+     -sph$ere
+</b>
+<a name="cylinder">#
+# Plot a cylinder from (x1,y1,z1) to (x2,y2,z2) with radius Radius and colour Colour
+# It is also possible to plot a cylinder with a different radius and colour at each ends.
+#
+<b>
+      cyli$nder  Xc1 Yc1 Zc1 Xc2 Yc2 Zc2 Radius Colour appe$nd
+                 Xc1 Yc1 Zc1 Xc2 Yc2 Zc2 Radius Colour 
+                 Xc1 Yc1 Zc1 Xc2 Yc2 Zc2 {Radius1 Radius2} {Colour1 Colour2} 
+     -cyl$inder
+</b>
+<a name="line">#
+# Plot a line from (x1,y1,z1) to (x2,y2,z2)
+#
+<b>
+      line       Xc1 Yc1 Zc1 Xc2 Yc2 Zc2 Colour appe$nd
+                 Xc1 Yc1 Zc1 Xc2 Yc2 Zc2 Colour 
+     -lin$e
+</b>
+<a name="ldp">#
+# Plot a linear distance plot for the selected atoms
+# Put the display state on/off
+#
+<b>
+      ldp        atom$s  Seg  Res  Atm
+                 on
+                 off
+</b>
+<a name="plane">#
+# Plot a plane through the x,y or z axis at the defined coordinate
+# Extend the plane D? in the negative and positive directions
+#
+<b>
+      plan$e     x Xcoord Dy Dz Colour
+                 y Ycoord Dx Dz Colour
+                 z Zcoord Dx Dy Colour
+                 x Xcoord Dy Dz Colour append
+                 y Ycoord Dx Dz Colour append
+                 z Zcoord Dx Dy Colour append
+</b>
+<a name="cluster">#
+# Put cluster display toggle on/off
+#
+<b>
+      clus$ter   on
+                 off
+     -clu$ster
+</b>
+<a name="cscale">#
+# Plot a colour scale with Ilevels from (min) Fmin to (max) Fmax
+# Put the display off
+#
+<b>
+      csca$le    Ilevels Fmin Fmax
+     -csc$ale
+</b>
+<a name="vector">#
+# Toggle a vector display on/off
+# The data has been read by the "import vector" command
+# There are two different display methods:
+#  1) The force vectors from CHARMM    (import vector charmm)
+#  2) Vectors read in from a flat file (import vector flatfile)
+#
+<b>
+      vect$or    on
+                 off
+                 byco$lour                            ;# colouring by the vector norm
+                -byc$olour                            ;# turn normal display on
+                 rang$e Fmin Fmax                     ;# for vector a display from a file
+                 atom$s  Seg  Res  Atm  Radius  Scale ;# this is only for CHARMM force vectors
+</b>
+<a name="cell">#
+# Toggle the cell display between on/off
+#
+<b>
+      cell       on
+                 off
+</b>
+<a name="text"><a name="text3">#
+# A very simple way to plot text
+#
+# Plot text (static) in Colour at x,y (0.0 - 1.0) with string
+# TextString
+# 
+# Plot text (fixed in the x,y,z space) in Colour at x,y,z with
+# TextString
+#
+<b>
+      text       Colour Xcoord Ycoord TextString
+      text3      Colour Xcoord Ycoord Zcoord TextString
+     -tex$t      
+</b>
+<a name="axis">#
+# Plot the local coordinate system at selected atoms (Segment Residue Atom)
+#
+# Turn the plot off
+<b>
+      axis  Segment Residue Atom
+      axis  Segment Residue Atom XaxisLength YaxisLength ZaxisLength
+
+     -axi$s
+</b>
+**************************************************************************
+LUL/2001
+**************************************************************************
+</PRE></BODY>
+</HTML>
+

@@ -1,0 +1,419 @@
+<HTML>
+<HEAD>
+<TITLE>define command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+<B>                         define command
+                        Leif Laaksonen CSC 1996
+                        Eero H&auml;kkinen  CSC 2002
+                        Timm Uhlmann       2003</B>
+**************************************************************************
+
+<a name="bgcolour">#
+# define background colour by defining a colour name or
+# integer or float triplet (rgb) values
+#
+<B>
+defi$ne    bgco$lour    Colour.Name
+                        "Fred Fgreen Fblue"
+</B>
+<a name="bondstyle">#
+# define bond display style options:
+#   smooth (atom colour changes smoothly along the bond)
+#   half or default (half of the bond is in the colour of the connected atom)  
+#
+<B>
+           bondst$yle   smoo$th
+                        half
+		                defa$ult
+</B>
+<a name="cell">#
+# define cell dimensions, line width and colour 
+#
+<b>
+            cell       dime$nsions  Fa Fb Fc
+                       angl$es      Falpha Fbeta Fgamma
+                       line$width   Ivalue
+                       colour       ColourName
+                                    "Fred Fgreen Fblue"
+</b>
+<a name="colormapping">#
+# define colour mapping for values between 0.0 ... 1.0
+# the scale goes from (0.0) blue to (1.0) red through green at (0.5)
+#
+<b>
+            colorm$apping     texture
+                              rainbow
+</b>
+<a name="colortype">#
+# define the display "colour" type. choose between colour and grayscale
+# if you choose grayscale the display will switch to grayscale.
+#
+<b>
+            colort$ype        colo$r
+                              gray$scale
+</b>
+<a name="cross">#
+# define the length of the cross used for atom display
+#
+<b>
+            cros$s            Fvalue
+</b>
+<a name="displaylists">#
+# Put the global usage of display lists on/off
+#
+<b>
+            disp$laylists     on
+                              off
+</b>
+#
+# Sets the type specific usage of display lists on/off
+# Global setting "off" will overwrite this.
+#
+<b>
+            disp$laylists     on  defa$ult
+                              off defa$ult
+            disp$laylists     on  TypeName
+                              off TypeName
+</b>
+<a name="drawbuffer">#
+# define the draw buffer (default is back)
+#
+<b>
+            drawb$uffer back
+                        fron$t
+</b>
+<a name="nearplane">#
+# define the near plane distance and step values
+#
+<b>
+            near$plane  step   Fvalue
+                        valu$e Fvalue
+</b>
+<a name="farplane">#
+# define the far plane distance and step values
+#
+<b>
+            farp$lane   step   Fvalue
+                        valu$e Fvalue
+</b>
+<a name="viewangle">#
+# define viewing angle for perspective projection
+#
+<b>
+            viewa$ngle         Fvalue
+</b>
+<a name="material">#
+# define material specular (0.0 - > 128.0)
+#
+<b>
+            mate$rial   spec$ular Fvalue
+</b>
+<a name="mlinewidth">#
+# molecule line width in pixels
+#
+<b>
+            mlin$ewidth Ivalue
+</b>
+<a name="node">#
+# not in use
+#
+<b>
+            node        Node.Name
+</b>
+<a name="contour">#
+# contour line width in pixels
+#
+<b>
+            clin$ewidth Ivalue
+</b>
+<a name="licosphere"><a name="licocylinder">#
+# define licorice sphere and cylinder for the molecule display
+# good for the ball and stick display
+# the Ivalue defines the structure number
+# to apply for all structures use the character "*" or word "all"
+#
+<b>
+            licos$phere   Fvalue Ivalue
+            licos$phere   Fvalue *
+            licoc$ylinder Fvalue Ivalue
+            licoc$ylinder Fvalue *
+</b>
+<a name="clyinderquality"><a name="spherequality">#
+# define the cylinder and sphere quality
+#
+<b>
+            cyli$nderquality Ivalue # any number &gt; 0 (default 10)
+            sphe$requality Ivalue # any number &gt; 0 (default 10)
+</b>
+<a name="hurl"><a name="webbrowser">#
+# not in use
+#
+<b>
+            hurl           URL.Address
+            webb$rowser    WebBrowser.Name
+</b>
+<a name="default">#
+# define default coordinate file type and extension
+#
+<b>
+            defa$ult       coor$dinate type ambe$r
+                                            char$mm
+                                            gaus$sian
+                                            hype$rchem
+                                            insi$ght
+                                            mol2
+                                            mumo$d
+                                            open$mol
+                                            pdb
+                                            xmol
+                                            xyz
+                                            yasp
+                            exte$nsion      ambe$r String
+                                            char$mm String
+                                            gaus$sian String
+                                            hype$rchem String
+                                            insi$ght String
+                                            mol2 String
+                                            mumo$d String
+                                            open$mol String
+                                            pdb String
+                                            xmol String
+                                            xyz String
+                                            yasp String
+</b>
+#
+# define default trajectory file type and extension
+#
+<b>
+                            traj$ectory     type           ambe$r
+                                                           ceri$us2
+                                                           char$mm
+                                                           disc$over
+                                                           grom$os
+                                                           hype$rchem
+                                                           mumo$d
+                                                           xmol
+                                                           xplor
+                                                           yasp
+                                            exte$nsion     ambe$r String
+                                                           ceri$us2 String
+                                                           char$mm String
+                                                           disc$over String
+                                                           grom$os String
+                                                           hype$rchem String
+                                                           mumo$d String
+                                                           xmol String
+                                                           xplo$r String
+                                                           yasp String
+</b>
+<a name="gromos96">#
+# Gromos96 uses a constant with which the coordinates will be
+# multiplied (default = 10.0).
+#
+<b>
+             gromos96        coorda$mplifier Fvalue 
+</b>
+<a name="rotation">#
+# toggle rotations state between on/off
+#
+<b>
+              rota$tion   stat$e on
+                                 off
+</b>
+<a name="translation">#
+# toggle translation state between on/off
+#
+<b>
+              tran$slation stat$e on
+                                  off
+</b>
+<a name="identify">#
+# activate or deavtivate the state for picking atoms
+#
+<b>
+              iden$ntify on
+                         off
+</b>
+
+<a name="reconnectivity">#
+# recalculate automatically atom reconnectivity
+#
+<b>
+              reco$nnectivity on
+                              off
+</b>
+# recalculate automatically atom hydrogen bonds
+#
+<b>
+              hbre$connectivity on
+                                off
+</b>
+<a name="system">#
+# defines whether the system is translated around origo or not
+# this is active both at reading a new structure or when there
+# already are structures read 
+#
+<b>
+             syst$em     tran$slation    on
+                                         off
+</b>
+<a name="projection">#
+# define the projection method orthographic/perspective
+#
+<b>
+             proj$ection       orth$ographic
+                               pers$pective
+</b>
+<a name="windowing">#
+# define window actions
+# single/multi windowing
+# update is automatic/manual
+#
+<b>
+             wind$owing        sing$le
+                               multi
+                               upda$te      auto$matic
+                                            manu$al
+</b>
+<a name="trajectory">#
+# put the trajectory frame number display on/off
+#
+<b>
+             traj$ectory       fid           on
+	                                     off
+</b>
+<a name="cutplane">#
+# define the cutplane 3d magnitude. Constant with which the magnitude is
+# multiplied with. The range is between 0.0 and 1.0.
+#
+<b>
+              cutp$lane         damp$ing   Fvalue
+</b>
+<a name="scaling">#
+# define scaling mode. It is possible to scale in "global" mode that
+# scales all objects equally  or in an "local" mode when only
+# one or some of the objects are scaled. Using this mode ruins of
+# course the chemistry/physics of teh system. It can only be use
+# for display purposes. The objects are selected from the main window.
+#
+<b>
+               scal$ing          glob$al
+                                 loca$l
+</b>
+<a name="spair">#
+# put the stereo pair display mode on/off
+# define the distance between the objects in the stereo pair mode
+# define the "tilt" angle for the objects (+-)
+#
+<b>
+               spai$r            on
+                                 off
+                                 distance Fvalue
+                                 angle    Fvalue
+</b>
+<a name="quadstereo">#
+# put the harware stereo (stereo in a window mode on/off
+# define the "tilt" angle for the objects (+-)
+#
+<b>                                            
+              quad$stereo       on
+                                off
+                                angl$e    Fvalue
+</b>
+
+<a name="atom"><a name="residue"><a name="segment"><a name="structure">#
+# be careful with these commands ... do not use them!
+#
+# Reconnectivity defines if the atom connection table
+# is recalculated between the frames or not.
+# Hbreconnectivity defines if the atom hydrogen bond
+# connection table is recalculated between the frames or not.
+# Maxconnectivity is the max number of connections (bonds)
+# an atom can have
+# Covar radius is used while calculating connections.
+#
+<b>
+               atom         coor$dinates Fx Fy Fy IAindex ISindex
+                            char$ge      Fvalue   IAindex ISindex
+                            labe$l       Name     IAindex ISindex
+                            resn$umber   Ivalue   IAindex ISindex
+                            vdw          Fvalue   IAindex ISindex
+                            iden$ntify   on
+                                         off
+                            reco$nnectivity    on
+                                               off
+                            hbre$connectivity  on
+                                               off
+                            maxc$onnectivity
+                            cova$r       AtomSymbol    Fradius
+                                         ElementNumber Fradius
+
+               resi$due     labe$l       Name  IAindex ISindex
+               segm$ent     labe$l       Name  IAindex ISindex
+               stru$cture   StrucName  Iatoms   new
+                                                appe$nd
+</b>
+#
+# define atom neighbour search window (in atoms)
+#
+<b>
+               atom         wind$ow    Inumber
+</b>
+<a name="gtext"></a>
+#
+#
+#	define global text string
+#
+<b>
+       gtext "string"
+</b>
+<a name="light">
+#
+#	Define light position
+#	       light diffuse color	
+#
+<b>
+         ligh$t        posi$tion
+		               		c
+					nw
+					ne
+					n
+					w
+					e
+					sw
+					se
+					s
+			diff$use
+					red	fval
+					gree$n	fval
+					blue	fval
+</b>
+<a name="redisplay">
+#
+#
+#	Sets redisplay mode to fast or slow
+#
+<b>
+       redi$splay        fast
+	                 slow
+</b>
+<a name="transformation"></a>
+#
+#
+#	Sets transformation mode
+#
+<b>
+      transf$ormation        global
+	                     local
+	   		     user
+</b>		              
+<a name="end">
+**************************************************************************
+LUL/2002
+**************************************************************************
+</PRE></BODY>
+</HTML>

@@ -1,0 +1,581 @@
+<HTML>
+<HEAD>
+<TITLE>Appendix</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" BACKGROUND="pict/gback.jpg">
+
+<hr>
+<h1>Appendix</h1> 
+<hr>
+<A NAME="COLOUR">
+<h1>Appendix I</h1> 
+
+
+<h2>The format of the colour file</h2>
+
+<P>
+The file is located at: data/colour_table.data
+</p>
+<P>
+The first line in the colour file is a comment. The following colour 
+table (a small part of it in fact) contains the rgb code and the name 
+defined for that rgb code. You can add your own colour to the table 
+by editing the file. The colour table file is also used by the colour 
+browsers. As it is now implemented only the first 200 colours are 
+included in the browser. 
+</p>
+<p>
+The rgb codes and their names:
+</p>
+<p>
+<pre>
+* Colour table to be used by gOpenMol (1997-11-21)
+255 255 255		white
+  0   0   0		black
+255   0   0		red
+  0 255   0		green
+  0   0 255		blue
+255   0 255		magenta
+255 255   0		yellow
+192 192 192		gray
+238 130 238		violet
+165  42  42		brown
+  0 255 255		cyan
+255 192  48     bright mustard
+134  26  26     dark firebrick
+255 128 144     miami pink
+ 80 255 255     miami turquoise
+ 80  40	 30     dark brown
+128   0	  0     dark red
+255 250 250		snow
+248 248 255		ghost white
+245 245 245		white smoke
+255 239 213		papaya whip
+255 218 185		peach puff
+255 228 181		moccasin
+255 248 220		cornsilk
+255 255 240		ivory
+255 250 205		lemon chiffon
+245 255 250		mint cream
+240 255 255		azure
+240 248 255		alice blue
+230 230 250		lavender
+255 240 245		lavender blush
+105 105 105		dim gray
+112 128 144		slate gray
+211 211 211		light grey
+ 25  25 112		midnight blue
+  0   0 128		navy blue
+175 238 238		pale turquoise
+  0 206 209		dark turquoise
+  0 100   0		dark green
+220 220 220		gainsboro
+253 245 230		old lace
+250 240 230		linen
+255 235 205		blanched almond
+255 228 196		bisque
+255 245 238		seashell
+240 255 240		honeydew
+105 105 105		dim grey
+. 
+. 
+.
+</pre>
+<p>
+The gOpenMol GUI uses sliders for dynamic colour selection but
+colour names can be used in the line command mode.
+</p>
+
+<A NAME="ATOMPARAM">
+<hr>
+<h1>Appendix II</h1> 
+<hr>
+
+<h2>The format of the data/atom_param.data file</h2>
+
+
+This file contains data for the display of atoms and some 
+other useful parameters as the Lennard-Jones parameters. 
+<p>
+The following data is taken from APPENDIX B of the QUANTA 
+Reference Manual 1990.
+<P>
+The titles of the columns in the atom_param.data file are: 
+
+<pre>
+(1): Atom type number (type). 
+
+(2): Bonding radius (bndrad). 
+
+(3): van der Waals spheres radius (vdwrad). 
+
+(4): Sphere radius (plurad) in plots. (Not used in gOpenMol). 
+
+(5): Value (global) is used in global search for bonds. 
+
+(6,7): Value (emin and rmin) used in the calculation of van der 
+       Waals and electrostatic energy. 
+
+(8): Atom polarizabilities (patom). 
+
+(9): The atom is either a hydrogen bond acceptor (A), donor 
+     (D or E), or not hydrogen bonded (N) 
+
+(10): The CHARMm atom type (atype). 
+
+(11): Atom mass (mass).
+
+</pre>
+<p>
+Example:
+<pre>
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11) 
+
+Type bndrad vdwrad plurad global emin rmin patom hbond atype mass 
+
+1 0.40 0.95 0.100 F -0.0498 0.8 0.044 D H 1.008
+</pre>
+<p>
+The parameters in QUANTA 3.0 are similar to those used in Version 21 
+of CHARMm. The emin rmin values differ for HA and all metals; bndrad 
+differs for hydrogens. Atoms with Mxx are metals; atoms with Xxx are 
+halogens.
+<p>
+If you wish to extend the parameter file to include your own 
+atom types, it is recommended to use atom numbers greater than 300.
+<p>
+<A NAME="DICTIONARY">
+<hr>
+<h1>Appendix III</h1> 
+<hr>
+<h2>The format of the atomXXX.dic files</h2>
+<p>
+The format of the atom.dic file is as following. 
+The first position (1) is the residue name, the next position (2) 
+is the atom name, third position (3) is the atom type according 
+to the CHARMm type and as the last position (4) comes the atom charge.
+<p>
+The residue and atom names are restricted to 4 characters, atomic 
+type is an integer and the charge is a floating point number. 
+The user can also use the symbols '*' and '?' for or in the 
+residue and atom names where '*' matches any characters to the end 
+and '?' matches any character at that particular point. 
+Your own molecules can be added to the end of the file 
+before the default atom types. 
+<p>
+Example of an atom dictionary file: 
+<p>
+<pre>
+*Amino acid dictionary, polar hydrogens only, CHARMm20.3 parameters (From QUANTA) 
+GLY CA 12 0.100 
+PRO N 33 -0.200 
+* N 32 -0.350 
+* NT 36 -0.100 
+* H 1 0.250 
+* HT?? 2 0.350 
+* CA 11 0.100 
+* C 14 0.550 
+* O 40 -0.550 
+* OT 44 -0.550 
+* CT1 10 
+* CT2 10 
+ALA CB 13 0.000 
+ARG CB 12 0.000 
+ARG CG 12 0.000 
+ARG CD 12 0.100 
+ARG NE 32 -0.400 
+ARG HE 1 0.300 
+ARG CZ 14 0.500 
+ARG NH? 37 -0.450 
+ARG HH?? 2 0.350 
+ASN CB 12 0.000 
+ASN CG 14 0.550 
+ASN OD? 40 -0.550 
+ASN ND? 32 -0.600 
+ASN HD?? 1 0.300 
+ASP CB 12 -0.160 
+ASP CG 14 0.360 
+ASP OD? 43 -0.600 
+ASP HD? 2 1.000 
+CYS CB 12 0.019 
+CYS SG 70 -0.019 
+CYS HG 1 0.000 
+GLN CB 12 0.000 
+GLN CG 12 0.000 
+GLN CD 14 0.550 
+GLN OE? 40 -0.550 
+GLN NE? 32 -0.600 
+GLN HE?? 1 0.300 
+GLU CB 12 0.000 
+GLU CG 12 -0.160 
+GLU CD 14 0.360 
+GLU OE? 43 -0.600 
+GLU HE? 2 1.000 
+HIS CB 12 0.000 
+HIS CG 21 0.100 
+HIS ND? 34 -0.400 
+HIS HD? 1 0.300 
+HIS CD? 23 0.100 
+HIS CE? 23 0.300 
+HIS NE? 34 -0.400 
+ILE CB 11 0.000 
+ILE CG1 12 0.000 
+ILE CG2 13 0.000 
+ILE CD? 13 0.000 
+LEU CB 12 0.000 
+LEU CG 11 0.000 
+LEU CD? 13 0.000 
+LYS CB 12 0.000 
+LYS CG 12 0.000 
+LYS CD 12 0.000 
+LYS CE 12 0.250 
+LYS NZ 36 -0.300 
+LYS HZ? 2 0.350 
+MET CB 12 0.000 
+MET CG 12 0.060 
+MET SD 70 -0.120 
+MET CE 13 0.060 
+PHE CB 12 0.000 
+PHE CG 22 0.000 
+PHE CD? 24 0.000 
+PHE CE? 24 0.000 
+PHE CZ 24 0.000 
+PRO CB 12 0.000 
+PRO CG 12 0.000 
+PRO CD 12 0.100 
+SER CB 12 0.250 
+SER OG 45 -0.650 
+SER HG 1 0.400 
+THR CB 11 0.250 
+THR OG? 45 -0.650 
+THR HG? 1 0.400 
+THR CG? 13 0.000 
+TRP CB 12 0.000 
+TRP CG 21 -0.030 
+TRP CD1 23 0.060 
+TRP CD2 26 0.100 
+TRP NE1 34 -0.360 
+TRP HE1 1 0.300 
+TRP CE2 26 -0.040 
+TRP CE3 24 -0.030 
+TRP CZ? 24 0.000 
+TRP CH? 24 0.000 
+TYR CB 12 0.000 
+TYR CG 22 0.000 
+TYR CD? 24 0.000 
+TYR CE? 24 0.000 
+TYR CZ 22 0.250 
+TYR OH 45 -0.650 
+TYR HH 1 0.400 
+VAL CB 11 0.000
+VAL CG? 13 0.000 
+WAT O??? 47 -0.834 
+WAT H??? 4 0.417 
+H2O O??? 47 -0.834 
+H2O H??? 4 0.417 
+SOL O??? 47 -0.834 
+SOL H??? 4 0.417 
+HOH O??? 47 -0.834 
+HOH H??? 4 0.417 
+DOD O??? 47 -0.834 
+DOD D??? 4 0.417 
+TIP O??? 47 -0.834 
+TIP H??? 4 0.417 
+TIP3 OH2 47 -0.834 
+TIP3 H1 4 0.417 
+TIP3 H2 4 0.417 
+NAP NA1 81 1.000 
+# 
+# New molecule definitions come here 
+# 
+** N??? 32 
+** C??? 10 
+** S??? 70 
+** HT?? 1 
+** H??? 3 
+** O??? 45 
+** P??? 60 
+** MFE? 86 
+** ZN?? 87 
+** MCA? 84 
+** ???? 499 
+</pre>
+<p>
+The user can easily add his/her favourite molecules to 
+the end of this file before the default atom types. 
+There are two files supplied atom.dic atom types 
+for amino acids with polar hydrogens and atomh.dic 
+for amino acids with all hydrogen atoms. The files can 
+be found in directory .../data. These files are made from 
+files of the QUANTA package by MSI. 
+<p>
+<A NAME="DENSITY">
+<hr>
+<h1>Appendix IV</h1> 
+<hr>
+
+The input format to the orbital and electron density 
+program DENSITY. The program accepts now only wave 
+functions from the ICON8 program. The default name 
+for the wave function file is fort.7. 
+<p>
+Input lines:
+<p>
+<pre>
+1) Two Title lines.
+
+2) Name of the input file to the ICON8 program. 
+   This file contains the atom coordinates. The coordinates 
+   and the atom names can also be directly included here.
+
+3) This line defines the size of the box by defining 
+   the x-min, x-max, y-min, y-max, z-min and z-max.
+
+4) This line defines the number of points in the x, y and z directions. 
+
+5) The first number defines t he orbital number to be calculated 
+   and the second number gives the type: 0 = orbital plot, 1 = orbital 
+   density and 2 = total elctron density. If the total electron 
+   density is defined the first number (the orbital number) has no meaning. 
+</pre>
+<p>
+Example:
+<p>
+<pre>
+****** test input ******* 
+****** test input ******* 
+@icon8.inp 
+fort.7 
+-8.3200 6.5625 -13.9597 6.2823 -2.7837 2.0980 
+50 50 50 
+41 0
+</pre>
+<p>
+If the input is made by gOpenMol the file looks like the following: 
+<p>
+<pre>
+Default title for: DENSITY 
+Default title for: DENSITY 
+6 
+0.000000 0.670000 0.000000 C 
+0.000000 -0.670000 0.000000 C 
+0.926650 1.205000 0.000000 H 
+-0.926650 1.205000 0.000000 H 
+0.926650 -1.205000 0.000000 H 
+-0.926650 -1.205000 0.000000 H 
+fort.7 
+-3.0 3.0 -3.0 3.0 -3.0 3.0 
+30 30 30 
+6 0
+</pre>
+<p>
+The main difference is now that the atom names and coordinates 
+are included in the input file.
+<p>
+The program can be run with the command 
+<p>
+density < density.inp > density.out. 
+<p>
+The program has the following options:
+<p>
+-ofile.name 
+<p>
+Write the orbital or density mesh into file file.name instead of 
+the default file orbital.plt.
+<p>
+
+<A NAME="PROBESURF">
+<hr>
+<h1>Appendix V</h1> 
+<hr>
+
+The probe surface program PROBESURF generates a mesh with 
+grid values from 0 to 100. The value 100 is at the vdW value 
+and value 0 is at the vdW + max. probe diameter value. 
+<p>
+It is possible to generate the surface for different probe values. 
+The method is based on the article by R. Voorintholt et al.
+(Voorintholt R., Koster M.T. , Vegter G. , Vriend G.  and 
+Hol W.G.J., "A very fast program for visualizing protein 
+surfaces, channels and cavities", J. Mol. Graphics  7 
+(1989) 243-245) 
+<p>
+The input format to the probe surface program PROBESURF. 
+<p>
+Input lines:
+<p>
+<pre>
+1) Two Title lines.
+
+2) Number of atoms.
+
+3) All this on one line:
+     1: Running atom number.
+     2: Segment name.
+     3: Residue name.
+     4: Atom name.
+     5: X coordinate.
+     6: Y coordinate.
+     7: Z coordinate.
+     8: van Der Waals radius. 
+
+4) This line defines the size of the box by defining the x-min, 
+   x-max, y-min, y-max, z-min and z-max.
+
+5) This line defines the number of points in the x, y and z directions. 
+
+6) The maximum probe radius.
+</pre>
+<p>
+Example:
+<p>
+<pre>
+Default title for: PROBESURF
+Default title for: PROBESURF
+27 
+1 OXAZ OXAZ C1 0.745450 1.329030 -0.112310 1.770000 
+2 OXAZ OXAZ C2 -0.649260 1.283460 -0.047400 1.770000 
+3 OXAZ OXAZ C3 -1.305230 0.051170 0.008740 1.770000 
+4 OXAZ OXAZ C4 -0.569310 -1.138250 0.000150 1.770000 
+5 OXAZ OXAZ C5 0.826120 -1.089110 -0.064870 1.770000 
+6 OXAZ OXAZ C6 1.483480 0.142830 -0.121060 1.770000 
+7 OXAZ OXAZ C7 -1.240880 -2.420370 0.058060 1.770000 
+8 OXAZ OXAZ C8 -1.934730 -4.549460 0.134900 1.770000 
+9 OXAZ OXAZ C9 -3.122750 -3.648180 0.170320 1.770000 
+10 OXAZ OXAZ O10 -2.574450 -2.443880 0.119710 1.520000 
+11 OXAZ OXAZ N11 -0.784090 -3.681460 0.063780 1.600000 
+12 OXAZ OXAZ O12 -4.320040 -3.925030 0.231080 1.520000 
+13 OXAZ OXAZ C13 -2.043830 -5.884680 0.168140 1.770000 
+14 OXAZ OXAZ C14 -1.244540 -8.066310 0.177640 1.770000 
+15 OXAZ OXAZ C15 0.052310 -8.899060 0.135760 1.770000 
+16 OXAZ OXAZ O16 -0.918760 -6.663430 0.133020 1.520000 
+17 OXAZ OXAZ H17 1.252970 2.282310 -0.155740 0.900000 
+18 OXAZ OXAZ H18 -1.221770 2.200130 -0.040530 0.900000 
+19 OXAZ OXAZ H19 -2.384360 0.009980 0.059090 0.900000 
+20 OXAZ OXAZ H20 1.395210 -2.008100 -0.071530 0.900000 
+21 OXAZ OXAZ H21 2.562540 0.178850 -0.171300 0.900000 
+22 OXAZ OXAZ H22 -3.033270 -6.342320 0.223210 0.900000 
+23 OXAZ OXAZ H23 -1.867540 -8.323760 -0.679230 0.900000 
+24 OXAZ OXAZ H24 -1.786000 -8.286150 1.098030 0.900000 
+25 OXAZ OXAZ H25 -0.196250 -9.959719 0.167400 0.900000 
+26 OXAZ OXAZ H26 0.675080 -8.646710 0.994020 0.900000 
+27 OXAZ OXAZ H27 0.595610 -8.681110 -0.783720 0.900000 
+-15.242029 15.242029 -15.242029 15.242029 -15.242029 15.242029 
+60 60 60
+1.900000 
+</pre>
+<p>
+The program has the following options:
+<p>
+
+-ofile.name 
+<p>
+Write the probe surface mesh into file file.name instead of the 
+default file probesurf.plt.
+<p>
+The program probsurf is located in the bin/ directory.
+<p>
+<b>When you display a probsurf generated *.plt grid file using
+the isocontour display engine remember that the display value range
+is between 100. and 0.0</b>
+<p>
+Example of a probesurface: The water surface around the cellobiohydrolase I (CBH I) tail.
+
+<img src="pict/probesurf.gif">
+
+
+<A NAME="VSS">
+<hr>
+<h1>Appendix VI</h1> 
+<hr>
+
+The VSS program calculates the electrostatic potential created 
+by the electronic distribution and the nuclei of a molecule in 
+the surrounding space. The electronic distribution is supposed 
+to be obtained from the ICON8 program. It correaponds to approximation II 
+of "Molecular electrostatic potentials: comparison of ab initio and CNDO 
+results" by C. Giessner-Prettre and A. Pullman, Theoret. Chim. Acta (Berl.) 
+(1972) 25, 83-88. This program is a direct translation of the 
+fortran version into c.
+<p>
+
+The input is as follows : 
+<p>
+<pre>
+(1) Title. 
+(2) Title. 
+(3) Title. 
+(4) NAT = number of atoms 
+    NH = number of hydrogens 
+
+    IU = 0 or 1. 
+
+    IU = 0 the coordinates are given in atomic units 
+
+    IU = 1 the coordinates are given in angstrom units 
+
+(5) the following NAT cards 
+
+    X, Y and Z coordinates for atom i 
+
+    IZ = number of valence electrons 
+
+    (The hydrogen atoms must be entered last).
+
+
+(6) the following NAT cards 
+
+    gross atomic population and screening constant for atom i 
+
+(7) Integer always 2 (not used) 
+
+(8) Xmin, Xmax, Ymin, Ymax, Zmin and Zmax values to define the box. 
+
+(9) Number of points in the X-, Y- and Z-directions.
+</pre>
+<p>
+Example:
+<p>
+<pre>
+*******NO_INFO******* 
+*******NO_INFO******* 
+ETHYLENE 
+6 4 1 
+0.0000 0.6700 0.0000 4 
+0.0000 -0.6700 0.0000 4 
+0.9267 1.2050 0.0000 1 
+-0.9267 1.2050 0.0000 1 
+0.9267 -1.2050 0.0000 1 
+-0.9267 -1.2050 0.0000 1 
+4.1027 1.6250 
+4.1027 1.6250 
+0.9486 1.3000 
+0.9486 1.3000 
+0.9486 1.3000 
+0.9486 1.3000 
+2 
+-0.9267 0.9267 -1.2050 1.2050 0.0000 0.0000 
+40 40 40
+</pre>
+<p>
+The program has the following options:
+<p>
+
+-ofile.name 
+<p>
+Write the isoenergy mesh into file file.name instead of the 
+default file vsscont.plt.
+<p>
+<hr>
+Currently all programs except the ICON8 program are written in c. 
+Dynamic memory allocation has been used in all the c programs. 
+ICON8 currently accepts systems up to 1000 atoms, but can easily be 
+modified to accept more atoms. The problem with the ICON8 code is 
+the memory. To calculate system up to 1000 atoms needs some 
+150 Mbytes of memory. The other programs used dynamic memory 
+allocation and uses very little memory. 
+
+
+</BODY>
+</HTML>
+

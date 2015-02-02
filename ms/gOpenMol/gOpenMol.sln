@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gOpenMol", "gOpenMol.vcproj", "{A45B6D72-4A91-4502-BE35-A591E0679D2B}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Debug (PCHs) = Debug (PCHs)
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{A45B6D72-4A91-4502-BE35-A591E0679D2B}.Debug.ActiveCfg = Debug|Win32
+		{A45B6D72-4A91-4502-BE35-A591E0679D2B}.Debug.Build.0 = Debug|Win32
+		{A45B6D72-4A91-4502-BE35-A591E0679D2B}.Debug (PCHs).ActiveCfg = Debug (PCHs)|Win32
+		{A45B6D72-4A91-4502-BE35-A591E0679D2B}.Debug (PCHs).Build.0 = Debug (PCHs)|Win32
+		{A45B6D72-4A91-4502-BE35-A591E0679D2B}.Release.ActiveCfg = Release|Win32
+		{A45B6D72-4A91-4502-BE35-A591E0679D2B}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

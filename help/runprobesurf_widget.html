@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<TITLE>Run probesurf program widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>
+**************************************************************************<BR>
+<b>
+Run probesurf program widget<BR>
+Leif Laaksonen CSC 1999<BR>
+</b>
+**************************************************************************<BR>
+<P>Run the ProbSurface program to produce a Connolly type of surface
+around a molecule system. You have to have an input file ready for the program
+which you define in the "Input file name" entry. If you don't remember the name and
+location of the input file you can browse by pressing the <b>Browse</b> button.
+The output file is the name of the contour grid file. If no name is given the
+program uses the default name, which will be placed in the "Output file name" entry.
+</P>
+<P>
+The ProbSurf calculation can be done either in <b>foreground</b> or <b>background</b>.
+The foreground calculation locks gOpenMol until the calulation has finished. The 
+background mode enables the further usage of gOpenMol while the calculation continues.
+</P>
+<P>
+The ProbSurf program uses a direct <b>(r)</b> and squared <b>(r**2)</b> distance method 
+for the calculation of the surfaces. Choose the method to be used.
+</P>
+<P>
+After the calculation has finished it is possible to read in the contour file and
+display the surface. Answer <b>yes</b> or <b>no</b> to the question.
+</P>
+
+<P><IMG SRC="pict/run_probesurf.gif"></P>
+<P>&nbsp;</P>
+<P>
+Line command: see <b><a href="run_help.html">run command</a></b>
+</P>
+<P>
+**************************************************************************<BR>
+LUL/1999<BR>
+**************************************************************************<BR>
+</BODY>
+</HTML>

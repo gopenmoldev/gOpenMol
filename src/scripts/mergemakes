@@ -1,0 +1,82 @@
+#! /bin/sh
+##############################################################################
+#                           Copyright (c) 2003 by:
+#          Leif Laaksonen, CSC - Scientific Computing Ltd, ESPOO, FINLAND 
+#                      Confidential unpublished property of 
+#                              Leif Laaksonen   
+#                            All rights reserved
+#
+#          Coded by: Eero Häkkinen
+##############################################################################
+# Usage:
+#     sh mergemakes Makefile >Makefile.noincludes
+if test -z "${mrgm_sedcmd}"
+then
+    trap "rm -f vars.tmp" 0 1 2 15
+    echo >vars.tmp
+fi
+mrgm_sedcmd='s/x/x/'
+# Test if echo uses backslash escaping.
+echo '\\' | grep '\\\\' >/dev/null || mrgm_sedcmd="${mrgm_sedcmd};s/\\/&&/g"
+# Test if read uses backslash escaping.
+# Is there any implementation which does not?
+echo '\\' | sed "${mrgm_sedcmd}" | ( read test; test '\\' = "${test}" ) ||
+    mrgm_sedcmd="${mrgm_sedcmd};s/\\/&&/g"
+# Read will skip leading spaces. Add `x' to the beginning of the lines.
+sed "${mrgm_sedcmd};s/^/x/" <"$1" | while read mrgm_line
+do
+    # Note: mrgm_line probably contains double backslashes.
+    #       It has to be echo'ed before use.
+    case ${mrgm_line} in
+    x"include "*)
+	# Convert to a shell variable assignment.
+	mrgm_sedcmd='s/\$[{(]\([A-Za-z0-9_]*\)[)}]/${mk_\1}/g;s/^xinclude *\(.*\)/"\1"/'
+	mrgm_assign="mrgm_file="`echo "${mrgm_line}" | sed "${mrgm_sedcmd}"`
+	if ( eval "${mrgm_assign}" 2>/dev/null )
+	then
+	    # We can expand the file name. We may need variables to
+	    # expand the right value. So read the values.
+	    . ./vars.tmp
+	    eval "${mrgm_assign}"
+	    if test -f "${mrgm_file}"
+	    then
+		# We expanded it correctly. Let us process it.
+		echo "x# BEGIN INCLUDE ${mrgm_file}"
+		set x "${mrgm_file}"; shift
+		# Note: mergemakes write variables to vars.tmp. It does not
+		#       change local variables.
+		case $0 in
+		*/*) . "$0" ;;
+		*)   . "./$0" ;;
+		esac
+		echo "x# END INCLUDE ${mrgm_file}"
+		echo "x"
+		. ./vars.tmp
+		continue
+	    fi
+	fi
+	echo "mergemakes: WARNING: unable to ${mrgm_file}" |
+	    sed 's/unable to xinclude/unable to include/' >&2
+	;;
+    x[A-Za-z]*)
+	if echo "${mrgm_line}" | grep '^[A-Za-z0-9_]* * = ' >/dev/null
+	then
+	    # Convert to a shell variable assignment.
+	    mrgm_sedcmd='s/\$[{(]\([A-Za-z0-9_]*\)[)}]/${mk_\1}/g;s/^x\([^ ]*\) *= *\(.*\)/mk_\1="\2"/'
+	    mrgm_assign=`echo "${mrgm_line}" | sed "${mrgm_sedcmd}"`
+	    # If it is too complex we will probably not need it.
+	    # We may have to pass variable to parent shell.
+	    # Use temp file to transfer variables.
+	    ( eval "${mrgm_assign}" 2>/dev/null ) && cat >>vars.tmp <<EOA
+${mrgm_assign}
+EOA
+	fi
+	# Keep the line.
+	echo "${mrgm_line}"
+	;;
+    *)
+	# Just a normal line.
+	echo "${mrgm_line}"
+	;;
+    esac
+done | sed 's/^x//'

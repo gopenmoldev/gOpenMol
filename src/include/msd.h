@@ -1,0 +1,12 @@
+extern int gomp_DeleteMSFset(void);
+extern int gomp_RMS_Fluctuation(int, const char *, const char *, const char *);
+extern int gomp_MeanSquareDisplacement(int,const char *,const char *,const char *);
+extern int gomp_ExportMSFset(const char *);
+extern int gomp_MSDdataWrite(const char *);
+extern int gomp_GetRMSlength(void);
+extern int gomp_CreateMSFset(int);
+extern int gomp_DeleteMSFset(void);
+extern int gomp_ExportMSFset(const char *);
+extern int gomp_GetRMSlength(void);
+extern int gomp_GetRMSatomindex(int);
+extern const float *gomp_GetRMSfluctuation(int);

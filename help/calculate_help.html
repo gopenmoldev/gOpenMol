@@ -1,0 +1,155 @@
+<HTML>
+<HEAD>
+<TITLE>calculate command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                        calculate command
+                        Leif Laaksonen CSC 2001
+			Timm Uhlmann       2003
+**************************************************************************
+<a name="avstructure">#
+# calculate average structure from a trajectory
+#
+<b>
+calc$ulate   avst$ructure
+</b>
+<a name="bbdihedrals">#
+# calculate backbone dihedral angles for a protein
+#
+<b>
+             bbdi$hedrals
+</b>
+<a name="cluster">#
+# calculate the clustering for atoms Seg Res Atm through the frames
+# in a trajectory
+#
+<b>
+             clus$ter     Seg Res Atm
+</b>
+#
+# delete all cluster data
+#
+<b>
+            -clu$ster
+</b>
+<a name="connectivity">#
+# (re)calculate the atom connectivity information for Seg Res Atm
+#
+<b>
+             conn$ectivity Seg Res Atm
+</b>
+<a name="hbonds">#
+# calculate hydrogen bonds
+#
+<b>
+             hbon$ds      Seg Res Atm
+             hbon$ds      Seg Res Atm  Colour
+             hbon$ds      Seg Res Atm  {Fred Fgreen Fblue}
+             hbon$ds      Seg Res Atm  nohy$drogens
+            -hbo$nds
+</b>
+#
+# calculate correlation array for distance/angle/torsion array(s) 
+# numbered Iserie1 and Iserie2
+#
+<b>
+             corr$elation dist$ance  Iserie1 Iserie2
+                          angl$e     Iserie1 Iserie2
+                          tors$ion   Iserie1 Iserie2
+</b>
+<a name="geomcenter">#
+# calculate geometrical center for atoms Seg Res Atm
+#
+<b> 
+             geomc$enter  Seg Res Atm
+</b>
+<a name="masscenter">#
+# calculate mass center for atoms Seg Res Atm
+#
+<b>
+             massc$enter  Seg Res Atm
+</b>
+<a name="distance">#
+# calculate distance between Seg1 Res1 Atm1 Seg2 Res2 Atm2
+#
+<b>
+             dist$ance    Seg1 Res1 Atm1 Seg2 Res2 Atm2
+</b>
+<a name="angle">#
+# calculate angle between Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3
+#
+<b>
+             angl$e       Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3
+</b>
+<a name="torsion">#
+# calculate torsion between Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3 Seg4 Res4
+#
+<b>
+             tors$ion     Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3 Seg4 Res4 Atm4
+</b>
+<a name="msdisplacement">#
+# calculate mean square displacement for atoms Seg Res Atm using
+# geometrical center
+#
+<b>
+             msdi$splacement  atom         Seg Res Atm
+</b>
+#
+# calculate mean square displacement for atoms Seg Res ATm using
+# mass center
+#
+<b>
+             msdi$splacement  mass$center  Seg Res Atm
+</b>
+<a name="quatfit">#
+# fit the atoms Seg1 Res1 Atm1 in system #1 to
+#         atoms Seg2 Res2 Atm2 in system #2
+# 0 = numerical display off, 1 = numerical display on
+#
+<b>
+             quat$fit     StrucN1 Seg1 Res1 Atm1 StrucN2 Seg2 Res2 Atm2 
+			                                                             0/1
+</b>
+<a name="rmsfluctuation">#
+# calculate root mean square fluctuation for atoms Seg Res Atm
+# through the frames
+#
+<b>
+             rmsf$luctuation  Seg Res Atm
+</b>
+<a name="rdf">#
+# calculate radial distribution function for atoms Seg2 Res2 Atm2
+# calculated from Seg1 Res Atm1. The calculation will <b>only</b>
+# be done for the current structure (system) displayed! However
+# applying the command successively will add the new calculated
+# rdf to the previous one(s) calculated. This enables the calculation
+# of rdf  for the full set of frames in a trajectory. To reset the
+# calculation apply the "calc -rdf" command.
+# To calculate the average from a set of applied "calc rdf" commands
+# apply the "calc rdfmean" command.
+#
+<b>
+             rdf          Seg1 Res1 Atm1 Seg2 Res2 Atm2 Fcut Tbin
+            -rdf
+             rdfm$mean
+
+<a name="plane">
+#
+#
+# calculate a plane from three points
+#
+<b>
+         plan$e		fx1 fy1 fz1 fx2 fy2 fz2 fx3 fy3 fz3
+<b/>
+
+
+</b><a name="end">
+
+**************************************************************************
+LUL/2001
+**************************************************************************
+</PRE></BODY>
+</HTML>

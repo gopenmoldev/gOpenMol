@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Tcl line command interface to gOpenMol</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>
+<HR>
+</P>
+<H1>Tcl line command interface to gOpenMol</H1>
+
+<UL>
+<LI><A HREF="tcl_scripts.html">Available Tcl command scripts</A> (defined in <B>gopenmol/data/.gopenmolrc</B>) </LI>
+<LI><A HREF="gOpenMol_begin.html">Menu driven interface to gOpenMol</A></LI></UL>
+
+<P>
+<hr>
+<p>
+The command line parser is implemented using the Tcl (Tool command language).
+  The language is rich of commands and I strongly recommend you first to have
+  a look the the Tcl commands (http://dev.scriptics.com/). For most
+  commands it is enough just to use the four first characters to uniquely define
+  the command. A clear exception is the 'contour' command where the first five
+  characters are needed not to mix the command with the 'continue' statement.
+  Through the help files I have used a dollar ($) sign to indicate there characters
+  needed to define a command. You can also get a list of all available commands
+  by typing the question (?) mark at the command prompt. Very many of the commands
+  return a parameter (or several) which can be used as an 
+input to a new command. </P>
+</p>
+<P>
+Please observe that when using the commands in <b>scripts</b>
+one needs to fill in the full command name!
+</P>
+<PRE>
+
+Commands available:
+
+<A HREF="atom_help.html">atom</A>               define various properties about atoms    
+<A HREF="calculate_help.html">calc$ulate</A>         calculate molecular properties
+<A HREF="center_help.html">cent$er</A>            center the system on the screen
+<A HREF="contour_help.html">conto$ur</A>           display and define isosurface plots
+<A HREF="define_help.html">defi$ne</A>            define general properties
+<A HREF="display_help.html">displ$ay</A>           display the current picture
+<A HREF="edit_help.html">edit</A>               edit molecule and molecule properties
+<A HREF="export_help.html">expo$rt</A>            export molecular structures
+<A HREF="fill_help.html">fill</A>               fill time series vectors
+<A HREF="find_help.html">find</A>               find/calculate various things
+gomError "text"    print the "text" through the ERROR module
+gomPrint "text"    print the "text" through the Print module          
+<A HREF="scale_help.html">gscal$e</A>            scale the current display
+<A HREF="hardcopy_help.html">hard$copy</A>          make a hardcopy of the currecnt display
+help               help system
+<A HREF="import_help.html">impo$rt</A>            import molecular coordinates and other things
+<A HREF="manipulate_help.html">mani$pulate</a>        manipulate time series
+<A HREF="monitor_help.html">moni$tor</A>           monitor molecular properties from a trajectory
+<A HREF="mopen_help.html">mope$n</A>             open old model file
+<A HREF="msave_help.html">msav$e</A>             save model file
+pause    Fvalue    pause for Fvalue seconds
+<A HREF="plot_help.html">plot</A>               plot various things
+<A HREF="plumber_help.html">plum$ber</A>           plot a ribbon or tube through atoms
+<A HREF="trace_help.html">ptra$ce</A>            trace atoms through the trajectory
+quit               stop program and exit
+<A HREF="reset_help.html">rese$t</A>             reset the system
+<A HREF="rotate_help.html">rota$te</A>            rotate the current display
+<A HREF="run_help.html">run</A>                run various programs
+<A HREF="select_help.html">sele$ct</A>            make a selection from the current atoms
+<A HREF="show_help.html">show</A>               show various things
+<A HREF="trajectory_help.html">traj$ectory</A>        trajectory display and analysis control
+<A HREF="translate_help.html">tran$slate</A>         translate the current display
+<A HREF="window_help.html">wind$ow</A>            window operations
+
+</PRE>
+<hr>
+<PRE>
+You don't always need the graphics when you use gOpenMol. In fact in
+some cases it's an advantage not to use the graphics. The command
+line options when you start gOpenMol are:
+
+    gopenmol -cInputCoord.Ext -h -t -ln -mModel.gom -pFile.Name  
+                                                                 
+    -mModel.gom start GopenMol with the model file Model.gom     
+    -cInputCoord.Ext start gOpenMol with coordinate file         
+    -pfile.name start gOpenMol with parameter file 'File.Name'  
+    -t start gOpenMol without any graphics      
+    -ln do not write a log file  (GOPENMOL.LOG) 
+    -ly force the write of the log file (GOPENMOL.LOG) 
+    -h print this help                                 
+
+**************************************************************************
+LUL/1996
+**************************************************************************</PRE>
+</BODY>
+</HTML>

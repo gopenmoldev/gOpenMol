@@ -1,0 +1,19 @@
+###
+### This file contains environment values essential for gOpenMol
+### Leif Laaksonen/2005
+###
+### Default prefix is the value of GOM_ROOT environment variable which is
+### set in bin\rungOpenMol.bat (Windows) or in bin/rungOpenMol (UNIX).
+### All values may be overwritten by setting corresponding environment variable.
+GOM_BIN     bin
+GOM_DATA    data
+GOM_PLUGINS plugins
+GOM_HELP    help
+GOM_DEMO    demo
+### Uncomment the following entries if you do not want to use default values.
+### On Windows, the default is GOM_ROOT environment variable.
+### On UNIX, the default is $HOME or $GOM_ROOT.
+# GOM_HOME    ""
+### On Windows, the default value is system temp directory.
+### On UNIX, the default is $TMPDIR, $TMP or /tmp.
+# GOM_TEMP    temp

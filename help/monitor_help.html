@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>monitor command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                             monitor command
+                        Leif Laaksonen CSC 1996
+**************************************************************************
+
+<a name="distance"><a name="angle"><a name="torsion"><a name="dihedral">#
+# Monitor a distance, angle or torsion
+# The operation with the "-" sign deletes the whole
+# preset structure
+# Change the line type or the line colour of list number Ilist 
+#
+<b>
+moni$tor  dist$ance   Seg1 Res1 Atm1 Seg2 Res2 Atm2
+                      colo$ur   CName Ilist
+                      type      Inum  Ilist
+         -dis$tance
+          angl$e      Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3
+                      colo$ur   CName Ilist
+                      type      Inum  Ilist
+         -ang$le
+          tors$ion    Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3 Seg4 Res4 Atm4
+                      colo$ur   CName Ilist
+                      type      Inum  Ilist
+          dihe$dral   Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3 Seg4 Res4 Atm4
+                      colo$ur   CName Ilist
+                      type      Inum  Ilist
+         -tor$sion
+         -dih$edral
+</b>
+<a name="display">#
+# Put the display switch on for the defined distance, angle and
+# torsion
+#
+<b>
+          disp$lay    dist$ance  on
+                                 off
+                      angl$e     on
+                                 off
+                      tors$ion   on
+                                 off
+                      dihe$dral  on
+                                 off
+</b>
+<a name="edit">#
+# Edit time series definitions. Access time series and change
+# defined atom index. 
+#
+<b>
+           edit       dist$ance  SeriesIndex Atm#1 Atm#2 TypeIndex Fred Fgreen Fblue
+                      angl$e     SeriesIndex Atm#1 Atm#2 Atm#3 TypeIndex Fred Fgreen Fblue
+                      tors$ion   SeriesIndex Atm#1 Atm#2 Atm#3 Atm#4 TypeIndex Fred Fgreen Fblue
+</b><a name="end">
+**************************************************************************
+LUL/1996
+**************************************************************************
+</PRE>
+</BODY>
+</HTML>
+

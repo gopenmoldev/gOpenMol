@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<TITLE>Join two Gamess IRC files command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+<B>Join two Gamess IRC files to one
+Leif Laaksonen CSC 2001</B>
+**************************************************************************
+
+Joining two Gamess irc-files.
+Both files start with the same transtion state, one going
+forwards and the other backwards.
+The order of the coordinate sets is reversed in the first file
+so the sequence in the result file is 
+
+reactant(s) - transition state - product(s)
+
+or in reversed order depending on the order in whih the files
+are given.
+
+G H&ouml;jer, 2001-05-15
+
+The IRC file can be read through the GAMESS coordinate input reader.
+The coordinate input reader produces a multi-coordinate file that
+can be viewed using the trajectory facility.
+
+The xmol file has the same name as the IRC file but with the xmol
+extension.
+
+**************************************************************************
+LUL/2001
+**************************************************************************
+</PRE></BODY>
+</HTML>

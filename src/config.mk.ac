@@ -1,0 +1,118 @@
+# -*- mode: makefile -*-
+# Directories.
+SUBDIRS          = general graphics parser readwrite
+# Source directories.
+incdir           = $(top_srcdir)/include
+rootdir          = $(top_srcdir)/..
+makedir          = $(top_srcdir)/unix/make
+make_config      = @make_config@
+# Target directories.
+prefix           = @prefix@
+exec_prefix      = @exec_prefix@
+bindir           = @bindir@
+datadir          = @datadir@
+includedir       = @includedir@
+libdir           = @libdir@
+gomsubdir        = @gomsubdir@
+gomroot          = $(libdir)/$(gomsubdir)
+gomdataroot      = $(datadir)/$(gomsubdir)
+gombindir        = $(gomroot)/bin
+gomincdir        = $(includedir)/$(gomsubdir)
+gomlibdir        = $(gomroot)/bin
+# Tcl/Tk entries.
+TCL_LIBRARY      = @TCL_LIBRARY@
+TK_LIBRARY       = @TK_LIBRARY@
+# Cached user values.
+CPPFLAGS         = @USER_CPPFLAGS@
+CFLAGS           = @USER_CFLAGS@
+CXXFLAGS         = @USER_CXXFLAGS@
+FFLAGS           = @USER_FFLAGS@
+LDFLAGS          = @USER_LDFLAGS@
+LTLDFLAGS        = @USER_LTLDFLAGS@
+DEFS             = @USER_DEFS@
+LIBS             = @USER_LIBS@
+# C library entries.
+TCL_LIBS         = @TCL_LIBS@
+X11_LIBS         = @X11_LIBS@
+TK_LIBS          = @TK_LIBS@
+GL_LIBS          = @GL_LIBS@
+GLU_LIBS         = @GLU_LIBS@
+GLUT_LIBS        = @GLUT_LIBS@
+JPEG_LIBS        = @JPEG_LIBS@
+PY_LIBS          = @PY_LIBS@
+# C compiler entries for libraries.
+TCL_CPPFLAGS     = @TCL_CPPFLAGS@
+TCL_LDFLAGS      = @TCL_LDFLAGS@
+TCL_LTLDFLAGS    = @TCL_LTLDFLAGS@
+X11_CPPFLAGS     = @X11_CPPFLAGS@
+X11_CFLAGS       = @X11_CFLAGS@
+X11_LDFLAGS      = @X11_LDFLAGS@
+TK_CPPFLAGS      = @TK_CPPFLAGS@
+TK_LDFLAGS       = @TK_LDFLAGS@
+TK_LTLDFLAGS     = @TK_LTLDFLAGS@
+PY_CPPFLAGS      = @PY_CPPFLAGS@
+PY_LDFLAGS       = @PY_LDFLAGS@
+PY_LTLDFLAGS     = @PY_LTLDFLAGS@
+COMMON_CPPFLAGS  = @COMMON_CPPFLAGS@
+COMMON_LDFLAGS   = @COMMON_LDFLAGS@
+COMMON_LTLDFLAGS = @COMMON_LTLDFLAGS@
+# C compiler entries.
+CPP              = @CPP@
+CC               = @CC@
+CXX              = @CXX@
+F77              = @F77@
+CCTAGS           = @CCTAGS@
+CCDEPMODE        = @CCDEPMODE@
+CCDEPCOMP        = @CCDEPCOMP@
+GOM_CPPFLAGS     = @CPPFLAGS@ -I$(incdir) -Iinclude -I.
+GOM_CFLAGS       = @ALL_CFLAGS@
+GOM_FFLAGS       = @ALL_FFLAGS@
+GOM_LDFLAGS      = @ALL_LDFLAGS@
+GOM_LTLDFLAGS    = @ALL_LTLDFLAGS@
+GOM_DEFS         = @ALL_DEFS@ @OS_DEFS@
+GOM_LIBS         = @ALL_LIBS@
+STD_LIBS         = @STD_LIBS@
+# Allow static linkage.
+AR               = ar
+ARFLAGS          = cru
+RANLIB           = @RANLIB@
+# File suffixies.
+ARSUFFIX         = @ARSUFFIX@
+EXEEXT           = @EXEEXT@
+PATH_SEPARATOR   = @PATH_SEPARATOR@
+# Tools.
+set_show         = set x $${MAKEFLAGS}; show='echo'; \
+		case " $$* " in " -s ") show=':' ;; esac; \
+		case $$2 in *=*) ;; *s*) show=':' ;; esac
+SHELL            = @SHELL@
+LN_S             = @LN_S@
+@SET_MAKE@
+MAKEOLD          = touch -t 199001010000
+MKDIR_P          = ${SHELL} ${top_srcdir}/unix/install-sh -d -m 755
+RM               = rm -f
+RM_R             = $(RM) -r
+TCLSH            = @TCLSH@
+DEPCOMP          = $(SHELL) $(top_srcdir)/unix/depcomp
+LIBTOOL          = @LIBTOOL@
+REMOVE           = $(LIBTOOL) --mode=clean $(RM)
+COMPILE          = $(LIBTOOL) $(CCTAGS) --mode=compile $(CC) $(GOM_CPPFLAGS) $(GOM_CFLAGS) $(GOM_DEFS) -c -o
+COMPILEFLAGS     =
+LINK             = $(LIBTOOL) --mode=link $(CC) $(GOM_CFLAGS) -o
+LINK_SO          = $(LINK)
+LINK_A           = $(LINK)
+LINKFLAGS        = $(GOM_LDFLAGS) $(GOM_LIBS) $(GOM_LTLDFLAGS) -rpath $(gomlibdir)
+LINKFLAGS_SO     = $(LINKFLAGS) -avoid-version
+LINKFLAGS_A      =
+LTPREINSTALL     = :
+LTINSTALL        = $(LIBTOOL) --mode=install $(INSTALL_PROGRAM)
+LTPOSTINSTALL    = $(LIBTOOL) --mode=finish
+INSTALL          = @INSTALL@
+INSTALL_PROGRAM  = @INSTALL_PROGRAM@
+INSTALL_SCRIPT   = @INSTALL_SCRIPT@
+INSTALL_DATA     = @INSTALL_DATA@
+# Build target:
+#     dynamic     Build a single binary which exports global symbols.
+#     shared      Build a shareable library if possible.
+#     noshared    Wont't use libraries at all.
+#     static      Build static libraries using $(AR) or libtool.
+BUILDTARGET      = @BUILDTARGET@

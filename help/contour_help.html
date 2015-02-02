@@ -1,0 +1,189 @@
+<HTML>
+<HEAD>
+<TITLE>contour command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                             contour command
+                        Leif Laaksonen CSC 2001
+                        Timm Uhlmann       2003
+                        Eero H&auml;kkinen  CSC 2004
+**************************************************************************
+#
+# Command to handle the various operations for a grid data to be 
+# displayed as a isocontour surface
+#
+
+<a name="file">#
+# Read a file with the name File.Name containing grid data and give
+# the set the name Contour.name
+#
+<b>
+conto$ur   file        File.Name Contour.Name
+</b>
+#
+# Delete all contour information for all files
+#
+<b>
+          -fil$e
+</b>
+<a name="delete">#
+# Delete all contour information for all files
+#
+<b>
+           dele$te
+</b>
+<a name="info">#
+# Print contour information about the files
+#
+<b>
+           info
+</b>
+<a name="plot">#
+# Plot the isosurface for contour with the name Contour.Name
+# using an isovalue Fvalue and colour Colour [Fvalue Colour ...]
+# The colour can be given as a (1) name, (2) RGB integer value or
+# (3) RGB floating values.
+#
+<b>
+           plot        Contour.Name Fvalue  Colour Fvalue Colour  ...
+           plot        Contour.Name Fvalue "Fvalue Fvalue Fvalue" ...
+           plot        Contour.Name Fvalue "Ivalue Ivalue Ivalue" ...
+</b>
+#
+# If contour mapping is used you have to give 
+# (1) The contour for wich one wants to define an iso value 
+# (2) The contour from which the property will be mapped
+# (3) A min and max value inside which the colour scaling will be done
+#
+<b>
+           plot {Contour.Name1 Contour.Name2} Fvalue  MinVal MaxVal  ...
+</b>
+
+<a name="alphablend">#
+# Change the transparent value for contour with the name Contour.Name
+# to Fvalue. If there are several isocontour values defined apply on
+# the one with index Ivalue. Fvalue is 1. for no transparency and 0.0
+# for full transparency.
+#
+<b>
+           alph$ablend Contour.Name Fvalue  Ivalue
+</b>
+<a name="smooth">#
+# Use smoothing for the isocontour surface with the name Contour.Name
+# and index Ivalue.
+#
+<b>
+           smoo$th     Contour.Name on      Ivalue
+</b>
+#
+# Do not use smoothing for the isocontour surface with the name 
+# Contour.Name and index Ivalue.
+#
+<b>
+           smoo$th     Contour.Name off     Ivalue
+</b>
+<a name="display">#
+# Display isocontour surface with name the name Contour.Name and
+# index Ivalue.
+#
+<b>
+           disp$lay    Contour.Name on      Ivalue
+</b>
+#
+# Do not display isocontour surface with name the name Contour.Name and
+# index Ivalue.
+#
+<b>
+           disp$lay    Contour.Name off     Ivalue
+</b>
+<a name="type">#
+# Change the surface display type to solid for isocontour surface with
+# the name Contour.Name and index Ivalue.
+#
+<b>
+           type        Contour.Name soli$d  Ivalue
+</b>
+#
+# Change the surface display type to mesh for isocontour surface with
+# the name Contour.Name and index Ivalue.
+#
+<b>
+           type        Contour.Name mesh    Ivalue
+</b>
+#
+# Change the surface display type to line for isocontour surface with
+# the name Contour.Name and index Ivalue.
+#
+<b>
+           type        Contour.Name line    Ivalue
+</b>
+<a name="method">#
+# It is possible to display a contour so that the contour polygon
+# values are saved in an array. The default is direct which do not save
+# the information. To get the polygon data look into the show command.
+# It is impossible to differ the contour levels from the data array.
+# The array is just an array of triangular meshes.
+<b>
+           meth$od     dire$ct
+                       save
+</b>
+<a name="mapping">#
+# Command to control the colour mapping of the values from one grid file
+# on the surface of an other isocontour file
+# ContourName#2 will now be mappend on the surface of ContourName#1
+#
+<b>
+           mapp$ing ContourName#1 ContourName#2
+</b>
+<a name="combine">#
+# Command to combine a contour file to a particular structure
+# Glue contour with name "Contour.Name" to structure number "Structure#"
+#
+<b>
+           comb$ine   Contour.Name   Structure#
+</b>
+<a name="clip">#
+# Contour clip plane commands
+# Put a clip plane at Fvalue with the clipping in the +/- direction
+# along the defined axis.
+# Put the defined clip (x, y or z axis) plane display on/off
+#
+<b>
+           clip       x+  Fvalue
+           clip       x-  Fvalue
+           clip       y+  Fvalue
+           clip       y-  Fvalue
+           clip       z+  Fvalue
+           clip       z-  Fvalue
+
+           clip       x   on
+           clip       x   off
+           clip       y   on
+           clip       y   off
+           clip       z   on
+           clip       z   off
+</b>
+# Put a clip plane of a line type contour at Fvalue along the defined axis.
+#
+           clip       x   Contour.Name Fvalue Ivalue
+           clip       y   Contour.Name Fvalue Ivalue
+           clip       z   Contour.Name Fvalue Ivalue
+</b>
+<a name="cullface">
+#
+#	toggle face culling on/off
+#
+<b>
+        cull$face    contname  	     on
+				     off
+</b>
+<a name="end">
+  
+**************************************************************************
+LUL/2004
+**************************************************************************
+</PRE></BODY>
+</HTML>

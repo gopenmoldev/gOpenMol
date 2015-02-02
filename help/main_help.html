@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>contour command</TITLE>
+<META NAME="Template" CONTENT="C:\Program Files\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+           This is the main help level for the gOpenMol program
+                        Leif Laaksonen CSC 2002
+**************************************************************************
+
+The command line parser is implemented using the Tcl (Tool command language).
+The language is rich of commands and I strongly recommend you first to have
+a look the the Tcl commands (http://www.sunlabs.com:80/research/tcl/).
+
+For most commands it is enough just to use the four first characters
+to uniquely define the command. A clear exception is the 'contour'
+command where the first five characters are needed not to mix the
+command with the 'continue' statement. Through the help files I have
+used a dollar ($) sign to indicate there characters needed to define a
+command. You can also get a list of all available commands by typing
+the question (?) mark at the command prompt.
+
+Very many of the commands return a parameter (or several) which can be
+used as an input to a new command.
+
+Commands available:
+
+atom               define various properties about atoms    
+calc$ulate         calculate molecular properties
+cent$er            center the system by choosing atoms
+conto$ur           display and define isisurface plots
+defi$ne            define general properties
+displ$ay           display the current picture
+edit               edit molecule and molecule properties
+expo$rt            export molecular structures
+fill               fill time series vectors
+hard$copy          make a hardcopy of the currecnt display
+help               help system
+impo$rt            import molecular coordinates and other things
+moni$tor           monitor molecular properties from a trajectory
+mope$n             open old model file
+msav$e             save model file
+plot               plot various things
+plum$ber           plot a ribbon or tube through atoms
+rese$t             reset the system
+rota$te            rotate the current display
+gscal$e            scale the current display
+sele$ct            make a selection from the current atoms
+show               show various things
+trac$e             trace atoms through the trajectory
+traj$ectory        trajectory display and analysis control
+tran$slate         translate the current display
+
+You don't always need the graphics when you use gOpenMol. In fact in
+some cases it's an advantage not to use the graphics. The command
+line options when you start gOpenMol are:
+
+    gopenmol -cInputCoord.Ext -h -t -ln -mModel.gom -pFile.Name  
+                                                                 
+    -mModel.gom start GopenMol with the model file Model.gom     
+    -cInputCoord.Ext start gOpenMol with coordinate file         
+    -pfile.name start gOpenMol with parameter file 'File.Name'  
+    -t start gOpenMol without any graphics      
+    -ln do not write a log file  (GOPENMOL.LOG) 
+    -ly force the write of the log file (GOPENMOL.LOG) 
+    -h print this help                                 
+
+**************************************************************************
+LUL/2002
+**************************************************************************
+</PRE><CODE>&nbsp;</CODE></BODY>
+</HTML>
+

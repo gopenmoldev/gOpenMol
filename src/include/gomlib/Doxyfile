@@ -1,0 +1,15 @@
+PROJECT_NAME           = "gOpenMol Extension API"
+ALWAYS_DETAILED_SEC    = YES
+DISTRIBUTE_GROUP_DOC   = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
+INPUT                  = .
+MACRO_EXPANSION        = YES
+SEARCH_INCLUDES        = YES
+INCLUDE_PATH           = .
+PREDEFINED             = DOXYGEN
+GENERATE_HTML          = YES
+GENERATE_HTMLHELP      = YES
+GENERATE_LATEX         = NO
+GENERATE_RTF           = NO
+GENERATE_MAN           = YES
+GENERATE_XML           = NO

@@ -1,0 +1,67 @@
+* Own parameter file
+
+# Following definition is taken from PROTEIN STRUCTURE by D.C. Phillips and
+# A.C.T. North, Carolina Biology readers (34), 1978
+#
+# acidic hydropilic
+water asp 255 0 0  # red
+water glu 255 0 0  # red
+water tyr 255 40 30  # light red
+
+# neutral hydrophilic
+water asn 255 255 255 # white
+water gln 255 255 255 # white
+water thr 255 255 255 # white
+water ser 255 255 255 # white
+
+# nonpolar hydrophobic
+water cys 60 60 60  # grey
+water met 60 60 60  # grey
+water gly 60 60 60  # grey
+water ala 60 60 60  # grey
+water val 60 60 60  # grey
+water pro 60 60 60  # grey
+water phe 60 60 60  # grey
+water leu 60 60 60  # grey
+water ile 60 60 60  # grey
+water trp 150 150 150 # light  grey
+
+# basic hydrophilic
+water his 0 220 0   # light green
+water lys 0 220 0   # light green
+water arg 0 220 0   # light green
+
+# following line defines the liquorice sphere and cylinder radius
+liquorice 0.3 0.3 
+
+# maximum memory available for storing the trajectories
+maxtrajmem 10
+
+# defining secondary structure for proteins
+secang  phi   c  n  ca  c # C(i-1) N(i) CA(i) C(i)
+secang  psi   n  ca  c  n # N(i) CA(i) C(i) N(i+1)
+secang  omega ca c   n  ca # CA(i) C(i) N(i+1) CA(i+1)
+
+# parameters for regular polypeptide conformations
+#            phi    psi   omega  "res per turn"   "translation per res A"  name
+pconf apbsheet  -139.  135.  -178.    2.0   3.4  4.  red # Antip beta-sheet
+pconf pbsheet   -119.  113.   180.    2.0   3.2  4.  green # Parall beta sheet
+pconf rhahelix  -57.  -47.    180.    3.6   1.5  4.  blue # Right handed alpha helix
+pconf 310helix  -49.  -26.    180.    3.0   2.0  4.  yellow # 3 10 helix
+pconf pihelix   -57.  -70.    180.    4.4   1.15 4.  white # Pi helix
+pconf pp1       -83.   158.     0.    3.33  1.9  4.  brown # Polyproline I
+pconf pp2       -78.   149.   180.    3.0   3.12  4. brown # Polyproline II
+pconf pg2       -80.   150.   180.    3.0   3.1   4. brown # Polyglycine II
+
+# define some aliases
+
+# set command
+set bond   half             # set sharp half style on
+set fkey1  displ            # Function key F1  ==  display
+set fkey8  dyna displ movie # F8 == Display traj as a movie
+set fkey9  dyna displ step  # F9 == Display traj in steps
+set fkey10 set bmode single # Function key F10 ==  set bmode single
+set fkey11 set bmode double # Function key F11 ==  set bmode double
+set fkey12 end              # Function key F12 ==  end
+
+end

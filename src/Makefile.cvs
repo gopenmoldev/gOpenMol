@@ -1,0 +1,52 @@
+##############################################################################
+#                       Copyright (c) 2002 - 2005 by:
+#          Leif Laaksonen, CSC - Scientific Computing Ltd, ESPOO, FINLAND 
+#                      Confidential unpublished property of 
+#                              Leif Laaksonen   
+#                            All rights reserved
+#
+#          Coded by: Eero Häkkinen
+##############################################################################
+
+# -*- mode: makefile -*-
+release: confsys FORCE
+	find .. \
+		-name 'CVS*' -o \
+		-name 'KEEP_THIS_DIRECTORY.txt' -o \
+		-name '*.dll' -o -name '*.exe' -o -name '*.lib' | \
+		xargs rm -fr xxxxxxxx
+	rm -fr autom4te.cache
+	rm -f stamp-h.in ac*.m4
+
+confsys: configure config.h.in FORCE ;
+
+configure: configure.ac aclocal.m4
+	autoconf
+
+# autoheader might not change config.h.in, so touch a stamp file.
+config.h.in: stamp-h.in
+stamp-h.in: configure.ac aclocal.m4
+	autoheader
+	echo timestamp > stamp-h.in
+
+config.h: stamp-h
+stamp-h: config.h.in config.status
+	./config.status
+
+Makefile: unix/make/top.mk.ac config.status
+	./config.status $@
+
+%/Makefile: unix/make/subdir.mk.ac config.status
+	./config.status $@
+
+config.status: configure
+	./config.status --recheck
+
+aclocal.m4: unix/*.m4 configure.ac include/gomversion.h
+	ver=`sed 's/.*(version \(.*\)).*/\1/p;d' include/gomversion.h`; \
+	aclocal -I unix && \
+	echo "m4_define([GOM_PACKAGE_VERSION],[$$ver])" >>$@
+
+FORCE:
+
+.PHONY: FORCE

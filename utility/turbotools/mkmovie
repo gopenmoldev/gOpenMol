@@ -1,0 +1,56 @@
+#!/usr/local/bin/perl
+#
+# This program makes XMol (xyz) movies from TURBOMOLE gradient files.
+# The movie can be viewed with xmol and gOpenMol.
+#
+# $ mkmovie gradient >movie.xyz 
+# 
+# Written by Jonas Juselius, 1998
+#
+
+$au2ang=0.52917726;
+$collect=0;
+$cycle=0;
+
+	open(INPUT, "<$ARGV[0]");
+	
+	while ( <INPUT> ) {
+		if ( /\$end/ ) {
+			last;
+		};
+
+		if ( $collect ) {
+			if ( /.* *[a-z]?[a-z] ?$/ ) {
+				($xcoord[$i], $ycoord[$i], $zcoord[$i], $elem[$i])=split;
+				
+				$xcoord[$i]*=$au2ang;
+				$ycoord[$i]*=$au2ang;
+				$zcoord[$i]*=$au2ang;
+				
+				if ($elem[$i] eq 'q') { 
+					$elem[$i]='x'; 
+				}
+				$elem[$i]=uc $elem[$i];
+				$i++;
+			}
+			else {
+				print $i-1, "\n";
+				print "cycle ", $cycle, "\n";
+				for ( $j=1; $j < $i; $j++ ) {
+					printf("%s %f %f %f\n",  $elem[$j], $xcoord[$j], 
+					$ycoord[$j], $zcoord[$j]);
+				}
+				$collect=0;
+			}
+		}
+		elsif ( /^ .cycle/ ) {
+			($_[0], $_[1], $_[2])=split;
+			$cycle=$_[2];
+			$collect=1;
+			$i=1;
+		}
+	}
+
+	
+	close(INPUT);	
+

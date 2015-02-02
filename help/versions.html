@@ -1,0 +1,164 @@
+<HTML>
+<HEAD>
+<TITLE>gOpenMol version 2.0 (31.03.2001)</TITLE>
+</HEAD>
+<BODY>
+
+<h1>gOpenMol version 2.0 (31.03.2001)</h1>
+<h2>New features in version 2.0</h2>
+<ol>
+<li>All the discovered bugs in version 1.4 and 1.4p have been corrected.</li>
+<li>Cut planes through the grid data can be defined from 3 coordinates (atoms)
+    or planes perpendicular to the x, y and z axis.</li>
+<li>Clip planes through the grid data can be defined from 3 coordinates (atoms)
+    or planes perpendicular to the x, y and z axis.</li>
+<li>Coordinate reader has been improved.</li>
+<li>Coordinate reader for Jaguar output files.</li>
+<li>Filter program to convert Jaguar grid data files into gOpenMol
+    plt files.</li>
+<li>Filter program to convert "cube" data in PC Gamess PUNCH files into
+    gOpenMol plt files.</li> 
+</ol>
+
+<h1>gOpenMol version 1.4 (01.06.2000)</h1>
+
+<h2>New features in version 1.4</h2>
+<ol>
+<li>All the discovered bugs in version 1.3 have been corrected.</li>
+<li>New input coordinate formats have been added:
+<ol>
+     <li>Coordinate input can be read from Amsterdam Density
+         Functional (ADF) output log files.</li>
+     <li>Coordinates from a GROMACS gro coordinate file.</li>
+</ol>
+<li>The trajectory readers have been changed to enable the reading
+    of binary trajectories indipendent of hardware. In principle it
+    should now be able to read trajectories without the need to
+    format/unformat them when moving from one hardware platform
+    to an other.</li>
+<li>New trajectory file format added:
+<ol>
+    <li>The GROMACS trn/trr/xtc trajectory file types.</li>
+</ol>
+<li>Binary plt plot files can be moved between hardware platforms
+    without the need to reformat them. The gOpenMol plt file reader
+    can now do the byte swap on the fly.</li>
+<li>It is now possible to select atoms by clicking on them and 
+    dragging them into an input widget. This makes it easier
+    to pick atoms into input widgets.</li>
+<li>All molecular systems read into gOpenMol has its own viewing
+    matrix enabling the rotation/translation of individual
+    molecules. The two modes are defined as <b>global</b> and
+    <b>local</b> transformations. In the <b>global</b> mode all 
+    the molecular systems rotate/translate to a common center
+    while in the <b>local</b> mode the translation/rotation will
+    be according to an individual coordinate center.</b>
+<li>To enable quick rotation, translation and picking it is possible 
+    to enable the translation mode by pressing the <b>Shift</b> key 
+    before one presses the left mouse. As long as the <b>Shift</b> key 
+    is and the left mouse button are pressed the structure will 
+    translate when the mouse is moved. Be careful to understand 
+    that if the <b>Shift</b> key will be released before the left mouse 
+    button the Translate state will be left on. In the other case 
+    Translate mode will return to Rotate mode.</li>
+<li>By pressing the <b>Ctrl</b> key first and keeping it pressed it is 
+    possible to pick or mark atoms in the graphics screen by pressing 
+    the left mouse button. The selected atom(s) can then be dragged to 
+    an input widget. If one releases the <b>Ctrl</b> key before releasing the 
+    left mouse button gOpenMol will stay in the picking mode.</li>
+<li>Pressing the <b>Alt</b> key and the left mouse button and moving the mouse 
+    in the x-axis direction rotates the molecule around the z-axis. This 
+    is the same as using the middle mouse on a three button mouse.</li>
+<li>In the <b>Edit</b> menu there is now an <b>Atom Browser</b> that opens as
+    a tree. The atoms in the tree can be clicked. The clicked atom will
+    show up in the graphics screen as being selected. It also works the
+    opposite way. Clicking an atom in the graphics window will highlight
+    the clicked atom in the atom tree. The atom tree also shows a lot of
+    atom information. In the future there will be a feature to edit the
+    parameters.</li>
+
+<li>All input file names can be given as a http link and thus be read
+    from a Web server. If you know that there is a file named <b>myfile.crd</b>
+    on a server named <b>my.server.org</b> the input file name can be given
+    as <b>http://my.server.org/myfile.crd</b>.     
+
+<li>Filter program (gamess2plt) to read the "CUBE" information from the 
+    PC Gamess v. 6.0 PUNCH file and convert it into a plt file. The
+    v. 6.0 of PC Gamess can now produce "CUBE" file information, like
+    the information GaussianXX programs produce, into the PUNCH file.
+
+<li>It's now possible to export the molecule(s) in their current
+    orientation and possition.
+
+<li>It's now possible to merge two or more structures into one
+    with the molecules in their current orientation and positions.
+
+</ol>
+
+<h1>gOpenMol version 1.3 (September 1999)</h1>
+
+<h2>New features in version 1.3</h2>
+<ol>
+<li>All the discovered bugs in version 1.2 have been corrected.</li>
+<li>Tcl and Tk versions 8.2 are now in use.</li>
+<li>Coordinates can be exported as VRML models. So far only of the molecules.
+    Cutplanes, isosurfaces and orbitals will be implemented later.</li>
+<li>More line commands have got a graphical interface.</li>
+<li>Improved facility to run/edit Tcl scripts.</li>
+<li>Stereo pair display.</li>
+<li>Possibility to add atom symbols to the display.</li>
+<li>Possibility to edit light position and properties.</li>
+<li>Filter program to convert a grid file from the GRID program
+    into the format used by gOpenMol.</li>
+<li>Filter program to convert an AutoDock electrostatic grid file
+    into the format used by gOpenMol.</li>
+<li>A tutorial written by Scott Anderson.</li>
+<li>Commands that originally was written in C has been rewritten in Tcl
+    to enable flexible extensions and correction.</li>
+<li>A crude manual is available in the doc directory. For new versions please check the
+    Windows Word file: <a href="http://laaksonen.csc.fi/gopenmol/docs/gopenmol-manual.doc">
+    <b>http://laaksonen.csc.fi/gopenmol/docs/gopenmol-manual.doc</b></a></li>
+</ol>
+
+<h2>New features in version 1.2</h2>
+
+<ol>
+<li>Programming of the 12 function keys. The user can now program
+    frequently used commands behind the 12 function keys. Please
+    look at the beginning of file <b>data/gopenmol_guirc.tcl</b> 
+    file.</li>
+<li>It's now possible to put gOpenMol in a full screen mode to support
+    the OpenGL PC-display cards.</li>
+<li>Atom partial charges can be imported from GaussianXX calculations
+    (log files).</li>
+<li>Time series can be exported to disk through the graphical GUI.</li>
+<li>It is possible to choose which structure is superimposed on which
+    structure.</li>
+<li>Possibility to edit the light properties.</li>
+<li>Possibility to use 9 different light positions. Please look at the
+    <b>Edit Light properties</b>.</li>
+<li>Possibility to display frame number while displaying a trajectory 
+    frame.</li>
+<li>Improved tools to analyze AutoDock results (trajectories).</li>
+<li>Possibility to display both the structure and a ldp simultaneously.
+    Clicking on the ldp window is displayed in the structure window as an
+    array connecting the two atoms defining the distance.</li>
+<li>Facility to export the polygon coordinates, values and 
+    normals from an isocontour display.</li>
+<li>Facility to display own polygon data.</li>
+<li>Ken Wilson at QTP Florida (http://www.qtp.ufl.edu/Aces2/) has prepared 
+    a filter for the display of ACES II properties using gOpenMol.</li> 
+<li>A filter routine written by Jonas Juselius, Department of Chemistry, 
+    University of Helsinki, to convert TURBOMOLE moloch grids 
+    into a format recongized by gOpenMol. Please look into the utility/turbotools
+    directory.</li>
+<li>An improved version (g94cub2pl.c) of the gcube2plt.c by Doug 
+    Moffatt, Technical Officer National Research Council of 
+    Canada. Please look into the utility/ directory</li>
+</ol>
+<hr>
+<address>Leif Laaksonen (2000)</address>
+</body>
+</html>
+
+

@@ -1,0 +1,35 @@
+#!/usr/local/bin/perl
+#
+# Makes a xyz file in angstroms out of a TURBOMOLE coord file in stdin
+#
+# usage: $ coord2xyz coord >coord.xyz
+
+$bohrs=0.52917726;
+
+print "   0\n\n";
+$n=0;
+$started=0;
+
+while (<>) {
+    chop;
+    s/\s*$//;
+    if (/^\$/) {
+	if ($_ eq '$coord') { $started=1; next; }
+	else {$started=0};
+    }
+    if ($started) {
+	s/^\s*//;
+	split;
+	$n++;
+	$elem=$_[3];
+	if ($elem eq 'q') { $elem='x'; }
+	printf ("%-4s %10.6f %10.6f %10.6f\n",ucfirst($elem),$_[0]*$bohrs,$_[1]*$bohrs,$_[2]*$bohrs);
+    }
+}
+
+if (seek(STDOUT,0,SEEK_SET)) {
+    printf ("%4d\n",$n);
+}
+
+
+       

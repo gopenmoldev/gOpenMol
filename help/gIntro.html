@@ -1,0 +1,157 @@
+<HTML>
+<HEAD>
+<TITLE>Introduction to gOpenMol </TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+<HR>
+<H1>Introduction to gOpenMol</H1>
+<HR>
+<p>gOpenMol started as the graphical interface to the <B>OpenMol</B>
+set of programs but is today an independent toolbox for 
+the display and analysis of results from a wide range of computational chemistry 
+programs. </p>
+<P>
+gOpenMol features include:
+<ul>
+    <li> for the static display of molecular structures</li>
+    <li> for the analysis and display of molecular dynamics trajectories</li>
+	<li> the display of molecular orbitals, electron densities </li> 
+	<li> electrostatic potentials from programs like the GaussianXX, GAMESS, TurboMole</li>
+	<li> electrostatic potentials from the UHBD (University of Houston 
+	     Brownian Dynamics)</li>
+</ul>
+<H1>Software:</H1>
+<P>gOpenMol can import, display and analyze several different input coordinate
+  file formats and binary trajectory file formats.
+  The program has a graphical
+  user interface (GUI) and an internal line command interpreter based on the
+Tcl/Tk interpreter. More details about the Tcl/Tk scripting language can be found
+at the address:</P>
+<I>
+<P><a href="http://dev.scriptics.com">http://dev.scriptics.com</a></P>
+</I><P> gOpenMol can be used for a wide range of analysis and display tasks like the 
+display of isocontour surfaces and cross sections of grid data. </P>
+<H1>Hardware:</H1>
+<P>gOpenMol graphics is implemened using the OpenGL 
+(<a href="http://www.opengl.org">http://www.opengl.org</a>) or MESA 
+(<a href="http://www.mesa3d.org">http://www.mesa3d.org</a>) graphics 
+libraries. Using the MESA graphics library it is possible to turn gOpenMol 
+into pure X-Windows application, where no extra graphics hardware is needed. </P>
+<P>gOpenMol is currently supported on two promary hardware platforms: </P>
+
+<UL>
+<LI>PC/Linux (MESA/OpenGL) </LI>
+<LI>Windows  (WIN32)</LI>
+</UL>
+
+<p>However gOpenMol has been running on the following platforms during the develoment
+  phases.</p>
+<UL>
+  <LI>SGI IRIX (OpenGL and MESA) </LI>
+  <LI>DEC Unix (MESA) </LI>
+  <LI>IBM AIX (OpenGL and MESA) </LI>
+</UL>
+<p>gOpenMol should run on any Unix platform without any changes.</p>
+<H1>Possibilities:</H1>
+<P>gOpenMol is hopefully a multipurpose program. Currently the program 
+has most of the molecular dynamics analysis features of SCARECROW and a lot
+of new features. Currently gOpenMol supports a wide range of molecular 
+coordinate input formats: </P>
+
+<UL>
+<LI>ADF output log file</li>
+<LI>Amber (close to the PDB format) </LI>
+<LI>CHARMm/CHARMM </LI>
+<LI>DL_Poly CONFIG file</li>
+<LI>A frame from a trajectory </LI>
+<LI>Gaussian formatted checkpoint file </LI>
+<LI>GROMACS</li>
+<LI>GROMOS</li>
+<LI>HyperChem </LI>
+<LI>Insight (car files) </LI>
+<LI>Mol2 </LI>
+<LI>Mumod </LI>
+<LI>OpenMol (center binary file) </LI>
+<LI>PDB (Brookhaven Protein Data Bank format) </LI>
+<LI>Tinker coordinate file </LI>
+<LI>Xmol xyz coordinate file </LI>
+<LI>XYZ general xyz coordinate file </LI>
+<LI>YASP </LI>
+</UL>
+
+<P>gOpenMol supports the following <B>binary</B> trajectory formats: </P>
+
+<UL>
+<LI>Amber. Program included for the unformatting of formatted AMBER
+    trajectories. </LI>
+<LI>Cerius2 </LI>
+<LI>CHARMm/CHARMM. Program included for the formatting/unformatting
+    of CHARMm/CHARMM trajectories. </LI>
+<LI>Discover </LI>
+<LI>DL_Poly</li>
+<LI>GROMACS</li>
+<LI>Gromos (Supporting the old GROMOS format)</LI>
+<LI>HyperChem (I haven't tested with the latest version)</LI>
+<LI>MUMOD </LI>
+<LI>XPLOR </LI>
+<LI>YASP </LI></UL>
+
+<P>and the following <B>ascii</B> trajectory format: </P>
+
+<UL>
+<LI>DL_Poly trajectory format.</li>
+<LI>GROMOS96 trajectory format.</LI>
+<LI>TINKER multi frame coordinate trajectory format.</LI>
+<LI>XMOL xyz multi-step data sets. The included Xvibs program enables
+    the display of vibrational modes from the GAUSSIANXX and GAMESS
+	programs.</LI>
+</UL>
+
+<P>Extensive display isocontour surfaces and cut planes for: </P>
+
+<UL>
+<LI>Orbitals, densities ... from GAUSSIANXX set of programs.</LI>
+<LI>Connolly type of surfaces using the ProbeSurf program.</LI>
+</UL>
+
+<H1>Utility programs</H1>
+
+All these executable programs are located in the bin/ directory and
+the source code is in the utility/ directory.
+<p> 
+<dl>
+<DT><b>ambera2b</b>
+<DD>Converts a formatted ascii AMBER trajectory into a unformatted one.
+    gOpenMol can only handle unformatted AMBER trajectories.
+<DT><b>charmmtrj</b>
+<DD>This program makes the formatted/binary tranformation for a CHARMM
+    dynamics trajectory file.
+<DT><b>contman</b>
+<DD>Performs a variety of operations on a contour (plt) file.
+<DT><b>convert</b>
+<DD>Converts the output search results (FDAT) from Cambridge Structural 
+    Database into separate PDB files.
+<DT><b>gcube2plt</b>
+<DD>Converts a cube file from the GaussianXX program into a binary format
+    known by gOpenMol.
+<DT><b>gridasc2plt</b>
+<DD>Converts a UHBD formatted PHI grid file into the plt format used by 
+    the gOpenMol progra,
+<DT><b>gridbin2plt</b>
+<DD>Converts a UHBD unformatted PHI grid file into the plt format used by
+    gOpenMol.
+<DT><b>pltfile</b>
+<dd>This program can be used to format a binary plot file or to make
+    a formatted file into binary. This program is helpful if you want to
+	move the plot file from one computer hardware to an other.
+<DT><b>sybyl2amber</b>
+<DD>Converts a formatted ascii Sybyl trajectory into an unformatted AMBER one.
+<DT><b>trajmerge</b>
+<DD>Merges two CHARMM trajectory files into one.
+<DT><b>xplor2charmm</b>
+<DD>Converts an XPLOR trajectory into a CHARMM trajectory.
+</dl>
+
+<HR>
+</BODY>
+</HTML>

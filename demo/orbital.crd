@@ -1,0 +1,9 @@
+* ++Automatic output generated from Gaussian++
+* ++using the 'cube' keyword                ++
+* Gaussian Test Job 257: Density cube                                   
+* SCF Molecular Orbitals
+*  
+    3 
+    1    1 GAUS O      0.05028   0.69222   0.00000 GAUS 1      0.00000 
+    2    1 GAUS H     -0.85481   1.01222   0.00000 GAUS 1      0.00000 
+    3    1 GAUS F      0.05028  -0.72778   0.00000 GAUS 1      0.00000 

@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>Using gOpenMol as a Web helper application</TITLE>
+</HEAD>
+<BODY>
+<h1>Using gOpenMol as a Web helper application</h1>
+
+<h2>For Windows</h2>
+<p>
+Do the following:
+<p>
+<ol>
+<li>Open Windows Explorer</li>
+<li> Open view - Options
+<li> Click File Types
+<li> Add new type by clicking the New Type button
+<li> Add to
+   Description of type: gOpenMol gom file
+   Content Type (MIME): chemical/x-gom
+   Default extension:   .gom
+<li> Action:
+   Edit the "open" action in the "Application used to perform action:"
+   to point to the rungOpenMol.bat file.
+   Example:
+   "D:\USERS\dummy\files\gopenmol\bin\rungOpenMol.bat"  "%1"
+<li> Click OK
+<li> Click Close
+<li> Click Close
+</ol>
+
+<h2>For Unix</h2>
+<p>
+Do the following:
+<p>
+Open the <b>mailcap</b> file in your home directory and
+and the following line to the file:
+<p>
+chemical/x-gom; /your/gopenmol/directory/gopenmol/bin/rungOpenMol %s
+<p>
+where /your/gopenmol/directory/gopenmol/bin is the directory where
+you have installed gOpenMol.
+<p>
+You can try downloading gom files from the pages:
+<p>
+http://laaksonen.csc.fi/gopenmol/gomodel.html<br>
+and<br>
+http://www.fos.su.se/physical/sasha/dna_sim/
+<p>
+<hr>
+<address>Leif Laaksonen (1998)</address>
+</body>
+</html>
+

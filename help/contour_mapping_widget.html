@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<TITLE>Contour Mapping Widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+<P>
+**************************************************************************<BR>
+<B>
+Contour Mapping Widget<BR>
+Leif Laaksonen CSC 1998<BR>
+</B>
+**************************************************************************<BR>
+
+<P>
+This is the contour mapping widget. Through this widget you can control 
+the mapping (colouring) of an isocontour surface according to the grid values
+of an other grid (*.plt) file. The colouring can be scaled according to any
+grid value range.
+</P>
+<P>
+<img src="pict/contour_control5.gif">
+</P>
+<P>The steps to do:</P>
+<OL>
+
+<LI>Read the atom coordinate information (through import coordinates) for 
+    your molecular system.</LI>
+<LI>Open the contour manager widget (if it is not open alredy).</LI>
+<LI>The contour data files are usually *.plt files (you can of course 
+    use your own file name extension). Click on the "Browse" button
+    to open the file browser to see the *.plt files. 
+    Double click on the file (or a single click and then 
+    press the "Open" button) to select the file.</LI>
+<LI>Press the "Import file" button to read in the grid data to gOpenMol.</LI>
+<LI>Repeat the previous steps to read at least one more grid (*.plt) files.</LI>
+<LI>Click on the radio button for the file for which you want to generate
+    the isocontour surface.</LI>
+<LI>Click on the "Mapping" button to open the "Mapping control widget".
+    This you already did because you got this help text.</LI>
+<LI>Click on the option menu button to select the file from which the
+    colouring (mapping) will be taken. Finish by pressing the "Accept" 
+	button.</LI>
+<LI>Write the isocontour value into the input field (starting upwards).
+    If you want to apply an other colour range than the default fill in
+	on the same line the <b>min.</b> and <b>max.</b> values for the range.
+	The colouring will be from min (blue) to max (red). If the values are
+	filled from <b>max.</b> to <b>min.</b> the colouring will be the opposite.
+	</LI>
+<LI>Press the "Apply" button"!</LI>
+</OL>
+<P>
+Surface details:
+</P>
+<UL>
+<LI>If you want the surface to be smoothed press the "Details" button.</LI>
+<LI>If you want to make the surface transparent press the "Details" button.</LI>
+<LI>If you want to switch between mesh and solid type of surfaces press 
+    the "Details" button.</LI>
+<LI>If you want to turn a particular surface off press the "Details" button</LI>
+</UL>
+<P>
+Please observe that the two grid files have to have the same number of
+grid points in the x, y and z directions and the grid data has to be defined 
+in the same x, y and z space for the both grid files.
+</P>
+<P>If you don't know the grid space you can run the format to unformat
+*.plt file converter (pltfile) in the bin/ directory.
+</P>
+<P>
+You can change either the isocontour value, colour, smoothing by
+pressing the "Details" button for the chosen isocontour value.
+</P>
+<P>
+**************************************************************************<br>
+LUL/1998<br>
+**************************************************************************<br>
+</BODY>
+</HTML>

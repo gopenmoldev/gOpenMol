@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<TITLE>Plot Root Mean Square Deviation (RMSD) widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>
+**************************************************************************<BR>
+<B>
+Calculate and plot the RMSD widget<BR>
+Leif Laaksonen CSC 1997<BR>
+</B>
+**************************************************************************<BR>
+<P>
+If a molecular dynamics trajector is defined it is possible to plot the
+Root Mean Square Deviation (RMSD) of a selected set of atoms as
+ellipsoids. The plot is always in the global x, y, z coordinate system.
+</P>
+<P>
+Select the atoms and press the <b>apply</b> button. There are two
+different approaches to generate the ellipsoids:
+<ul>
+    <li> The individual frames are <b>not</b> superimposed 
+	     on the average structure (= nofit).</li>
+    <li> The individual frames are superimposed on the
+	     average structure (= fit).</li>
+</ul>
+<P>
+The plot can be deleted by pressing the <b>Delete</b> button. If the
+fluctuation has a small amplitude it is possible to magnify the amplitude
+by a factor.
+</P>
+<P>
+<IMG SRC="pict/plot_rmsd.gif"></P>
+<P>
+Line command: <b>p_rmsd Segment Residue Atom(s) Scale fit/nofit</b>
+</P>
+<P>
+**************************************************************************<BR>
+LUL/1997<BR>
+**************************************************************************<BR>
+</BODY>
+</HTML>

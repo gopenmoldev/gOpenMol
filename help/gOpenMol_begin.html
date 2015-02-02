@@ -1,0 +1,348 @@
+<HTML>
+<HEAD>
+<TITLE>How to begin your gOpenMol session</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<HR>
+<H1>How to begin your gOpenMol session</H1>
+<HR>
+<B>
+<P>UNIX</P>
+</B>
+<P>
+We assume that gOpenMol is properly installed on your system and you know 
+how to source the macro (setgopenmol) to set various aliases and environment values.
+In case you are using MESA and you are using a 8-bit display I recommend you 
+to set the following environment variable: </P>
+
+<P><B>setenv MESA_RGB_VISUAL "PseudoColor 8" </B> </P>
+<P>
+This variable tells MESA about your display type and assigns a proper visual to it. 
+Write <B>rungOpenMol</B> (including path if you have not defined the symbol) 
+and gOpenMol starts and if your display supports OpenGL or you 
+are using MESA you get two new windows on your screen. The first window contains a 
+pull down menu and some buttons to be used as the input window for gOpenMol. 
+The other one is the graphics window where the molecular structures and other 
+graphics objects are displayed.
+</P>
+<P>
+Before we look at the GUI in more detail it is worth describing some of the 
+things you don't see but yet they are still there: 
+</P>
+<UL>
+<LI>When gOpenMol starts it reads a lot of information about atoms, 
+    which will be needed for the display or other purposes. 
+    This information is taken from the gopenmol/data directory. </LI>
+<LI>The user can modify a lot of the default parameters or variables at startup 
+    through two startup files: </LI>
+
+<OL>
+<LI>At startup gOpenMol reads first the system startup file 
+    (<B>gopenmolrc.tcl</B>) located in the gopenmol/data directory. 
+    This file contains information related rather to all users.</LI>
+<LI>The second file is <B>.gopenmolrc.tcl</B> from your login 
+    directory which can contain information specific for one user.</LI>
+</OL>
+</UL>
+
+<P>Both startup files can contain internal gOpenMol tcl-commands. </P>
+
+<B><P>WIN32</P>
+</B><P>To start gOpenMol on the WIN32 platform run the <B>rungOpenMol.bat</B> 
+file in the bin/ directory. This is easily done by making a shortcut from 
+the file to your desktop.</P>
+
+<P>
+Before we look at the GUI in more detail it is worth describing some of 
+the things you don't see but still are there: 
+</P>
+<UL>
+<LI>When gOpenMol starts it reads a lot of information about atoms, 
+    which will be needed for the display or other purposes.</LI> 
+    This information is taken from the gopenmol/data directory. </LI>
+<LI>The user can modify a lot of the default parameters or variables 
+    at startup through a startup file: </LI>
+
+<UL>
+
+<LI>At startup gOpenMol reads first the system/user startup file 
+   (<B>gopenmolrc.tcl</B>) located in the gopenmol/data directory. 
+   This file calls further tcl files to set up many features of 
+   gOpenMol.</LI>
+</UL>
+</UL>
+
+<B>
+<P>Start up windows:</P>
+</B>
+<P>The input window looks like (after reading in a structure): </P>
+<P><IMG SRC="pict/startup.gif"></P>
+<P>gOpenMol starts with two windows (3D graphics window and GUI window). Window A
+ contains the 3D graphics and the other windows contain the GUI with the 
+various buttons. The various regions are defined as:</P>
+
+<UL>
+<li> A: The graphics 3D window. 
+<li> B: In the GUI window there are various important regions. In the upper left corner there is a list describing the currently read input files and a checkbutton attached to the file name showing if the structure is active (checked) or inactive (not checked). 
+<li> C: Pressing the gOpenMol logo generates a display command for gOpenMol. Always when you want to display a scene press this button. 
+<li> D: Pressing the left mouse button and moving the mouse rotates the structure(s) in the 3D window if the rotation radiobutton is checked. If the translation radiobutton is checked the structure will be translated. 
+<li> E: It is possible to choose a full structure or fragments of a structure. If the selection radiobutton is checked the rotation or translation is applied to this selection. 
+<li> F: gOpenMol does not automatically redisplay a scene after a command has been applied. Checking the instant update to on will generate an automatic redisplay after all commands. 
+<li> G: Picking mode can be put on and off.
+<li> H: The line command entry widget. 
+</UL>
+<P>
+<B>Please always remember to press the</B> <IMG SRC="pict/logo.gif"> <b>button
+to (re)display the graphics!</b>
+</b>
+<A NAME="COMMANDS">
+
+<H1>The main idea of the command interface</H1>
+
+<P>The menu driven interface is implemented using the line commands. The pulldown menu options 
+generate a Tcl/Tk/gOpenMol command, which is sent to the gOpenMol parser.</P>
+<P>The flexible <B>gOpenMol</B> <A HREF="tcl.html"><B><I>line command interface</I></B></A> is
+  extremely powerful and useful.</P>
+
+<PRE>The pulldown menues in the window (so far) are:
+<HR>
+<B>| </B><A HREF="#FILE"><B>File</B></A><B>  | </B><A HREF="#EDIT"><B>Edit</B></A><B> | </B><A HREF="#VIEW"><B>View</B></A><B> | </B><A HREF="#COLOUR"><B>Colour</B></A><B> | </B><A HREF="#CALCULATE"><B>Calculate</B></A><B> | </B><A HREF="#PLOT"><B>Plot</B></A><B> | </B><A HREF="#TRAJECTORY"><B>Trajectory</B></A><B> |</B> <A HREF="#RUN"><B>RUN</B></A><B> |</B> <A HREF="#TOOLS"><B>TOOLS</B></A><B> | </B><A HREF="#HELP"><B>HELP</B></A><B> |</B>
+<HR>
+</PRE>
+<A NAME="FILE">
+<H2>(1) FILE menu has the options:</H2>
+<PRE>
+  New,      Starts a new gOpenMol session and destroy all internal
+            data structures and data.
+
+  <A HREF="import_model_widget.html">Open</A>,     Open a previously written model (structure file gom file).
+
+  <A HREF="close_widget.html">Close</A>,    Close the current session and destroy all internal data.
+
+  <A HREF="export_model_widget.html">Save</A>,     Save the current structure and display in a model gom file.
+
+  <A HREF="export_model_widget.html">Save as</A>,  Save the current structure and display in a new gom file.
+
+  Import, Import various things into gOpenMol.
+            * <A HREF="read_cluster_widget.html">Cluster data</A>
+            * <A HREF="import_coordinates_widget.html">Coordinates in various formats</A>
+            * <A HREF="import_dictionary_widget.html">Dictionary file</A> defining the mapping between atom label to atom type
+            * <A HREF="import_gbasis_widget.html">Gaussian basis</A> set for OpenMol
+            * <A HREF="import_vector_widget.html">Atom vector data</A> import vector data for display
+            * <A HREF="import_tcl_widget.html">Read a Tcl</A> script and execute it
+            * Import partial atomic charges from various program output files
+                       * GAUSSIAN charges from (extracted from a Gaussian output file)
+                            - Natural populationa
+                            - Merz-Kollmann
+                            - Chelpg
+                       * ICON8 atom charges (extracted from an ICON8 output file)
+                       * MOPAC
+
+  Export=, Export various things out from gOpenMol
+            * <A HREF="write_cluster_widget.html">Cluster data</A>
+            * <A HREF="export_coordinates_widget.html">Coordinates into some formats</A>
+            * <A HREF="write_correlation_widget.html">Correlation data</A>
+            * Input=, Generate <b>raw</b> input to
+                        * <A HREF="export_input_widget.html">GAMESS</A> program
+                        * <A HREF="export_input_widget.html">ICON8</A> program
+                        * <A HREF="export_input_widget.html">MOPAC</A> program
+                        * <A HREF="export_input_widget.html">Probesurf</A> program
+                        * <A HREF="export_input_widget.html">Own USER</A> program
+            * <A HREF="write_rdf_widget.html">Radial distribution function</A>
+            * Root mean square deviation
+            * <A HREF="copy_timeseries2disk_widget.html">Save time series to disk</a>
+
+  Reset=,  Reset various things.
+            * <A HREF="reset_help.html">Atom colour</A>;           Reset atom colours to default!
+            * <A HREF="reset_gopenmol.html">gOpenMol</A>;              Reset gOpenMol and free all reserved memory!
+            * <A HREF="reset_gopenmol.html">View</A>;                  Reset view to the startup view!
+
+  <A HREF="hardcopy_widget.html">Hardcopy</A>; Produce a hardcopy or screen dump in some bitmap formats.
+
+  <A HREF="exit_widget.html">EXIT</A>;     Halt program execution.
+</PRE>
+<H2>(2) EDIT menu has the options:</H2>
+<PRE>
+  Copy=,  Copy various things to the clipboard paste buffer (works only on Windows).
+           * <A HREF="copy_bitmap.html">Bitmap</A>;      Copy current graphics window into clipboard
+           * <A HREF="copy_correlation.html">Correlation</A>; Copy correlation data into the clipboard
+           * <A HREF="copy_msd.html">MSD</A>;         Copy the Mean Square Displacement data into clipboard
+           * <A HREF="copy_rdf.html">RDF</A>;         Copy the radial distribution function into clipboard
+           * <A HREF="copy_timeseries_widget.html">Timeseries</A>;  Copy time series into clipboard.
+
+  <A HREF="define_cell_widget.html">Edit Cell</A>,            Edit the cell dimensions.
+
+  <A HREF="center_widget.html">Center</A>,               Center system.
+
+  <A HREF="identify_atom_widget.html">Identify Atom</A>,        Identify an atom by picking.
+
+  <A HREF="edit_light_widget.html">Light Properties</A>,     Edit light properties.
+
+  <A HREF="edit_material_widget.html">Material Properties</A>,  Edit surface material properties.
+
+  Merge structures,     Merge all the current structures into one.
+
+  <A HREF="edit_mol_widget.html">Molecule</A>,             Edit molecule (break and create bonds).
+
+  <A HREF="rotate_widget.html">Rotate/Translate</A>,     Control widget for rotation and translation.
+
+  <A HREF="select_widget.html">Select</A>,               Select atoms into the selction buffer.
+
+  <A HREF="edit_disp_attr_widget.html">Display properties</A>,   Change display properties.
+
+  <A HREF="edit_disp_attr_widget.html">Display list props</A>,   Change display list properties.
+
+  3D to 2D,             Make a 3D to 2D transformation of your system.
+<A NAME="VIEW"></PRE>
+<H2>(3) VIEW menu has the options:</H2>
+<PRE>
+  <A HREF="color_selection_widget.html">Atom colour</A>,          Change atom colour.
+  
+  <a href="atom_label_selection_widget.html">Atom labels</a>,          Display atom labels.
+
+  <A HREF="atom_browser_widget.html">Atom tree</A>,            Display atom data as a tree.
+
+  <A HREF="atom_display_mask_widget.html">Atom mask</A>,            Change atom display mask.
+
+  <A HREF="atom_type_widget.html">Atom type</A>,            Change atom type display.
+
+
+  Background colour=,           Change background colour in graphics window.
+               * <A HREF="bgcolor_widget1.html">Background</A>,  Change background colour with a Tcl/Tk tool.
+               * <A HREF="bgcolor_widget2.html">Background</A>,  Change background colour with a RGB tool.
+
+  <A HREF="measuregeom_widget.html">Measure</A>,              Measure molecular geometry.
+
+  Periodic table,       Show the periodic table
+  
+  Stereo=,                  Stereo display
+                        * <a href="plot_stereo_pair_widget.html">Stereo pairs</a>
+
+  <A HREF="text_output_widget.html">Text output</A>,          Display gOpenMol output text.
+<A NAME="CALCULATE"></PRE>
+<H2>(4) CALCULATE menu has the options:</H2>
+<PRE>
+  Average structure     Calculate average structure from a set of trajectory frames.
+  
+  <A HREF="calculate_cluster.html">Cluster</A>,              Calculate and plot cluster matrix from a 
+                        Trajectory file.
+
+  <A HREF="calc_atom_conn.html">Connectivity</A>,         Calculate atom connectivity.
+
+  <a href="hydrogen_bonds_widget.html">Hydrogen bonds</a>,       Calculate and display hydrogen bonds.  
+  
+  <A HREF="calculate_correlation.html">Correlation</A>,          Calculate correlation series from time series.
+
+  <A HREF="measuregeom_widget.html">Geometry</A>,             Calculate molecular geometry.
+
+  <A HREF="calculate_msd.html">Mean sgr displ</A>,       Calculate mean square displacement values from
+                        a trajectory file.
+
+  <A HREF="calculate_rdf_widget.html">RDF</A>,                  Calculate a single or an average radial 
+                        Distribution function from a frame or trajectory.
+
+  <A HREF="calculate_simpose.html">Superimpose</A>,          Superimpose two structures.
+
+  Surface centroid,     Calculate the centroid for an isosurface.
+<A NAME="PLOT"></PRE>
+<H2>(5) PLOT menu has the options:</H2>
+<PRE>
+  <a href="plot_axis_widget.html">Axis,</a>                 Plot coordinate axis.
+  <a href="contour_clip_plane_widget.html">Clip plane,</a>           Plot contour using a clip plane.           
+  <A HREF="plot_cscale_widget.html">Colour scale</A>,         Plot a colour scale.
+  <A HREF="contour_widget.html">Contour</A>,              Display contour surfaceses.
+  <A HREF="contour_plane_widget.html">Cutplane</A>,             Plot a cutplane trough a contour surface.
+
+  <A HREF="ldp_widget.html">LDP</A>,                  Plot a linear distance plot for selected atoms.
+
+  <A HREF="plumber_widget.html">Plumber</A>,              Plot a tube or ribbon trough selected atoms.
+  <A HREF="plot_rmsd_widget.html">RMSD</A>,                 Plot root mean square deviation of atom movement.
+  <a href="plot_vector_file_widget.html">Vector file</a>,          Plot vectors using data from a file.
+<A NAME="TRAJECTORY"></PRE>
+<H2>(6) TRAJECTORY menu has the options:</H2>
+<PRE>  Fill=,                Fill time series vectors.
+               *  <A HREF="fill_distance.html">Distance array</A>
+               *  <A HREF="fill_angle.html">Angle array</A>
+               *  <A HREF="fill_torsion.html">Torsion array</A>
+
+  Delete=,              Delete time series vectors.
+               *  <A HREF="delete_distance.html">Distance array</A>
+               *  <A HREF="delete_angle.html">Angle array</A>
+               *  <A HREF="delete_torsion.html">Torsion array</A>
+
+  <A HREF="main_trajectory_widget.html">Main</A>,                 Main trajectory control widget.
+
+  Monitor=,             Monitor molecular geometry.
+               *  <A HREF="mondist_widget.html">Distance(s)</A>
+               *  <A HREF="monang_widget.html">Angle(s)</A>
+               *  <A HREF="montors_widget.html">Torsion(s)</A>
+
+
+  <A HREF="mantimeseries_widget.html">Time series</A>,          Manipulate time series widget.
+  <A HREF="trace_driver_widget.html">Trace</A>,                Trace the movement of selected atoms.
+  <A HREF="make_animation_widget.html">Make video</A>,           Make animations.
+
+<A NAME="RUN"></PRE>
+<H2>(7) RUN menu has the options:</H2>
+<PRE>
+  <A HREF="runautodock2plt_widget.html">AutoDock2plt</a>,         Run AutoDock2plt to convert a map grid file
+                        into a format known by gOpenMol.
+
+  <A HREF="runcontman_widget.html">ContMan</a>,              Run ContMan to manipulate plt files.
+
+  <a href="rungamess2plt_widget.html">Gamess2plt</a>            Run the filter program to convert (PC)GAMESS output 
+                        grid data into a format known by gOpenMol. 
+
+  <A HREF="rungcube2plt_widget.html">gCube2plt/g94cub2pl</A>,  Run the gCube2plt or g94cub2pl to convert a GaussianXX 
+                        cube file into a format known by gOpenMol.
+
+  <a href="runjaguar2plt_widget.html">Jaguar2plt</a>            Run the filter program to convert Jaguar output
+                        grid data into a form known by gOpenMol.
+
+  Join Gamess IRC files Run script to join Gamess IRC files.
+
+  <A HREF="runkont2plt_widget.html">Kont2plt</a>,             Run Kont2plt to convert a Grid grid file
+                        into a format known by gOpenMol.
+
+  <A HREF="runpltfile_widget.html">Pltfile</A>,              Run the Pltfile program to convert the gOpenMol
+                        plot file between binary and formatted.
+
+  <A HREF="runprobesurf_widget.html">Probesurf</A>,            Run the Probesurf program to generate a Connolly
+                        type of surface.
+
+  <A HREF="runturbomole2plt_widget.html">TMole2plt</A>,            Run the TMole2plt program to convert a TurboMole
+                        grid file into a format known by gOpenMol.
+
+  <A HREF="runuhbd2plt_widget.html">UHBD2plt</a>,             Run the UHBD2plt program to convert a phi grid file
+                        into a format known by gOpenMol.
+
+  <A HREF="runxvibs_widget.html">Xvibs</a>                 Run the Xvibs program to prepare animations from
+                        a GaussianXX vibration calcalation.
+
+<A NAME="TOOLS"></PRE>
+<H2>(8) TOOLS menu has the options:</H2>
+<PRE>
+  DLL/SO plugins          Available gOpenMol plugins
+  <A HREF="main_autodock_widget.html">AutoDock</A>,               AutoDock display facility.
+<A NAME="HELP"></PRE>
+<H2>(9) HELP menu has the options:</H2>
+<PRE>
+  <A HREF="about_widget.html">About</A>,                Show the about text about gOpenMol.
+  <A HREF="demo_widget.html">Demo</A>,                 Demo widget.
+  <A HREF="help_widget.html">Help</A>,                 Show this file.
+  Menu help,            Show the pulldown menu help.
+  Peek version,         Use the http protocol to get info about
+                        the latest available gOpenMol version and platforms.
+  <A HREF="help_widget.html">Tutorials</A>,            Show the available tutorials. Please observe
+                        that the internal browser may not show the pages properly so 
+                        you should use a proper Web browser for the best result.
+</PRE>
+
+<P>
+<B>gOpenMol</B> is implemented using c-coding and Tcl/Tk and using OpenGL for the 
+graphics display and Tk for the GUI (Graphical User Interface). 
+</P>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>gOpenMol programming interface</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+<hr>
+<center><h1><tt>Introduction to the <br>
+gOpenMol<br>
+programming interface</tt></h1>
+</center>
+<hr>
+<p>gOpenMol uses extensively the Tcl/Tk library. It is not very easy to 
+extend the Tcl/Tk (in gOpenMol) without touching the original source code. However, because 
+gOpenmol uses the Tcl interface it is possible to use the DSO (Dynamic Shared Object) approach to include new 
+features into the program without &quot;touching&quot; the source code of the distributed (binary) module, at the Tcl level. 
+Please have a look at the DSO man pages of your Unix/Windows systems.</p>
+<p>The DSO modules are loaded during program execution time and allow thus new program features to be included.. </p>
+<p><strong>EXAMPLE:</strong></p>
+<p>The following small piece of code introduces a new command &quot;test&quot; into the Tcl command interpreter. When the 
+&quot;test&quot; command is executed one gets the words &quot;Hello World&quot; displayed.</p>
+<p><code>The program Test_Init introduces the command command &quot;test&quot; to the interpreter and 
+lulTest is called when the command test is executed.</code></p>
+<hr>
+<p>
+
+<pre>
+/*
+This code is based on the tcl-command language
+Leif Laaksonen Center for Scientific Computing 1995, 1996
+*/
+#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;string.h&gt;
+#include &lt;tcl.h&gt;
+
+/* commands */
+int lulTest(ClientData , Tcl_Interp *, int , char **);
+
+/* external */
+
+extern Tcl_Interp *lulGetTclInterp(void); /* get the tcl interp pointer */
+
+/* ........ */
+
+
+/*********************************************************************/
+int Test_Init()
+/*********************************************************************/
+{
+int code;
+Tcl_Interp *Interp;
+
+Interp = lulGetTclInterp();
+
+/* test */
+Tcl_CreateCommand(Interp,&quot;test&quot;,lulTest,(ClientData)NULL,
+(Tcl_CmdDeleteProc *)NULL);
+return(TCL_OK);
+}
+/*********************************************************************/
+int lulTest(ClientData clientdata , Tcl_Interp *interp,
+int argc , char *argv[])
+/*********************************************************************/
+{
+printf(&quot;Hello World\n&quot;);
+exit(0);
+}
+</pre>
+</p>
+<hr>
+<p>This file is compiled using the command:</p>
+<p><strong>cc -c test.c<br>
+ld -shared test.o -o test.so</strong></p>
+<p>Now we have a module called <em>test.so</em> which can be loaded into gOpenMol.</p>
+<p>The module will be include into gOpenMol using the Tcl command:</p>
+<p><strong>load ./test.so test</strong></p>
+<p>Executing now the command (inside gOpenmol) test gives you &quot;Hello World&quot;. <strong>Easy, isn't it?</strong></p>
+<p>This was a very simple example but more extensive will be presented.&#160;</p>
+<hr>
+</body>
+
+</html>

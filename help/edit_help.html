@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<TITLE>Edit command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                         edit command
+                    Leif Laaksonen CSC 1996
+                    Eero H&auml;kkinen  CSC 2002
+**************************************************************************
+<a name="bond">#
+# edit atom bonding
+#
+<b>
+edit  bond  brea$k   Seg1 Res1 Atm1 
+                     Seg1 Res1 Atm1 Seg2 Res2 Atm2
+            crea$te  Seg1 Res1 Atm1 Seg2 Res2 Atm2
+</b>
+<a name="hbond">#
+# edit hydrogen bonding
+#
+<b>
+edit  hbond  brea$k   Seg1 Res1 Atm1 
+                      Seg1 Res1 Atm1 Seg2 Res2 Atm2
+             crea$te  Seg1 Res1 Atm1 Seg2 Res2 Atm2
+</b>
+<a name="hbsubset">#
+# Set hydrogen bond search subset.
+#
+<b>
+edit  hbsu$bset       Seg  Res  Atm
+</b>
+# Reset hydrogen bond search subset.
+#
+<b>
+edit  -hbs$ubset
+</b><a name="end">
+**************************************************************************
+LUL/2002
+**************************************************************************
+</PRE></BODY>
+</HTML>

@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Manual for gOpenMol</TITLE>
+<META NAME="Template" CONTENT="C:\Program Files\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<HR>
+<H1>User's Manual for gOpenMol</H1>
+<HR>
+<P ALIGN="JUSTIFY">The molecule/atom information is organized as in the CHARMM/CHARMm program(s). All atoms in a molecule system can be defined/identified through a <I>segmen</I>t <I>name</I>, <I>residue</I> <I>name</I> and/or <I>residue</I> <I>number</I> and an <I>atom</I> <I>name</I>. This arrangement is very flexible and can be used to define quite complicated commands.</P>
+<P ALIGN="JUSTIFY">The line commands, when they want to be applied on a set of atoms, must be give as:</P>
+<B><P ALIGN="CENTER">Segment_name Residue_name/number Atom_name/number</P>
+</B><P ALIGN="JUSTIFY">The segment, residue and atom name can be 1-4 characters long. The names are assigned when one reads a coordinate file. For a command the data is supplied as three fields separated by ':'. Example <B><I>set atom colour S1 * CA yellow </B></I>sets all CA atoms in all residues in segment S1 to the colour yellow. The general identifier looks like <B>segment residue atom </B>where the segment name is always a character string. The wild character '*' and the '?' characters can be used. The '*' character matches all strings and '?' matches any character at it's position. In the residue and atom field residue numbers and atom numbers can be used or a combination of characters and integer numbers. Example: set atom colour <B>S1 TYR,1,10,30-45 CA,N,C </B>blue command sets all CA,N and C atoms in all tyrosine residues and residues 1,10 and range 30-45 in segment S1 to the colour blue. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>Please note:</P>
+</B><P>The interpreter for gOpenMol interprets the lower and upper case letters as different. This applies for both commands and segment/residue/atom names.</P>
+<P>&nbsp;</P>
+
+<UL>
+<LI><A HREF="gOpenMol_install.html">Install gOpenMol</A> </LI>
+<LI><A HREF="gOpenMol_begin.html">Begin a gOpenMol session</A> </LI>
+<LI><A HREF="gOpenMol_contour.html">Display contour data</A> </LI>
+<LI><A HREF="import_coordinates_widget.html">Import a structure into gOpenMol</A> </LI>
+<LI><A HREF="gOpenMol_man.html">Manipulate a structure in gOpenMol</A> </LI></UL>
+
+<P>&nbsp;</P>
+<P>This is not really useful for more than me (so far). </P>
+<P><HR></P>
+<P>&nbsp;</P></BODY>
+</HTML>

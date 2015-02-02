@@ -1,0 +1,11 @@
+extern int gomp_GetHardcopyActiveState(void);
+extern int gomp_HardcopyPostScript(const char * , const char *);
+extern int gomp_HardcopyXWD(const char *);
+extern int gomp_HardcopyBMP(const char *);
+extern int gomp_HardcopyRGB(const char *);
+extern int gomp_HardcopyTGA(const char *);
+extern int gomp_HardcopyJPEG(const char *);
+extern int gomp_HardcopyWindowsMetafile(const char *);
+extern int gomp_PrepareHardcopy(void);
+extern int gomp_PutHardcopyCoordinates(int , int);
+extern int gomp_SaveScreenPicture(const char *);

@@ -1,0 +1,24 @@
+#! /bin/sh
+# script to run gOpenMol
+# contains only essential assignments
+# the rest will be placed in the 'environment.txt' file
+# Leif Laaksonen 2004
+GOM_ROOT=${GOM_ROOT:-$(dirname "$(dirname "$(readlink -f "$(which "$0")" || ( cd "$(dirname "$(which "$0")")" && echo "$(pwd)/dummy" ))")")}
+TCL_LIBRARY=$GOM_ROOT/lib/tcl8.4
+TK_LIBRARY=$GOM_ROOT/lib/tk8.4
+LD_LIBRARY_PATH=$GOM_ROOT/lib${LD_LIBRARY_PATH+:$LD_LIBRARY_PATH}
+export GOM_ROOT TCL_LIBRARY TK_LIBRARY LD_LIBRARY_PATH
+LC_ALL=C xdpyinfo 2>/dev/null |
+	sed '/^number of extensions:/,/:/!d' |
+	grep '^ *GLX$' >/dev/null || use_mesa=yes
+( LC_ALL=C ldd -r "$GOM_ROOT/bin/gopenmol" 2>&1 || echo error: $? ) |
+	grep :. >/dev/null && use_mesa=yes
+if test 'yes' = "$use_mesa"
+then
+    LD_LIBRARY_PATH=$GOM_ROOT/lib/Mesa:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH
+fi
+case $# in
+0) exec "$GOM_ROOT/bin/gopenmol"      ;;
+*) exec "$GOM_ROOT/bin/gopenmol" "$@" ;;
+esac

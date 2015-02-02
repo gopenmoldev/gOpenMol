@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+<TITLE>Write input coordinates widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+**************************************************************************<br>
+<B>Write input coordinates widget</B><br>
+Leif Laaksonen CSC 1996<br>
+**************************************************************************<br>
+<p>
+Export coordinates into input files of external programs. Supported
+external formats are:
+<ul>
+<li> ICON8 extended Huckel program (located in bin/ directory)</li>
+<li> GAMESS program. This is only a very crude starting input file.</li>
+<li> MOPAC6 program. This is only a very crude starting input file.</li>
+<li> OpenMol program. This is only a very crude starting input file.</li>
+<li> <a href="appendix.html#PROBESURF">Probesurf</a> program. A Connolly type of program
+     located in the bin/ directory.
+</ul>
+<h2>ProbeSurf program input</h2>
+
+ProbeSurf program is the program to generate Connolly type of surfaces.
+<P>
+The probe surface program PROBESURF generates a mesh with 
+grid values from 0 to 100. The value 100 is at the vdW value 
+and value 0 is at the vdW + max. probe diameter value. 
+<P>
+It is possible to generate the surface for different probe values. 
+The method is based on the article by R. Voorintholt et al.
+(Voorintholt R., Koster M.T. , Vegter G. , Vriend G.  and 
+Hol W.G.J., "A very fast program for visualizing protein 
+surfaces, channels and cavities", J. Mol. Graphics  7 
+(1989) 243-245) 
+
+<P><IMG SRC="pict/export_probesurf_inp.gif" WIDTH=309 HEIGHT=234></P>
+**************************************************************************<br>
+LUL/1996<br>
+**************************************************************************<br>
+</BODY>
+</HTML>

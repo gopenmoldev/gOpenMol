@@ -1,0 +1,1039 @@
+#
+# This is the system startup file
+# 
+# Leif Laaksonen 1996
+#
+
+# Start the Tcl  definitions .........
+puts "Processing System Startup File..."
+
+set gOpenMolInfo {*** gOpenMol version 23.09.1954 ***
+This is the gOpenMol program for the display and analysis of molecular structures.}
+
+puts "loading macro 'm_distance x1 y1 z1 x2 y2 z2' ..."
+#
+# m_distance x1 y1 z1 x2 y2 z2
+#
+proc m_distance {x1 y1 z1 x2 y2 z2 } {
+
+set dx [expr $x1 - $x2]
+set dy [expr $y1 - $y2]
+set dz [expr $z1 - $z2]  
+
+set dr [expr sqrt($dx*$dx + $dy*$dy + $dz*$dz)]
+
+#distance is ...
+return $dr
+}
+
+puts "loading macro 'm_angle x1 y1 z1 x2 y2 z2 x3 y3 z3' ..."
+#
+# m_angle x1 y1 z1 x2 y2 z2 x3 y3 z3
+#
+proc m_angle {x1 y1 z1 x2 y2 z2 x3 y3 z3} {
+
+set  tmp1  [expr $x1 - $x2]
+set  tmp2  [expr $y1 - $y2]
+set  tmp3  [expr $z1 - $z2]
+
+set  d212  [expr $tmp1 * $tmp1 + $tmp2 * $tmp2 + $tmp3 * $tmp3]
+
+set  tmp1  [expr $x2 - $x3]
+set  tmp2  [expr $y2 - $y3]
+set  tmp3  [expr $z2 - $z3]
+
+set  d223  [expr $tmp1 * $tmp1 + $tmp2 * $tmp2 + $tmp3 * $tmp3]
+
+set tmp1    [expr $x1 - $x3]
+set tmp2    [expr $y1 - $y3]
+set tmp3    [expr $z1 - $z3]
+
+set  d213  [expr $tmp1 * $tmp1 + $tmp2 * $tmp2 + $tmp3 * $tmp3]
+
+set  temp  [expr 0.5 * ($d212 + $d223 - $d213)/sqrt($d212 * $d223)]
+
+if {$temp >  1.0} {set temp  1.0}
+if {$temp < -1.0} {set temp -1.0}
+
+set angijk  [expr acos( $temp )]
+
+# angle is ...
+return $angijk
+}
+
+puts "loading macro 'm_torsion x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4' ..."
+#
+# m_torsion x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4
+#
+proc m_torsion {iax iay iaz ibx iby ibz icx icy icz idx idy idz} {
+
+#        bond lengths and unit vectors    
+
+set   eabx [expr $ibx - $iax]
+set   eaby [expr $iby - $iay]
+set   eabz [expr $ibz - $iaz]
+
+set   rab  [expr sqrt ($eabx * $eabx + $eaby * $eaby + $eabz * $eabz)]
+set   xrab [expr 1.0 / $rab]
+
+set   eabx [expr $eabx * $xrab]
+set   eaby [expr $eaby * $xrab]
+set   eabz [expr $eabz * $xrab]
+
+set   ebcx [expr $icx - $ibx]
+set   ebcy [expr $icy - $iby]
+set   ebcz [expr $icz - $ibz]
+
+set   rbc  [expr sqrt ($ebcx * $ebcx + $ebcy * $ebcy + $ebcz * $ebcz)]
+set   xrbc [expr 1.0 / $rbc]
+
+set   ebcx [expr $ebcx * $xrbc]
+set   ebcy [expr $ebcy * $xrbc]
+set   ebcz [expr $ebcz * $xrbc]
+
+set   ecdx [expr $idx - $icx]
+set   ecdy [expr $idy - $icy]
+set   ecdz [expr $idz - $icz]
+
+set   rcd  [expr sqrt ($ecdx * $ecdx + $ecdy * $ecdy + $ecdz * $ecdz)]
+set   xrcd [expr 1.0 / $rcd]
+
+set   ecdx [expr $ecdx * $xrcd]
+set   ecdy [expr $ecdy * $xrcd]
+set   ecdz [expr $ecdy * $xrcd]
+
+#        cross and dot products between unit vectors, and bond (!)
+#        angles
+
+set   abbcx [expr $eaby * $ebcz - $eabz * $ebcy]
+set   abbcy [expr $eabz * $ebcx - $eabx * $ebcz]
+set   abbcz [expr $eabx * $ebcy - $eaby * $ebcx]
+
+set   cosb  [expr -($eabx * $ebcx + $eaby * $ebcy + $eabz * $ebcz)]
+set   phib  [expr acos($cosb)]
+set   xsinb [expr 1.0 / sin($phib)]
+
+set   dccbx [expr $ecdy * $ebcz - $ecdz * $ebcy]
+set   dccby [expr $ecdz * $ebcx - $ecdx * $ebcz]
+set   dccbz [expr $ecdx * $ebcy - $ecdy * $ebcx]
+
+set   cosc  [expr -($ecdx * $ebcx + $ecdy * $ebcy + $ecdz * $ebcz)]
+set   phic  [expr  acos($cosc)]
+set   xsinc [expr 1.0 / sin($phic)]
+
+#        torsional angle   
+
+set   abcdx [expr -( $abbcy * $dccbz - $abbcz * $dccby )]
+set   abcdy [expr -( $abbcz * $dccbx - $abbcx * $dccbz )]
+set   abcdz [expr -( $abbcx * $dccby - $abbcy * $dccbx )]
+
+set   temp  [expr $abcdx * $ebcx + $abcdy * $ebcy + $abcdz * $ebcz]
+
+set   signum  1.0
+if { $temp < 0.0 } {set signum  -1.0}
+
+set   cosdel [expr -($abbcx * $dccbx + $abbcy * $dccby + $abbcz * $dccbz) *  $xsinb * $xsinc]
+
+    if { $cosdel < -1.0} {set cosdel  -1.0}
+    if { $cosdel >  1.0} {set cosdel   1.0}
+
+set angle [expr $signum * acos ($cosdel)]
+
+    return $angle
+}
+
+puts "loading macro 'p_rmsd seg res atom scale fit/nofit' ..."
+#
+# this procedure will calculate the root mean square displacement
+# for a set of atoms and plot them as ellipsoids
+#
+#  Leif Laaksonen 1996
+#
+#  Usage:
+#
+#          p_rmsd Segment Residue Atom Scale fit/nofit
+#
+#
+proc p_rmsd {seg res atm scale fit} {
+puts "Root mean square fluctuation for: $seg:$res:$atm $fit"
+set numat [show numatoms]
+if {$scale == ""} {set scale 1.0}
+puts "Will use scale factor: $scale"
+#check atoms
+if {$numat < 1} {
+   puts "no atoms defined"
+   return 1
+}
+puts "Number of atoms: $numat"
+#check trajectory
+set frames [show numframes]
+if {$frames < 1} {
+   puts "no trajectory defined"
+   return 1
+}
+puts "Number of frames: $frames"
+
+# calculate RMSD
+eval calculate rmsf $seg $res $atm $fit
+#
+set rmsflu [show rmsfl length]
+# reset the sphere plot
+plot -sphere
+for {set i 1} {$i <= $rmsflu} {incr i} {
+set temp   [show rmsflu $i]
+scan $temp "%f %f %f %f" rad xf yf zf
+set aindex [show rmsfl atomin $i]
+set  temp1 [show atomcolo $aindex]
+scan $temp1 "%f %f %f" rc gc bc
+set atomc  [show atomcoor $aindex]
+scan $atomc "%f %f %f" xc yc zc
+#
+
+plot sphere $xc $yc $zc [expr $scale * $rad] "$rc $gc $bc" $xf $yf $zf append
+}
+puts "Job is done..."
+return 0
+}
+
+# ****************** graphical interface ***************************
+
+# This is the Tk graphical user interface part
+# Leif Laaksonen Autumn 1996
+#
+
+# setup default parameters
+# set default gOpenMol file name
+set gomFileName ""
+set lulAtomColour #ffffff
+
+# Menu bar
+frame .frame -relief raised -bd 2
+frame .dummy 
+frame .dummy.left -relief sunken -bg red -width 8c -height 10c 
+frame .dummy.right -bg blue -width 15c -height 10c
+pack  .frame .dummy -side top -fill x
+pack  .dummy.left   -side left -fill y 
+pack  .dummy.right  -side right -fill y
+
+# File menu ...
+menubutton .frame.file -text "File" -menu .frame.file.menu -underline 0
+pack .frame.file -side left
+set m .frame.file.menu
+menu .frame.file.menu
+$m add command -label "New ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+$m add command -label "Open ..." -command {lulImportModelFile .dummy.left}
+$m add command -label "Close" -command {error "this is just a demo: no action has been defined for the \"New\" entry"}
+$m add command -label "Save" -command {lulSaveModelFile .dummy.left}
+$m add command -label "Save As ..." -command {lulExportModelFile .dummy.left}
+$m add separator
+$m add cascade -label "Import ..." -menu $m.import
+$m add cascade -label "Export ..." -menu $m.export
+$m add separator
+$m add cascade -label "Reset..."   -menu $m.reset
+$m add separator
+$m add command -label "Hardcopy" -command "puts hello"
+$m add command -label "Exit" -command exit
+
+menu  $m.import
+set w $m.import
+$w add command -label "Coords..." -command "lulImportCoordFile"
+$w add command -label "Dict..."   -command "lulImportDictionaryFile $w"
+$w add command -label "GBasis..." -command "lulImportGBasisFile $w"
+$w add command -label "Vector..." -command "lulImportVectorFile $w"
+
+menu  $m.export
+set w $m.export
+$w add command -label "Cluster..."      -command "lulExportClusterFile $w"
+$w add command -label "Coords..."       -command "puts coords"
+$w add command -label "Correlation..."  -command "lulExportCorrelationFile $w"
+$w add command -label "Input..."        -command "puts Input"
+$w add command -label "RMSD..."         -command "puts RMSD"
+
+menu  $m.reset
+set w $m.reset
+$w add command -label "gOpenmol..." -command "puts gOpenMol"
+
+# Edit menu ...
+menubutton .frame.edit -text "Edit" -menu .frame.edit.menu -underline 0
+pack .frame.edit -side left
+set m .frame.edit.menu
+menu .frame.edit.menu
+$m add command -label "Annotate ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+$m add command -label "Atom" -command {error "this is just a demo: no action has been defined for the \"New\" entry"}
+$m add command -label "Edit cell ..." -command {error "this is just a demo: no action has been defined for the \"Save\" entry"}
+$m add command -label "Edit molecule ..." -command {error "this is just a demo: no action has been defined for the \"Save As ...\" entry"}
+$m add command -label "Identify atom ... ..." -command {error "this is just a demo: no action has been defined for the \"Print Setup ...\" entry"}
+$m add command -label "Manipulate ..." -command {error "this is just a demo: no action has been defined for the \"Print ...\" entry"}
+$m add command -label "Select ..." -command {error "this is just a demo: no action has been defined for the \"Print ...\" entry"}
+$m add command -label "Superimpose ..." -command {error "this is just a demo: no action has been defined for the \"Print ...\" entry"}
+$m add separator
+$m add command -label "Display attribs..." -command exit
+$m add separator
+$m add command -label "Setup ..." -command exit
+
+# View menu ...
+menubutton .frame.view -text "View" -menu .frame.view.menu -underline 0
+pack .frame.view -side left
+set m .frame.view.menu
+menu .frame.view.menu
+$m add command -label "Atom colour ..." -command "lulDefineAtomColour"
+$m add command -label "Atom mask ..." -command "lulDefineDisplayAtoms" 
+$m add command -label "Atom type ..." -command "lulDefineADType"
+$m add command -label "Measure ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+$m add separator
+$m add command -label "Contour ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+$m add separator
+$m add command -label "Text output ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+
+# Colour menu ...
+menubutton .frame.colour -text "Colour" -menu .frame.colour.menu -underline 1
+pack .frame.colour -side left
+set m .frame.colour.menu
+menu .frame.colour.menu
+$m add command -label "Background ..." -command DefineBGColour
+$m add command -label "Atoms ..." -command "lulDefineAtomColour"
+
+# Calculate menu ...
+menubutton .frame.calculate -text "Calculate" -menu .frame.calculate.menu -underline 4
+pack .frame.calculate -side left
+set m .frame.calculate.menu
+menu .frame.calculate.menu
+$m add command -label "Cluster ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+
+# Plot menu ...
+menubutton .frame.plot -text "Plot" -menu .frame.plot.menu -underline 0
+pack .frame.plot -side left
+set m .frame.plot.menu
+menu .frame.plot.menu
+$m add command -label "Cutplane ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+$m add command -label "LDP ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+$m add command -label "Plumber ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+
+# Trajectory menu ...
+menubutton .frame.trajectory -text "Trajectory" -menu .frame.trajectory.menu -underline 0
+pack .frame.trajectory -side left
+set m .frame.trajectory.menu
+menu .frame.trajectory.menu
+$m add command -label "Main ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+$m add command -label "Control ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+$m add command -label "Trace ..." -command {error "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+
+# Help menu ...
+menubutton .frame.help -text "Help" -menu .frame.help.menu -underline 0
+pack .frame.help -side right
+set m .frame.help.menu
+menu .frame.help.menu
+$m add command -label "About ..." -command {DialogText $gOpenMolInfo}
+$m add command -label "Help ..." -command {DisplayText "this is just a demo: no action has been defined for the \"Open ...\" entry"}
+
+# Prelude ...
+tk_menuBar .frame .frame.file .frame.file.import .frame.file.export \
+.frame.edit .frame.help 
+focus .frame
+# ....
+
+label   .dummy.left.gomlabel  -text "gOpenMol version 0.0" \
+        -font -*-Helvetica-Bold-R-Normal-*-*-160-*-*-*-*-*-*
+image create bitmap gomlogo  -file [file join $env(GOM_DATA) images Logo.xbm]
+button  .dummy.right.logo   -image gomlogo -command "display"
+#button  .dummy.right.logo     -text gOpenMol -command "display"
+pack .dummy.left.gomlabel  -side top
+pack .dummy.right.logo     -side top -anchor ne
+
+entry   .dummy.right.commandline   -width  40 -relief sunken -bd 2 -textvariable command_line
+pack    .dummy.right.commandline   -side bottom
+#
+# Fill the structure list box with an entry:
+# if $Action == 0 create new list
+#            == 1 append to old list
+#             < 0 just delete the list
+#
+proc FillStructureListbox {Action Entry} {
+     set Size [.dummy.left.structurelist size]
+
+     if {$Action < 0 } {
+       if { $Size > 0 } {
+         .dummy.left.structurelist delete 1 $Size
+          return
+       }
+       else
+          return
+     }
+     if { ($Action == 0) && ($Size > 0)} {
+      .dummy.left.structurelist delete 1 $Size
+     }
+      .dummy.left.structurelist insert end $Entry
+      .dummy.left.structurelist selection set $Size
+}
+
+bind .dummy.right.commandline <Return> {eval $command_line;set command_line ""}
+# Start Proc ProcessLineInput .................................
+proc ProcessLineInput CommandLine {
+eval $CommandLine
+set command_line ""
+}
+# End   Proc ProcessLineInput .................................
+
+frame .statusline -relief raised
+pack  .statusline -side bottom
+entry .statusline.filesize  -width 20 -relief sunken -bd 2 -textvariable file_size
+entry .statusline.numatoms  -width 15 -relief sunken -bd 2 -textvariable num_atoms
+entry .statusline.timeflies -width 20 -relief sunken -bd 2 -textvariable time_flies
+pack  .statusline.filesize .statusline.numatoms .statusline.timeflies -side left -expand 1
+
+################### text widget with text input #############
+#
+# Text widget
+#
+proc lulDisplayTextText InputText {
+
+set w .text
+catch {destroy $w}
+toplevel $w
+wm title $w "Display text"
+wm iconname $w "text"
+
+frame $w.buttons
+pack $w.buttons -side bottom -fill x -pady 2m
+button $w.buttons.dismiss -text Dismiss -command "destroy $w"
+pack $w.buttons.dismiss -side left -expand 1
+
+text $w.text -relief sunken -bd 2 -yscrollcommand "$w.scroll set" -setgrid 1 \
+	-height 30
+scrollbar $w.scroll -command "$w.text yview"
+pack $w.scroll -side right -fill y
+pack $w.text -expand yes -fill both
+$w.text delete 0.0 end
+$w.text insert 0.0 $InputText
+$w.text mark set insert 0.0
+}
+################### text widget with text input #############
+#
+# Text widget
+#
+proc lulDisplayTextFile InputFile {
+
+set w .text
+catch {destroy $w}
+toplevel $w
+wm title $w "Display text"
+wm iconname $w "text"
+
+frame $w.buttons
+pack $w.buttons -side bottom -fill x -pady 2m
+button $w.buttons.dismiss -text Dismiss -command "destroy $w"
+pack $w.buttons.dismiss -side left -expand 1
+
+text $w.text -relief sunken -bd 2 -yscrollcommand "$w.scroll set" -setgrid 1 \
+	-height 30
+scrollbar $w.scroll -command "$w.text yview"
+pack $w.scroll -side right -fill y
+pack $w.text -expand yes -fill both
+$w.text delete 0.0 end
+
+set File [open $InputFile r]
+    while {![eof $File]} {
+    $w.text insert end [read $File 1000]
+    }
+
+$w.text mark set insert 0.0
+}
+###############################################################################
+#
+# dialog widget
+#
+proc DialogText InputText {
+
+after idle {.dialog1.msg configure -wraplength 4i}
+set i [tk_dialog .dialog1 "gOpenMol info" $InputText \
+info 0 OK ]
+
+#switch $i {
+#    0 {puts "You pressed OK"}
+#}
+}
+
+##################### update background colour ############################
+#
+# define background colour widget
+#
+proc DefineBGColour {} {
+global env
+set w .colourscale
+catch {destroy $w}
+toplevel $w
+wm title $w "Colour scale"
+wm iconname $w "Colour"
+
+frame $w.buttons
+pack $w.buttons -side bottom -fill x -pady 2m
+button $w.buttons.dismiss -text Dismiss -command "destroy $w"
+pack $w.buttons.dismiss -side left -expand 1
+
+button $w.button -text "Click to choose the colour" -height 2 -command UpdateBGColour
+scale  $w.red   -label Red   -from 0 -to 255 -length 8c -orient vertical \
+      -command "ColourButton $w"
+scale  $w.green -label Green -from 0 -to 255 -length 8c -orient vertical \
+      -command "ColourButton $w"
+scale  $w.blue  -label Blue  -from 0 -to 255 -length 8c -orient vertical \
+      -command "ColourButton $w"
+
+#listbox $w.listbox -width 10 -height 10
+
+pack   $w.button
+pack   $w.red $w.green $w.blue -side left
+#pack   $w.listbox
+
+#set f [open [file join $env(GOM_DATA) colour_table.data]]
+#while {[gets $f line] >= 0} {
+#    $w.listbox insert end $line
+#}
+}
+#
+# change the colour button background colour according to the sliders
+#
+proc ColourButton {w a} {
+  set colour [format #%02x%02x%02x [$w.red get] [$w.green get] [$w.blue get]]
+  $w.button config -bg $colour
+}
+#
+# take the red green blue colour values (as integers) and convert them to
+# float and change the background colour
+#
+proc UpdateBGColour {} {
+     set red   [.colourscale.red   get]
+     set green [.colourscale.green get]
+     set blue  [.colourscale.blue  get]
+     define bgcolour "[expr $red/255.] [expr $green/255.] [expr $blue/255.]"
+     display
+}
+########################## end of update bgcolour #########################
+
+##################### Atom type display ############################
+#
+# define atom type widget
+#
+proc lulDefineADType {} {
+set w .atomtype
+catch {destroy $w}
+toplevel $w 
+wm title $w "Atom type"
+wm iconname $w "Atom display"
+
+frame  $w.buttons
+pack   $w.buttons -side bottom -fill x -pady 2m
+button $w.buttons.dismiss -text Dismiss -command "destroy $w"
+button $w.buttons.apply   -text Apply -command "lulDoDisplayType $w"
+button $w.buttons.help    -text Help -command "destroy $w"
+pack   $w.buttons.dismiss $w.buttons.apply $w.buttons.help -side left -expand 1
+
+label  $w.label -text "Atom type display:"
+pack   $w.label -side top -anchor w
+
+frame  $w.frame1 
+label  $w.frame1.segment -text "Segment:" -width 10
+entry  $w.frame1.segment_input -width 30 -textvariable segment_display 
+pack   $w.frame1 -side top -anchor w
+pack   $w.frame1.segment $w.frame1.segment_input -side left
+
+if { [$w.frame1.segment_input get] == "" } {$w.frame1.segment_input insert 0 "*"}
+
+frame  $w.frame2 
+label  $w.frame2.residue -text "Residue:" -width 10
+entry  $w.frame2.residue_input -width 30 -textvariable residue_display 
+pack   $w.frame2 -side top -anchor w
+pack   $w.frame2.residue $w.frame2.residue_input -side left 
+
+if { [$w.frame2.residue_input get] == ""} {$w.frame2.residue_input insert 0 "*"}
+
+frame  $w.frame3 
+label  $w.frame3.atom -text "Atom:" -width 10
+entry  $w.frame3.atom_input -width 30 -textvariable atom_display 
+pack   $w.frame3 -side top -anchor w
+pack   $w.frame3.atom $w.frame3.atom_input -side left
+
+if { [$w.frame3.atom_input get] == "" } {$w.frame3.atom_input insert 0 "*"}
+
+frame  $w.frame4
+radiobutton $w.frame4.on  -text "On"  -variable disp_action -value 1
+radiobutton $w.frame4.off -text "Off" -variable disp_action -value 0
+pack $w.frame4 -side left 
+pack $w.frame4.on $w.frame4.off -side top -anchor w
+$w.frame4.on select
+
+frame  $w.frame5
+radiobutton $w.frame5.stick    -text "Stick"    -variable disp_type -value stick
+radiobutton $w.frame5.cpk      -text "CPK"      -variable disp_type -value cpk
+radiobutton $w.frame5.licorice -text "Licorice" -variable disp_type -value licorice
+pack $w.frame5 -side right
+pack $w.frame5.stick $w.frame5.cpk $w.frame5.licorice -side left
+$w.frame5.stick select
+}
+#
+# react to display type
+#
+proc lulDoDisplayType { w } {
+  global disp_type
+  global disp_action
+  global segment_display
+  global residue_display
+  global atom_display
+
+  if { $disp_type == "stick" } {
+     if { $disp_action } {
+          set Action "atom display"
+     } else {
+          set Action "atom -display"
+     }
+  } else {
+     if { $disp_action } {
+          set Action "atom  $disp_type"
+     } else {
+          set Action "atom -$disp_type"
+     }
+  }
+
+  eval [concat $Action $segment_display $residue_display $atom_display]
+}
+#
+# take the red green blue colour values (as integers) and convert them to
+# float and change the background colour
+#
+proc ApplyAtomTypeDisplay {} {
+     display
+}
+########################## end of update bgcolour #########################
+
+##################### import gOpenMol file ############################
+
+proc lulImportModelFile { w } {
+    global gomFileName
+
+    #   Type names		Extension(s)	Mac File Type(s)
+    #
+    #---------------------------------------------------------
+    set types {
+	{"GOM files"		{.gom}		TEXT}
+	{"All files"		*}
+    }
+    set file [tk_getOpenFile -filetypes $types -parent $w \
+         -defaultextension .gom -title "Read Model File"]
+
+    if [string compare $file ""] {
+    eval "import model $file"
+    set gomFileName $file
+    }
+}
+
+########################## end of import model #########################
+
+##################### export gOpenMol file ############################
+
+proc lulExportModelFile { w } {
+    global gomFileName
+
+    #   Type names		Extension(s)	Mac File Type(s)
+    #
+    #---------------------------------------------------------
+    set types {
+	{"GOM files"		{.gom}		TEXT}
+	{"All files"		*}
+    }
+    set file [tk_getSaveFile -filetypes $types -parent $w \
+         -defaultextension .gom -title "Save Model File"]
+
+    if [string compare $file ""] {
+    eval "export model $file"
+    set gomFileName $file
+    }
+}
+
+#
+# if there is a name already available save with that name
+# if not ask for a name
+#
+proc lulSaveModelFile { w } {
+    global gomFileName
+
+    if {$gomFileName == "" } {
+        lulExportModelFile $w
+    } else {
+        eval "export model $gomFileName"
+    }
+}
+
+########################## end of export model #########################
+
+##################### import coordinate file ############################
+
+proc lulImportCoordFile {} {
+
+set w .coordinates
+catch {destroy $w}
+toplevel $w 
+wm title $w "Import coordinates"
+wm iconname $w "Import coordinates"
+
+frame  $w.buttons
+pack   $w.buttons -side bottom -fill x -pady 2m
+button $w.buttons.dismiss -text Dismiss -command "destroy $w"
+button $w.buttons.apply   -text Apply -command "lulDoImportCoordinates $w"
+button $w.buttons.help    -text Help -command "destroy $w"
+pack   $w.buttons.dismiss $w.buttons.apply $w.buttons.help -side left -expand 1
+
+frame $w.left
+frame $w.right
+
+pack $w.left  -side left
+pack $w.right -side right
+
+radiobutton $w.right.amber     -text "Amber"     -variable coord_type -value amber
+radiobutton $w.right.charmm    -text "Charmm"    -variable coord_type -value charmm
+radiobutton $w.right.frame     -text "Frame"     -variable coord_type -value 1
+radiobutton $w.right.gaussian  -text "Gaussian"  -variable coord_type -value gaussian
+radiobutton $w.right.hyperchem -text "HyperChem" -variable coord_type -value hyperchem
+radiobutton $w.right.insight   -text "Insight"   -variable coord_type -value insight
+radiobutton $w.right.mol2      -text "Mol2"      -variable coord_type -value mol2
+radiobutton $w.right.mopac     -text "Mopac"     -variable coord_type -value mopac
+radiobutton $w.right.mumod     -text "Mumod"     -variable coord_type -value mumod
+radiobutton $w.right.openmol   -text "OpenMol"   -variable coord_type -value openmol
+radiobutton $w.right.pdb       -text "PDB"       -variable coord_type -value pdb
+radiobutton $w.right.xmol      -text "Xmol"      -variable coord_type -value xmol
+radiobutton $w.right.xyz       -text "XYZ"       -variable coord_type -value xyz
+radiobutton $w.right.yasp      -text "YASP"      -variable coord_type -value yasp
+set wr $w.right
+pack $wr.amber     -side top -anchor w
+pack $wr.charmm    -side top -anchor w
+pack $wr.frame     -side top -anchor w
+pack $wr.gaussian  -side top -anchor w
+pack $wr.hyperchem -side top -anchor w
+pack $wr.insight   -side top -anchor w
+pack $wr.mol2      -side top -anchor w
+pack $wr.mopac     -side top -anchor w
+pack $wr.mumod     -side top -anchor w
+pack $wr.openmol   -side top -anchor w
+pack $wr.pdb       -side top -anchor w
+pack $wr.xmol      -side top -anchor w
+pack $wr.xyz       -side top -anchor w
+pack $wr.yasp      -side top -anchor w
+
+label  $w.left.label    -text "Input file name: "
+entry  $w.left.filename -width 40
+button $w.left.browse   -text "Browse" -command "lulActionFileName $w.left"
+
+pack   $w.left.label     -side top -anchor w
+pack   $w.left.filename  -side left
+pack   $w.left.browse    -side left
+}
+
+proc lulActionFileName { w } {
+
+    global coord_type
+
+    #   Type names		Extension(s)	Mac File Type(s)
+    #
+    #---------------------------------------------------------
+    if {$coord_type == "amber"} {
+       set types {
+         {"Amber files"		{.amb}		TEXT}
+         {"All files"		*}
+       }
+       set def_type ".amb"
+    } elseif {$coord_type == "charmm"} {
+       set types {
+         {"CHARMM files"		{.CRD .crd}		TEXT}
+         {"All files"		*}
+       }
+       set def_type ".crd"
+    }
+    $w.filename delete 0 end
+    
+    set file [tk_getOpenFile -filetypes $types -parent $w  -defaultextension $def_type -title "Read Coordinate File"]
+
+    if [string compare $file ""] {
+    $w.filename delete 0 end
+    $w.filename insert 0 $file
+    }
+}
+
+##################### import dictionary file ############################
+
+proc lulImportDictionaryFile { w } {
+
+    #   Type names		Extension(s)	Mac File Type(s)
+    #
+    #---------------------------------------------------------
+    set types {
+	{"Dictionary files"		{.dic}		TEXT}
+	{"All files"		*}
+    }
+    set file [tk_getOpenFile -filetypes $types -parent $w \
+         -defaultextension .dic -title "Read Dictionary File"]
+
+    if [string compare $file ""] {
+    eval "import dictionary $file"
+    }
+}
+
+########################## end of import dictionary #########################
+
+##################### import GBASIS file ############################
+
+proc lulImportGBasisFile { w } {
+
+    #   Type names		Extension(s)	Mac File Type(s)
+    #
+    #---------------------------------------------------------
+    set types {
+	{"GBasis files"		{.data}		TEXT}
+	{"All files"		*}
+    }
+    set file [tk_getOpenFile -filetypes $types -parent $w \
+         -defaultextension .dic -title "Read GBasis File"]
+
+    if [string compare $file ""] {
+    puts "GBasis file: $file"
+#    eval "import dictionary $file"
+    }
+}
+
+########################## end of import GBasis #########################
+
+##################### import vector file ############################
+
+proc lulImportVectorFile { w } {
+
+    #   Type names		Extension(s)	Mac File Type(s)
+    #
+    #---------------------------------------------------------
+    set types {
+	{"Vector files"		{.crd .CRD}		TEXT}
+	{"All files"		*}
+    }
+    set file [tk_getOpenFile -filetypes $types -parent $w \
+         -defaultextension .dic -title "Read Vector File"]
+
+    if [string compare $file ""] {
+    eval "import vector $file"
+    }
+}
+
+########################## end of import dictionary #########################
+
+##################### export cluster file ############################
+
+proc lulExportClusterFile { w } {
+
+    #   Type names		Extension(s)	Mac File Type(s)
+    #
+    #---------------------------------------------------------
+    set types {
+	{"Cluster file"		{.dat}		TEXT}
+	{"All files"		*}
+    }
+    set file [tk_getSaveFile -filetypes $types -parent $w \
+         -defaultextension .gom -title "Save Cluster File"]
+
+    if [string compare $file ""] {
+    eval "export cluster $file"
+    }
+}
+########################## end of export cluster #########################
+
+##################### export correlation file ############################
+
+proc lulExportCorrelationFile { w } {
+
+    #   Type names		Extension(s)	Mac File Type(s)
+    #
+    #---------------------------------------------------------
+    set types {
+	{"Correlation file"	{.dat}		TEXT}
+	{"All files"		*}
+    }
+    set file [tk_getSaveFile -filetypes $types -parent $w \
+         -defaultextension .gom -title "Save Correlation File"]
+
+    if [string compare $file ""] {
+    eval "export correlation $file"
+    }
+}
+########################## end of export correlation #########################
+
+##################### Atom display ############################
+#
+# define atom widget
+#
+proc lulDefineDisplayAtoms {} {
+set w .atoms
+catch {destroy $w}
+toplevel $w 
+wm title $w "Display Atoms"
+wm iconname $w "Display Atoms"
+
+frame  $w.buttons
+pack   $w.buttons -side bottom -fill x -pady 2m
+button $w.buttons.dismiss -text Dismiss -command "destroy $w"
+button $w.buttons.apply   -text Apply -command "lulDoDisplayAtoms $w"
+button $w.buttons.help    -text Help -command "destroy $w"
+pack   $w.buttons.dismiss $w.buttons.apply $w.buttons.help -side left -expand 1
+
+label  $w.label -text "Display atoms:"
+pack   $w.label -side top -anchor w
+
+frame  $w.frame1 
+label  $w.frame1.segment -text "Segment:" -width 10
+entry  $w.frame1.segment_input -width 30 -textvariable segment_display 
+pack   $w.frame1 -side top -anchor w
+pack   $w.frame1.segment $w.frame1.segment_input -side left
+
+if { [$w.frame1.segment_input get] == "" } {$w.frame1.segment_input insert 0 "*"}
+
+frame  $w.frame2 
+label  $w.frame2.residue -text "Residue:" -width 10
+entry  $w.frame2.residue_input -width 30 -textvariable residue_display 
+pack   $w.frame2 -side top -anchor w
+pack   $w.frame2.residue $w.frame2.residue_input -side left 
+
+if { [$w.frame2.residue_input get] == ""} {$w.frame2.residue_input insert 0 "*"}
+
+frame  $w.frame3 
+label  $w.frame3.atom -text "Atom:" -width 10
+entry  $w.frame3.atom_input -width 30 -textvariable atom_display 
+pack   $w.frame3 -side top -anchor w
+pack   $w.frame3.atom $w.frame3.atom_input -side left
+
+if { [$w.frame3.atom_input get] == "" } {$w.frame3.atom_input insert 0 "*"}
+
+frame  $w.frame4
+radiobutton $w.frame4.on  -text "On"  -variable disp_action -value 1
+radiobutton $w.frame4.off -text "Off" -variable disp_action -value 0
+pack $w.frame4 -side left 
+pack $w.frame4.on $w.frame4.off -side top -anchor w
+$w.frame4.on select
+
+}
+#
+# react to display qatom
+#
+proc lulDoDisplayAtoms { w } {
+
+     global segment_display residue_display atom_display
+     global  disp_action
+
+     if { $disp_action } {
+          set Action "atom display"
+     } else {
+          set Action "atom -display"
+     }
+
+  eval [concat $Action $segment_display $residue_display $atom_display]
+}
+#########################################################################
+
+##################### Atom colour display ############################
+#
+# define atom widget
+#
+proc lulDefineAtomColour {} {
+
+   global lulAtomColour
+
+set w .atoms
+catch {destroy $w}
+toplevel $w 
+wm title $w "Define Atom Colour"
+wm iconname $w "Define Atom Colour"
+
+frame  $w.buttons
+pack   $w.buttons -side bottom -fill x -pady 2m
+button $w.buttons.dismiss -text Dismiss -command "destroy $w"
+button $w.buttons.apply   -text Apply -command "lulDoDefineAtomColour"
+button $w.buttons.help    -text Help -command "destroy $w"
+pack   $w.buttons.dismiss $w.buttons.apply $w.buttons.help -side left -expand 1
+
+label  $w.label -text "Define atom colour:"
+pack   $w.label -side top -anchor w
+
+frame  $w.frame1 
+label  $w.frame1.segment -text "Segment:" -width 10
+entry  $w.frame1.segment_input -width 30 -textvariable segment_display 
+pack   $w.frame1 -side top -anchor w
+pack   $w.frame1.segment $w.frame1.segment_input -side left
+
+if { [$w.frame1.segment_input get] == "" } {$w.frame1.segment_input insert 0 "*"}
+
+frame  $w.frame2 
+label  $w.frame2.residue -text "Residue:" -width 10
+entry  $w.frame2.residue_input -width 30 -textvariable residue_display 
+pack   $w.frame2 -side top -anchor w
+pack   $w.frame2.residue $w.frame2.residue_input -side left 
+
+if { [$w.frame2.residue_input get] == ""} {$w.frame2.residue_input insert 0 "*"}
+
+frame  $w.frame3 
+label  $w.frame3.atom -text "Atom:" -width 10
+entry  $w.frame3.atom_input -width 30 -textvariable atom_display 
+pack   $w.frame3 -side top -anchor w
+pack   $w.frame3.atom $w.frame3.atom_input -side left
+
+if { [$w.frame3.atom_input get] == "" } {$w.frame3.atom_input insert 0 "*"}
+
+frame $w.frame4
+button $w.frame4.cbutton -text "Choose colour..." \
+       -command "lulPickAtomColour $w"
+pack $w.frame4 -anchor w
+pack $w.frame4.cbutton 
+$w.frame4.cbutton configure -bg $lulAtomColour
+}
+#
+# pick atom colour
+#
+proc lulPickAtomColour { w } {
+
+    global lulAtomColour
+
+    set colour [tk_chooseColor -title "Choose atom colour" -parent $w \
+         -initialcolor white]
+
+    if { $colour != "" } {
+        $w.frame4.cbutton configure -bg $colour
+    }
+
+    set lulAtomColour $colour
+}
+
+#
+# react to atom colour
+#
+proc lulDoDefineAtomColour { } {
+
+     global segment_display residue_display atom_display
+     global lulAtomColour
+
+     set CompLong [expr ([string length $lulAtomColour] - 1)/3]
+
+#red component
+     set iplace1 1
+     set iplace2 $CompLong
+     set red    "0x[string range $lulAtomColour $iplace1 $iplace2]"
+#green component
+     set iplace1 [expr $iplace2 + 1]
+     set iplace2 [expr $iplace1 + $CompLong - 1]
+     set green  "0x[string range $lulAtomColour $iplace1 $iplace2]"
+#blue component
+     set iplace1 [expr $iplace2 + 1]
+     set iplace2 [expr $iplace1 + $CompLong - 1]
+     set blue  "0x[string range $lulAtomColour $iplace1 $iplace2]"
+#
+     set Action "atom colour"
+     eval "$Action $segment_display $residue_display $atom_display \
+           {[expr $red/255.] [expr $green/255.] [expr $blue/255.]}"
+}
+#########################################################################
+
+# .... daigadaigaduu
+
+puts "Done!"
+
+

@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>Monitor distance</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+<P>
+**************************************************************************<BR>
+<b>
+Manipulate Time Series  Widget<BR>
+Leif Laaksonen CSC 1997<BR>
+</b>
+**************************************************************************<BR>
+<P>
+Manipulate the distance, angle and torsion time series through the following
+operations:
+<pre>
+Types of operations (manipulations):
+
+     DAVErage  ;    Q(t) = Q(t) - <Q(t)>
+     SQUAre  ;      Q(t) = Q(t) ** 2
+     COS  ;         Q(t) = cos(Q(t))  
+     COS2  ;        Q(t) = 3*cos(Q(t))**2 - 1  
+     SQRT  ;        Q(t) = sqrt(Q(t)) 
+     DINItial  ;    Q(t) = Q(t) - Q(0) 
+     COPY nr ;      Q(t) = Q2(t)  
+     ADD nr ;       Q(t) = Q(t) + Q2(t)   
+     LOG ;          Q(t) = log(Q(t)) 
+     EXP ;          Q(t) = exp(Q(t)) 
+     POWer real ;   Q(t) = Q(t) ** real 
+     MULT real ;    Q(t) = real * Q(t) 
+     DIVIde real ;  Q(t) = Q(t) / real 
+     SHIFt real ;   Q(t) = Q(t) + real  
+     DMIN ;         Q(t) = Q(t) - Q(min)
+     ABS ;          Q(t) = abs(Q(t))
+     DIVFirst ;     Q(t) = Q(t) / Q(0) 
+     DIVMaximum ;   Q(t) = Q(t) /max(Q(t)) 
+     PSPEctrum nr ; Power spectrum
+     ZERO ;         Q(t) = 0.0
+</pre>
+<P>
+Click on the radio button for the desired operation. If the operation requires
+a further value or index, please fill it in the input widget. Choose the
+distance, angle or torsion option.
+</p>
+<p>
+Fill in the number index for the desired time series.
+</p>
+<p> 
+<P><IMG SRC="pict/man_timeseries.gif"></P>
+<p>
+Line command: see <b><a href="manipulate_help.html">manipulate command</a></b>
+</P>
+<P>
+**************************************************************************<BR>
+LUL/1997<BR>
+**************************************************************************<BR>
+</BODY>
+</HTML>

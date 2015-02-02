@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<TITLE>Plumber command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                             plumber command
+                        Leif Laaksonen CSC 2001
+                        Eero H&auml;kkinen  CSC 2002
+**************************************************************************
+
+<a name="atoms">#
+# Draw a tube, ribbon, trace, solid helix, flat helix, arrow or strand
+# through the selected atoms in ColourName and Frad wide.
+# For helixes, arrow and strand also the width and thickness values have
+# to be defined.
+# If "glue" parameter is given plumber will be glued to selected
+# atoms i.e. plumber position will be relative to atom positions.
+#
+<b>
+plum$ber atom$s Seg Res Atm Frad ColourName tube
+                                            tube                  glue
+                                            ribb$on               ...
+                                            trac$e                ...
+                                            shel$ix Fwidth Fthick
+                                            shel$ix Fwidth Fthick glue
+                                            fhel$ix Fwidth Fthick ...
+                                            arro$w  Fwidth Fthick ...
+                                            stra$nd Fwidth Fthick ...
+         -ato$ms
+</b>
+<a name="colour"><a name="color">#
+# Change plumber colour.
+#
+<b>
+         colour      ColourName  IPlumber
+</b>
+<a name="structure">#
+# Unglue plumber from atoms and tie plumber to
+# a structure (to the same or to another).
+#
+<b>
+         stru$cture  IStruct     IPlumber
+</b>
+<a name="destroy">#
+# Destroy plumber.
+#
+<b>
+         dest$roy    IPlumber
+</b>
+<a name="display">#
+# Toggle the display state between on/off
+#
+<b>
+          disp$lay  on
+                    off
+</b>
+**************************************************************************
+LUL/2002
+**************************************************************************
+</PRE><CODE>&nbsp;</CODE></BODY>
+</HTML>
+

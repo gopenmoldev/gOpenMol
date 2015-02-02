@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<TITLE>hardcopy command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                             hardcopy command
+                        Leif Laaksonen CSC 1996
+**************************************************************************
+<a name="hardcopy">#
+# make a screen dump of the screen in a selected format 
+# into a file
+#
+# WinNr is the window number from the left upper corner or
+# the running number in which the windows have been created
+#
+# for the PostScript option it is also possible to define the 
+# landscape orientation through the "-l" and the pixels/inch
+# density through the "-ppixelsperinch"
+#
+<b>
+hard$copy WinNR bmp          File.Name
+                post$script  File.Name {-l | -ppixelsperinch}
+                rgb          File.Name
+                targa        File.Name
+                xwd          File.Name
+</b><a name="end">
+**************************************************************************
+LUL/1996
+**************************************************************************
+</PRE></BODY>
+</HTML>
+

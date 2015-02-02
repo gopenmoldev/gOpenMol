@@ -1,0 +1,188 @@
+<HTML>
+<HEAD>
+<TITLE>atom command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                             atom command
+                        Leif Laaksonen CSC 1996
+                        Timm Uhlmann       2003
+**************************************************************************
+
+The 'atom' command controls the display and the display style of the
+atoms.  One can choose between the atom/style <b>on</b> or <b>off</b> using the "-"
+sign in front of the command.
+
+<a name="display">#
+# display the atoms with name segment name Seg 
+#                             residue name Res
+#                             atom name    Atm
+#
+<b>
+atom  display   Seg  Res  Atm
+</b>
+#
+# display all atoms with a radius of Float around Seg1 Res Atm1
+#
+<b> 
+      display   Seg1 Res1 Atm1 around Float
+</b>
+#
+# display all atoms of name Seg2 Res2 Atm2 with a radius Float around 
+# Seg2 Res2 Atm2
+#
+# this function returns also the number of atoms selected
+#
+<b>
+                               around Float Seg2 Res2 Atm2                            
+</b>
+#
+# display all atoms of name Seg2 Res2 Atm2 with a radius Float around 
+# Seg2 Res2 Atm2 with colour Colour_name
+#
+# this function returns also the number of atoms selected
+#
+<b>
+                               around Float Seg2 Res2 Atm2  Color_name
+</b>
+#
+# display all atoms of name Seg2 Res2 Atm2 with a radius Float around 
+# Seg2 Res2 Atm2 with colour Int Int Int (RGB colour indexes, 0-255)
+#
+# this function returns also the number of atoms selected
+#
+<b>
+                                                           "Int Int Int"
+</b>
+#
+# display all atoms of name Seg2 Res2 Atm2 with a radius Float around 
+# Seg2 Res2 Atm2 with colour Float Float Float (RGB colour, 0.0 - 1.0)
+#
+# this function returns also the number of atoms selected
+#
+<b>
+                                                           "Float Float Float"
+</b>
+#
+# turn the display off for Seg Res Atm
+#
+<b>
+atom -display   Seg  Res  Atm
+</b>
+#
+# turn the display off for atoms within radius Float around Seg1 Res Atm1
+#
+<b>
+     -display   Seg1 Res1 Atm1 around Float
+</b>
+#
+# turn the Seg2 Res2 Atm2 atom display off for atoms within a radius Float
+# around Seg1 Seg2 Atm2
+# 
+<b>
+                               around Float Seg2 Res2 Atm2
+                             
+                               around Float Seg2 Res2 Atm2  Color_name
+                                                            "Int Int Int"
+                                                            "Float Float Float"
+</b>
+<a name="color">#
+# change the atom colour for Seg Res Atm to Colour_name/RGB index
+#
+<b>
+atom  coulor    Seg Res Atm    Color_name
+                               "Int Int Int"
+                               "Float Float Float"
+</b>
+#
+# colour atoms Seg Res Atm according to the vector array value
+# from Fmin to Fmax
+#
+<b>
+                byvector      Seg Res Atm Fmin Fmax
+</b>
+#
+# colour atoms Seg Res Atm according to their atomic partial charge value
+# from Fmin to Fmax
+#
+<b>
+                bycharge      Seg Res Atm Fmin Fmax
+</b>
+<a name="cpk">#
+# display atoms Seg Res Atm as CPK spheres
+#
+<b>
+atom  cpk       Seg Res Atm
+</b>
+#
+# turn the CPK display off for atoms Seg Res Atm
+#
+<b>
+atom -cpk       Seg Res Atm
+</b>
+<a name="label">#
+# display atom labels (full, atom, residue)
+# full includes segment, residue and atom names (numbers)
+# by default only the atom label (name) is shown 
+#
+<b>
+atom  label     Seg Res Atm
+                              full
+                              atom
+                              residue
+     -label     Seg Res Atm
+</b>
+<a name="licorice">#
+# display atoms Seg Res Atm in the licorice display style
+#
+<b>
+atom  licorice  Seg Res Atm
+</b>
+#
+# turn the licorice display style off for atoms Seg Res Atm
+#
+<b>
+atom -licorice  Seg Res Atm
+</b>
+<a name="scale">
+#
+# scale the CPK sphere(s) for Seg Res Atm with a value of Float
+#
+<b>
+atom  scale cpk Float Seg Res Atm
+</b>
+<a name="selection">
+#
+# when executing a command to include atoms according to a radius
+# the atoms included will be selected either by atom or by whole residue
+# this command selects either the atom based or whole residue base selection
+# default: atom
+<b>
+atom  selection atom
+                residue
+</b>
+<a name="structure">#
+# Create (replace or append) a new atom structure
+# Rename a structure
+# Delete all or a single structure
+# Merge all or a single structure
+#
+<b>
+         structure append Name NumberOfAtoms
+                   new    Name NumberOfAtoms
+                   rename FileName
+                   delete
+                   delete Istructure
+                   merge
+                   merge  Istructure Idestination
+</b>
+<a name="end">
+
+**************************************************************************
+LUL/2005
+**************************************************************************
+</PRE>
+</BODY>
+</HTML>

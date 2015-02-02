@@ -1,0 +1,100 @@
+ICON8 Default Values (Note: COULS, COULP, AND COULD in ev's.)
+SYMB      VELEC     NS, NP, ND     EXPS   EXPP   EXPD    COULS   COULP    COULD
+H           1           1          1.3    1.3    0.0    -13.6      0.0      0.0 
+Li          1           2          0.650  0.650  0.0     -5.4     -3.5      0.0
+Be          2           2          0.975  0.975  0.0    -10.0     -6.0      0.0
+B           3           2          1.300  1.300  0.0    -15.2     -8.5      0.0
+C           4           2          1.625  1.625  0.0    -21.4    -11.4      0.0
+N           5           2          1.950  1.950  0.0    -26.0    -13.4      0.0
+O           6           2          2.275  2.275  0.0    -32.3    -14.8      0.0
+F           7           2          2.425  2.425  0.0    -40.0    -18.1      0.0
+Na          1           3          0.733  0.733  0.0     -5.1     -3.O      0.0
+Mg          2           3          0.950  0.950  0.0     -9.0     -4.5      0.0
+Al          3           3          1.167  1.167  0.0    -12.3     -6.5      0.0
+Si          4           3          1.383  1.383  1.383  -17.3     -9.2     -6.0
+P           5           3          1.600  1.600  1.400  -18.6    -14.0     -7.0
+S           6           3          1.817  1.817  1.500  -20.0    -13.3     -8.0
+Cl          7           3          2.033  2.033  2.033  -30.0    -15.0     -9.0
+
+
+
+
+
+
+
+                                                                               ~
+
+                    Burns ' Exponents
+
+
+
+SYMB      VELEC   NS, NP, ND   EXPS     EXPP      EXPD
+
+ H
+                              0. 600    0.500
+                              O . 900  0 . 750
+                              1 . 225  1 . OOp
+                              1 . 550  1 . 325
+                               1.875    1.650
+                              2 . 200  1 . 975
+                               2.525    2.300
+
+
+Na          1         3        0,900    0.533
+Mg          2         3       1, 100    0.700
+Al          3         3       1 . 317  0 .867    0.500
+Si          4         3       1 . 533  1 . 083  0 . 667
+p           5         3       1 . 750  1 . 300  0 . 833
+S           6         3        1.967    1.517    1.000
+Cl          7         3       2 . 183  1 . 733  1 . 1 67
+
+
+
+
+Note: See reference 1.
+
+2. First Row Transition Metals
+
+
+
+    SYMB      VELEC      EXPS      EXPP      EXP Dl       Cl       EXP D2      C2
+
+     Ti         4       1.075      0.675      4.55      0.4206      1.40     0.7839
+                        1.175      0.800      4.55      0.4391      1.60     0,7397
+
+     V          5       1.200      0.750      4.75      0.456       1.50     0.752
+                        1.300      0.875      4.75      0.476       1.70     0.706
+
+     Cr         6       1.325      0.825      4.95      0.4876      1.60     0.7205
+                        1,425      0.950      4.95    _-~0.5060     1.80     0.6750
+
+     Mn         7       1.450      0.900      5.15      0.514       1.70     0.693
+                        1.550      1.025      5.15      0.532       1.90     0.649
+
+     Fe         8       1.575      0.975      5.35      0.5366      1.80     0.6678
+                        1,675      1.100      5.35      0.5505      2.00     0.6260
+
+     Co         9       1.700      1.050      5,55      0.555       1.90     0.646
+                        1.800      1,175      5.55      0.568       2.10     0.606
+
+     Ni        10       1.825      1.125      5.75      0.5683      2.00     0.6292
+                        1,925      1.250      5.75      0.5817      2.20     0.5800
+
+     Cu        11       1.950      1.200      5.95       0.58       2.10     0.62
+                        2.050      1.325      5.95      0.5933      2.30     0.5744
+
+
+
+   Notes: a) For each metal the first row gives the parameters for the neutral atom, the second
+             row the parameters for the +l lon.
+             b) NS,NP= 4 and ND=3 for each metal.
+             c) EXPS and EXPP from reference 1 assuming configurations d S2 and dn 2sp
+             for the neutral atom and dn 2S and dn 2p for the catLon.
+             d) d orbital parameters from reference 4.
+
+
+
+
+                                                             ~
+
+                         Charqe lteration Parameters (NCON = 3)

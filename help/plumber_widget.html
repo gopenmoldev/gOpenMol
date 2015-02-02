@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>Plumber widget</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P>
+**************************************************************************<BR>
+<B>
+Calculate and plot a plumber through atoms widget<BR>
+Eero H&auml;kkinen CSC 2002<BR>
+</B>
+**************************************************************************<BR>
+<P>
+Select the atoms through which the plumber will go through.
+You can click the button <b>Click for information</b> to get a list of
+<a href="plumber_seco_widget.html">detected secondary structures</a>.
+<br>
+If you write atom list by hand you probably want to put &quot;CA&quot; to
+&quot;Atom:&quot; widget.</P>
+<P>
+Then select the type of the plumber. You can also change the size of the plumber.
+if you don't like the defaults. All types except Trace
+has radius, and helixes, arrows and strands also have minor and major axis lengths.
+Plumber colour can also be selected.</P>
+<P><IMG SRC="pict/plumber.gif"></P>
+<P>Several plumbers can be defined by selecting the &quot;Append&quot; mode.</P>
+<P>
+Selecting &quot;Glue to atoms&quot; will create plumber which is tied to atoms.
+That means plumber will be reformed then its atoms are relocated for instance by
+rotating an atom selection.
+<br>
+The more significant change is that more detailed information of the plumber
+can be shown in <a href="plumber_list_widget.html">Plumber list widget</a>.</P>
+<P>Plumber is created by clicking the &quot;Apply&quot; button.</P>
+<P>After you have created plumbers you can show them by setting the
+Display mode to &quot;On&quot;.</P>
+<P>You can modify and delete existing plumber in
+<a href="plumber_list_widget.html">Plumber list widget</a>. Just click the
+&quot;List plumber(s)&quot; button.</P>
+
+
+Tube, Ribbon, Solid Helix, Flat Helix and Arrow, Colour and radius.</P>
+<P>The define display can be displayed by setting the Display mode "On".</P>
+<P><IMG SRC="pict/plumber.gif"></P>
+<P>The tube/ribbon colour can be selected from the colour menu.</P>
+<P><IMG SRC="pict/plumber2.gif"></P>
+<P>
+If the PDB coordinate file contain secondary structure information
+gOpenMol can use that information to define the objects. Select the 
+type from the widget and click "Apply" button and the information
+is moved to the main Plumber widget. The only thing the user has to
+define is the colour.
+
+<p>
+Line command: see <b><a href="plumber_help.html">plumber command</a></b>
+</P>
+<P>
+**************************************************************************<BR>
+LUL/2001<BR>
+**************************************************************************<BR>
+</BODY>
+</HTML>

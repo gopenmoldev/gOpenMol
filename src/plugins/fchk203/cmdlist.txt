@@ -1,0 +1,95 @@
+Tcl wrapper and interface procedures:
+
+proc gridsave { id fn} {
+Saves grid index id to filename fn.
+
+proc loadmolecule {fn} {
+Loads FCHK file from filename fn.
+
+proc fchk {} {
+Launches fchk dialog box.
+
+proc InitFCHK {} {
+Initializes FCHK- sets up tools menu option.
+
+
+
+C++ functions exported to Tcl interpreter:
+
+DYNEXPORT_C int InitBox(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Resets box size to the default box size (2* extent of molecule).  Takes no
+input.  Returns no output.
+
+DYNEXPORT_C int SetBox(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Sets box size to values given as input.  Takes as input 12 float values- the
+coordinates of four defining corners of box.    Returns no output.
+
+DYNEXPORT_C int ScaleBox(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Scales box by constant given as input (defaults to 2).  Takes as input the scale factor.
+Returns no output.
+
+DYNEXPORT_C int SetGrain(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Sets number of points in x,y,z directions.  Takes as input 3 integers- nx,ny,nz.
+Returns no output.
+
+DYNEXPORT_C int GetParms(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Reports box size and grid density.  Takes one integer flag as input.  Returns integers
+or floats as needed:
+Flag	Return
+0		nx (integer)
+1		ny (integer)
+2		nz (integer)
+3		r_0 (3 floats, position of one corner of box (origin))
+4		r_1	(3 floats, position of one corner of box (x-axis))
+5		r_2	(3 floats, position of one corner of box (y-axis))
+6		r_3	(3 floats, position of one corner of box (z-axis))
+
+DYNEXPORT_C int GetMolecule(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Reads in FCHK file and loads data arrays. Takes filename as input.  Returns number of atoms
+in file (integer).
+
+DYNEXPORT_C int FreeArrays(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Frees memory associated with FCHK arrays.  Takes no input.  Returns no output.
+
+DYNEXPORT_C int ExtractAtomNumbers(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Extracts two atom numbers from a gOpenMol pick list.  Takes pick list (string structure) as
+input.  Returns two integers (atom numbers) as output.
+
+DYNEXPORT_C int NewFillGrid(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Actually creates a contour grid.  Takes a sequence of integers and characters indicating what 
+value should be calculated (wavefunction, gradient, laplacian, density, spin density, spin
+density difference, electrostatic potential; which spin, etc.)  Returns result of
+dllFillContourStructure.
+
+DYNEXPORT_C int SaveGrid(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Writes a contour grid to a file.  Takes pointer to grid data and filename as input.  Uses
+current grid density and box edges.  Can be made to fail if input is wrong.  Returns total
+number of points (integer) as output.
+
+DYNEXPORT_C int ListEnergies(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Lists the orbital energies read from a FCHK file.  Takes spin flag (0=alpha, 1=beta) and
+optional orbital range as input.  Returns list of floats with energies.  Occupied orbitals
+(of ground state) marked with *.
+
+DYNEXPORT_C int GraphPlane(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Calculates wavefunction information along a section of a plane perpendicular to
+given interatomic vector.  Takes parameter sequence as input.  Returns result of CalcPlane
+as output.
+
+DYNEXPORT_C int CompFileNames(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Compares two file names.  Takes two file names.  Returns 0 if they are equal, 1 otherwise.
+
+DYNEXPORT_C int AdjustFileName(ClientData ,Tcl_Interp *,int ,TCL_CONST char **);
+Changes the extension of a filename.  Takes filename and new extension as input.  Returns
+new filename as output.
+
+DYNEXPORT_C int CalcCharges(ClientData, Tcl_Interp *,int ,TCL_CONST char **);
+Calculates Mulliken and/or Lowdin charges on atoms.  Takes flag to indicate which charges
+to calculate (m, l, or b).  Returns total number of electrons (float) for each type of
+charge calculated.
+
+DYNEXPORT_C int GetMullikenCharge(ClientData, Tcl_Interp *,int ,TCL_CONST char **);
+Reports Mulliken charge for one atom.  Takes atom id (integer).  Returns atom charge (float).
+
+DYNEXPORT_C int GetLowdinCharge(ClientData, Tcl_Interp *,int ,TCL_CONST char **);
+Reports Lowdin charge for one atom.  Takes atom id (integer).  Returns atom charge (float).

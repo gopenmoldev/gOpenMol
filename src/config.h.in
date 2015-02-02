@@ -1,0 +1,166 @@
+/* config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define if you want to enable debugging code. */
+#undef DEBUG
+
+/* Define if you want to enable API functions for extensions. */
+#undef ENABLE_EXTENSIONS
+
+/* Define to enable graphics sub system. */
+#undef ENABLE_GRAPHICS
+
+/* Produce a library (will produce a gom_main entry point). */
+#undef GOMLIB
+
+/* Define to 1 if you have the `asprintf' function. */
+#undef HAVE_ASPRINTF
+
+/* Define to 1 if you have C99 [v][s[n]|f]printf. */
+#undef HAVE_C99_XPRINTF
+
+/* Define to 1 if you have C99 [v][s|f]scanf. */
+#undef HAVE_C99_XSCANF
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the `getcwd' function. */
+#undef HAVE_GETCWD
+
+/* Define to 1 if you have the `getrusage' function. */
+#undef HAVE_GETRUSAGE
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `gl' library (-lgl) and corresponding header
+   files. */
+#undef HAVE_LIBGL
+
+/* Define to 1 if you have the `glu' library (-lglu) and corresponding header
+   files. */
+#undef HAVE_LIBGLU
+
+/* Define to 1 if you have the `glut' library (-lglut) and corresponding
+   header files. */
+#undef HAVE_LIBGLUT
+
+/* Define to 1 if you have the `jpeg' library (-ljpeg) and corresponding
+   header files. */
+#undef HAVE_LIBJPEG
+
+/* Define to 1 if you have the `python' library (-lpython) and corresponding
+   header files. */
+#undef HAVE_LIBPYTHON
+
+/* Define to 1 if you have the `tcl' library (-ltcl) and corresponding header
+   files. */
+#undef HAVE_LIBTCL
+
+/* Define to 1 if you have the `tk' library (-ltk) and corresponding header
+   files. */
+#undef HAVE_LIBTK
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the `nearbyint' function. */
+#undef HAVE_NEARBYINT
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/procfs.h> header file. */
+#undef HAVE_SYS_PROCFS_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the `vasprintf' function. */
+#undef HAVE_VASPRINTF
+
+/* Define if you want to disable debugging code. */
+#undef NDEBUG
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Define as the return type of signal handlers (`int' or `void'). */
+#undef RETSIGTYPE
+
+/* The size of a `gom dummy sizeof *', as computed by sizeof. */
+#undef SIZEOF_GOM_DUMMY_SIZEOF_P
+
+/* The size of a `int', as computed by sizeof. */
+#undef SIZEOF_INT
+
+/* The size of a `intmax_t', as computed by sizeof. */
+#undef SIZEOF_INTMAX_T
+
+/* The size of a `intptr_t', as computed by sizeof. */
+#undef SIZEOF_INTPTR_T
+
+/* The size of a `long int', as computed by sizeof. */
+#undef SIZEOF_LONG_INT
+
+/* The size of a `long long int', as computed by sizeof. */
+#undef SIZEOF_LONG_LONG_INT
+
+/* The size of a `ptrdiff_t', as computed by sizeof. */
+#undef SIZEOF_PTRDIFF_T
+
+/* The size of a `size_t', as computed by sizeof. */
+#undef SIZEOF_SIZE_T
+
+/* The size of a `void *', as computed by sizeof. */
+#undef SIZEOF_VOID_P
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Define to 1 if the X Window System is missing or not being used. */
+#undef X_DISPLAY_MISSING
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const
+
+/* Define as `__inline' if that's what the C compiler calls it, or to nothing
+   if it is not supported. */
+#undef inline
+
+/* Define to `int' if <sys/types.h> does not define. */
+#undef pid_t
+
+/* Define to `unsigned' if <sys/types.h> does not define. */
+#undef size_t
+
+/* Define to empty if the keyword `volatile' does not work. Warning: valid
+   code using `volatile' can become incorrect without. Disable with care. */
+#undef volatile

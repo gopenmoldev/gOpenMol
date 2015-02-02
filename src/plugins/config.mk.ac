@@ -1,0 +1,108 @@
+# -*- mode: makefile -*-
+# Directory entries.
+prefix           = @prefix@
+exec_prefix      = @exec_prefix@
+datadir          = @datadir@
+includedir       = @includedir@
+libdir           = @libdir@
+gomsubdir        = @gomsubdir@
+gomroot          = ${libdir}/${gomsubdir}
+gomdataroot      = ${datadir}/${gomsubdir}
+gombindir        = ${gomroot}/bin
+gomincdir        = ${gomsrcdir}/include/gomlib
+#INS gomincdir        = ${includedir}/${gomsubdir}
+gomlibdir        = ${gomroot}/bin
+gomsrcdir        = @abs_top_srcdir@
+gombltdir        = @abs_top_builddir@
+#INS gomsrcdir        = ${gomroot}/src
+#INS gombltdir        = ${gomroot}/src
+gompluginsdir    = ${gomroot}/plugins
+gompluginstcldir = ${gomdataroot}/data/pkgtcl/plugins
+
+# File suffixies.
+OBJSUFFIX        = lo
+ARSUFFIX         = la
+# Cached user values.
+CPPFLAGS         = @USER_CPPFLAGS@
+CFLAGS           = @USER_CFLAGS@
+CXXFLAGS         = @USER_CXXFLAGS@
+FFLAGS           = @USER_FFLAGS@
+LDFLAGS          = @USER_LDFLAGS@
+LTLDFLAGS        = @USER_LTLDFLAGS@
+DEFS             = @USER_DEFS@
+LIBS             = @USER_LIBS@
+# Some useful C/C++ compiler entries found by gOpenMol configure.
+# C library entries.
+TCL_LIBS         = @TCL_LIBS@
+X11_LIBS         = @X11_LIBS@
+TK_LIBS          = @TK_LIBS@
+GL_LIBS          = @GL_LIBS@
+GLU_LIBS         = @GLU_LIBS@
+GLUT_LIBS        = @GLUT_LIBS@
+JPEG_LIBS        = @JPEG_LIBS@
+PY_LIBS          = @PY_LIBS@
+# C compiler entries for libraries.
+TCL_CPPFLAGS     = @TCL_CPPFLAGS@
+TCL_LDFLAGS      = @TCL_LDFLAGS@
+TCL_LTLDFLAGS    = @TCL_LTLDFLAGS@
+X11_CPPFLAGS     = @X11_CPPFLAGS@
+X11_CFLAGS       = @X11_CFLAGS@
+X11_LDFLAGS      = @X11_LDFLAGS@
+TK_CPPFLAGS      = @TK_CPPFLAGS@
+TK_LDFLAGS       = @TK_LDFLAGS@
+TK_LTLDFLAGS     = @TK_LTLDFLAGS@
+PY_CPPFLAGS      = @PY_CPPFLAGS@
+PY_LDFLAGS       = @PY_LDFLAGS@
+PY_LTLDFLAGS     = @PY_LTLDFLAGS@
+COMMON_CPPFLAGS  = @COMMON_CPPFLAGS@
+COMMON_LDFLAGS   = @COMMON_LDFLAGS@
+COMMON_LTLDFLAGS = @COMMON_LTLDFLAGS@
+# Values used by gOpenMol.
+# Not quite... Don't show private gOpenMol headers to plugins.
+GOM_CPPFLAGS     = @CPPFLAGS@ -I${gomincdir} -I${gombltdir}/include/gomlib
+GOM_CFLAGS       = @CFLAGS@
+GOM_FFLAGS       = @FFLAGS@
+GOM_LDFLAGS      = @LDFLAGS@
+GOM_LTLDFLAGS    = @LTLDFLAGS@
+GOM_DEFS         = @DEFS@ @OS_DEFS@
+GOM_LIBS         = @LIBS@
+# Default values for plugin.
+PLUG_CPPFLAGS    = ${GOM_CPPFLAGS}
+PLUG_CFLAGS      = ${CFLAGS}
+PLUG_CXXFLAGS    = ${CXXFLAGS}
+PLUG_LDFLAGS     = ${GOM_LDFLAGS}
+PLUG_LTLDFLAGS   = ${GOM_LTLDFLAGS}
+PLUG_DEFS        = ${DEFS}
+PLUG_LIBS        = ${LIBS}
+# C/C++ compiler entries.
+CPP              = @CPP@
+CC               = @CC@
+CXX              = @CXX@
+CCDEPMODE        = @CCDEPMODE@
+CCDEPCOMP        = @CCDEPCOMP@
+CXXDEPMODE       = @CXXDEPMODE@
+CXXDEPCOMP       = @CXXDEPCOMP@
+GOM_COMPILE_CC   = ${LIBTOOL} --tag=CC  --tag=disable-static --mode=compile ${CC}
+GOM_COMPILE_CXX  = ${LIBTOOL} --tag=CXX --tag=disable-static --mode=compile ${CXX}
+GOM_LINK_CC      = ${LIBTOOL} --tag=CC  --tag=disable-static --mode=link ${CC}
+GOM_LINK_CXX     = ${LIBTOOL} --tag=CXX --tag=disable-static --mode=link ${CXX}
+# Tools.
+SHELL            = @SHELL@
+LN_S             = @LN_S@
+DEPCOMP          = ${SHELL} ${gomsrcdir}/unix/depcomp
+LIBTOOL          = ${SHELL} ${gombltdir}/libtool
+MKDIR_P          = ${SHELL} ${gomsrcdir}/unix/install-sh -d -m 755
+RM               = rm -f
+RM_R             = ${RM} -r
+GOM_REMOVE       = ${LIBTOOL} --mode=clean ${RM}
+GOM_COMPILEFLAGS =
+GOM_LINKFLAGS    = -avoid-version -rpath ${gompluginsdir}
+# Install library using following commands:
+#  ${GOM_PREINSTALL} ${gompluginsdir}
+#  ${GOM_INSTALL} libexample.${ARSUFFIX} ${gompluginsdir}
+#  ${GOM_POSTINSTALL} ${gompluginsdir}
+GOM_PREINSTALL   = :
+GOM_INSTALL      = ${LIBTOOL} --mode=install ${SHELL} ${gomsrcdir}/unix/install-sh -c -m 555
+GOM_POSTINSTALL  = ${LIBTOOL} --mode=finish
+# To install data files such as Tcl scripts.
+GOM_INSTALL_DATA = ${SHELL} ${gomsrcdir}/unix/install-sh -c -m 644

@@ -1,0 +1,174 @@
+#
+# Leif Laaksonen (CSC) 1994
+# 
+# This file contains information about atom conversion
+# 
+# (1) Real symbol of an atom and the second
+# (2) Name in which the atom can be found in a data file.
+# (3) Index to the atom type in a force field (CHARMM)
+# (4) Colour to be used for this atom
+# (5) default basis set for this atom
+#
+# Trailing numbers (integers) are not included
+# However, starting integers are!!
+#
+# Example:
+# O   OH   47 red    OxygenBS     # Oxygen in OH
+# Means that an atom label OH is equivalent to an oxygen (O) atom in OH
+Ar   AR  170 cyan   ArgonBS     
+B    B     7 cyan   BoronBS
+C    C    14 green  CarbonBS       # default carbon atom
+C    CA   14 green  CarbonBS       # default carbon atom
+C    CB   14 green  CarbonBS       # default carbon atom
+C    CD   14 green  CarbonBS       # default carbon atom
+C    CE   14 green  CarbonBS       # default carbon atom
+C    CG   14 green  CarbonBS       # default carbon atom
+C    CH   14 green  CarbonBS       # default carbon atom
+C    CZ   14 green  CarbonBS       # default carbon atom
+H    H     1 white  HydrogenBS     # default hydrogen atom
+H    HA    1 white  HydrogenBS     # default hydrogen atom
+H    HB    1 white  HydrogenBS     # default hydrogen atom
+H    HD    1 white  HydrogenBS     # default hydrogen atom
+H    HE    1 white  HydrogenBS     # default hydrogen atom
+H    HG    1 white  HydrogenBS     # default hydrogen atom
+H    HN    1 white  HydrogenBS     # default hydrogen atom
+H    HT    1 white  HydrogenBS     # default hydrogen atom
+H    HZ    1 white  HydrogenBS     # default hydrogen atom
+H   1HA    1 white  HydrogenBS     # default hydrogen atom
+H   1HB    1 white  HydrogenBS     # default hydrogen atom
+H   1HG    1 white  HydrogenBS     # default hydrogen atom
+H   1HD    1 white  HydrogenBS     # default hydrogen atom
+H   1HE    1 white  HydrogenBS     # default hydrogen atom
+H   1HZ    1 white  HydrogenBS     # default hydrogen atom
+H   1HH    1 white  HydrogenBS     # default hydrogen atom
+H   2HA    1 white  HydrogenBS     # default hydrogen atom
+H   2HB    1 white  HydrogenBS     # default hydrogen atom
+H   2HG    1 white  HydrogenBS     # default hydrogen atom
+H   2HD    1 white  HydrogenBS     # default hydrogen atom
+H   2HE    1 white  HydrogenBS     # default hydrogen atom
+H   2HZ    1 white  HydrogenBS     # default hydrogen atom
+H   2HH    1 white  HydrogenBS     # default hydrogen atom
+He   He  168 cyan   HeliumBS
+Ne   Ne  169 violet NeonBS
+LP   LP    5 violet **NO BS**      # Handle LP1, LP2, KP3 and LP4
+N    N    31 blue   NitrogenBS     # default nitrogen atom
+N    ND   31 blue   NitrogenBS     # default nitrogen atom
+N    NE   31 blue   NitrogenBS     # default nitrogen atom
+N    NH   31 blue   NitrogenBS     # default nitrogen atom
+N    NZ   31 blue   NitrogenBS     # default nitrogen atom
+N    MN   31 blue   NitrogenBS     # default nitrogen atom
+N    MNZ  31 blue   NitrogenBS     # default nitrogen atom
+O    O    40 red    OxygenBS       # default oxygen atom
+O    OD   40 red    OxygenBS       # default oxygen atom
+O    OE   40 red    OxygenBS       # default oxygen atom
+O    OG   40 red    OxygenBS       # default oxygen atom
+O    OH   40 red    OxygenBS 
+P    P    60 yellow PhosphorousBS
+S    S    70 yellow SulphurBS
+S    SD   70 yellow SulphurBS
+S    SG   70 yellow SulphurBS
+At   XAT 131 brown  AstatineBS
+Br   XBR  94 brown  BromineBS
+Cl   XCL  93 brown  ChlorineBS
+Xe   XE  172 violet XenonBS
+F    XF   92 brown  FluorineBS
+I    XI   95 brown  IodineBS
+Ac   MAC 126 magenta ActiniumBS
+Ag   MAG 111 magenta SilverBS
+Al   MAL  91 magenta AluminumBS
+Am   MAM 159 magenta AmericiumBS
+As   MAS 101 magenta ArsenicBS
+Au   MAU 119 magenta GoldBS
+Ba   MBA 115 magenta BariumBS
+Be   MBE   6 magenta BerylliumBS
+Bi   MBI 122 magenta BismuthBS
+Bk   MBK 161 magenta BerkeliumBS
+Ca   MCA  84 magenta Calcium BS
+Cd   MCD 112 magenta CadmiumBS
+Ce   MCE 124 magenta CeriumBS
+Cf   MCF 162 magenta CaliforniumBS
+Cm   MCM 160 magenta CuriumBS
+Co   MCO  99 magenta CobaltBS
+Cr   MCR  98 magenta ChromiumBS
+Cs   MCS  89 magenta CesiumBS
+Cu   MCU  96 magenta CopperBS
+Dy   MDY 150 magenta DysprosiumBS
+Er   MER 152 magenta ErbiumBS
+Es   MES 163 magenta EinsteiniumBS
+Eu   MEU 147 magenta EuropiumBS
+F    F    92 brown   FluorineBS
+Fe   MFE  86 magenta IronBS
+Fm   MFM 164 magenta FermiumBS
+Fr   MFR 142 magenta FranciumBS
+Ga   MGA 135 magenta GalliumBS
+Gd   MGD 148 magenta GadoliniumBS
+Ge   MGE 136 magenta GermaniumBS
+Ha   MHA 175 magenta HahniumBS
+Hf   MHF 138 magenta HafniumBS
+Hg   MHG 120 magenta MercuryBS
+Ho   MHO 151 magenta HolmiumBS
+In   MIN 137 magenta IndiumBS
+Ir   MIR 140 magenta IridiumBS
+K    MK   83 magenta PotassiumBS
+La   MLA 123 magenta LanthanumBS
+Li   MLI  80 magenta LithiumBS
+Lr   MLR 167 magenta LawrenciumBS
+Lu   MLU 155 magenta LutetiumBS
+Md   MMD 165 magenta MedeleviumBS
+Mg   MMG  82 magenta MagnesiunBS
+Mg   MG   82 magenta MagnesiunBS
+Mn   MMN  85 magenta ManganeseBS
+Mo   MMO 107 magenta MolybdenumBS
+Na   MNA  81 magenta SodiumBS
+Nb   MNB 106 magenta NiobiumBS
+Nd   MND 144 magenta NeodymiumBS
+Ni   MNI 100 magenta NickelBS
+No   MNO 166 magenta NobeliumBS
+Np   MNP 157 magenta NeptuniumBS
+Os   MOS 117 magenta OsmiumBS
+Pa   MPA 156 magenta ProtactiniumBS
+Pb   MPB 121 magenta LeadBS
+Pd   MPD 110 magenta PalladiumBS
+Pm   MPM 145 magenta PromethiumBS
+Po   MPO 130 magenta PoloniumBS
+Pr   MPR 125 magenta PraseodymiumBS
+Pt   MPT 118 magenta PlatinumBS
+Pu   MPU 158 magenta PlutoniumBS
+Ra   MRA 143 magenta RadiumBS
+Rb   MRB  88 magenta RubidiumBS
+Re   MRE 176 magenta RheniumBS
+Rf   MRF 174 magenta RutherfordiumBS/KurchatoviumBS
+Rh   MRH 109 magenta RhodiumBS
+Ru   MRU 108 magenta RutheniumBS
+Sb   MSB 114 magenta AntimonyBS
+Sc   MSC 133 magenta ScandiumBS
+Se   MSE 102 magenta SeleniumBS
+Si   MSI  90 magenta SiliconBS
+Sm   MSM 146 magenta SamariumBS
+Sn   MSN 113 magenta TinBS
+Sr   MSR 103 magenta StrontiumBS
+Ta   MTA 139 magenta TantalumBS
+Tb   MTB 149 magenta TerbiumBS
+Tc   MTC 132 magenta TechnetiumBS
+Te   MTE 129 magenta TelluriumBS
+Th   MTH 127 magenta ThoriumBS
+Ti   MTI 134 magenta TitaniumBS
+Tl   MTL 141 magenta ThalliumBS
+Tm   MTM 153 magenta ThuliumBS
+U    MU  128 magenta UraniumBS
+V    MV   97 magenta VanadiumBS
+W    MW  116 magenta TungstenBS
+Y    MY  104 magenta YttriumBS
+Yb   MYB 154 magenta YtterbiumBS
+Zn   MZN  87 magenta ZincBS
+Zr   MZR 105 magenta ZirconiumBS
+# dummy atoms
+XX   XX  2000 cyan   DummyBS
+YY   YY  2001 cyan   DummyBS
+ZZ   ZZ  2002 cyan   DummyBS
+# For water
+O    OW   40 red     OxygenBS
+H    HW    1 white   HydrogenBS
+# For proteins
+H    HE    1 white  HydrogenBS     # protein hydrogen atom
+Na   NA1  81 yellow SodiumBS   

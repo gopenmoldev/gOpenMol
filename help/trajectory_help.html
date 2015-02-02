@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>trajectory command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                          trajectory command
+                        Leif Laaksonen CSC 2001
+**************************************************************************
+
+#
+# Define trajectory information
+#
+# Define file type and name
+# Alloved Itypes are: ambe$r, ceri$us2, char$mm, disc$over, fdl_$poly, 
+#                     udl_$poly, gromos, gromacs, hype$rchem, mumo$d, 
+#                     open, tink$er, xmol, xplo$r, yasp, gromos96a, 
+#                     gromos96b, famb$er
+#
+<b>
+traj$ectory   file     Itype   File.Name
+</b>
+#
+# Delete the trajector file structure (defined with previous command)
+#
+             -fil$e
+#
+# Define trajectory display limits (first , last , step)
+#
+<b>
+              limi$ts  Ifirst  Ilast  Istep
+</b>
+#
+# Define fast/slow retrieve mode for formatted trajectory files
+#
+<b>
+              acti$on    fast
+                         slow
+</b>
+#
+# Specify if the velocities/forces will be retrieved from the 
+# trajectory file. <b>This will only work for CHARMM/CHARMm</b>
+#
+              retr$ieve  velo$cities on
+                                     off
+                         forc$es     on
+                                     off
+#
+# Line commands for controlling the loop display
+#
+<b>
+              loop       play
+                         stop
+                         forw$ard
+                         back$ward
+                         firs$t
+                         last
+</b>
+**************************************************************************
+LUL/2001
+**************************************************************************
+&nbsp;
+</PRE><CODE>&nbsp;</CODE></BODY>
+</HTML>

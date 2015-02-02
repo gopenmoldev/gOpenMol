@@ -1,0 +1,304 @@
+<html>
+<pre>
+/*
+                       Copyright (c) 1995 - 2001 by:
+        Leif Laaksonen , Centre for Scientific Computing , ESPOO, FINLAND
+            Confidential unpublished property of Leif Laaksonen
+                        All rights reserved
+
+
+      This is a program to convert the output using the "cube"
+      command from the Gaussian program to a plot format recognized
+      by gOpenMol.
+
+
+      Run this program on the output from GaussianXX using the
+      'cube' keyword in GaussianXX.
+
+      This program produces a coordinate file and a plot file, 
+      that can be read into SCARECROW or gOpenMol.
+
+      The running of this program is quite obvious (see later in this
+      file).
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ This program converts the Gaussian output using the 'cube'
+ command to a form understandable to gopenmol.
+ Usage:
+ gcube2plt -iinput.cube -ooutput.plt
+ Options:  -mXXX , where XXX is the molecular orbital number to be
+                   placed in the plot file
+           -p      prevent the output of the coordinate file
+           -d      text string with the type of data included in the CUBE file
+                   g: gradient include 
+                   l: laplacian included
+                   n: normal will be calculated from the gradient
+                      (Gaussian98 can also produce this data)
+           -t      type of Gaussian used for generating the CUBE file
+                   g94: Gaussian94
+                   g98: Gaussian98
+
+The gradient file will be saved as a text file and can be displayed
+by importing the file (import vector flatfile) and displaying
+through the "plot vector" commands.
+
+There will be a file naming scheme applied.
+
+The output file names will be based on the input file name:
+
+if the input CUBE data file is named my_cube.cube the output file
+names will be:
+
+1) Density/orbital(s) and gradient norm by G94/98:     my_cube.plt
+2) Laplacian:                                          my_cube_lap.plt
+3) Gradient norm (if requested by the filter program): my_cube_norm.plt
+4) Gradient vectors in a formatted flat text file:     my_grad.txt
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+      If you need any help please feel free to contact:
+
+      Leif.Laaksonen@csc.fi
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Taken from the;
+                 Gaussian 94 User's Reference Manual
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+> Cube keyword
+
+
+DESCRIPTION
+
+The Cube properties keyword can be used to evaluate molecular orbitals, the 
+electrostatic potential, the electron density, density gradient, the norm of 
+the density gradient, and Laplacian of the density over a 3 dimensional grid 
+(cube) of points. By default, Cube evaluates the electron density (corresponding to
+the Density option). Which density is used is controlled by the Density keyword; 
+use Density=Current to evaluate the cube over the density from a correlated or 
+Cl-Singles wavefunction instead of the default Hartree-Fock density.
+
+Note that only one of the available quantities can be evaluated within any one job 
+step. Save the checkpoint file (using %Chk), and include Guess=(Reod,Only) 
+Density=Checkpoint in the route section of a subsequent job (or job step) in 
+order to evaluate a different quantity without repeating any of the other steps
+ of the calculation.
+
+Gaussian 94 provides reasonable defaults for grids, so Cube no longer requires 
+that the cube be specified by the user. However, the output filename must still
+always be provided (see below).
+
+Alternatively, Cube may be given a parameter specifying the number of points to
+use per "side" (the default is 80). For example, Cube=100 specifies a grid of 
+1,000,000 points ( 100 ), evenly distributed over the rectangular grid generated
+by the program (which is not necessarily a cube). In addition, the input
+format used by earlier versions of Gaussian is still supported; Cube=Cards
+indicates that a grid will be input. It may be used to specify a grid of
+arbitrary size and shape.
+
+The files create by Cube can be manipulated using the cubman utility, described
+in chapter 5.
+
+Note that Pop=None will inhibit cube file creation.
+
+INPUT FORMAT
+
+When the user elects to provide it, the grid information is read from the input
+stream. The first line-required for all Cube jobs-gives a file name for the cube
+file. Subsequent lines, which are included only with Cube=Cards, must conform to
+format (15,3F12.6), according to the following syntax:
+
+Output-file-name              Required in all Cube jobs.
+IFlag, X0, Y0, Z0             Output unit number and initial point.
+N1, X1, Y1, Z1                Number of points and step-size in the X-direction.
+N2, X2, Y2, Z2                Number of points and step-size in the Y-direction.
+N3, X3, Y3, Z3                Number of points and step-size in the Z-direction.
+
+If IFlag is positive, the output file is unformatted; if it is negative, 
+the output file is formatted. If N1<O the input cube coordinates are assumed 
+to be in Bohr, otherwise, they are interpreted as Angstroms (|N1| is used as 
+the number of X-direction points in any case). Note that the three axes are 
+used exactly as specified; they are not orthogonalized, so the grid need not 
+be rectangular.
+
+If the Orbitals option is selected, the cube filename (or cube filename and 
+cube specification input) is immediately followed by a list of the orbitals 
+to evaluate, in free-format, terminated by a blank line. In addition to 
+numbers for the orbitals (with alpha orbitals numbered starting at N+l), the
+following abbreviations can appear in the list:
+
+HOMO             The highest occupied molecular orbital
+LUMO             The lowest unoccupied molecular orbital
+OCCA             All occupied (alpha) orbitals
+OCCB             All beta occupied orbitals for UHF
+ALL              All orbitals
+VALENCE          All occupied non-core orbitals
+VIRTUALS         All virtual orbitals
+
+
+OUTPUT FILE FORMATS
+
+Using the default input to Cube produces an unformatted output file (you can 
+use the cubman utility to convert it to a formatted version if you so desire; 
+see chapter 5). When the Cards option is specified, then the IFlag parameter's
+sign determines the output file type. If IFlag>0, the output is unformatted. If
+IFlag<0, the output is formatted. All values in the cube file are in atomic units,
+regardless of the input units.
+
+For density and potential grids, unformatted files have one row per record 
+(i.e., N1 * N2 records each of length N3). For formatted output, each row is 
+written out in format (6E13.5). In this case, if N3 is not a multiple of six,
+then there may be blank space in some lines.
+
+The norm of the density gradient is also a scalar (i.e., one value per point),
+and is written out in the same manner. Density+gradient grids are similar, but
+with two writes for each row (of lengths N3 and 3*N3). Density+gradient+Laplacian
+grids have 3 writes per row (of lengths N3, 3*N3, and N3).
+
+For example, for a density cube, the output file looks like this:
+
+NAtoms, X-Origin, Y-Origin, Z-Origin
+N1, X1, Y1, Z1              # of increments in the slowest running direction
+N2, X2, Y2, Z2
+N3, X3, Y3, Z3              # of increments in the fastest running direction
+IA1, Chgl, X1, Y1, Z1       Atomic number, charge, and coordinates of thefirst atom
+...
+IAn, Chgn, Xn, Yn, Zn       Atomic number, charge, and coordinates of the last atom
+
+(N1 * N2) records, each of length N3  Values of the density at each point in the grid
+
+Note that a separate write is used for each record.
+
+
+For molecular orbital output, NAtoms will be less than zero, and an additional 
+record follows the data for the final atom (in format lOI5 if the file is formatted):
+
+NMO,  ( MO ( I ), I = 1, NMO )                      Number of MOs and their numbers
+
+If NMO orbitals were evaluated, then each record is NMo * N3 long and has the 
+values for all orbitals at each point together.
+
+READING CUBE FILES WITH FORTRAN PROGRAMS
+
+If one wishes to read the values of the density or potential back into an 
+array dimensioned X(N3,N2,N1) code like the following Fortran loop may be used:
+
+      Do 10 I1 = 1,N1
+      Do 10 I2 = 1,N2
+         Read(n,'(6E13.5)') (X(I3,I2,I1),I3=1,N3)
+10    Continue
+
+where n is the unit number corresponding to the cube file.
+
+If the origin is (X0,Y0,Z0), and the increments (X1,Y1,Z1), then point 
+(I1,I2,I3) has the coordinates:
+
+X-co0rdinate: X0+(I1-1)*X1+(I2-1)*X2+(I3-1)* X3
+Y-coordinate: Y0+(I1-1)*Y1+(I2-1)*Y2+(I3-1)* Y3
+Z-coordinate: Z0+(I1-1)*Z1+(I2-1)*z2+(I3-1)* Z3
+
+The output is similar if the gradient or gradient and Laplacian of the charge 
+density are also requested, except that in these cases there are two or three 
+records, respectively, written for each pair of I1, I2 values. Thus, if the 
+density, gradient, and Laplacian are to be read into arrays D(N3,N2,N1),
+G(3,N3,N2,N1), RL(N3,N2,N1) from a formatted output file, a correct set of 
+Fortran loops would be:
+
+      Do 10 I1 = 1, N1
+      Do 10 I2 = 1, N2
+        Read(n,'(6F13.5)') (D(I3,I2,I1),I3=1,N3)
+        Read(n,'(6F13.5)') ((G(IXYZ,I3,I2,I1),IXYZ=1,3), I3=1,N3)
+        Read(n,'(6F13.5)') (RL(I3,I2,I1),I3=1,N3)
+10    Continue
+
+where again n is the unit number corresponding to the cube file.
+
+
+OPTIONS
+
+Density      Compute just the density values. This is the default.
+
+Potential    Compute the electrostatic potential at each point.
+
+Gradient     Compute the density and gradient.
+
+Laplacian    Compute the density, gradient, and Laplacian ofthe density 
+             ((nabla)2(rho)).
+
+NormGradient Compute the norm of the density gradient at each point.
+
+Orbitals     Compute the values of one or more molecular orbitals at each point.
+
+FrozenCore   Remove the SCF core density. This is the default for the density,
+             and is not allowed for the potential.
+
+Full         Evaluate the density including all electrons.
+
+Total        Use the total density. This is the default.
+
+Alpha        Use only the alpha spin density.
+
+Beta         Use only the beta spin density.
+
+Spin         Use the spin density (difference between alpha and beta densities).
+
+Cards        Read grid specification from the input stream (as described above).
+
+Example 1: Produce the total electron density.
+
+x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+#p rhf/6-31g* 5d test geom=modela  cube=(density,read) FormCheck=OptCart
+
+Gaussian Test Job 257:
+Density cube
+
+0,1
+o h f
+
+input.cube
+  -51        -2.0        -2.0        -1.0
+   40         0.1         0.0         0.0
+   40         0.0         0.1         0.0
+   20         0.0         0.0         0.1
+	   
+x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+
+
+Example 2: Produce the data to plot molecular orbitals
+
+x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+#p rhf/6-31g* 5d test geom=modela  cube=(orbitals) FormCheck=OptCart
+
+Gaussian Test Job 257:
+Density cube
+
+0,1
+o h f
+
+input.cube
+  -51        -2.0        -2.0        -1.0
+   40         0.1         0.0         0.0
+   40         0.0         0.1         0.0
+   20         0.0         0.0         0.1
+ALL
+
+x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+
+
+!!!!!!!!!!!!!!!!!!O B S E R V E!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+The cube data has to be given as an orthogonal x-, y-, z-coordinate system
+in such a way that the x-axis comes first and the z-axis is given as the 
+last one. This means that x is the slowest running coordinate and z is the
+fastes running coordinate.
+
+This program produces also a coordinate file in the CHARMM 'crd' format
+which can be read by gOpenMol or SCARECROW.
+
+!!!!!!!!!!!!!!!!!!O B S E R V E!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+*/
+</pre>
+</html>

@@ -1,0 +1,27 @@
+#! /bin/sh
+for file
+do
+    funcs=`
+	sed 's/[^A-Za-z0-9_(]/\\
+/g;s/(/(\\
+/g' "$file" |
+	sed '/.($/!d' |
+	grep -xvF '
+return(
+sizeof(
+if(' |
+	sort |
+	uniq`
+    {
+    for header in maindefs.h `sed 's/[ 	]//;s/^#include"\\(.*\\)"/\\1/p;d' "$file"`; do
+	case $header in
+	maindefs.h | stdafx.h) continue ;;
+	esac
+	grep -qF "$funcs" "include/$header" || echo "#include \"$header\""
+    done
+    for header in `sed 's/[ 	]//;s/^#include<\\(.*\\)>/\\1/p;d' "$file"`; do
+	echo "#include <$header>" | ${CPP-${CC-cc} -E} ${CPPFLAGS} - |
+	    grep -qF "$func" || echo "#include <$header>"
+    done
+    } 2>&1 | sed "s@^@$file:	@"
+done

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Developer Studio">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>XMOL coordinate file</TITLE>
+</HEAD>
+<BODY>
+<!-- Insert HTML here -->
+<b>Modified from the XMOL help files</b>
+<P>
+XMOL(XYZ) datafiles specify molecular geometries using a Cartesian
+coordinate   system. The XMOL(XYZ) format supports multi-step datasets.
+Each  step  is represented by a two-line "header," followed by one line for
+each atom.
+<P>
+The first line of a step's header is the number of atoms  in
+that step.  This integer may be preceded by whitespace; any-
+thing on the line after the integer is ignored.  The  second
+line  of  the  header  leaves room for a descriptive string.
+This line may be blank, or it may contain  some  information
+pertinent to that particular step, but it must exist, and it
+must be just one line long.
+<P>
+Each line of text describing a single atom must  contain  at
+least  four  fields of information, separated by whitespace:<br>
+the atom's type (a short string of alphanumeric characters),
+and  its  x-,  y-, and z-positions. Optionally, extra fields
+may be used to specify a charge for the atom, and/or a  vector
+associated  with  the  atom.  If an input line contains
+five or eight fields, the fifth field is interpreted as  the
+atom's  charge;  otherwise, a charge of zero is assumed.  If
+an input line contains seven or eight fields, the last three
+fields are interpreted as the components of a vector.  These
+components should be specified in angstroms.
+<P>
+The XMOL(XYZ) format doesn't contain connectivity information.
+<P>
+<H2>Example:</H2>
+<PRE>
+<hr>
+10
+Input Geometry
+	C	0.000000	0.000000	0.000000	0.000000
+	H	1.070860	0.000000	0.000000	0.000000
+	H	-0.357652	1.007862	0.000000	0.000000
+	H	-0.357386	-0.503905	-0.874441	0.000000
+	O	-0.476922	-0.672592	1.167050	0.000000
+	C	-1.050823	-2.776752	3.226941	0.000000
+	H	0.019804	-2.793463	3.212141	0.000000
+	I	-1.458293	-4.270705	4.689464	0.000000
+	H	-1.392643	-1.763433	3.233782	0.000000
+	H	-1.428068	-3.273182	2.356576	0.000000
+<hr>
+</PRE>
+</BODY>
+</HTML>

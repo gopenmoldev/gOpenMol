@@ -1,0 +1,134 @@
+##############################################################################
+#                        Copyright (c) 2001 - 2004 by:
+#          Leif Laaksonen, CSC - Scientific Computing Ltd, ESPOO, FINLAND 
+#                      Confidential unpublished property of 
+#                              Leif Laaksonen   
+#                            All rights reserved
+#
+#       Enhancements 2002 - 2004 by:
+#           Eero Häkkinen
+##############################################################################
+#
+# make executables of the utility programs
+#
+top_builddir = @top_builddir@.
+top_srcdir   = @top_srcdir@
+builddir     = @builddir@
+srcdir       = @srcdir@
+
+include $(top_builddir)/config.mk
+
+OBJECTS_C    = fmalloc.o
+
+BINARIES     = $(BINARIES_C) $(BINARIES_CXX) $(BINARIES_F) $(BINARIES_JAR)
+
+BINARIES_C   = contman$(EXEEXT) \
+               g94cub2pl$(EXEEXT) \
+               gamess2plt$(EXEEXT) \
+               gcube2plt$(EXEEXT) \
+               jaguar2plt$(EXEEXT) \
+               pltfile$(EXEEXT) \
+               tmole2plt$(EXEEXT) \
+               probsurf$(EXEEXT) \
+               density$(EXEEXT) \
+               vss$(EXEEXT)
+
+BINARIES_CXX = mpcube2plt$(EXEEXT)
+
+BINARIES_F   = ambera2b$(EXEEXT) \
+               autodock2plt$(EXEEXT) \
+               charmmtrj$(EXEEXT) \
+               convert$(EXEEXT) \
+               delphi2plt$(EXEEXT) \
+               ins2plt$(EXEEXT) \
+               kont2plt$(EXEEXT) \
+               sybyl2amber$(EXEEXT) \
+               trajmerge$(EXEEXT) \
+               xmol2bamber$(EXEEXT) \
+               xplor2charmm$(EXEEXT) \
+               gridasc2plt$(EXEEXT) \
+               gridbin2plt$(EXEEXT) \
+               icon8$(EXEEXT)
+
+BINARIES_JAR = xvibs.jar
+
+# Build once. Don't try to build again if an error occured.
+build: FORCE
+	@set $(BINARIES); \
+	for b in "$$@"; do test -f $$b.err || set "$$@" $$b; shift; done; \
+	$(MAKE) $(MFLAGS) -k build-listed BINARIES="$$*" || :; \
+	for b in "$$@"; do test -f $$b || echo error >$$b.err; done; \
+	exit 0
+
+build-listed: $(BINARIES) FORCE ;
+
+all: build-listed FORCE ;
+
+install: FORCE
+	$(MKDIR_P) '$(gomroot)/bin' || test -d '$(gomroot)/bin'
+	set -e; \
+	for file in $(BINARIES); do \
+	    test ! -f "$$file" || \
+		$(INSTALL_PROGRAM) "$$file" '$(gomroot)/bin'/"$$file"; \
+	done
+
+$(OBJECTS_C):
+	$(CC) -c $? $(CPPFLAGS) $(CFLAGS)
+
+$(BINARIES_C):
+	$(CC) -o $@ $? $(CPPFLAGS) $(CFLAGS) $(STD_LIBS) $(LDFLAGS)
+
+$(BINARIES_CXX):
+	$(CXX) -o $@ $? $(CPPFLAGS) $(CXXFLAGS) $(STD_LIBS) $(LDFLAGS)
+
+$(BINARIES_F):
+	$(F77) -o $@ $? $(FFLAGS) $(STD_LIBS) $(LDFLAGS)
+
+$(BINARIES_JAR):
+	cp $? $@
+
+clean:
+	$(REMOVE) *.o *.lo *.err
+	$(RM) $(BINARIES)
+
+ambera2b$(EXEEXT):     $(rootdir)/utility/ambera2b.f
+autodock2plt$(EXEEXT): $(rootdir)/utility/autodock2plt.f
+charmmtrj$(EXEEXT):    $(rootdir)/utility/charmmtrj.f
+contman$(EXEEXT):      $(rootdir)/utility/contman.c
+convert$(EXEEXT):      $(rootdir)/utility/convert.f
+delphi2plt$(EXEEXT):   $(rootdir)/utility/delphi2plt.f
+g94cub2pl$(EXEEXT):    $(rootdir)/utility/g94cub2pl.c
+gamess2plt$(EXEEXT):   $(rootdir)/utility/gamess2plt.c
+gcube2plt$(EXEEXT):    $(rootdir)/utility/gcube2plt.c
+ins2plt$(EXEEXT):      $(rootdir)/utility/ins2plt.f
+jaguar2plt$(EXEEXT):   $(rootdir)/utility/jaguar2plt.c
+kont2plt$(EXEEXT):     $(rootdir)/utility/kont2plt.f
+mpcube2plt$(EXEEXT):   $(rootdir)/utility/mpcube2plt.cpp
+pltfile$(EXEEXT):      $(rootdir)/utility/pltfile.c
+sybyl2amber$(EXEEXT):  $(rootdir)/utility/sybyl2amber.f
+trajmerge$(EXEEXT):    $(rootdir)/utility/trajmerge.f
+xmol2bamber$(EXEEXT):  $(rootdir)/utility/xmol2bamber.f
+xplor2charmm$(EXEEXT): $(rootdir)/utility/xplor2charmm.f
+
+tmole2plt$(EXEEXT):    $(rootdir)/utility/turbotools/tmole2plt.c
+
+gridasc2plt$(EXEEXT):  $(rootdir)/utility/UHBD/gridasc2plt.f
+gridbin2plt$(EXEEXT):  $(rootdir)/utility/UHBD/gridbin2plt.f
+
+xvibs.jar:             $(rootdir)/bin/xvibs.jar
+
+density$(EXEEXT):      $(rootdir)/density/density.c
+
+icon8$(EXEEXT):        $(rootdir)/icon8/icon8.f \
+                       $(rootdir)/icon8/rsp.f \
+                       $(rootdir)/icon8/output.f \
+                       fmalloc.o
+fmalloc.o:             $(rootdir)/icon8/fmalloc.c
+
+probsurf$(EXEEXT):     $(rootdir)/probsurf/probsurf2.0.c
+
+vss$(EXEEXT):          $(rootdir)/vss/vssmod.c
+
+FORCE:
+
+.PHONY: FORCE

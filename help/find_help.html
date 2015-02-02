@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<TITLE>Find command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                             find command
+                        Leif Laaksonen CSC 2001
+                        Eero H&auml;kkinen  CSC 2002
+**************************************************************************
+<a name="ssbonds">
+#
+# Find S-S bonds in a structure
+# Apply the search on all structures available or just to the structure
+# with number "StructureNumber". It is also possible to give a distance
+# Fbond inside which the S-S must be.
+#
+<b>
+find   ssbo$nds   all             [Fbond]
+                  StructureNumber [Fbond]
+</b><a name="hbonds">
+#
+# Find hydrogen bonds (equivalent to calculate hydrogen bonds).
+# Array "gomHydrogenBondingParams" can be used to customize hbond criteria.
+# Following array elements are recognized:
+#   Maximum distances:
+#     d-a              Distance between donor and acceptor
+#     d-a_nohydrogens  Distance between donor and acceptor
+#                      (used then "nohy$drogens" is applied)
+#     h-a              Distance between hydrogen and acceptor
+#     d-h              Distance between donor and hydrogen
+#   Minimum angles:
+#     d-h-a            donor-hydrogen-acceptor
+#     d-a-aa           donor-acceptor-&lt;atom bonded to acceptor&gt;
+#     h-a-aa           hydrogen-acceptor-&lt;atom bonded to acceptor&gt;
+#   Maximum angles:
+#     aromatic         Angle between aromatic plane and vector donor-hydrogen
+#
+<b>
+       hbon$ds    Seg Res Atm
+       hbon$ds    Seg Res Atm  nohy$drogens
+      -hbo$nds
+</b><a name="chains">
+#
+# Find protein chains in a structure.
+# Returns a list of two items lists. First item is segment name and the
+# second item is a residue number ranges in form
+# ResN11[-ResN12][,ResN21[-ResN22][,...]]
+#
+<b>
+       chain$s     Seg Res IStruct
+                           all
+                           sele$cted
+</b>
+<a name="around">#
+# Find atoms around other atoms or around coordinate point.
+# Return atom or residue number ranges in form
+# Num11[-Num12][,Num21[-Num22][,...]]
+# Return segment names as comma separated list.
+# Return selection list as list of segment names, residue number ranges and
+# atom number ranges.
+# Structure index "IStruct" can also be "all" or "sele$cted".
+#
+<b>
+       atom$s     around  Seg1 Res1 Atm1 FRad Seg2 Res2 Atm2 IStruct
+                                         FRad FXc FYc FZc    IStruct
+       resi$due   around  Seg1 Res1 Atm1 FRad Seg2 Res2 Atm2 IStruct
+                                         FRad FXc FYc FZc    IStruct
+       segm$ent   around  Seg1 Res1 Atm1 FRad Seg2 Res2 Atm2 IStruct
+                                         FRad FXc FYc FZc    IStruct
+       sel$list   around  Seg1 Res1 Atm1 FRad Seg2 Res2 Atm2 IStruct
+                                         FRad FXc FYc FZc    IStruct
+</b>
+<a name="join">#
+# Search for atoms using multiple selection lists.
+# Return atom or residue number ranges in form
+# Num11[-Num12][,Num21[-Num22][,...]]
+# Return segment names as comma separated list.
+# Return selection list as list of segment names, residue number ranges and
+# atom number ranges.
+# Structure index "IStruct" can also be "all" or "sele$cted".
+#
+<b>
+       atom$s     join
+                         Seg1 Res1 Atm1 IStruct
+                         Seg1 Res1 Atm1 Seg2 Res2 Atm2 IStruct
+                         Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3 IStruct
+                         ...
+       resi$due   join
+                         Seg1 Res1 Atm1 IStruct
+                         Seg1 Res1 Atm1 Seg2 Res2 Atm2 IStruct
+                         Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3 IStruct
+                         ...
+       segm$ent   join
+                         Seg1 Res1 Atm1 IStruct
+                         Seg1 Res1 Atm1 Seg2 Res2 Atm2 IStruct
+                         Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3 IStruct
+                         ...
+       sel$list   join
+                         Seg1 Res1 Atm1 IStruct
+                         Seg1 Res1 Atm1 Seg2 Res2 Atm2 IStruct
+                         Seg1 Res1 Atm1 Seg2 Res2 Atm2 Seg3 Res3 Atm3 IStruct
+                         ...
+</b><a name="end">
+**************************************************************************
+LUL/2002
+**************************************************************************
+</PRE>
+</BODY>
+</HTML>

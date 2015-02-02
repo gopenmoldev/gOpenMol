@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+<TITLE>import command</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<PRE>
+**************************************************************************
+                             import command
+                        Leif Laaksonen CSC 1996
+**************************************************************************
+
+<a name="coordinates">#
+# import coordinate (atom) information from a file
+# 1: ADF            output log files
+# 2: Amber          input coordinates
+# 3: Charmm *.crd   input coordinates    
+# 4: A frame from a trajectory file
+# 5: Gaussian formatted checkpoint file
+# 6: Gromacs *.gro  input coordinates
+# 7: Gromos96 formatted coordinate files
+# 8: HyperChem  *.hin  input coordinates
+# 9: Insight *.car  input coordinates
+#10: Mol2    *.mol2 input coordinates
+#11: Mopac output graphics file (NOT WORKING)
+#12: OpenMol input file
+#13: Brookhaven *.pdb input coordinates
+#14: XMOL *.xyz and *.xmol input coordinates
+#15: Plain *.gxyz *.gxyz  input coordinates
+#16: YASP *.yasp      input coordinates        
+<b>
+impo$rt    coor$dinates     adf         File.Name
+                            ambe$r      File.Name
+                            char$mm     File.Name
+                            fram$e      Ivalue
+                            gaus$sian   File.Name
+                            groma$cs    FILE.Name
+                            gromo$s96a   File.Name
+                            hype$rchem  File.Name
+                            insi$ght    File.Name
+                            mol2        File.Name
+                            mopa$c      File.Name
+                            mumo$d      File.Name
+                            open$mol    File.Name
+                            pdb         File.Name
+                            xmol        File.Name
+                            gxyz        File.Name
+                            yasp        File.Name
+</b>
+<a name="cluster">#
+# import a pre calculated cluster matrix
+#
+<b>
+           clus$ter         File.name
+</b>
+<a name="dictionary">#
+# import a dictionary file (containing atom information)
+# into gOpenMol
+#
+<b>
+           dict$ionary      File.Name
+</b>
+<a name="vector">#
+# import a vector file defining the size and direction of
+# an array property attached to the atoms for a charmm file
+# and a general file with vectors in any points in space
+# for a flat file
+#
+<b>
+           vect$or          char$mm    File.Name
+                            flat$file  File.Name
+</b>
+<a name="gbasis">#
+# import Gaussian basis set data base
+#
+<b>
+           gbas$is          File.Name
+</b>
+<a name="model">#
+# import a gOpenMol model file
+#
+<b>
+           mode$l           File.Name
+</b>
+<a name="charge">#
+# import atom partial charges from
+# 1. ICON8 output file
+#
+<b>
+           char$ge  icon8   File.Name 
+</b>
+**************************************************************************
+LUL/1996
+**************************************************************************
+</PRE></BODY>
+</HTML>
+
