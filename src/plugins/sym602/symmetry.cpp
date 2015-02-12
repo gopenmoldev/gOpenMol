@@ -117,18 +117,22 @@ int ReadChem3DCoords(ClientData cd,Tcl_Interp *ti,int argc,const char** argv)
     FILE* infile;
     int i;
     int NAtom;
+    char *result;
 
     infile=fopen(argv[1],"rb");
     printf("%s\n",argv[1]);
     NAtom=ExtractAtoms(&C3DEl,&C3DRvec,infile);
     fclose(infile);
-    sprintf(ti->result,"%i",NAtom);
+    result = Tcl_Alloc(16);
+    sprintf(result,"%i",NAtom);
+    Tcl_SetResult(ti, result, TCL_DYNAMIC);
     return TCL_OK;
 }
 
 int GetChem3DName(ClientData cd,Tcl_Interp *ti,int argc,const char** argv)
 {
     int s,i;
+    char *result;
 
     s=atoi(argv[1]);
     i=atoi(argv[2]);
@@ -172,7 +176,9 @@ int GetChem3DName(ClientData cd,Tcl_Interp *ti,int argc,const char** argv)
                 gom_PutAtomRmin(s-1,1.0,i-1);
                 break;
     }*/
-    sprintf(ti->result,"%s",C3DEl[i-1]);
+    result = Tcl_Alloc(64);
+    sprintf(result,"%s",C3DEl[i-1]);
+    Tcl_SetResult(ti, result, TCL_DYNAMIC);
     printf("%s\n",C3DEl[i-1]);
     return TCL_OK;
 }
@@ -181,13 +187,16 @@ int GetChem3DVec(ClientData cd,Tcl_Interp *ti,int argc,const char** argv)
 {
     int i;
     int coord;
+    char *result;
 
     if(argc<3)
         return TCL_ERROR;
     i=atoi(argv[1]);
     coord=atoi(argv[2]);
     printf("%i %i\n",i,coord);
-    sprintf(ti->result,"%f7.5",C3DRvec[i-1][coord]);
+    result = Tcl_Alloc(16);
+    sprintf(result,"%f7.5",C3DRvec[i-1][coord]);
+    Tcl_SetResult(ti, result, TCL_DYNAMIC);
     return TCL_OK;
 }
 
@@ -216,6 +225,7 @@ float **BackBone=NULL;
 int ReportBackBone(ClientData cd,Tcl_Interp *ti,int argc,const char** argv)
 {
     int i;
+    char *result;
 
     if((argc<2)||(BackBone==NULL))
         return TCL_ERROR;
@@ -231,7 +241,9 @@ int ReportBackBone(ClientData cd,Tcl_Interp *ti,int argc,const char** argv)
     }
     else
     {
-        sprintf(ti->result,"%g %g %g",BackBone[i][0],BackBone[i][1],BackBone[i][2]);
+      result = Tcl_Alloc(64);
+        sprintf(result,"%g %g %g",BackBone[i][0],BackBone[i][1],BackBone[i][2]);
+	Tcl_SetResult(ti, result, TCL_DYNAMIC);
     }
     return TCL_OK;
 }
@@ -380,6 +392,7 @@ int TellAtoms(ClientData cd,Tcl_Interp *ti,int argc,const char** argv)
     float wx,wy,wz;
     float xcm,ycm,zcm;
     const float *CPKRadScale;
+    char *result;
 
     NStruct=gom_GetNumMolecStructs();
     printf("Found %i Structures\n",NStruct);
@@ -519,7 +532,9 @@ int TellAtoms(ClientData cd,Tcl_Interp *ti,int argc,const char** argv)
         free((void*)rc);
         free((void*)Z);
     }
-    sprintf(ti->result,"%i",NBBC);
+    result = Tcl_Alloc(16);
+    sprintf(result,"%i",NBBC);
+    Tcl_SetResult(ti, result, TCL_DYNAMIC);
     return TCL_OK;
 }
 

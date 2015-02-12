@@ -72,7 +72,7 @@ void AddCylinder(FILE* of,float* q1,float* q2,float r,float* c1,float* c2)
 //      printf("%i %g %g %g\n",i,theta,xy[i][0],xy[i][1]);
     }
 //  PauseForAction();
-    fprintf(of,"Shape {\n",r);
+    fprintf(of,"Shape {\n");
     fprintf(of,"\tappearance Appearance {\n\t\t");
     fprintf(of,"material Material {diffuseColor %4.2f %4.2f %4.2f}\n\t}\n",c1[0],c1[1],c1[2]);
     fprintf(of,"\tgeometry Extrusion{\n\t\t");
@@ -83,7 +83,7 @@ void AddCylinder(FILE* of,float* q1,float* q2,float r,float* c1,float* c2)
     }
     fprintf(of,"\t\t]\n\t\tspine [\n\t\t\t%6.4f %6.4f %6.4f,\n\t\t\t%6.4f %6.4f %6.4f",q1[0],q1[1],q1[2],q3[0],q3[1],q3[2]);
     fprintf(of,"\n\t\t]\n\t}\n}\n");
-    fprintf(of,"Shape {\n",r);
+    fprintf(of,"Shape {\n");
     fprintf(of,"\tappearance Appearance {\n\t\t");
     fprintf(of,"material Material {diffuseColor %4.2f %4.2f %4.2f}\n\t}\n",c2[0],c2[1],c2[2]);
     fprintf(of,"\tgeometry Extrusion{\n\t\t");
@@ -96,7 +96,7 @@ void AddCylinder(FILE* of,float* q1,float* q2,float r,float* c1,float* c2)
     fprintf(of,"\n\t\t]\n\t}\n}\n");
 }
 
-int PickFNums(int NNum,char* rstr,float* vals)
+int PickFNums(int NNum, const char* rstr,float* vals)
 {
     int i=0;
     int j=0;
@@ -171,7 +171,7 @@ int SetDisplay(ClientData cd,Tcl_Interp *ti,int argc,const char **argv)
         {
             sprintf(comstr,"show atom color %i %i",j+1,i+1);
             Tcl_Eval(ti,comstr);
-            PickFNums(3,ti->result,col);
+            PickFNums(3,Tcl_GetStringResult(ti),col);
             nei=gom_GetAtomConnection(i,j);
             nn=nei[0];
 //          printf("\n");
@@ -186,9 +186,9 @@ int SetDisplay(ClientData cd,Tcl_Interp *ti,int argc,const char **argv)
                         if(j<nei[k])
                         {
                             sprintf(comstr,"show atom color %i %i",nei[k]+1,i+1);
-                            printf("%s %i %i\n",ti->result,nei[k]+1,i+1);
+                            printf("%s %i %i\n",Tcl_GetStringResult(ti),nei[k]+1,i+1);
                             Tcl_Eval(ti,comstr);
-                            PickFNums(3,ti->result,col2);
+                            PickFNums(3,Tcl_GetStringResult(ti),col2);
                             AddCylinder(VRMLfile,r0,r1,cr,col,col2);
                         }
                     }
@@ -553,7 +553,7 @@ void WriteVRMLScriptObject(FILE* of)
     fprintf(of,"\t\t}\n\t\"\n}\n\n");
 }
 
-int PickNums(int NNum,char* rstr,double* vals)
+int PickNums(int NNum, const char* rstr,double* vals)
 {
     int i=0;
     int j=0;
@@ -602,7 +602,7 @@ void WriteVRMLAtoms(FILE* of,Tcl_Interp *ti)
         }
         sprintf(comstr,"show atom color %0i 1",i+1);
         Tcl_Eval(ti,comstr); 
-        PickNums(3,ti->result,colors);
+        PickNums(3,Tcl_GetStringResult(ti),colors);
         r=(float)colors[0];g=(float)colors[1];b=(float)colors[2];
         sprintf(tstr,"Atom%0iSph",i);
         fprintf(of,"DEF %s Transform {\n\t",tstr);
@@ -642,7 +642,7 @@ void WriteVRMLSAtoms(FILE* of,Tcl_Interp* ti)
         }
         sprintf(comstr,"show atom color %0i 1",i+1);
         Tcl_Eval(ti,comstr); 
-        PickNums(3,ti->result,colors);
+        PickNums(3,Tcl_GetStringResult(ti),colors);
         r=(float)colors[0];g=(float)colors[1];b=(float)colors[2];
         sprintf(tstr,"Atom%0iSph",i);
         fprintf(of,"DEF %s Transform {\n\t",tstr);
@@ -680,7 +680,7 @@ void WriteVRMLBonds(FILE* of,Tcl_Interp* ti)
         }
         sprintf(comstr,"show atom color %0i 1",at1+1);
         Tcl_Eval(ti,comstr); 
-        PickNums(3,ti->result,colors);
+        PickNums(3,Tcl_GetStringResult(ti),colors);
         r=(float)colors[0];g=(float)colors[1];b=(float)colors[2];
         sprintf(tstr,"Bond%0iCyl0",i);
         fprintf(of,"Shape {\n\tgeometry DEF %s Extrusion {\n",tstr);
@@ -698,7 +698,7 @@ void WriteVRMLBonds(FILE* of,Tcl_Interp* ti)
         fprintf(of,"material Material {diffuseColor %4.3f %4.3f %4.3f}\n\t}\n}\n\n",r,g,b);
         sprintf(comstr,"show atom color %0i 1",at2+1);
         Tcl_Eval(ti,comstr); 
-        PickNums(3,ti->result,colors);
+        PickNums(3,Tcl_GetStringResult(ti),colors);
         r=(float)colors[0];g=(float)colors[1];b=(float)colors[2];
         sprintf(tstr,"Bond%0iCyl1",i);
         fprintf(of,"Shape {\n\tgeometry DEF %s Extrusion {\n",tstr);

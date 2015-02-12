@@ -336,7 +336,7 @@ int gomp_ParserCommand(ClientData clientData,Tcl_Interp *interp,
     int       new_objc  = 0;
     Tcl_Obj **new_objv  = NULL;
     int       obj_index = 1; /* Skip the main command name. */
-    int       Flags     = 0;
+    intptr_t  Flags     = 0;
     int       i;
 
     list_start      = list;

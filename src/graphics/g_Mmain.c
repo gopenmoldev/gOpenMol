@@ -487,7 +487,7 @@ int gomp_Mmain(int argc, const char *argv[])
     {
         Tcl_Interp  *interp;
         interp = gomp_GetTclInterp();
-        sprintf(Temp,"'%s' problems creating the Tk window",interp->result);
+        sprintf(Temp,"'%s' problems creating the Tk window", Tcl_GetStringResult(interp));
         gomp_PrintERROR(Temp);
         return(1);
     }

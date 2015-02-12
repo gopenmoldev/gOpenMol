@@ -137,8 +137,8 @@
 ** or remove these declarations.
 */
 #ifdef BSD
-/*#include <stdlib.h>*/
-#include <malloc.h>
+#include <stdlib.h>
+/*#include <malloc.h>*/
 #endif
 #if (defined(SYSV) && !defined(VMS))
 #include <malloc.h>

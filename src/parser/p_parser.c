@@ -111,8 +111,9 @@ int  gomp_Tcl_AppInit(int argc , const char *argv[])
 
 /* define the commands */
 /* catch */
-    Tcl_CreateObjCommand(Interp,"catch",CatchCommand,(ClientData)NULL,
-                         (Tcl_CmdDeleteProc *)NULL);
+// Catch is already defined in Tcl, collision...
+//    Tcl_CreateObjCommand(Interp,"catch",CatchCommand,(ClientData)NULL,
+//                         (Tcl_CmdDeleteProc *)NULL);
 /* quit */
     Tcl_CreateCommand(Interp,"quit",Quit,(ClientData)NULL,
                       (Tcl_CmdDeleteProc *)NULL);
@@ -809,8 +810,8 @@ int          gomp_TclRunScript()
     if(value != (const char *)NULL) {
         code = Tcl_EvalFile(interp , value);
         if(code != TCL_OK) {
-            if(*interp->result != (char)NULL) {
-                gomp_PrintERROR(interp->result);
+            if(Tcl_GetStringResult(interp) != (char *)NULL) {
+                gomp_PrintERROR(Tcl_GetStringResult(interp));
                 return(1);
             }
         }

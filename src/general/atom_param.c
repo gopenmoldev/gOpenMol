@@ -178,7 +178,7 @@ int gomp_ReadAtomParams(const char *File)
     gomp_AtomTypes.params = i;
 
 #ifdef DEBUG   
-    for(j = 0 ; j < i; j++) {
+    for(int j = 0 ; j < i; j++) {
 
         printf("%d ",gomp_AtomTypes.AtomParams[j].type);
         printf("%f ",gomp_AtomTypes.AtomParams[j].bndrad);

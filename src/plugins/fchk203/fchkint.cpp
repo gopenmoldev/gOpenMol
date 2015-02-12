@@ -278,20 +278,20 @@ int GetMolecule(ClientData cd,Tcl_Interp* ti,int argc,TCL_CONST char** argv)
     Pmn=(double*)malloc(NumGBasis*(NumGBasis)*sizeof(double));
     if(Pmn==NULL)
     {
-        printf(ti->result,"Memory allocation error in density matrix.");
+      printf(Tcl_GetStringResult(ti),"Memory allocation error in density matrix.");
         return TCL_ERROR;
     }
     Smn=(double*)malloc(NumGBasis*(NumGBasis)*sizeof(double));
     if(Smn==NULL)
     {
-        printf(ti->result,"Memory allocation error in overlap matrix.");
+      printf(Tcl_GetStringResult(ti),"Memory allocation error in overlap matrix.");
         free((void*)Pmn);
         return TCL_ERROR;
     }
     Pmnd=(double*)malloc(NumGBasis*(NumGBasis)*sizeof(double));
     if(Pmnd==NULL)
     {
-        printf(ti->result,"Memory allocation error in density matrix.");
+      printf(Tcl_GetStringResult(ti),"Memory allocation error in density matrix.");
         free((void*)Pmnd);
         free((void*)Smn);
         return TCL_ERROR;
@@ -774,20 +774,20 @@ int CalcCharges(ClientData cd,Tcl_Interp* ti,int argc,TCL_CONST char** argv)
     Smn12=(double*)malloc(NumGBasis*NumGBasis*sizeof(double));
     if(Smn12==NULL)
     {
-        printf(ti->result,"Memory allocation error in transform matrix");
+      printf(Tcl_GetStringResult(ti),"Memory allocation error in transform matrix");
         return TCL_ERROR;
     }
     Smnp=(double*)malloc(NumGBasis*NumGBasis*sizeof(double));
     if(Smnp==NULL)
     {
-        printf(ti->result,"Memory allocation error in transformed matrix");
+      printf(Tcl_GetStringResult(ti),"Memory allocation error in transformed matrix");
         free((void*)Smn12);
         return TCL_ERROR;
     }
     Pmm=(double*)malloc(NumGBasis*sizeof(double));
     if(Pmm==NULL)
     {
-        printf(ti->result,"Memory allocation error in Mulliken vector.");
+      printf(Tcl_GetStringResult(ti),"Memory allocation error in Mulliken vector.");
         free((void*)Smn12);
         free((void*)Smnp);
         return TCL_ERROR;

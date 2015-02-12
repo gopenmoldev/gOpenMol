@@ -2428,7 +2428,7 @@ int      gomp_SetSystemTranslateState(int Value)
         0.0 , 0.0 , 1.0 , 0.0,
         0.0 , 0.0 , 0.0 , 1.0};
 
-    if((MoleculeDimensions.TranslateState == Value))
+    if(MoleculeDimensions.TranslateState == Value)
         return(0);
 
     if(gomp_GetNumMolecStructs() < 1) {
