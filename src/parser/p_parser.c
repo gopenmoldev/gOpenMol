@@ -375,7 +375,7 @@ int gomp_CommandLineInput()
 
 /* if there is a tcl script coming execute that first */
     InputTclScript = GetInputTclScriptFileName();
-    if(InputTclScript[0] != (char)NULL) {
+    if(strlen(InputTclScript) != 0) {
         sprintf(CommandLine,"source {%s}",InputTclScript);
         if(TCL_OK != gomp_SendCommand2Parser(CommandLine)) {
             gomp_PrintERROR("can't evaluate supplied input tcl script");
@@ -440,7 +440,7 @@ int Quit(ClientData clientdata , Tcl_Interp *interp,
                         "lulProgramShutdownString" , 
                         TCL_GLOBAL_ONLY);
 
-    if(value != (const char *)NULL) {
+    if(value != NULL) {
         if(TCL_OK != gomp_SendCommand2Parser(value)) {
             gomp_PrintERROR("can't evaluate supplied input tcl script at exit");
         }
@@ -465,9 +465,9 @@ int PauseCommand(ClientData clientdata , Tcl_Interp *interp,
     static int   Itime;
 
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-    if(Text[0] == (char)NULL) {
+    if(strlen(Text) == 0) {
         gomp_PrintERROR("pause time missing");
         return(1);
     }
@@ -507,9 +507,9 @@ int FilterCommand(ClientData clientdata , Tcl_Interp *interp,
     static int   i;
 
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-    if(Text1[0] == (char)NULL) 
+    if(strlen(Text1) == 0) 
         return(1);
 
     Tcl_DStringInit(&gomp_Tcl_Collect);
@@ -541,22 +541,22 @@ int gomp_PickingCommand(ClientData clientdata , Tcl_Interp *interp,
     static int   ITemp2;
 
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-    if(Text[0] == (char)NULL) {
+    if(strlen(Text) == 0) {
         gomp_PrintERROR("picking parameter missing");
         return(TCL_ERROR);
     }
 
     if(gomp_StringMatch(Text , "atom")) {
-        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        if(Text1[0] == (char)NULL) {
+        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        if(strlen(Text1) == 0) {
             gomp_PrintERROR("atom index value missing");
             return(TCL_ERROR);
         }
         ITemp1 = atoi(Text1) - 1;
-        gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        if(Text2[0] == (char)NULL) {
+        gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        if(strlen(Text2) == 0) {
             ITemp2 = 0;
         } 
         else {
@@ -573,14 +573,14 @@ int gomp_PickingCommand(ClientData clientdata , Tcl_Interp *interp,
             return(TCL_OK);
     }
     if(gomp_StringMatch(Text , "-atom")) {
-        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        if(Text1[0] == (char)NULL) {
+        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        if(strlen(Text1) == 0) {
             gomp_PrintERROR("atom index value missing");
             return(TCL_ERROR);
         }
         ITemp1 = atoi(Text1) - 1;
-        gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        if(Text2[0] == (char)NULL) {
+        gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        if(strlen(Text2) == 0) {
             ITemp2 = 0;
         } 
         else {
@@ -597,10 +597,10 @@ int gomp_PickingCommand(ClientData clientdata , Tcl_Interp *interp,
             return(TCL_OK);
     }
     else if(gomp_StringMatch(Text , "get")) {
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
         
-        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        if(Text1[0] == (char)NULL) {
+        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        if(strlen(Text1) == 0) {
             gomp_PrintERROR("atom index value missing");
             return(TCL_ERROR);
         }
@@ -666,22 +666,22 @@ int PipeCommand(ClientData clientdata , Tcl_Interp *interp,
     static char  Text2[BUFF_LEN];
 
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-    if(Text[0] == (char)NULL) {
+    if(strlen(Text) == 0) {
         gomp_PrintERROR("action parameter missing");
         return(TCL_ERROR);
     }
 
-    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
     if(gomp_StringMatch(Text , "open")) {
-        if(Text1[0] == (char)NULL) {
+      if(strlen(Text1) == 0) {
             gomp_PrintERROR("program parameter missing");
             return(TCL_ERROR);
         }
-        gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        if(Text2[0] == (char)NULL) {
+        gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        if(strlen(Text2) == 0) {
             gomp_PrintERROR("type parameter missing");
             return(TCL_ERROR);
         }
@@ -722,7 +722,7 @@ int TestCommand(ClientData clientdata , Tcl_Interp *interp,
 /*    unsigned const int *address;*/
 
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
     printf("%s\n",Text);
 /*    address = (unsigned const int *)atoi(Text);*/
@@ -738,7 +738,7 @@ const char *gomp_GetNextFromParserStack(int argc, const char **argv)
     static const char **point;
     static int          index;
     static int          total;
-    static char         Empty = (char)NULL;
+    static char         Empty = '\0';
 
     if(  argv    != NULL) {
         index    = 0;
@@ -807,10 +807,10 @@ int          gomp_TclRunScript()
                                       TCL_RUN_DISPLAY_FILE_VAR , 
                                       TCL_GLOBAL_ONLY);
 
-    if(value != (const char *)NULL) {
+    if(value != NULL) {
         code = Tcl_EvalFile(interp , value);
         if(code != TCL_OK) {
-            if(Tcl_GetStringResult(interp) != (char *)NULL) {
+            if(Tcl_GetStringResult(interp) != NULL) {
                 gomp_PrintERROR(Tcl_GetStringResult(interp));
                 return(1);
             }
@@ -846,9 +846,9 @@ int WebURLCommand(ClientData clientdata , Tcl_Interp *interp,
 #endif
 
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-    if(Text[0] == (char)NULL) {
+    if(strlen(Text) == 0) {
         gomp_PrintERROR("Web URL is missing");
         return(1);
     }
@@ -877,9 +877,9 @@ int PrintInterface(ClientData clientdata , Tcl_Interp *interp,
     static char  Text[BUFF_LEN];
 
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-    if(Text[0] == (char)NULL) {
+    if(strlen(Text) == 0) {
         return(0);
     }
 
@@ -896,9 +896,9 @@ int ErrorInterface(ClientData clientdata , Tcl_Interp *interp,
     static char  Text[BUFF_LEN];
 
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+    gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-    if(Text[0] == (char)NULL) {
+    if(strlen(Text) == 0) {
         return(0);
     }
 
@@ -913,7 +913,7 @@ int          SetInputTclScriptFileName(const char *Name)
 {
     memset(gomInputScriptName, 0, BUFF_LEN);
 
-    if( Name!=NULL && strlen(Name) ) {
+    if( Name!=NULL && strlen(Name) != 0 ) {
         strncpy(gomInputScriptName , Name , BUFF_LEN-1);
     }
 

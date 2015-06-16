@@ -250,7 +250,7 @@ int gomp_ParseGetAtomInfo(const char *AtonName)
     else
         strncpy(TempAtom, AtonName, MAX_ATM_NAME_LEN);
 
-    if(*TempAtom == (char)NULL)
+    if(*TempAtom == '\0')
         return(1);
 
 /*   first level hit by looking into the atom conversion table        */    
@@ -396,7 +396,7 @@ int gomp_IdentifyAtom(int AtomStructure, int AtomIndex, int *pHits)
     strncpy(TempAtom  , Atom_p[AtomIndex] , MAX_ATM_NAME_LEN);
     strncpy(TempAtom1 , Atom_p[AtomIndex] , MAX_ATM_NAME_LEN);
 
-    if(*TempAtom == (char)NULL) {
+    if(*TempAtom == '\0') {
         sprintf(OutText,"atom name can not be empty string (NULL)\nUnknown atom #%d",AtomIndex+1);
         gomp_PrintEXIT(OutText);
     }
@@ -415,7 +415,7 @@ int gomp_IdentifyAtom(int AtomStructure, int AtomIndex, int *pHits)
         Hit = gomp_MatchAtom(TempAtom);
         if(Hit) {
             Atom_tt = LookIntoAtomConversionTableDirectHit(TempAtom);
-            if(Atom_tt->AtomName[0] != (char)NULL) {
+            if(Atom_tt->AtomName[0] != '\0') {
                 (void)AssignAtomInfo( AtomStructure , AtomIndex , Atom_tt);
                 Hits[1] += 1;
                 Hits[6] += 1;
@@ -463,7 +463,7 @@ int gomp_IdentifyAtom(int AtomStructure, int AtomIndex, int *pHits)
                 Hit = gomp_MatchAtom(TempAtom);
                 if(Hit) {
                     Atom_tt = LookIntoAtomConversionTableDirectHit(TempAtom);
-                    if(Atom_tt->AtomName[0] != (char)NULL) {
+                    if(Atom_tt->AtomName[0] != '\0') {
                         (void)AssignAtomInfo( AtomStructure , AtomIndex , Atom_tt);
                         Hits[4] += 1;
                         Hits[6] += 1;
@@ -594,7 +594,7 @@ int IdentifyAtomColours(int AtomStructure)
         strncpy(TempAtom  , Atom_p[i] , MAX_ATM_NAME_LEN);
         strncpy(TempAtom1 , Atom_p[i] , MAX_ATM_NAME_LEN);
 
-        if(*TempAtom == (char)NULL) {
+        if(*TempAtom == '\0') {
             sprintf(OutText,"atom name can not be empty string (NULL)\nUnknown atom #%d",i+1);
             gomp_PrintEXIT(OutText);
         }
@@ -611,7 +611,7 @@ int IdentifyAtomColours(int AtomStructure)
             Hit = gomp_MatchAtom(TempAtom);
             if(Hit) {
                 Atom_tt = LookIntoAtomConversionTableDirectHit(TempAtom);
-                if(Atom_tt->AtomName[0] != (char)NULL) {
+                if(Atom_tt->AtomName[0] != '\0') {
                     (void)AssignColour2Atoms( AtomStructure , i , Atom_tt);
                 } else {
                     sprintf(OutText,"Can't assign type to atom '%s'",TempAtom);
@@ -652,7 +652,7 @@ int IdentifyAtomColours(int AtomStructure)
                     Hit = gomp_MatchAtom(TempAtom);
                     if(Hit) {
                         Atom_tt = LookIntoAtomConversionTableDirectHit(TempAtom);
-                        if(Atom_tt->AtomName[0] != (char)NULL) {
+                        if(Atom_tt->AtomName[0] != '\0') {
                             (void)AssignColour2Atoms( AtomStructure , i , Atom_tt);
                         } else {
                             sprintf(OutText,"Can't assign type to atom '%s'",TempAtom);

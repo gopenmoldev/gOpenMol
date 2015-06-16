@@ -182,7 +182,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
                 return(1);
             }
             icount = fread(GromacsVersion,sizeof(char), record ,File_p);
-            GromacsVersion[record] = (char)NULL;
+            GromacsVersion[record] = '\0';
             if(TrajectoryPrecision) {
                 icount = fread(&GromacsHeader.ir_size,sizeof(int), 1 ,File_p);
                 icount = fread(&GromacsHeader.e_size,sizeof(int), 1 ,File_p);
@@ -257,7 +257,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
                 DiskPointer = malloc(sizeof(int));
             }
 
-            if(DiskPointer == (const int *)NULL) {
+            if(DiskPointer == NULL) {
                 gomp_PrintERROR("can't assign memory for disk pointers");
                 return(1);
             }
@@ -410,7 +410,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
             if(GromacsHeader.x_size) {
                 if(TrajectoryPrecision) {
                     dcvec = malloc(GromacsHeader.x_size);
-                    if(dcvec == (const double  *)NULL) {
+                    if(dcvec == NULL) {
                         gomp_PrintERROR("can't assign memory for temporary coordinates");
                         return(1);
                     }
@@ -427,7 +427,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
                     free(dcvec);
                 } else {
                     cvec = malloc(GromacsHeader.x_size);
-                    if(cvec == (const float *)NULL) {
+                    if(cvec == NULL) {
                         gomp_PrintERROR("can't assign memory for temporary coordinates in 'rw_get_frame_gromacs'");
                         return(1);
                     }
@@ -456,7 +456,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
             if(GromacsHeader.x_size) {
                 if(TrajectoryPrecision) {
                     dcvec = malloc(GromacsHeader.x_size);
-                    if(dcvec == (const double  *)NULL) {
+                    if(dcvec == NULL) {
                         gomp_PrintERROR("can't assign memory for temporary coordinates");
                         return(1);
                     }
@@ -473,7 +473,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
                     free(dcvec);
                 } else {
                     cvec = malloc(GromacsHeader.x_size);
-                    if(cvec == (const float *)NULL) {
+                    if(cvec == NULL) {
                         gomp_PrintERROR("can't assign memory for temporary coordinates in 'rw_get_frame_gromacs'");
                         return(1);
                     }
@@ -504,7 +504,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
             if(GromacsHeader.v_size) {
                 if(TrajectoryPrecision) {
                     dcvec = malloc(GromacsHeader.v_size);
-                    if(dcvec == (const double  *)NULL) {
+                    if(dcvec == NULL) {
                         gomp_PrintERROR("can't assign memory for temporary coordinates");
                         return(1);
                     }
@@ -525,7 +525,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
                     free(dcvec);
                 } else {
                     cvec = malloc(GromacsHeader.v_size);
-                    if(cvec == (const float *)NULL) {
+                    if(cvec == NULL) {
                         gomp_PrintERROR("can't assign memory for temporary coordinates in 'rw_get_frame_gromacs'");
                         return(1);
                     }
@@ -558,7 +558,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
             if(GromacsHeader.f_size) {
                 if(TrajectoryPrecision) {
                     dcvec = malloc(GromacsHeader.f_size);
-                    if(dcvec == (const double  *)NULL) {
+                    if(dcvec == NULL) {
                         gomp_PrintERROR("can't assign memory for temporary coordinates");
                         return(1);
                     }
@@ -578,7 +578,7 @@ int GetFrameGromacsTrr(int alt, FILE *File_p, int iappend)
                     free(dcvec);
                 } else {
                     cvec = malloc(GromacsHeader.f_size);
-                    if(cvec == (const float *)NULL) {
+                    if(cvec == NULL) {
                         gomp_PrintERROR("can't assign memory for temporary coordinates in 'rw_get_frame_gromacs'");
                         return(1);
                     }
@@ -1505,7 +1505,7 @@ int GetFrameGromacsXtc(int alt, FILE *File_p, int iappend)
     static const float *sumxyz;
     static float Box[9];
     static int nsteps;
-    static float *cvec = (float *)NULL;
+    static float *cvec = NULL;
     static char   label[BUFF_LEN];
     static int *DiskPointer = NULL;
     static int    DiskPointerLen = 0;
@@ -1564,7 +1564,7 @@ int GetFrameGromacsXtc(int alt, FILE *File_p, int iappend)
 
         DiskPointerLen = 1;
         DiskPointer = malloc(sizeof(int));
-        if(DiskPointer == (const int *)NULL) {
+        if(DiskPointer == NULL) {
             gomp_PrintERROR("can't assign memory for disk pointers");
             return(1);
         }
@@ -1612,7 +1612,7 @@ int GetFrameGromacsXtc(int alt, FILE *File_p, int iappend)
 
             DiskPointerLen++;
             DiskPointer = realloc(DiskPointer , (DiskPointerLen * sizeof(int)));
-            if(DiskPointer == (const int *)NULL) {
+            if(DiskPointer == NULL) {
                 gomp_PrintERROR("can't assign memory for disk pointers");
                 return(1);
             }
@@ -1681,7 +1681,7 @@ int GetFrameGromacsXtc(int alt, FILE *File_p, int iappend)
 
             Size = 3 * natoms * sizeof(float); 
             cvec = malloc(Size);
-            if(cvec == (const float *)NULL) {
+            if(cvec == NULL) {
                 gomp_PrintERROR("can't assign memory for temporary coordinate array");
                 return(1);
             }
@@ -1787,7 +1787,7 @@ int GetGromacsPrecisionTrr(FILE *File_p)
         return(1);
     }
     icount = fread(GromacsVersion,sizeof(char), record ,File_p);
-    GromacsVersion[record] = (char)NULL;
+    GromacsVersion[record] = '\0';
 
     icount = fread(&GromacsHeader.ir_size,sizeof(int), 1 ,File_p);
     icount = fread(&GromacsHeader.e_size,sizeof(int), 1 ,File_p);

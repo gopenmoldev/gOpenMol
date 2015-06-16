@@ -105,7 +105,7 @@ int ReadDictionaryEntries(const char *type_file)
     while(fgets(input,BUFF_LEN,par_p) != NULL) {
 
         if(input[strlen(input) - 1] == '\n')
-            input[strlen(input) - 1] = (char)NULL;
+            input[strlen(input) - 1] = '\0';
 
         if(!sscanf(input,"%s %s %d %f",TempRes,TempAtm,&TempType,&TempCharge))
             continue;

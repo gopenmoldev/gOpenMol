@@ -75,7 +75,7 @@ const char *gomp_StrTok(char *String1,const char *String2)
     for(i = FromLoop ; i < SaveLen ; i++) 
     {
 
-        if((TempChar = OutLoop[i]) == (char)NULL) 
+        if((TempChar = OutLoop[i]) == '\0') 
             return(OutLoop+StartLoop);
 
         if(TokenPause(TempChar)) 

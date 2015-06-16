@@ -66,12 +66,12 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text , "calc$ulate")) {
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
         if(gomp_StringMatch(Text , "test")) {
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             gomp_CopyBitmap2Clipboard();
             return(TCL_OK);
         }
@@ -83,9 +83,9 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_ParseCalcConnList(Text1 , Text2 , Text3 , "Dummy"))
                 return(TCL_ERROR);
@@ -99,11 +99,11 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text5 , "nohy$drogens")) {
                 if(gomp_ParseCalcHbondsList(Text1 , Text2 , Text3 , 0 , Text4))
@@ -148,9 +148,9 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* geometrical center */
         else if(gomp_StringMatch(Text , "geomc$enter")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             {
                 float xc = 1.e+20f;
                 float yc = 1.e+20f;
@@ -178,17 +178,17 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* plane */
         else if(gomp_StringMatch(Text , "plan$e")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             {
                 float A = 0.0;
@@ -227,9 +227,9 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* center of mass */
         else if(gomp_StringMatch(Text , "massc$enter")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             {
                 float xc = 1.e+20f;
                 float yc = 1.e+20f;
@@ -262,9 +262,9 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* cluster */
         else if(gomp_StringMatch(Text , "clus$ter")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_CalcCluster(Text1,Text2,Text3,
                               Text1,Text2,Text3))
                 return(TCL_ERROR);
@@ -280,12 +280,12 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* distance */
         else if(gomp_StringMatch(Text , "dist$ance")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             sprintf(Text,"%f",
                     gomp_CalculateDistance(Text1 , Text2 , Text3 ,
@@ -298,15 +298,15 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* angle   */
         else if(gomp_StringMatch(Text , "angl$e")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             sprintf(Text,"%f",
                     gomp_CalculateAngle(Text1 , Text2 , Text3 ,
@@ -320,18 +320,18 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* torsion */
         else if(gomp_StringMatch(Text , "tors$ion")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text11,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text12,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text11,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text12,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             sprintf(Text,"%f",
                     gomp_CalculateTorsionAngle(Text1 , Text2 , Text3 ,
@@ -345,12 +345,12 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "rmsf$luctuation")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(gomp_StringMatch(Text4 , "fit") || Text4[0] == (char)NULL) {
+            if (strlen(Text4) == 0 || gomp_StringMatch(Text4 , "fit")) {
                 if(gomp_RMS_Fluctuation( 1 , Text1,Text2,Text3))
                     return(TCL_ERROR);
                 else
@@ -369,21 +369,21 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* mean square displacement */
         else if(gomp_StringMatch(Text , "msdi$splacement")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text1 , "atom")) {
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_MeanSquareDisplacement( 0 , Text2,Text3,Text4))
                     return(TCL_ERROR);
                 else
                     return(TCL_OK);
             }
             else if(gomp_StringMatch(Text1 , "mass$center")) {
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_MeanSquareDisplacement( 1 , Text2,Text3,Text4))
                     return(TCL_ERROR);
                 else
@@ -395,14 +395,14 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
             }
         }
         else if(gomp_StringMatch(Text , "rdf")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_ParseRDFList(Text1, Text2, Text3, 
                                Text4, Text5, Text6,
                                Text7, Text8))
@@ -430,15 +430,15 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
         }   
         else if(gomp_StringMatch(Text , "corr$elation")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text1 , "dist$ance")) {
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] == (char)NULL) {
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("index value is missing");
                     return(TCL_ERROR);
                 }
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text3[0] == (char)NULL)
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text3) == 0)
                     gomp_CopyString(Text3,Text2,BUFF_LEN);
                 if(gomp_CalculateCorrelation(DIST_TYPE, atoi(Text2), atoi(Text3)))
                     return(TCL_ERROR);
@@ -447,12 +447,12 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text1 , "angl$e")) {
                 gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("index value is missing");
                     return(TCL_ERROR);
                 }
                 gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text3[0] == (char)NULL)
+                if(strlen(Text3) == 0)
                     gomp_CopyString(Text3,Text2,BUFF_LEN);
                 if(gomp_CalculateCorrelation(ANG_TYPE, atoi(Text2), atoi(Text3)))
                     return(TCL_ERROR);
@@ -461,12 +461,12 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text1 , "tors$ion")) {
                 gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("index value is missing");
                     return(TCL_ERROR);
                 }
                 gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text3[0] == (char)NULL)
+                if(strlen(Text3) == 0)
                     gomp_CopyString(Text3,Text2,BUFF_LEN);
                 if(gomp_CalculateCorrelation(TORS_TYPE, atoi(Text2), atoi(Text3)))
                     return(TCL_ERROR);
@@ -480,15 +480,15 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
                 (void)gomp_SendTclReturn("ERROR: number of structures must be >= 2");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
           
             ITemp = 1;
 
@@ -498,7 +498,7 @@ int gomp_CalculateCommand(ClientData clientdata, Tcl_Interp *interp,
             else if(gomp_StringMatch(Text9 , "off")) {
                 ITemp = 0;
             }
-            else if(Text9[0] == (char)NULL) {
+            else if(strlen(Text9) == 0) {
                 ITemp = 1;
             }
             else {

@@ -49,7 +49,7 @@ int gomp_SelectCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text , "sele$ct")) {
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
 /* atoms */
         if(gomp_StringMatch(Text , "atom$s")) {
@@ -58,12 +58,12 @@ int gomp_SelectCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
         
-            if(*Text4 == (char)NULL) {
+            if(strlen(Text4) == 0) {
                 ITemp = 1;
             }
             else {
@@ -95,7 +95,7 @@ int gomp_SelectCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text1 , "all")) {
                 for(i = 0 ; i < gomp_GetNumMolecStructs() ; i++) {
@@ -114,7 +114,7 @@ int gomp_SelectCommand(ClientData clientdata, Tcl_Interp *interp,
 
             Loop = 0;
 
-            while(Text1[0] != (char)NULL) {
+            while(strlen(Text1) != 0) {
                 ITemp      = atoi(Text1);
                 if(ITemp < 1 || ITemp > gomp_GetNumMolecStructs()) {
                     gomp_PrintERROR("index is out of range");
@@ -129,7 +129,7 @@ int gomp_SelectCommand(ClientData clientdata, Tcl_Interp *interp,
                     return(TCL_ERROR);
                 }
                 Loop++;
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
             }
             return(TCL_OK);
@@ -142,7 +142,7 @@ int gomp_SelectCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text1 , "all")) {
                 for(i = 0 ; i < gomp_GetNumMolecStructs() ; i++) {
@@ -161,7 +161,7 @@ int gomp_SelectCommand(ClientData clientdata, Tcl_Interp *interp,
 
             Loop = 0;
 
-            while(Text1[0] != (char)NULL) {
+            while(strlen(Text1) != 0) {
                 ITemp      = atoi(Text1);
                 if(ITemp < 1 || ITemp > gomp_GetNumMolecStructs()) {
                     gomp_PrintERROR("index is out of range");
@@ -176,7 +176,7 @@ int gomp_SelectCommand(ClientData clientdata, Tcl_Interp *interp,
                     return(TCL_ERROR);
                 }
                 Loop++;
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
             }
             return(TCL_OK);

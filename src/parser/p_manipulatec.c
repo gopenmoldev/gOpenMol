@@ -72,20 +72,20 @@ int gomp_ManipulateCommand(ClientData clientdata, Tcl_Interp *interp,
 
     if(gomp_StringMatch(Text , "mani$pulate")) {
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
 /* time series */
         if(gomp_StringMatch(Text , "time$serie")) {
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text1 , "dist$ance")) {
                 type = ManipulationAction(Text2);
-                if(Text3[0] == (char)NULL) {
+                if(strlen(Text3) == 0) {
                     gomp_PrintERROR("index into list is missing");
                     return(TCL_ERROR);
                 }
@@ -103,7 +103,7 @@ int gomp_ManipulateCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text1 , "angl$e")) {
                 type = ManipulationAction(Text2);
-                if(Text3[0] == (char)NULL) {
+                if(strlen(Text3) == 0) {
                     gomp_PrintERROR("index into list is missing");
                     return(TCL_ERROR);
                 }
@@ -121,7 +121,7 @@ int gomp_ManipulateCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text1 , "tors$ion")) {
                 type = ManipulationAction(Text2);
-                if(Text3[0] == (char)NULL) {
+                if(strlen(Text3) == 0) {
                     gomp_PrintERROR("index into list is missing");
                     return(TCL_ERROR);
                 }

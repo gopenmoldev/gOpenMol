@@ -56,17 +56,17 @@ int gomp_CopyCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text , "copy")) {
 
-        gomp_CopyString(Text ,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text ,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
         if(gomp_StringMatch(Text , "bitm$ap"))  {
 
-            strncpy(Text ,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text ,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
             SaveWindowID = gomp_GetWindowID();
 
 /* default window is window == 1 */
-            if(Text[0] == (char)NULL) {
+            if(strlen(Text) == 0) {
                 if(gomp_SetWindow(gomp_GetWindowIDFromStack(0))) {
                     gomp_SetWindow(SaveWindowID);
                     return(1);
@@ -131,9 +131,9 @@ int gomp_CopyCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else if(gomp_StringMatch(Text , "times$eries")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("time series type is missing");
                 return(TCL_ERROR);
             }
@@ -152,9 +152,9 @@ int gomp_CopyCommand(ClientData clientdata, Tcl_Interp *interp,
                 gomp_PrintERROR("unrecognized type of list (distance, angle, torsion)");
                 return(TCL_ERROR);
             }
-            strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            if(Text2[0] == (char)NULL) {
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("time series index is missing");
                 return(TCL_ERROR);
             }

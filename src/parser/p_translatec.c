@@ -51,23 +51,23 @@ int gomp_TranslateCommand(ClientData clientdata, Tcl_Interp *interp,
         c = 0.0;
 
 /* #1.1 primary */
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
         if(gomp_StringMatch(Text , "prim$ary") || 
            gomp_StringMatch(Text , "disp$lay")) {
 
 #ifdef ENABLE_GRAPHICS
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 a = atof(Text);
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 b = atof(Text);
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 c = atof(Text);
             }
 
@@ -80,18 +80,18 @@ int gomp_TranslateCommand(ClientData clientdata, Tcl_Interp *interp,
 /* #1.1 selection */
         else if(gomp_StringMatch(Text , "sele$ction")) {
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 a = atof(Text);
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 b = atof(Text);
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 c = atof(Text);
             }
        

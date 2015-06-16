@@ -42,9 +42,9 @@ int gomp_MOpenCommand(ClientData clientdata, Tcl_Interp *interp,
 
         Wstr = 0;
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-        if(Text[0] == (char)NULL) {
+        if(strlen(Text) == 0) {
             gomp_PrintERROR("model file name missing");
             return(TCL_ERROR);
         }

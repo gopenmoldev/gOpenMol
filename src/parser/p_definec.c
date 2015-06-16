@@ -87,11 +87,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 
         Wstr = 0;
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 /* node */
         if(gomp_StringMatch(Text , "node")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("node name missing");
                 return(TCL_ERROR);
             }
@@ -102,7 +102,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* help function used to move text between c-code and tcl */
         else if(gomp_StringMatch(Text , "gtext")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(!gomp_SetGlobalTextString(Text1)) 
                 return(TCL_OK);
             else
@@ -112,7 +112,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* colour type */
         else if(gomp_StringMatch(Text , "colourt$ype") || 
                 gomp_StringMatch(Text , "colort$ype")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text , "gray$scale") ||
                gomp_StringMatch(Text , "grey$scale")) {
                 (void)gomp_SetDisplayColourType(OFF);
@@ -132,7 +132,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* projection */
         else if(gomp_StringMatch(Text , "proj$ection")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text , "orth$ographic")) {
                 (void)gomp_SetProjectionTransformation(ORTHOGRAPHIC_VIEW);
                 (void)gomp_ResetView();
@@ -152,7 +152,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 #if defined(GLUT)
 /* windowing */
         else if(gomp_StringMatch(Text , "wind$owing")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text , "sing$le")) {
                 (void)gomp_SetWindowingStyle(SINGLE_WINDOWING);
                 return(TCL_OK);
@@ -163,7 +163,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text , "upda$te") ||
                     gomp_StringMatch(Text , "redr$aw")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text1 , "auto$matic")) {
                     if(gomp_SetUpdateDisplayMode(ON)) {
                         return(TCL_ERROR);
@@ -200,11 +200,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 #endif /* ENABLE_GRAPHICS */
 /* default coordinate extension */
         else if(gomp_StringMatch(Text , "defa$ult")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text , "coor$dinate")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text1 , "type")) {
-                    gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                    gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                     if(gomp_StringMatch(Text2 , "ambe$r")) {
                         (void)gomp_PutAMBERdefault();
                         return(TCL_OK);
@@ -259,8 +259,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                     }
                 }
                 else if(gomp_StringMatch(Text1 , "exte$nsion")) {
-                    gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                    gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                     if(gomp_StringMatch(Text2 , "ambe$r")) {
                         (void)gomp_PutAMBERcoordFileType(Text1);
                         return(TCL_OK);
@@ -318,10 +318,10 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* ................................................ */
 /* default trajectory extension */
             else if(gomp_StringMatch(Text , "traj$ectory")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text1 , "type")) {
                     int Type = gomp_ParseTrajType(
-                        gomp_GetNextFromParserStack(argc,(const char **)NULL));
+                        gomp_GetNextFromParserStack(argc,NULL));
                     if ( Type > 0 ) {
                         gomp_PutTrajectoryTypeDefault(Type);
                         return(TCL_OK);
@@ -331,8 +331,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 }
                 else if(gomp_StringMatch(Text1 , "exte$nsion")) {
                     int Type = gomp_ParseTrajType(
-                        gomp_GetNextFromParserStack(argc,(const char **)NULL));
-                    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                        gomp_GetNextFromParserStack(argc,NULL));
+                    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                     if ( Type > 0 ) {
                         gomp_PutTrajectoryTypeFileExtension(Type, Text1);
                         return(TCL_OK);
@@ -347,8 +347,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* draw buffer */
         else if(gomp_StringMatch(Text , "drawb$uffer")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("buffer value missing (front/back)");
                 return(TCL_ERROR);
             }
@@ -367,13 +367,13 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* licorice sphere */
         else if(gomp_StringMatch(Text , "licos$phere")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("licorice sphere value missing");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 ITemp1 = 1;
             }
             else if(gomp_StringMatch(Text1, "all") || gomp_StringMatch(Text1, "*")) {
@@ -404,13 +404,13 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* licorice cylinder */
         else if(gomp_StringMatch(Text , "licoc$ylinder")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("licorice cylinder value missing");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 ITemp1 = 1;
             }
             else if(gomp_StringMatch(Text1, "all") || gomp_StringMatch(Text1, "*")) {
@@ -441,8 +441,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* display list */
         else if(gomp_StringMatch(Text , "disp$laylists")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("parameter value missing");
                 return(TCL_ERROR);
             }
@@ -453,8 +453,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 (void)gomp_SetDisplayListState(OFF);
                 gomp_PrintMessage("Display lists are not used");
             } else {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text1[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("parameter value missing");
                     return(TCL_ERROR);
                 }
@@ -479,8 +479,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* molecule line width */
         else if(gomp_StringMatch(Text , "mlin$ewidth")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("molecule line value missing");
                 return(TCL_ERROR);
             }
@@ -491,8 +491,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* contour line width */
         else if(gomp_StringMatch(Text , "clin$ewidth")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("contour line value missing");
                 return(TCL_ERROR);
             }
@@ -503,8 +503,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* sphere quality */
         else if(gomp_StringMatch(Text , "sphe$requality")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("sphere quality value missing");
                 return(TCL_ERROR);
             }
@@ -516,8 +516,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* cylinder quality */
         else if(gomp_StringMatch(Text , "cyli$nderquality")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("cylinder quality value missing");
                 return(TCL_ERROR);
             }
@@ -529,8 +529,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* help url */
         else if(gomp_StringMatch(Text , "hurl")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("URL to the help files is missing");
                 return(TCL_ERROR);
             }
@@ -543,8 +543,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* web browser */
         else if(gomp_StringMatch(Text , "webb$rowser")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("web browser name missing");
                 return(TCL_ERROR);
             }
@@ -558,8 +558,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* background colour */
         else if(gomp_StringMatch(Text , "bgco$lour") ||
                 gomp_StringMatch(Text , "bgco$lor")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("colour name/value is missing");
                 return(TCL_ERROR);
             }
@@ -576,11 +576,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* near clipping plane */
         else if(gomp_StringMatch(Text , "near$plane")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text , "step")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text1[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("near clipping plane step value is missing");
                     return(TCL_ERROR);
                 }
@@ -588,8 +588,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
             }
             else if(gomp_StringMatch(Text , "valu$e")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text1[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("near clipping plane value is missing");
                     return(TCL_ERROR);
                 }
@@ -632,11 +632,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* far clipping plane */
         else if(gomp_StringMatch(Text , "farp$lane")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text , "step")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text1[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("near clipping plane step value is missing");
                     return(TCL_ERROR);
                 }
@@ -644,9 +644,9 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
             }
             else if(gomp_StringMatch(Text , "valu$e")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("far clipping plane value is missing");
                     return(TCL_ERROR);
                 }
@@ -701,7 +701,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* viewing angle */
         else if(gomp_StringMatch(Text , "viewa$ngle")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             (void)gomp_SetPerspectiveAngle(atof(Text));
 #ifdef ENABLE_GRAPHICS
@@ -713,19 +713,19 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* material */
         else if(gomp_StringMatch(Text , "mate$rial")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text1 , "spec$ular")) {
 
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
          
 /* red */
                 if(gomp_StringMatch(Text2 , "red")) {
 
-                    strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                    strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                             BUFF_LEN-1);
      
-                    if(Text3[0] == (char)NULL) {
+                    if(strlen(Text3) == 0) {
                         gomp_PrintERROR("red material specular value missing");
                         return(TCL_ERROR);
                     }
@@ -737,10 +737,10 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* green */
                 else if(gomp_StringMatch(Text2 , "gree$n")) {
 
-                    strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                    strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                             BUFF_LEN-1);
      
-                    if(Text3[0] == (char)NULL) {
+                    if(strlen(Text3) == 0) {
                         gomp_PrintERROR("green material specular value missing");
                         return(TCL_ERROR);
                     }
@@ -753,10 +753,10 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* blue */
                 else if(gomp_StringMatch(Text2 , "blue")) {
 
-                    strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                    strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                             BUFF_LEN-1);
      
-                    if(Text3[0] == (char)NULL) {
+                    if(strlen(Text3) == 0) {
                         gomp_PrintERROR("blue material specular value missing");
                         return(TCL_ERROR);
                     }
@@ -773,9 +773,9 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text1 , "shin$iness")) {
 
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("material shininess value missing");
                     return(TCL_ERROR);
                 }
@@ -798,15 +798,15 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* very elaborate stuff */
         else if(gomp_StringMatch(Text , "stru$cture")) {
 /* structure name */
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("structure name is missing");
                 return(TCL_ERROR);
             }
 
 /* atoms to be in the structure */
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("number of atoms is missing");
                 return(TCL_ERROR);
             }
@@ -816,8 +816,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 /* action parameter */
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text3[0] == (char)NULL || gomp_StringMatch(Text3 , "new"))
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text3) == 0 || gomp_StringMatch(Text3 , "new"))
                 return(gomp_CreateMolecStruct(Text1 , ITemp , NEW) >= 0 ? TCL_OK : TCL_ERROR);
             else if(gomp_StringMatch(Text3 , "appe$nd"))
                 return(gomp_CreateMolecStruct(Text1 , ITemp , APPEND) >= 0 ? TCL_OK : TCL_ERROR);
@@ -828,21 +828,21 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* atom */
         else if(gomp_StringMatch(Text , "atom")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text1 , "labe$l") ||
                gomp_StringMatch(Text1 , "symb$ol")) {
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text[0] == (char)NULL) {
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text) == 0) {
                     gomp_PrintERROR("atom symbol is missing");
                     return(TCL_ERROR);
                 }
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text1[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("atom index is missing");
                     return(TCL_ERROR);
                 }
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] == (char)NULL) {
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) == 0) {
                     ITemp1 = 1;
                 }
                 else
@@ -859,17 +859,17 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 }
                 ITemp--;
 
-                if(gomp_GetAtomSegName(ITemp1 , ITemp) == (const char *)NULL)
+                if(gomp_GetAtomSegName(ITemp1 , ITemp) == NULL)
                     (void)gomp_PutAtomSegName(ITemp1 , "gom" , ITemp);
-                if(gomp_GetAtomResName(ITemp1 , ITemp) == (const char *)NULL)
+                if(gomp_GetAtomResName(ITemp1 , ITemp) == NULL)
                     (void)gomp_PutAtomResName(ITemp1 , "gom" , ITemp);
                 (void)gomp_PutAtomAtmName(ITemp1 , Text ,  ITemp);
                 return(TCL_OK);
             }
 /* define cross size (length) */
             else if(gomp_StringMatch(Text1 , "cros$s")) {
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] == (char)NULL) {
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("cross length value missing");
                     return(TCL_ERROR);
                 }
@@ -882,16 +882,16 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* atom coordinates */
             else if(gomp_StringMatch(Text1 , "coor$dinates")) {
                 const float *sumxyz = gomp_GetTranslateArray();
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text4[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text4) == 0) {
                     gomp_PrintERROR("atom index is missing");
                     return(TCL_ERROR);
                 }
-                if(Text5[0] == (char)NULL) {
+                if(strlen(Text5) == 0) {
                     ITemp1 = 1;
                 }
                 else
@@ -914,7 +914,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text1 , "sele$ction")) {
 
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
           
                 if(gomp_StringMatch(Text2 , "on")) {
@@ -950,7 +950,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* atom selection */
             else if(gomp_StringMatch(Text1 , "iden$tify")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
                 if(gomp_StringMatch(Text2 , "on")) {
                     if(!gomp_SetIdentifyAtomActive(ON))
@@ -971,7 +971,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* atom connectivity */
             else if(gomp_StringMatch(Text1 , "reco$nnectivity")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
                 if(gomp_StringMatch(Text2 , "on")) {
                     if(!gomp_SetBondReconnectivityState(ON))
@@ -992,7 +992,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* atom hydrogen bond connectivity */
             else if(gomp_StringMatch(Text1 , "hbre$connectivity")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
                 if(gomp_StringMatch(Text2 , "on")) {
                     if(!gomp_SetHBondReconnectivityState(ON))
@@ -1013,9 +1013,9 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* max atom connectivity */
             else if(gomp_StringMatch(Text1 , "maxc$onnectivity")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("atom connectivity max value missing");
                     return(TCL_ERROR);
                 }
@@ -1028,9 +1028,9 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* covar radius */
             else if(gomp_StringMatch(Text1 , "cova$r")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
                 if(gomp_ParseSetAtomCovar(Text2,Text3))
                     return(TCL_ERROR);
@@ -1039,9 +1039,9 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* atom window */
             else if(gomp_StringMatch(Text1 , "windo$w")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("search window value missing");
                     return(TCL_ERROR);
                 }
@@ -1065,15 +1065,15 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* charge */
             else if(gomp_StringMatch(Text1 , "charg$e")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("atom index is missing");
                     return(TCL_ERROR);
                 }
-                if(Text3[0] == (char)NULL) {
+                if(strlen(Text3) == 0) {
                     ITemp1 = 1;
                 }
                 else
@@ -1094,15 +1094,15 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* VDW */
             else if(gomp_StringMatch(Text1 , "vdw")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("atom index is missing");
                     return(TCL_ERROR);
                 }
-                if(Text3[0] == (char)NULL) {
+                if(strlen(Text3) == 0) {
                     ITemp1 = 1;
                 }
                 else
@@ -1124,14 +1124,14 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* atom colour */
             else if(gomp_StringMatch(Text1 , "colo$r") ||
                     gomp_StringMatch(Text1 , "colo$ur")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("atom index is missing");
                     return(TCL_ERROR);
                 }
-                if(Text3[0] == (char)NULL) {
+                if(strlen(Text3) == 0) {
                     ITemp1 = 1;
                 }
                 else
@@ -1156,15 +1156,15 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* residue number */
             else if(gomp_StringMatch(Text1 , "resn$umber")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("atom index is missing");
                     return(TCL_ERROR);
                 }
-                if(Text3[0] == (char)NULL) {
+                if(strlen(Text3) == 0) {
                     ITemp1 = 1;
                 }
                 else
@@ -1188,21 +1188,21 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* atom ...... */
 /* residue */
         else if(gomp_StringMatch(Text , "resi$due")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text1 , "labe$l") ||
                gomp_StringMatch(Text1 , "symb$ol")) {
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text[0] == (char)NULL) {
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text) == 0) {
                     gomp_PrintERROR("residue name is missing");
                     return(TCL_ERROR);
                 }
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text1[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("residue index is missing");
                     return(TCL_ERROR);
                 }
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] == (char)NULL) {
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) == 0) {
                     ITemp1 = 1;
                 }
                 else
@@ -1225,21 +1225,21 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* residue ...... */
 /* segment */
         else if(gomp_StringMatch(Text , "segm$ent")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text1 , "labe$l") ||
                gomp_StringMatch(Text1 , "symb$ol")) {
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text[0] == (char)NULL) {
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text) == 0) {
                     gomp_PrintERROR("segment name is missing");
                     return(TCL_ERROR);
                 }
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text1[0] == (char)NULL) {
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("segment index is missing");
                     return(TCL_ERROR);
                 }
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] == (char)NULL) {
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) == 0) {
                     ITemp1 = 1;
                 }
                 else
@@ -1261,7 +1261,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* stereo pair ...... */
         else if(gomp_StringMatch(Text , "spai$r")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text1 , "on")) {
                 (void)gomp_SetStereoPlotState(ON);
@@ -1272,8 +1272,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
             }
             else if(gomp_StringMatch(Text1 , "dist$ance")) {
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] != (char)NULL) 
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) != 0) 
                     (void)gomp_SetStereoPlotTranslate(atof(Text2));
                 else {
                     gomp_PrintERROR("translate value missing");
@@ -1282,8 +1282,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
             }
             else if(gomp_StringMatch(Text1 , "angl$e")) {
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] != (char)NULL) 
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) != 0) 
                     (void)gomp_SetStereoPlotAngle(atof(Text2));
                 else {
                     gomp_PrintERROR("angle value missing");
@@ -1294,7 +1294,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* QUAD stereo ...... */
         else if(gomp_StringMatch(Text , "quad$stereo")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
       
             if(gomp_StringMatch(Text1 , "on")) {
                 gomp_QuadStereoOn();
@@ -1305,8 +1305,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
             }
             else if(gomp_StringMatch(Text1 , "ang$le")) {
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text2[0] != (char)NULL) 
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text2) != 0) 
                     gomp_SetQuadStereoHalfAngle(0.5*atof(Text2));
                 else {
                     gomp_PrintERROR("angle value missing");
@@ -1316,13 +1316,13 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
         }
         else if(gomp_StringMatch(Text , "cell")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text1 , "dime$nsions")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text4,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
                 gomp_SetCellA(atof(Text2));
@@ -1332,11 +1332,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
             }
             else if(gomp_StringMatch(Text1 , "angl$es")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text4,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
                 gomp_SetCellAlpha(atof(Text2));
@@ -1346,9 +1346,9 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_OK);
             }
             else if(gomp_StringMatch(Text1 , "line$width")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("line width value missing");
                     return(TCL_ERROR);
                 }
@@ -1359,9 +1359,9 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text1 , "colo$urs") ||
                     gomp_StringMatch(Text1 , "colo$rs")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("colour name or code missing");
                     return(TCL_ERROR);
                 }
@@ -1381,11 +1381,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             else if(gomp_StringMatch(Text1 , "tran$slation") ||
                     gomp_StringMatch(Text1 , "plac$e")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text4,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
                 (void)gomp_SetCellXtrans(atof(Text2));
@@ -1401,11 +1401,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* rotation */
         else if(gomp_StringMatch(Text , "rota$tion")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
             if(gomp_StringMatch(Text1 , "stat$e")) {
 
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
                 if(gomp_StringMatch(Text2 , "on")) {
@@ -1446,11 +1446,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* translation */
         else if(gomp_StringMatch(Text , "tran$slation")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
             if(gomp_StringMatch(Text1 , "stat$e")) {
 
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
                 if(gomp_StringMatch(Text2 , "on")) {
@@ -1491,14 +1491,14 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* gromos96 */
         else if(gomp_StringMatch(Text , "gromos96")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
             if(gomp_StringMatch(Text1 , "coorda$mplifier")) {
 
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("coordinate amplifier value missing");
                     return(TCL_ERROR);
                 }
@@ -1512,7 +1512,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
         }
         else if(gomp_StringMatch(Text , "bondst$yle")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
             if(gomp_StringMatch(Text1 , "smoo$th")) {
@@ -1535,10 +1535,10 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* system */
         else if(gomp_StringMatch(Text , "syst$em")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text1 , "tran$slation")) {
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text[0] == (char)NULL) {
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text) == 0) {
                     gomp_PrintERROR("translation state missing (on/off)");
                     return(TCL_ERROR);
                 }
@@ -1563,7 +1563,7 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* light mapping type */
         else if(gomp_StringMatch(Text , "colorm$apping") ||
                 gomp_StringMatch(Text , "colourm$apping")) {
-            strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
           
             if(gomp_StringMatch(Text2 , "text$ure")) {
@@ -1586,12 +1586,12 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* light position */
         else if(gomp_StringMatch(Text , "ligh$t")) {
 
-            strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
           
             if(gomp_StringMatch(Text2 , "posi$tion")) {
 
-                strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
                 if(gomp_StringMatch(Text3 , "c")) {
@@ -1642,15 +1642,15 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                 }
             } else if(gomp_StringMatch(Text2 , "diff$use")) {
 
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
          
 /* red */
                 if(gomp_StringMatch(Text2 , "red")) {
   
-                    strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                    strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                             BUFF_LEN-1);
      
-                    if(Text3[0] == (char)NULL) {
+                    if(strlen(Text3) == 0) {
                         gomp_PrintERROR("red light diffuse value missing");
                         return(TCL_ERROR);
                     }
@@ -1662,10 +1662,10 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* green */
                 else if(gomp_StringMatch(Text2 , "gree$n")) {
 
-                    strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                    strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                             BUFF_LEN-1);
      
-                    if(Text3[0] == (char)NULL) {
+                    if(strlen(Text3) == 0) {
                         gomp_PrintERROR("green light diffuse value missing");
                         return(TCL_ERROR);
                     }
@@ -1678,10 +1678,10 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
 /* blue */
                 else if(gomp_StringMatch(Text2 , "blue")) {
 
-                    strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                    strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                             BUFF_LEN-1);
      
-                    if(Text3[0] == (char)NULL) {
+                    if(strlen(Text3) == 0) {
                         gomp_PrintERROR("blue light diffuse value missing");
                         return(TCL_ERROR);
                     }
@@ -1702,11 +1702,11 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* define trajectory */
         else if(gomp_StringMatch(Text , "traj$ectory")) {
-            strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
             if(gomp_StringMatch(Text2 , "fid")) {
-                strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
                 if(gomp_StringMatch(Text3 , "on")) {
@@ -1722,14 +1722,14 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
             }
         }
         else if(gomp_StringMatch(Text , "cutp$lane")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
             if(gomp_StringMatch(Text1 , "damp$ing")) {
 
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("damping factor is missing");
                     return(TCL_ERROR);
                 }
@@ -1742,8 +1742,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* define redisplay mode fast/slow */
         else if(gomp_StringMatch(Text , "redi$splay")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("redisplay mode has to be (fast/slow)");
                 return(TCL_ERROR);
             }
@@ -1766,8 +1766,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* define global/local scaling */
         else if(gomp_StringMatch(Text , "scal$ing")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("scaling parameter has to be local/global");
                 return(TCL_ERROR);
             }
@@ -1794,8 +1794,8 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* define global/local manipulation */
         else if(gomp_StringMatch(Text , "transf$ormation")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("manipulation parameter has to be local/global");
                 return(TCL_ERROR);
             }
@@ -1873,10 +1873,10 @@ int gomp_DefineCommand(ClientData clientdata, Tcl_Interp *interp,
                         gomp_PrintERROR("cant't reset view (local), the result will be unreliable");
                     }
 
-                    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                    gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                    gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                    gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                    gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                    gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                    gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                    gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
                     ITemp  = atoi(Text1);
                     FTemp1 = atof(Text2);
@@ -1926,7 +1926,7 @@ const char *gomp_SetGlobalTransformationState()
     Value = Tcl_SetVar(gomp_GetTclInterp(),"lulTraceTransformationValue","0",TCL_GLOBAL_ONLY);
     if(!Value) {
         gomp_PrintERROR("can't set tcl variable 'lulTraceTransformationValue'");
-        return((const char *)NULL);
+        return(NULL);
     }
     Value  = Tcl_GetVar(gomp_GetTclInterp() , 
                                 "lulDoViewTransGlobalLocal", 
@@ -1943,7 +1943,7 @@ const char *gomp_SetLocalTransformationState()
     Value = Tcl_SetVar(gomp_GetTclInterp(),"lulTraceTransformationValue","1",TCL_GLOBAL_ONLY);
     if(!Value) {
         gomp_PrintERROR("can't set tcl variable 'lulTraceTransformationValue'");
-        return((const char *)NULL);
+        return(NULL);
     }
 
     Value  = Tcl_GetVar(gomp_GetTclInterp() , 

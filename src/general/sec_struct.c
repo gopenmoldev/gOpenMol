@@ -631,7 +631,7 @@ int KillExtraSpaces(char *Text)
     int i;
 
     for(i = strlen(Text) - 1 ; i > 0 ; i--) {
-        if(Text[i] == ' ') Text[i] = (char)NULL;
+        if(Text[i] == ' ') Text[i] = '\0';
     }
 
     return(0);

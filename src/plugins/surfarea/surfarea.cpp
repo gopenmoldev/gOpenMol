@@ -3,7 +3,9 @@
 /* Copyright 2002-2003 Kevin J. Boyd and the University of New Orleans.  
 Permission granted to distribute and modify this code for personal, educational, and
 research use. */
-
+#include <sys/types.h>
+#include <inttypes.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -73,7 +75,7 @@ int SetContourData(ClientData cd,Tcl_Interp *ti,int nv,const char **argv)
         nx=atoi(argv[8]);
         ny=atoi(argv[9]);
         nz=atoi(argv[10]);
-        ContData=(float*)atoi(argv[11]);
+        ContData=(float*)strtol(argv[11], NULL, 10);
     }
     else
     {
@@ -86,7 +88,7 @@ int SetContourData(ClientData cd,Tcl_Interp *ti,int nv,const char **argv)
         nx=atoi(argv[8]);
         ny=atoi(argv[9]);
         nz=atoi(argv[10]);
-        ContData=(float*)atoi(argv[11]);
+        ContData=(float*)strtol(argv[11], NULL, 10);
     }
     return TCL_OK;
 }

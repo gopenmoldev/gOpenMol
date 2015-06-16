@@ -130,7 +130,11 @@ int gomp_ReadAtomParams(const char *File)
 #endif
 
 /* 1 line */
-    fgets(input,BUFF_LEN,File_p);   /*    read first line and check for "*" */
+    if (fgets(input,BUFF_LEN,File_p) == NULL) {  /*    read first line and check for "*" */
+      gomp_PrintERROR("?Atom parameter file - ERROR");
+      gomp_PrintMessage("$ File is empty");
+      return(1);
+    }
     if(input[0] != '*') {
         gomp_PrintERROR("?Atom parameter file - ERROR");
         gomp_PrintMessage("$ First line in a par-file has to start with a '*'-sign");

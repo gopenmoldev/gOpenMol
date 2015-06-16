@@ -45,26 +45,26 @@ int gomp_WindowCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text , "window")) {
 
-        gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        if(Text3[0] == (char)NULL) {
+        gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        if(strlen(Text3) == 0) {
             gomp_PrintERROR("window ID (number) missing");
             return(TCL_OK);
         }
 
         WinID = atoi(Text3);
 
-        gomp_CopyString(Text ,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text ,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
         if(gomp_StringMatch(Text , "resi$ze"))  {
 
             if(gomp_SetWindow(WinID)) return(TCL_ERROR);
 
-            strncpy(Text1 ,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1 ,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text2 ,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2 ,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
-            if(Text1[0] == (char)NULL || Text2[0] == (char)NULL) {
+            if(strlen(Text1) == 0 || strlen(Text2) == 0) {
                 gomp_PrintERROR("new window size parameter(s) missing");
                 return(TCL_ERROR);
             }
@@ -78,12 +78,12 @@ int gomp_WindowCommand(ClientData clientdata, Tcl_Interp *interp,
 
             if(gomp_SetWindow(WinID)) return(TCL_ERROR);
 
-            strncpy(Text1 ,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1 ,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text2 ,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2 ,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
-            if(Text1[0] == (char)NULL || Text2[0] == (char)NULL) {
+            if(strlen(Text1) == 0 || strlen(Text2) == 0) {
                 gomp_PrintERROR("new window size parameter(s) missing");
                 return(TCL_ERROR);
             }

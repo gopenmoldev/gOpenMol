@@ -56,7 +56,7 @@ int gomp_HardcopyCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_ERROR);
         }
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
         ITemp = atoi(Text);
         if(gomp_SetWindow(ITemp)) return(1);
@@ -67,12 +67,12 @@ int gomp_HardcopyCommand(ClientData clientdata, Tcl_Interp *interp,
         (void)gomp_PeekMessageQueue();
 #endif
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
 /* bmp */
         if(gomp_StringMatch(Text , "bmp")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("hardcopy file name is missing");
                 return(TCL_ERROR);
             }
@@ -82,9 +82,9 @@ int gomp_HardcopyCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else if(gomp_StringMatch(Text , "post$script")) {
-            strncpy(Text, gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN-1);
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            strncpy(Text, gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN-1);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("hardcopy file name is missing");
                 return(TCL_ERROR);
             }
@@ -94,8 +94,8 @@ int gomp_HardcopyCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else if(gomp_StringMatch(Text , "rgb")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("hardcopy file name is missing");
                 return(TCL_ERROR);
             }
@@ -105,8 +105,8 @@ int gomp_HardcopyCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else if(gomp_StringMatch(Text , "xwd")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("hardcopy file name is missing");
                 return(TCL_ERROR);
             }
@@ -117,8 +117,8 @@ int gomp_HardcopyCommand(ClientData clientdata, Tcl_Interp *interp,
         }
         else if(gomp_StringMatch(Text , "tga") ||
                 gomp_StringMatch(Text , "targ$a")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("hardcopy file name is missing");
                 return(TCL_ERROR);
             }
@@ -129,8 +129,8 @@ int gomp_HardcopyCommand(ClientData clientdata, Tcl_Interp *interp,
         }
         else if(gomp_StringMatch(Text , "jpg") ||
                 gomp_StringMatch(Text , "jpeg")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("hardcopy file name is missing");
                 return(TCL_ERROR);
             }

@@ -182,7 +182,7 @@ int GetInputParams(int argc, const char *argv[])
                 break;
 /* -d debug level           */
             case 'd':          /* define debug level     */
-                if(argv[i][2] != (char)NULL) {
+                if(argv[i][2] != '\0') {
                     DebugLevel = atoi(&argv[i][2]);
                 } else {
                     if((i+1) >= argc) {

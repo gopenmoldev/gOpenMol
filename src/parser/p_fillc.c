@@ -42,10 +42,10 @@ int gomp_FillCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text , "fill")) {
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 /* distance */
         if(gomp_StringMatch(Text , "dist$ance")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text , "arra$y") ||
                gomp_StringMatch(Text , "list")) {
@@ -63,7 +63,7 @@ int gomp_FillCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* angle */
         else if(gomp_StringMatch(Text , "angl$e")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text , "arra$y") ||
                gomp_StringMatch(Text , "list")) {
@@ -81,7 +81,7 @@ int gomp_FillCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* torsion */
         else if(gomp_StringMatch(Text , "tors$ion")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text , "arra$y") ||
                gomp_StringMatch(Text , "list")) {
@@ -99,8 +99,8 @@ int gomp_FillCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* structure */
         else if(gomp_StringMatch(Text , "stru$cture")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 ITemp1 = 1;
             }
             else 
@@ -117,15 +117,15 @@ int gomp_FillCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* atom */
         else if(gomp_StringMatch(Text , "atom")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("atom index is missing");
                 return(TCL_ERROR);
             }
             else
                 ITemp2 = atoi(Text);
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 ITemp1 = 1;
             }
             else

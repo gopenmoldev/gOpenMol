@@ -52,24 +52,24 @@ int gomp_RotateCommand(ClientData clientdata, Tcl_Interp *interp,
         c = 0.0;
 
 /* #1.1 primary/display */
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
         if(gomp_StringMatch(Text , "prim$ary") ||
            gomp_StringMatch(Text , "disp$lay")) {
 #ifdef ENABLE_GRAPHICS
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 a = atof(Text);
                 gomp_Rotate(-a , 1.0 , 0.0 , 0.0); /* x - axis rotation */
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 b = atof(Text);
                 gomp_Rotate(-b , 0.0 , 1.0 , 0.0); /* y - axis rotation */
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 c = atof(Text);
                 gomp_Rotate(-c , 0.0 , 0.0 , 1.0); /* z - axis rotation */
             }
@@ -81,20 +81,20 @@ int gomp_RotateCommand(ClientData clientdata, Tcl_Interp *interp,
 /* #1.1 selection */
         else if(gomp_StringMatch(Text , "sele$ction")) {
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 a = atof(Text);
                 gomp_RotateCoordinates1X(-a , 'x'); /* x - axis rotation */
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 b = atof(Text);
                 gomp_RotateCoordinates1X(-b , 'y'); /* y - axis rotation */
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 c = atof(Text);
                 gomp_RotateCoordinates1X(-c , 'z'); /* z - axis rotation */
             }

@@ -57,26 +57,26 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
 
     if(gomp_StringMatch(Text , "plum$ber")) {
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
 /* atoms */
         if(gomp_StringMatch(Text , "atom$s")) {
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(Text4[0] == (char)NULL) {
+            if(strlen(Text4) == 0) {
                 gomp_PrintERROR("radius value missing");
                 return(TCL_ERROR);
             }
             Rad = atof(Text4);
 
-            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(Text5[0] == (char)NULL) {
+            if(strlen(Text5) == 0) {
                 gomp_PrintERROR("colour name (value) missing");
                 return(TCL_ERROR);
             }
@@ -86,7 +86,7 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
  
-            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             Type = CYLINDER_TYPE;
             if(gomp_StringMatch(Text6 , "cyli$nder") ||
@@ -113,13 +113,13 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
                 Type == FLAT_HELIX_TYPE ||
                 Type == ARROW_TYPE ||
                 Type == STRAND_TYPE ) {
-                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text9[0] == (char)NULL) {
+                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text9) == 0) {
                     sprintf(Text9,"2.0");
                     gomp_PrintMessage("using default width value 2.0");
                 }
-                if(Text10[0] == (char)NULL) {
+                if(strlen(Text10) == 0) {
                     sprintf(Text10,"0.5");
                     gomp_PrintMessage("using default thickness value 0.5");
                 }
@@ -129,10 +129,10 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
 
             Glue = 0;
             do {
-                gomp_CopyString(Text11,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text11,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text11 , "glue"))
                     Glue = 1;
-            } while( Text11[0] != (char)NULL );
+            } while( strlen(Text11) != 0);
 
             (void)gomp_ParsePlumberList( Text1,
                                        Text2,
@@ -158,7 +158,7 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* display */
         else if(gomp_StringMatch(Text , "disp$lay")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text1 , "on")) {
                 if(!gomp_GetPlumberSets()) {
                     gomp_PrintERROR("no plumber sets are defined");
@@ -189,9 +189,9 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
         }
         else if(gomp_StringMatch(Text , "colo$r") ||
                 gomp_StringMatch(Text , "colo$ur")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
         
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("colour name (value) missing");
                 return(TCL_ERROR);
             }
@@ -201,8 +201,8 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 ITemp = 1;
             }
             else
@@ -218,9 +218,9 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "stru$cture")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
         
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("structure number missing");
                 return(TCL_ERROR);
             }
@@ -232,8 +232,8 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
             }
             ITemp1--;
 
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 ITemp = 1;
             }
             else
@@ -247,8 +247,8 @@ int gomp_PlumberCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "dest$roy")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 ITemp = 1;
             }
             else

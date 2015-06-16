@@ -109,7 +109,7 @@ is one, its the surface contour data, if not its the contour to be averaged.*/
         dx[0]/=(double)(nx[0]-1);
         dx[1]/=(double)(nx[1]-1);
         dx[2]/=(double)(nx[2]-1);
-        ContData=(float*)atoi(argv[11]);
+        ContData=(float*)strtol(argv[11], NULL, 10);
         if(nv<13)
             contval=1.e-3;
         else
@@ -129,7 +129,7 @@ is one, its the surface contour data, if not its the contour to be averaged.*/
         dx2[0]/=(double)(nx2[0]-1);
         dx2[1]/=(double)(nx2[1]-1);
         dx2[2]/=(double)(nx2[2]-1);
-        ContData2=(float*)atoi(argv[11]);
+        ContData2=(float*)strtol(argv[11], NULL, 10);
     }
     return TCL_OK;
 }

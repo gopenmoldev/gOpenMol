@@ -142,7 +142,7 @@ int gomp_GetFrameDL_PolyUNFORMATTED(int alt, FILE *File_p, int iappend)
         }
 
         icount = fread(&hdr,sizeof(char),  80 ,File_p);
-        hdr[DL_POLY_TEXT_FIELD - 1] = (char)NULL;
+        hdr[DL_POLY_TEXT_FIELD - 1] = '\0';
         gomp_PrintMessage(hdr);
         icount = fread(&record,sizeof(int), 1 ,File_p);
 /*#2*/

@@ -971,12 +971,12 @@ const float *gomp_GetRMSfluctuation(int Which)
 
     if(!MSFdata.Long) {
         gomp_PrintERROR("no rms fluctuation list is set up");
-        return((const float *)NULL);
+        return(NULL);
     }
 
     if(Which < 1 || Which > MSFdata.Long) {
         gomp_PrintERROR("your index is out of range");
-        return((const float *)NULL);
+        return(NULL);
     }
 
     Temp[0] = MSFdata.Value[Which-1];
@@ -1030,13 +1030,13 @@ int   gomp_CopyMSDarray2Clipboard()
             if(!i) {
                 String = gomp_AllocateCharVector(strlen(Text) + 1);
                 strncpy(String,Text,strlen(Text));
-                String[strlen(Text)] = (char)NULL;
+                String[strlen(Text)] = '\0';
             }
             else {
                 String = gomp_ReallocateCharVector(String , 
                                                 strlen(Text) + strlen(String) + 1);
                 strncat(String,Text,strlen(Text));
-                String[strlen(String)] = (char)NULL;
+                String[strlen(String)] = '\0';
             }
         }
         (void)gomp_CopyText2Clipboard(String);

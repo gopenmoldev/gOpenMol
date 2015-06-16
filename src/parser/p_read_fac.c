@@ -62,13 +62,13 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
     if(gomp_StringMatch(Text , "impo$rt")) {
 
 /* #1.1 coor$dinates */
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
         if(gomp_StringMatch(Text , "coor$dinates")) {
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_FileNameIsURL(Text2)) {
                 sprintf(Text1,"?Can't handle the given URL '%s'",Text2);
@@ -98,9 +98,9 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* cluster */
         else  if(gomp_StringMatch(Text , "clus$ter")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("cluster file name missing");
                 sprintf(Text3,"1");
                 (void)gomp_SendTclReturn(Text3);
@@ -122,9 +122,9 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else  if(gomp_StringMatch(Text , "dict$ionary")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("file name is missing");
                 (void)gomp_SendTclReturn("1");
                 return(TCL_ERROR);
@@ -144,9 +144,9 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /*  vector */
         else  if(gomp_StringMatch(Text , "vect$or")) {
-            strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            if(Text2[0] == (char)NULL) {
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("file type is missing");
                 (void)gomp_SendTclReturn("1");
                 return(TCL_ERROR);
@@ -164,7 +164,7 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
             if(gomp_FileNameIsURL(Text1)) {
@@ -191,10 +191,10 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* #1.3 gbas$is */
         else if(gomp_StringMatch(Text , "gbas$is")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("file name is missing");
                 (void)gomp_SendTclReturn("1");
                 return(TCL_ERROR);
@@ -216,10 +216,10 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* model */
         else  if(gomp_StringMatch(Text , "mode$l")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("file name is missing");
                 (void)gomp_SendTclReturn("1");
                 return(TCL_ERROR);
@@ -241,18 +241,18 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* charge */
         else  if(gomp_StringMatch(Text , "char$ge")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("source type missing");
                 return(TCL_ERROR);
             }
 /* ICON8 */
             if(gomp_StringMatch(Text1 , "icon8") ||
                gomp_StringMatch(Text1 , "ICON8")) {
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("ICON8 output file name missing");
                     return(TCL_ERROR);
                 }
@@ -276,9 +276,9 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
 /* MOPAC6 */
             else if(gomp_StringMatch(Text1 , "mopa$c6") ||
                     gomp_StringMatch(Text1 , "MOPA$C6")) {
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("MOPAC6 output file name missing");
                     return(TCL_ERROR);
                 }
@@ -300,9 +300,9 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
 /* GAUSSIAN */
             else if(gomp_StringMatch(Text1 , "gaus$sian") ||
                     gomp_StringMatch(Text1 , "GAUS$SIAN")) {
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("GAUSSIAN output file name missing");
                     return(TCL_ERROR);
                 }
@@ -324,9 +324,9 @@ int gomp_ImportCommand(ClientData clientdata, Tcl_Interp *interp,
 /* USER */
             else if(gomp_StringMatch(Text1 , "user") ||
                     gomp_StringMatch(Text1 , "MOPA$C6")) {
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("USER output file name missing");
                     return(TCL_ERROR);
                 }
@@ -383,7 +383,7 @@ int gomp_FileNameIsURL(char *Text)
           
         value  = Tcl_GetVar(gomp_GetTclInterp() , "gomURLFileName", TCL_GLOBAL_ONLY);
 
-        if(!value || (value[0] == (char)NULL)) {
+        if(!value || (strlen(value) == 0)) {
             gomp_PrintERROR("can't retrieve given URL");
             return(1);
         } 

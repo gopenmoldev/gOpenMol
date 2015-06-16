@@ -70,14 +70,14 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
     if(gomp_StringMatch(Text , "expo$rt")) {
 
 /* #1.1 coor$dinates */
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
         if(gomp_StringMatch(Text , "coor$dinates")) {
 
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             ITemp = atoi(Text1);
             if(ITemp < 1 || ITemp > gomp_GetNumMolecStructs()) {
@@ -91,7 +91,7 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else  if(gomp_StringMatch(Text , "dict$ionary")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
             if(!gomp_ImportDictionaryAndApply(Text1))
                 return(TCL_OK);
@@ -100,8 +100,8 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* #1.2 rmsfluctuation */
         else  if(gomp_StringMatch(Text , "rmsf$luctuation")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("file name missing");
                 return(TCL_ERROR);
             }
@@ -112,8 +112,8 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* #1.3 rdf */
         else if(gomp_StringMatch(Text , "rdf")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("rdf file name is missing");
                 return(TCL_ERROR);
             }
@@ -124,8 +124,8 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* means square displacement */
         else if(gomp_StringMatch(Text , "msdi$splacement")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("file name is missing");
                 return(TCL_ERROR);
             }
@@ -136,8 +136,8 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* #1.4 mode$l */
         else if(gomp_StringMatch(Text , "mode$l")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("file name missing");
                 return(TCL_ERROR);
             }
@@ -148,13 +148,13 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* cluster */
         else if(gomp_StringMatch(Text , "clus$ter")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("cluster file name missing");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 gomp_CopyString(Text2,"** Default cluster file label **",BUFF_LEN);
             }
             if(!gomp_WriteClusterData(Text1 , Text2))
@@ -164,8 +164,8 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* correlation data */
         else if(gomp_StringMatch(Text , "corr$elation")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("correlation file name missing");
                 return(TCL_ERROR);
             }
@@ -176,19 +176,19 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* time series */
         else if(gomp_StringMatch(Text , "dist$ance")) {
-            strncpy(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
             if(gomp_StringMatch(Text , "list") ||
                gomp_StringMatch(Text , "seri$es")) {
-                strncpy(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text[0] == (char)NULL) {
+                if(strlen(Text) == 0) {
                     gomp_PrintERROR("index to list is missing");
                     return(TCL_ERROR);
                 }
                 ITemp = atoi(Text);
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text[0] == (char)NULL) {
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text) == 0) {
                     gomp_PrintERROR("file name is missing");
                     return(TCL_ERROR);
                 }
@@ -199,13 +199,13 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
             }
         }
         else if(gomp_StringMatch(Text , "angl$e")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text , "list") ||
                gomp_StringMatch(Text , "seri$es")) {
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 ITemp = atoi(Text);
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text[0] == (char)NULL) {
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text) == 0) {
                     gomp_PrintERROR("file name is missing");
                     return(TCL_ERROR);
                 }
@@ -216,13 +216,13 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
             }
         }
         else if(gomp_StringMatch(Text , "tors$ion")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text , "list") ||
                gomp_StringMatch(Text , "seri$es")) {
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 ITemp = atoi(Text);
-                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                if(Text[0] == (char)NULL) {
+                gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                if(strlen(Text) == 0) {
                     gomp_PrintERROR("file name is missing");
                     return(TCL_ERROR);
                 }
@@ -235,9 +235,9 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
 /* protein backbone torsion */
         else if(gomp_StringMatch(Text , "bbto$rsion") ||
                 gomp_StringMatch(Text , "bbdi$hedrals")) {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("backbone torsion file name missing");
                 return(TCL_ERROR);
             }
@@ -267,19 +267,19 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
                 }
             }
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 /* .. USER */
             if(gomp_StringMatch(Text , "user")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("structure number missing");
                     return(TCL_ERROR);
                 }
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("input file name is missing");
                     return(TCL_ERROR);
                 }
@@ -309,15 +309,15 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* .. ICON8 */
             else if(gomp_StringMatch(Text , "icon$8")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("structure number missing");
                     return(TCL_ERROR);
                 }
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("input file is missing");
                     return(TCL_ERROR);
                 }
@@ -342,16 +342,16 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* .. GAMESS */ 
             else if(gomp_StringMatch(Text , "game$ss")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("structure number missing");
                     return(TCL_ERROR);
                 }
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("input file name is missing");
                     return(TCL_ERROR);
                 }
@@ -380,16 +380,16 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* .. MOPAC */
             else if(gomp_StringMatch(Text , "mopa$c")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("structure number missing");
                     return(TCL_ERROR);
                 }
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("input file name is missing");
                     return(TCL_ERROR);
                 }
@@ -419,16 +419,16 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
 /* .. OpenMol */
             else if(gomp_StringMatch(Text , "open$mol")) {
 
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("structure index missing");
                     return(TCL_ERROR);
                 }
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     gomp_PrintERROR("input file name is missing");
                     return(TCL_ERROR);
                 }
@@ -454,12 +454,12 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* .. PROBESURF */
             else if(gomp_StringMatch(Text , "prob$esurf")) {
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
-                if(Text2[0] == (char)NULL) {
+                if(strlen(Text2) == 0) {
                     gomp_PrintERROR("structure index missing");
                     return(TCL_ERROR);
                 }
@@ -475,89 +475,89 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
                 }
             
             
-                if(Text1[0] == (char)NULL) {
+                if(strlen(Text1) == 0) {
                     if(!gomp_InputView)
                         gomp_PopAtomCoordinates();
                     gomp_PrintERROR("input file is missing");
                     return(TCL_ERROR);
                 }
 
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
 
                 sumxyz    = gomp_GetTranslateArray();
                 /* Xmin .. */
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Xmin = atof(Text2);
                 }
                 else 
                     Xmin = -(gomp_GetSizeOfSystem() + sumxyz[0]);
 
                 /* Xmax .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Xmax = atof(Text2);
                 }
                 else
                     Xmax =  gomp_GetSizeOfSystem() + sumxyz[0];
 
                 /* Ymin .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Ymin = atof(Text2);
                 }
                 else  
                     Ymin  = -(gomp_GetSizeOfSystem() + sumxyz[1]);
 
                 /* Ymax .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Ymax = atof(Text2);
                 }
                 else
                     Ymax =   gomp_GetSizeOfSystem() + sumxyz[1];
 
                 /* Zmin .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Zmin = atof(Text2);
                 }
                 else 
                     Zmin =  -(gomp_GetSizeOfSystem() + sumxyz[2]);
 
                 /* Zmax .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Zmax = atof(Text2);
                 }
                 else
                     Zmax =   gomp_GetSizeOfSystem() + sumxyz[2];
 
                 /* Xpts .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Xpts = atoi(Text2);
                 }
                 else 
                     Xpts = 60;
                 /* Ypts .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Ypts = atoi(Text2);
                 }
                 else 
                     Ypts = 60;
                 /* Zpts .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     Zpts = atoi(Text2);
                 }
                 else 
@@ -565,9 +565,9 @@ int gomp_ExportCommand(ClientData clientdata, Tcl_Interp *interp,
 
 
                 /* ProbeRad .. */
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                if(Text2[0] != (char)NULL) {
+                if(strlen(Text2) != 0) {
                     ProbeRad = atof(Text2);
                 }
                 else 
@@ -624,7 +624,7 @@ int WriteCoordinates(int Which ,
 /* ball and stick  */
     if(gomp_StringMatch(Text1 , "bands$tick")) {
 
-        if(Text2[0] == (char)NULL) {
+      if(strlen(Text2) == 0) {
             gomp_PrintERROR("output file name is missing");
             return(TCL_ERROR);
         }
@@ -649,7 +649,7 @@ int WriteCoordinates(int Which ,
     else if(gomp_StringMatch(Text1 , "char$mm") ||
             gomp_StringMatch(Text1 , "karp$lus")) {
 
-        if(Text2[0] == (char)NULL) {
+      if(strlen(Text2) == 0) {
             gomp_PrintERROR("output file name is missing");
             return(TCL_ERROR);
         }
@@ -672,7 +672,7 @@ int WriteCoordinates(int Which ,
 /* free  */
     else if(gomp_StringMatch(Text1 , "free")) {
 
-        if(Text2[0] == (char)NULL) {
+      if(strlen(Text2) == 0) {
             gomp_PrintERROR("output file name is missing");
             return(TCL_ERROR);
         }
@@ -696,7 +696,7 @@ int WriteCoordinates(int Which ,
 /* pdbq  */
     else if(gomp_StringMatch(Text1 , "pdbq")) {
 
-        if(Text2[0] == (char)NULL) {
+      if(strlen(Text2) == 0) {
             gomp_PrintERROR("output file name is missing");
             return(TCL_ERROR);
         }
@@ -725,7 +725,7 @@ int WriteCoordinates(int Which ,
 /* pdb  */
     else if(gomp_StringMatch(Text1 , "pdb")) {
 
-        if(Text2[0] == (char)NULL) {
+      if(strlen(Text2) == 0) {
             gomp_PrintERROR("output file name is missing");
             return(TCL_ERROR);
         }
@@ -749,7 +749,7 @@ int WriteCoordinates(int Which ,
 /* openmol  */
     else if(gomp_StringMatch(Text1 , "open$mol")) {
 
-        if(Text2[0] == (char)NULL) {
+      if(strlen(Text2) == 0) {
             gomp_PrintERROR("output file name is missing");
             return(TCL_ERROR);
         }
@@ -773,7 +773,7 @@ int WriteCoordinates(int Which ,
 /* xyz  */
     else if(gomp_StringMatch(Text1 , "xyz")) {
 
-        if(Text2[0] == (char)NULL) {
+      if(strlen(Text2) == 0) {
             gomp_PrintERROR("output file name is missing");
             return(TCL_ERROR);
         }

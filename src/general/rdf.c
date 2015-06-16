@@ -332,7 +332,7 @@ int gomp_WriteRDF(const char *FileName)
         return(1);
     }
 
-    if(FileName[0] == (char)NULL) {
+    if(strlen(FileName) == 0) {
         gomp_PrintERROR("rdf file name is missing");
         return(1);
     }
@@ -390,13 +390,13 @@ int   gomp_CopyRDFarray2Clipboard()
             if(!i) {
                 String = gomp_AllocateCharVector(strlen(Text) + 1);
                 strncpy(String,Text,strlen(Text));
-                String[strlen(Text)] = (char)NULL;
+                String[strlen(Text)] = '\0';
             }
             else {
                 String = gomp_ReallocateCharVector(String , 
                                                 strlen(Text) + strlen(String) + 1);
                 strncat(String,Text,strlen(Text));
-                String[strlen(String)] = (char)NULL;
+                String[strlen(String)] = '\0';
             }
         }
         (void)gomp_CopyText2Clipboard(String);

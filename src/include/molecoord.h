@@ -83,5 +83,5 @@ extern int gomp_PopAtomCoordinates(void);
 
 #define IMPLEMENT_GET_MODIFIABLE_POINTER( \
     type,name,args,value,invalidate) \
-    const type *gomp_Get##name args { return((void*)value); } \
+    const type *gomp_Get##name args { return((type*)value); } \
     type       *gomp_##GetModifiable##name args { invalidate; return(value); }

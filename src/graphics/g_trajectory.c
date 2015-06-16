@@ -280,7 +280,7 @@ int  gomp_DisplayTrajectory(int Method)
         return(0);
     }
 
-    if ( *gomp_GetTrajectoryFileName() == (char)NULL )
+    if ( strlen(gomp_GetTrajectoryFileName()) == 0 )
         return(1);
 
     (void)gomp_GetTrajectoryDisplayParams(&FirstFrame , 

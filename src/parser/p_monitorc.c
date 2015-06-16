@@ -62,25 +62,25 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_ERROR);
         }
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
         if(     gomp_StringMatch(Text , "dist$ance"))  {
 
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text4,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text5,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text6,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text7,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text8,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
 /* check first if the intention is to change the colour */
@@ -91,7 +91,7 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
                     float GreenC;
                     float BlueC;
 
-                    if(Text2[0] == (char)NULL) {
+                    if(strlen(Text2) == 0) {
                         gomp_PrintERROR("line colour value/nale is missing");
                         return(TCL_ERROR);
                     }
@@ -102,8 +102,8 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
                         return(TCL_ERROR);
                     }
 
-                    if(Text3[0] == (char)NULL) {
-                        Text3[0] = '1';
+                    if(strlen(Text3) == 0) {
+		      strcpy(Text3, "1"); 
                     }
 
                     if(!gomp_SetDistMonitorColor((atoi(Text3) - 1), 
@@ -117,13 +117,13 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
             if(gomp_StringMatch(Text1 , "type")) {
                 {
 
-                    if(Text2[0] == (char)NULL) {
+		  if(strlen(Text2) == 0) {
                         gomp_PrintERROR("line type value/nale is missing");
                         return(TCL_ERROR);
                     }
 
-                    if(Text3[0] == (char)NULL) {
-                        Text3[0] = '1';
+		  if(strlen(Text3) == 0) {
+		    strcpy(Text3, "1");
                     }
 
                     if(!gomp_SetDistMonitorType((atoi(Text3) - 1), atoi(Text2)))
@@ -151,30 +151,30 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "angl$e"))     {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text4,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text5,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text6,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text7,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text8,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text9,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text10,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text10,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text11,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text11,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
-/* check first if the intentuion is to change the colour */
+/* check first if the intention is to change the colour */
             if(gomp_StringMatch(Text1 , "colo$ur") ||
                gomp_StringMatch(Text1 , "colo$r")) {
                 {
@@ -182,7 +182,7 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
                     float GreenC;
                     float BlueC;
 
-                    if(Text2[0] == (char)NULL) {
+                    if(strlen(Text2) == 0) {
                         gomp_PrintERROR("line colour value/nale is missing");
                         return(TCL_ERROR);
                     }
@@ -193,8 +193,8 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
                         return(TCL_ERROR);
                     }
 
-                    if(Text3[0] == (char)NULL) {
-                        Text3[0] = '1';
+                    if(strlen(Text3) == 0) {
+		      strcpy(Text3, "1");
                     }
 
                     if(!gomp_SetAngMonitorColor((atoi(Text3) - 1), 
@@ -208,14 +208,14 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
 /* check first if the intention is to change the type */
             if(gomp_StringMatch(Text1 , "type")) {
                 {
-                    if(Text2[0] == (char)NULL) {
+		  if(strlen(Text2) == 0) {
                         gomp_PrintERROR("line type value/nale is missing");
                         return(TCL_OK);
                     }
 
-                    if(Text3[0] == (char)NULL) {
-                        Text3[0] = '1';
-                    }
+		  if(strlen(Text3) == 0) {
+		    strcpy(Text3, "1");
+		  }
 
                     if(!gomp_SetAngMonitorType((atoi(Text3) - 1), atoi(Text2)))
                         return(TCL_OK);
@@ -245,36 +245,36 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
         }
         else if(gomp_StringMatch(Text , "tors$ion") ||
                 gomp_StringMatch(Text , "dihe$dral"))   {
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text4,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text5,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text6,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text7,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text8,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text9,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text10,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text10,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text11,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text11,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text12,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text12,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text13,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text13,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
-            strncpy(Text14,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text14,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
 
-/* check first if the intentuion is to change the colour */
+/* check first if the intention is to change the colour */
             if(gomp_StringMatch(Text1 , "colo$ur") ||
                gomp_StringMatch(Text1 , "colo$r")) {
                 {
@@ -282,7 +282,7 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
                     float GreenC;
                     float BlueC;
 
-                    if(Text2[0] == (char)NULL) {
+                    if(strlen(Text2) == 0) {
                         gomp_PrintERROR("line colour value/nale is missing");
                         return(TCL_ERROR);
                     }
@@ -293,8 +293,8 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
                         return(TCL_ERROR);
                     }
 
-                    if(Text3[0] == (char)NULL) {
-                        Text3[0] = '1';
+                    if(strlen(Text3) == 0) {
+		      strcpy(Text3, "1");
                     }
 
                     if(!gomp_SetTorsMonitorColor((atoi(Text3) - 1), 
@@ -308,13 +308,13 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
 /* check first if the intention is to change the type */
             if(gomp_StringMatch(Text1 , "type")) {
                 {
-                    if(Text2[0] == (char)NULL) {
+		  if(strlen(Text2) == 0) {
                         gomp_PrintERROR("line type value/nale is missing");
                         return(TCL_ERROR);
                     }
 
-                    if(Text3[0] == (char)NULL) {
-                        Text3[0] = '1';
+		  if(strlen(Text3) == 0) {
+		    strcpy(Text3, "1");
                     }
 
                     if(!gomp_SetTorsMonitorType((atoi(Text3) - 1), atoi(Text2)))
@@ -348,9 +348,9 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "disp$lay"))  {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text,"dist$ance")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text1,"on")) {
                     (void)gomp_SetDistMonitor(ON);
                     return(TCL_OK);
@@ -367,7 +367,7 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
             }
 /* .... */
             else if(gomp_StringMatch(Text,"angl$e")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text1,"on")) {
                     (void)gomp_SetAngMonitor(ON);
                     return(TCL_OK);
@@ -385,7 +385,7 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
 /* .... */
             else if(gomp_StringMatch(Text,"tors$ion") ||
                     gomp_StringMatch(Text,"dihe$dral")) {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text1,"on")) {
                     (void)gomp_SetTorsMonitor(ON);
                     return(TCL_OK);
@@ -402,15 +402,15 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
             }
         }
         else if(gomp_StringMatch(Text , "edit"))  {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(gomp_StringMatch(Text , "dist$ance"))  {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_EditDistVector( atoi(Text1) - 1 , 
                                       atoi(Text2) - 1 , atoi(Text3) - 1 , 
                                       atoi(Text4)     , atof(Text5) , atof(Text6) , atof(Text7))) {
@@ -419,14 +419,14 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
                     return(TCL_OK);
                 }
             } else if(gomp_StringMatch(Text , "angl$e"))  {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_EditAngVector( atoi(Text1) - 1 , 
                                      atoi(Text2) - 1 , atoi(Text3) - 1 , atoi(Text4) - 1 ,
                                      atoi(Text5)     , atof(Text6) , atof(Text7) , atof(Text8))) {
@@ -435,15 +435,15 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
                     return(TCL_OK);
                 }
             } else if(gomp_StringMatch(Text , "tors$ion"))  {
-                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_EditTorsVector( atoi(Text1) - 1 , 
                                       atoi(Text2) - 1 , atoi(Text3) - 1 , atoi(Text4) - 1 , atoi(Text5) - 1 ,
                                       atoi(Text6)     , atof(Text7) , atof(Text8) , atof(Text9))) {
@@ -457,9 +457,9 @@ int gomp_MonitorCommand(ClientData clientdata, Tcl_Interp *interp,
             }
         }
         else if(gomp_StringMatch(Text , "dele$te"))  {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("index number to list is missing");
                 return(TCL_ERROR);
             }

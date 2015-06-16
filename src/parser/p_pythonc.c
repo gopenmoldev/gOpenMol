@@ -59,9 +59,9 @@ int gomp_PythonCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text , "pyth$on")) {
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-        if(Text[0] == (char)NULL) {
+        if(strlen(Text) == 0) {
             gomp_PrintERROR("python state value missing (on/off)");
             return(TCL_ERROR);
         }

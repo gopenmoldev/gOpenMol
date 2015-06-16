@@ -881,11 +881,11 @@ int gomp_GetFrameCerius2(int alt, FILE *File_p, int iappend)
         }
         icount = fread(eextit,sizeof(char), leexti , File_p);
         if(leexti) {
-            eextit[79] = (char)NULL;
+            eextit[79] = '\0';
             gomp_PrintMessage(eextit);
         }
         else 
-            eextit[0]  = (char)NULL;
+            eextit[0]  = '\0';
         icount = fread(&record,sizeof(int), 1 ,File_p);
 
         icount = fread(&record,sizeof(int), 1 ,File_p);
@@ -895,10 +895,10 @@ int gomp_GetFrameCerius2(int alt, FILE *File_p, int iappend)
         }
         icount = fread(partit,sizeof(char), lparti , File_p);
         if(lparti) {
-            partit[79] = (char)NULL;
+            partit[79] = '\0';
             gomp_PrintMessage(partit);
         } else 
-            partit[0] = (char)NULL;
+            partit[0] = '\0';
 /* end of record #4*/
         icount = fread(&record,sizeof(int), 1 ,File_p);
 
@@ -1004,8 +1004,8 @@ int gomp_GetFrameCerius2(int alt, FILE *File_p, int iappend)
 /* next # */
         if (period && lnpecan ) {
             icount = fread(&record,sizeof(int), 1 ,File_p);
+            icount = fread(&sigdyn[0],sizeof(double), 1 , File_p);
             icount = fread(&sigdyn[1],sizeof(double), 1 , File_p);
-            icount = fread(&sigdyn[2],sizeof(double), 1 , File_p);
             icount = fread(&qcanon,sizeof(double), 1 , File_p);
             icount = fread(&record,sizeof(int), 1 ,File_p);
         }

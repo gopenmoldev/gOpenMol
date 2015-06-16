@@ -87,7 +87,7 @@ static int collect_selected_atoms;  /* help variable to collect atoms */
 /* functions and variables to support a save of the atoms that
    are selected during a command */
 
-static int *AtomHitList           = (int *)NULL;
+static int *AtomHitList           = NULL;
 static int  AtomHitListTextLength = 0;
 static int  AtomHitListActive     = 0;
 
@@ -100,7 +100,7 @@ static struct {
     int  Length;
     int  State; /* if != 0 all are selected, if == 0 at least one structure is not selected */ 
     int *List;
-} Selected = { 0  , 0 , (int *)NULL};
+} Selected = { 0  , 0 , NULL};
 
 static struct {
     int   Structures;
@@ -117,8 +117,8 @@ static struct {
     gom_PlotterData Plotter;
 } CoordAxisList = {
     0, 0.0, 0.0, 0.0, 
-    (int *)NULL, (int *)NULL, (int *)NULL,
-    0, (float *)NULL, (float *)NULL, (float *)NULL,
+    NULL, NULL, NULL,
+    0, NULL, NULL, NULL,
     { NULL, NULL }
 };
 
@@ -2443,10 +2443,10 @@ int gomp_ParseRDFList(const char *Segment1 ,
 
     if(slong > 0) {      /* #1 */
 
-        if(TRcut[0] != (char)NULL) 
+      if(strlen(TRcut) != 0) 
             Rcut = atof(TRcut);
 
-        if(TNbin[0] != (char)NULL)
+      if(strlen(TNbin) != 0)
             Nbin = atoi(TNbin);
 
         CellA = gomp_GetCellA();
@@ -2574,7 +2574,7 @@ int gomp_GetAtomIndexFromName(const char *Input , int *Wstr , int *AtomI)
     static char Residue[BUFF_LEN];
     static char Atom[BUFF_LEN];
 
-    if(Input[0] == (char)NULL) {
+    if(strlen(Input == 0) {
         gomp_PrintERROR("can't parse an empty string");
         return(1);
     }
@@ -2707,9 +2707,9 @@ int gomp_ParsePlotVectorList(  const char *Segment ,
 
     if(slong > 0) {      /* #1 */
 
-        if(*Scale  != (char)NULL)
+      if(strlen(Scale)  != 0)
             (void)gomp_SetVectorScale(atof(Scale));
-        if(*Radius != (char)NULL)
+      if(strlen(Radius) != 0)
             (void)gomp_SetVectorRadius(atof(Radius));
 
         (void)gomp_SetVectorListLength(slong);
@@ -2940,7 +2940,7 @@ int gomp_ParseCalcHbondsList(const char *Segment ,
     if(InitAtomHitList())
         return(1);
 
-    if(*Extra != (char)NULL) {
+    if(strlen(Extra) != 0) {
         if(gomp_ColourName2RGB(Extra , &RedC , &GreenC , &BlueC)) {
             gomp_FormatERROR("can't resolve colour name '%s'",Extra);
             return(1);
@@ -3599,15 +3599,15 @@ int gomp_ParsePlotAxisList(const char *Segment ,
 
     CoordAxisDataIsChanging();
 
-    if(*Xaxis != (char)NULL)
+    if(strlen(Xaxis) != 0)
         CoordAxisList.Xaxis = atof(Xaxis);
     else
         CoordAxisList.Xaxis = 2.0;
-    if(*Yaxis != (char)NULL)
+    if(strlen(Yaxis) != 0)
         CoordAxisList.Yaxis = atof(Yaxis);
     else
         CoordAxisList.Yaxis = 2.0;
-    if(*Zaxis != (char)NULL)
+    if(strlen(Zaxis) != 0)
         CoordAxisList.Zaxis = atof(Zaxis);
     else
         CoordAxisList.Zaxis = 2.0;
@@ -3864,7 +3864,7 @@ int SaveAtomHitList(int Entries , const int *EntryPointer)
         sprintf(Temp,"{} ");
         String = gomp_AllocateCharVector(strlen(Temp) + 1);
         strncpy(String,Temp,strlen(Temp));
-        String[strlen(Temp)] = (char)NULL;
+        String[strlen(Temp)] = '\0';
         AtomHitListTextLength = strlen(String);
         ITemp = Tcl_SetVar(gomp_GetTclInterp(),"gomAtomHitList",String,TCL_GLOBAL_ONLY);
         if(!ITemp) {
@@ -3881,7 +3881,7 @@ int SaveAtomHitList(int Entries , const int *EntryPointer)
     }
     String = gomp_AllocateCharVector(strlen(Temp) + 1);
     strncpy(String,Temp,strlen(Temp));
-    String[strlen(Temp)] = (char)NULL;
+    String[strlen(Temp)] = '\0';
 
     for (loop = 1 ; loop < Entries ; loop++) {
 
@@ -3893,7 +3893,7 @@ int SaveAtomHitList(int Entries , const int *EntryPointer)
         String = gomp_ReallocateCharVector(String , 
                                         strlen(Temp) + strlen(String) + 1);
         strncat(String,Temp,strlen(Temp));
-        String[strlen(String)] = (char)NULL;
+        String[strlen(String)] = '\0';
     }
 
     if(AtomHitListTextLength) {

@@ -78,11 +78,11 @@ int gomp_HelpCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text1,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text1 , "help")) {
 
-        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 /* node */
         if(gomp_StringMatch(Text1 , "?") ||
-           (Text1[0] == (char)NULL)     ||
+           (strlen(Text1) == 0)     ||
            gomp_StringMatch(Text1 , "help")) {
             if(!PrintHelpInfo(MAIN_HELP,""))
                 return(TCL_OK);
@@ -265,11 +265,11 @@ int gomp_HelpCommand(ClientData clientdata, Tcl_Interp *interp,
         }   
 /* use a web browser to get the help */
         else if(gomp_StringMatch(Text1 , "webb$rowser")) {
-            if(*gomp_GetWebBrowser() == (char)NULL) {
+	  if(strlen(gomp_GetWebBrowser()) == 0) {
                 gomp_PrintERROR("web browser is not defined");
                 return(TCL_ERROR);
             }
-            if(*gomp_GetHURL() == (char)NULL) {
+	  if(strlen(gomp_GetHURL()) == 0) {
                 gomp_PrintERROR("URL to the help files is not defined");
                 return(TCL_ERROR);
             }

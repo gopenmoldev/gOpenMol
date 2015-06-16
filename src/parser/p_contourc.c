@@ -74,12 +74,12 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text , "conto$ur")) {
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
 /* file */
         if(gomp_StringMatch(Text , "file")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("file name is missing");
                 return(TCL_ERROR);
             }
@@ -90,8 +90,8 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
             }
 
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 sprintf(Text2,"%d",(gomp_GetContoursDefined()+1));
                 sprintf(Text,"will use default name '%s' for the contour",Text2);
                 gomp_PrintMessage(Text);
@@ -123,7 +123,7 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else if(gomp_StringMatch(Text , "meth$od")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             if(gomp_StringMatch(Text , "dire$ct")) {
                 (void)gomp_SetSurfaceMethod(0);
@@ -141,11 +141,11 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
         else if(gomp_StringMatch(Text , "plot")) {
             int OldContourLevels;
 
-            gomp_CopyString(Text ,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text ,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(Text[0] == (char)NULL) {
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("contour name missing");
                 return(TCL_ERROR);
             }
@@ -231,7 +231,7 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
             } 
 
             Loop = 0;
-            while(Text1[0] != (char)NULL) {
+            while(strlen(Text1) != 0) {
 
                 FTemp      = atof(Text1);
                 if(gomp_ColourName2RGB(Text2 , &FTemp1 , &FTemp2 , &FTemp3)) {
@@ -278,9 +278,9 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 }
                 Loop++;
                 (void) gomp_SetSurfaceControlON();
-                strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
-                strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+                strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                         BUFF_LEN-1);
             }
             (void)gomp_FinalizeContourLevels(ITemp - 1,Loop);
@@ -288,16 +288,16 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "alph$ablend")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(!(ITemp = gomp_CheckContourName(Text))) {
                 sprintf(Text,"no contour name match '%s'",Text);
                 gomp_PrintERROR(Text);
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             FTemp = atof(Text);
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 if(!gomp_GetContourLevels(ITemp - 1)) {
                     gomp_PrintERROR("no contour levels defined");
                     return(TCL_ERROR);
@@ -318,13 +318,13 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else if(gomp_StringMatch(Text , "smoo$th")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(!(ITemp = gomp_CheckContourName(Text))) {
                 sprintf(Text,"no contour name match '%s'",Text);
                 gomp_PrintERROR(Text);
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             ITemp1 = 0;
             if(gomp_StringMatch(Text , "on")) {
                 ITemp1 = 1;
@@ -336,8 +336,8 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 gomp_PrintERROR("wrong state (has to be 'on' or 'off'");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 if(!gomp_GetContourLevels(ITemp - 1)) {
                     gomp_PrintERROR("no contour levels defined");
                     return(TCL_ERROR);
@@ -363,13 +363,13 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "cull$face")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(!(ITemp = gomp_CheckContourName(Text))) {
                 sprintf(Text,"no contour name match '%s'",Text);
                 gomp_PrintERROR(Text);
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             ITemp1 = 0;
             if(gomp_StringMatch(Text , "on")) {
                 ITemp1 = 1;
@@ -381,8 +381,8 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 gomp_PrintERROR("wrong state (has to be 'on' or 'off'");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 if(!gomp_GetContourLevels(ITemp - 1)) {
                     gomp_PrintERROR("no contour levels defined");
                     return(TCL_ERROR);
@@ -408,13 +408,13 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "disp$lay")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(!(ITemp = gomp_CheckContourName(Text))) {
                 sprintf(Text,"no contour name match '%s'",Text);
                 gomp_PrintERROR(Text);
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             ITemp1 = 0;
             if(gomp_StringMatch(Text , "on")) {
                 ITemp1 = 1;
@@ -426,8 +426,8 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 gomp_PrintERROR("wrong state (has to be 'on' or 'off'");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 if(!gomp_GetContourLevels(ITemp - 1)) {
                     gomp_PrintERROR("no contour levels defined");
                     return(TCL_ERROR);
@@ -452,13 +452,13 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "type")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(!(ITemp = gomp_CheckContourName(Text))) {
                 sprintf(Text,"no contour name match '%s'",Text);
                 gomp_PrintERROR(Text);
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
             ITemp1 = CONTOUR_TYPE_SOLID;
 
@@ -475,8 +475,8 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 gomp_PrintERROR("wrong state (has to be 'mesh' or 'solid'");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] == (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) == 0) {
                 if(!gomp_GetContourLevels(ITemp - 1)) {
                     gomp_PrintERROR("no contour levels defined");
                     return(TCL_ERROR);
@@ -496,9 +496,9 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "mapp$ing")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("contour name missing for #1");
                 return(TCL_ERROR);
             }
@@ -508,9 +508,9 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 gomp_PrintERROR(Text1);
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(Text2[0] == (char)NULL) {
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("contour name missing for #2 (map this on #1)");
                 return(TCL_ERROR);
             }
@@ -526,9 +526,9 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "comb$ine")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(Text1[0] == (char)NULL) {
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("contour name missing for #1");
                 return(TCL_ERROR);
             }
@@ -538,9 +538,9 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                 gomp_PrintERROR(Text1);
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(Text2[0] == (char)NULL) {
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("structure number missing");
                 return(TCL_ERROR);
             }
@@ -554,13 +554,13 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
             return(TCL_OK);
         }
         else if(gomp_StringMatch(Text , "clip$plane")) {
-            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text1[0] == (char)NULL) {
+            gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text1) == 0) {
                 gomp_PrintERROR("clipping plane parameter(s) missing");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("clipping plane option parameters missing");
                 return(TCL_ERROR);
             }
@@ -629,14 +629,14 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                     (void)gomp_SetContourXYZClippingPlaneState( 1 , OFF);
                     return(TCL_OK);
                 }
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 (void)gomp_SetContourXYZClippingPlaneParameters( 1 , atof(Text2) , atof(Text3) , atof(Text4) , 
                                                                atof(Text5) , atof(Text6) , atof(Text7) ,
                                                                atof(Text8) , atof(Text9) , atof(Text10));
@@ -651,14 +651,14 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                     (void)gomp_SetContourXYZClippingPlaneState( 2 , OFF);
                     return(TCL_OK);
                 }
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 (void)gomp_SetContourXYZClippingPlaneParameters( 2 , atof(Text2) , atof(Text3) , atof(Text4) , 
                                                                atof(Text5) , atof(Text6) , atof(Text7) ,
                                                                atof(Text8) , atof(Text9) , atof(Text10));
@@ -673,14 +673,14 @@ int gomp_ContourCommand(ClientData clientdata, Tcl_Interp *interp,
                     (void)gomp_SetContourXYZClippingPlaneState( 3 , OFF);
                     return(TCL_OK);
                 }
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-                gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text5,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text6,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text7,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text8,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text9,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+                gomp_CopyString(Text10,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 (void)gomp_SetContourXYZClippingPlaneParameters( 3 , atof(Text2) , atof(Text3) , atof(Text4) , 
                                                                atof(Text5) , atof(Text6) , atof(Text7) ,
                                                                atof(Text8) , atof(Text9) , atof(Text10));
@@ -759,19 +759,19 @@ int ParseContourNameList(const char *TextI , const char *TextI1 , const char *Te
 
     gomp_CopyString(Text1,TextI1,BUFF_LEN);
     gomp_CopyString(Text2,TextI2,BUFF_LEN);
-    strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+    strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
             BUFF_LEN-1);
     Loop = 0;
-    while(Text1[0] != (char)NULL) {
+    while(strlen(Text1) != 0) {
 
         FTemp      = atof(Text1);
 
-        if(*Text2 != (char)NULL) {
+        if(strlen(Text2) != 0) {
             FTemp1 = atof(Text2);
         } else {
             FTemp1 = gomp_GetContourMin(ITemp1 - 1);
         }
-        if(*Text3 != (char)NULL) {
+        if(strlen(Text3) != 0) {
             FTemp2 = atof(Text3);
         } else {
             FTemp2 = gomp_GetContourMax(ITemp1 - 1);
@@ -810,11 +810,11 @@ int ParseContourNameList(const char *TextI , const char *TextI1 , const char *Te
         Loop++;
         (void) gomp_SetSurfaceControlON();
 
-        strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+        strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                 BUFF_LEN-1);
-        strncpy(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+        strncpy(Text2,gomp_GetNextFromParserStack(argc,NULL),
                 BUFF_LEN-1);
-        strncpy(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+        strncpy(Text3,gomp_GetNextFromParserStack(argc,NULL),
                 BUFF_LEN-1);
     }
     (void)gomp_FinalizeContourLevels(ITemp - 1 , Loop);

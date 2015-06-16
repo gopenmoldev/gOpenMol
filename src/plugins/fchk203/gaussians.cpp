@@ -60,6 +60,9 @@ int vecindx(int* k)
                             break;
                     case 3: return 11;
                             break;
+		    default:
+		      fprintf(stderr, "Error in gaussians.cpp:vecindx k[1]=%d\n", k[1]);
+		      return(-1);
                     }
                     break;
             case 1: switch(k[1])
@@ -70,6 +73,9 @@ int vecindx(int* k)
                             break;
                     case 2: return 15;
                             break;
+		    default:
+		      fprintf(stderr, "Error in gaussians.cpp:vecindx k[1]=%d\n", k[1]);
+		      return(-1);
                     }
             case 2: if(k[1])
                         return 13;
@@ -77,7 +83,15 @@ int vecindx(int* k)
                         return 14;
                     break;
             case 3: return 10;
+	      break;
+	    default:
+	      fprintf(stderr, "Error in gaussians.cpp:vecindx k[0]=%d\n", k[0]);
+	      return(-1);
             }
+      break;
+    default:
+      fprintf(stderr, "Error in gaussians.cpp:vecindx k[0]+k[1]+k[2]=%d\n", k[0]+k[1]+k[2]);
+      return(-1);
     }
 }
 
@@ -594,7 +608,7 @@ void FillResult(double* rspace,double* workspace,int AM1,int AM2,int nk,int nl)
             }
             else
             {
-                if(AM2=-2)
+                if(AM2 == -2)
                 {
                     rspace[ik*5]=2.0*workspace[ik*nl+2]-workspace[ik*nl]-workspace[ik*nl+1];
                     rspace[ik*5+1]=workspace[ik*nl+4];
@@ -1057,7 +1071,7 @@ int NuclearIntegral(GaussianOrbital *g1,GaussianOrbital *g2,AtomicCore *AC,doubl
             }
             else
             {
-                if(g2->AngMom=-2)
+                if(g2->AngMom == -2)
                 {
                     for(il=0;il<5;il++)
                         rspace[ik*5+il]*=Q;

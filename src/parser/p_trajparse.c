@@ -45,17 +45,17 @@ int gomp_TrajectoryCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* #1.1 file */
 
-        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
         if(gomp_StringMatch(Text1,"file"))
         {
 
-            if(!(FileType = gomp_ParseTrajType(gomp_GetNextFromParserStack(argc,(const char **)NULL)))) 
+            if(!(FileType = gomp_ParseTrajType(gomp_GetNextFromParserStack(argc,NULL)))) 
                 return(TCL_ERROR);
 
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
-            if(*Text == (char)NULL) {
+            if(strlen(Text) == 0) {
                 gomp_PrintERROR("Incomplete 'trajectory file' command, file name missing");
                 return(TCL_ERROR);
             }
@@ -79,13 +79,13 @@ int gomp_TrajectoryCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* limits */
         else if(gomp_StringMatch(Text1,"limi$ts")) {
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("values missing");
                 return(TCL_ERROR);
             }
-            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+            gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            gomp_CopyString(Text4,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
             if(!gomp_SetTrajectoryDisplayParams(
                    atoi(Text2),atoi(Text3),atoi(Text4)))
                 return(TCL_OK);
@@ -93,8 +93,8 @@ int gomp_TrajectoryCommand(ClientData clientdata, Tcl_Interp *interp,
                 return(TCL_ERROR);
         }
         else if(gomp_StringMatch(Text1,"acti$on")) {
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("value missing");
                 return(TCL_ERROR);
             }
@@ -113,14 +113,14 @@ int gomp_TrajectoryCommand(ClientData clientdata, Tcl_Interp *interp,
         }
 /* retrieve velocities/forces */
         else if(gomp_StringMatch(Text1,"retr$ieve")) {
-            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text2[0] == (char)NULL) {
+            gomp_CopyString(Text2,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text2) == 0) {
                 gomp_PrintERROR("retrieve either 'velocities of forces'");
                 return(TCL_ERROR);
             }
 
             if(gomp_StringMatch(Text2,"velo$cities")) {
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text3 , "on")) {
                     if(!gomp_SetVelocityRetrieveState(ON)) {
                         return(TCL_OK);
@@ -142,7 +142,7 @@ int gomp_TrajectoryCommand(ClientData clientdata, Tcl_Interp *interp,
                     return(TCL_ERROR);
                 }
             } else if(gomp_StringMatch(Text2,"forc$es")) {
-                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+                gomp_CopyString(Text3,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
                 if(gomp_StringMatch(Text3 , "on")) {
                     if(!gomp_SetForceRetrieveState(ON)) {
                         return(TCL_OK);
@@ -174,7 +174,7 @@ int gomp_TrajectoryCommand(ClientData clientdata, Tcl_Interp *interp,
 /* check that there is graphics */
             if(gomp_GetTermType() != GRAPHICS_AVAILABLE) return(TCL_OK);
 /*     done ...                 */
-            strncpy(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),
+            strncpy(Text1,gomp_GetNextFromParserStack(argc,NULL),
                     BUFF_LEN-1);
             if(gomp_StringMatch(Text1,"play")) {
 

@@ -43,13 +43,13 @@ int gomp_ScaleCommand(ClientData clientdata, Tcl_Interp *interp,
     strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
     if(gomp_StringMatch(Text , "gsc$ale")) {
 
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
 #ifdef ENABLE_GRAPHICS
 /* display */
         if(gomp_StringMatch(Text , "disp$lay")) {
-            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-            if(Text[0] != (char)NULL) {
+            gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+            if(strlen(Text) != 0) {
                 Scale = atof(Text);
                 if(!gomp_ScaleDisplay(Scale , Scale , Scale))
                     return(TCL_OK);

@@ -316,12 +316,12 @@ int gomp_SelectDistArray(const char *Seg1, const char *Res1, const char *Atm1,
 
     if(slong1 > 0 && slong2 > 0) {
 
-        if(*Type != (char)NULL)
+        if(*Type != '\0')
             LineType = atoi(Type);
         else
             LineType = 1;
 
-        if(*Colour != (char)NULL) {
+        if(*Colour != '\0') {
 
             if(gomp_ColourName2RGB(Colour , &RedC , &GreenC , &BlueC)) {
                 sprintf(OutText,"can't resolve colour name '%s', will use default colour",Colour);
@@ -445,14 +445,14 @@ int gomp_SelectAngArray(const char *Seg1, const char *Res1, const char *Atm1,
 
     if(slong1 > 0 && slong2 > 0 && slong3 > 0) {
 
-        if(*Type != (char)NULL) {
+        if(*Type != '\0') {
             LineType = atoi(Type);
         }
         else {
             LineType = 2;
         }
 
-        if(*Colour != (char)NULL) {
+        if(*Colour != '\0') {
 
             if(gomp_ColourName2RGB(Colour , &RedC , &GreenC , &BlueC)) {
                 sprintf(OutText,"can't resolve colour name '%s', will use default colour",Colour);
@@ -598,14 +598,14 @@ int gomp_SelectTorsArray(const char *Seg1, const char *Res1, const char *Atm1,
 
     if(slong1 > 0 && slong2 > 0 && slong3 > 0 && slong4 > 0) {
 
-        if(*Type != (char)NULL) {
+        if(*Type != '\0') {
             LineType = atoi(Type);
         }
         else {
             LineType = 3;
         }
 
-        if(*Colour != (char)NULL) {
+        if(*Colour != '\0') {
 
             if(gomp_ColourName2RGB(Colour , &RedC , &GreenC , &BlueC)) {
                 sprintf(OutText,"can't resolve colour name '%s', will use default colour",Colour);
@@ -1372,7 +1372,7 @@ int   gomp_ManipulateTimeSeries(int Type , int Action ,
     static float *Array1;
     static float *Array2;
 
-    if(Text1[0] == (char)NULL) {
+    if(Text1[0] == '\0') {
         gomp_PrintERROR("index to list is missing");
         return(1);
     }
@@ -1391,7 +1391,7 @@ int   gomp_ManipulateTimeSeries(int Type , int Action ,
         Array1 = DistanceSeries[Mindex - 1].Value;
         if(Action == COPYNR ||
            Action == ADDNR) {
-            if(Text2[0] == (char)NULL) {
+            if(Text2[0] == '\0') {
                 gomp_PrintERROR("index to second list is missing");
                 return(1);
             }
@@ -1411,7 +1411,7 @@ int   gomp_ManipulateTimeSeries(int Type , int Action ,
         Array1 = AngleSeries[Mindex - 1].Value;
         if(Action == COPYNR ||
            Action == ADDNR) {
-            if(Text2[0] == (char)NULL) {
+            if(Text2[0] == '\0') {
                 gomp_PrintERROR("index to second list is missing");
                 return(1);
             }
@@ -1431,7 +1431,7 @@ int   gomp_ManipulateTimeSeries(int Type , int Action ,
         Array1 = TorsionSeries[Mindex - 1].Value;
         if(Action == COPYNR ||
            Action == ADDNR) {
-            if(Text2[0] == (char)NULL) {
+            if(Text2[0] == '\0') {
                 gomp_PrintERROR("index to second list is missing");
                 return(1);
             }
@@ -2364,13 +2364,13 @@ int   gomp_CopyTimeseries2Clipboard(int Type , int Which)
                 if(!i) {
                     String = gomp_AllocateCharVector(strlen(Text) + 1);
                     strncpy(String,Text,strlen(Text));
-                    String[strlen(Text)] = (char)NULL;
+                    String[strlen(Text)] = '\0';
                 }
                 else {
                     String = gomp_ReallocateCharVector(String , 
                                                     strlen(Text) + strlen(String) + 1);
                     strncat(String,Text,strlen(Text));
-                    String[strlen(String)] = (char)NULL;
+                    String[strlen(String)] = '\0';
                 }
             }
             (void)gomp_CopyText2Clipboard(String);
@@ -2392,13 +2392,13 @@ int   gomp_CopyTimeseries2Clipboard(int Type , int Which)
                 if(!i) {
                     String = gomp_AllocateCharVector(strlen(Text) + 1);
                     strncpy(String,Text,strlen(Text));
-                    String[strlen(Text)] = (char)NULL;
+                    String[strlen(Text)] = '\0';
                 }
                 else {
                     String = gomp_ReallocateCharVector(String , 
                                                     strlen(Text) + strlen(String) + 1);
                     strncat(String,Text,strlen(Text));
-                    String[strlen(String)] = (char)NULL;
+                    String[strlen(String)] = '\0';
                 }
             }
             (void)gomp_CopyText2Clipboard(String);
@@ -2420,13 +2420,13 @@ int   gomp_CopyTimeseries2Clipboard(int Type , int Which)
                 if(!i) {
                     String = gomp_AllocateCharVector(strlen(Text) + 1);
                     strncpy(String,Text,strlen(Text));
-                    String[strlen(Text)] = (char)NULL;
+                    String[strlen(Text)] = '\0';
                 }
                 else {
                     String = gomp_ReallocateCharVector(String , 
                                                     strlen(Text) + strlen(String) + 1);
                     strncat(String,Text,strlen(Text));
-                    String[strlen(String)] = (char)NULL;
+                    String[strlen(String)] = '\0';
                 }
             }
             (void)gomp_CopyText2Clipboard(String);
@@ -2468,13 +2468,13 @@ int   gomp_CopyCorrelationArray2Clipboard()
             if(!i) {
                 String = gomp_AllocateCharVector(strlen(Text) + 1);
                 strncpy(String,Text,strlen(Text));
-                String[strlen(Text)] = (char)NULL;
+                String[strlen(Text)] = '\0';
             }
             else {
                 String = gomp_ReallocateCharVector(String , 
                                                 strlen(Text) + strlen(String) + 1);
                 strncat(String,Text,strlen(Text));
-                String[strlen(String)] = (char)NULL;
+                String[strlen(String)] = '\0';
             }
         }
         (void)gomp_CopyText2Clipboard(String);

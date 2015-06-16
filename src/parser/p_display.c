@@ -76,8 +76,8 @@ int gomp_DisplayCommand(ClientData clientdata, Tcl_Interp *interp,
 
 /* check to see if the event queue check is not to be done */
         strncpy(Text,gomp_GetNextFromParserStack(argc , argv),BUFF_LEN-1);
-        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
-        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,(const char **)NULL),BUFF_LEN);
+        gomp_CopyString(Text,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
+        gomp_CopyString(Text1,gomp_GetNextFromParserStack(argc,NULL),BUFF_LEN);
 
 /* an attemp to avoid some problems introduced in the complicated event handling */
         (void)gomp_SetMouseButtonState(OFF);
@@ -85,7 +85,7 @@ int gomp_DisplayCommand(ClientData clientdata, Tcl_Interp *interp,
         LoopDisplayState = 0;
 
         ITemp = 0;
-        if(Text[0] != (char)NULL) {
+        if(strlen(Text) != 0) {
             if(gomp_StringMatch(Text , "noch$eck")) {
                 gomp_DrawSceneCallback();
                 return(TCL_OK);

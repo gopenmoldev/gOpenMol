@@ -186,9 +186,9 @@ int gomp_PushText2AnnotateStack(int   Index , const char *Text , const char *Fon
 
         TextManager[0].txt_msg = gomp_AllocateCharVector(strlen(Text) + 1);
         strncpy(TextManager[0].txt_msg , Text , strlen(Text));
-        TextManager[0].txt_msg[strlen(Text)] = (char)NULL;
+        TextManager[0].txt_msg[strlen(Text)] = '\0';
         TextManager[0].txt_fnt = gomp_AllocateCharVector(strlen(Font) + 1);
-        TextManager[0].txt_fnt[strlen(Font)] = (char)NULL;
+        TextManager[0].txt_fnt[strlen(Font)] = '\0';
 
         strncpy(TextManager[0].txt_fnt , Font , strlen(Font));
 
@@ -218,11 +218,11 @@ int gomp_PushText2AnnotateStack(int   Index , const char *Text , const char *Fon
 
         TextManager[txt_deep].txt_msg = gomp_AllocateCharVector(strlen(Text) + 1);
         strncpy(TextManager[txt_deep].txt_msg , Text , strlen(Text));
-        TextManager[txt_deep].txt_msg[strlen(Text)] = (char)NULL;
+        TextManager[txt_deep].txt_msg[strlen(Text)] = '\0';
 
         TextManager[txt_deep].txt_fnt = gomp_AllocateCharVector(strlen(Font) + 1);
         strncpy(TextManager[txt_deep].txt_fnt , Font , strlen(Font));
-        TextManager[txt_deep].txt_fnt[strlen(Font)] = (char)NULL;
+        TextManager[txt_deep].txt_fnt[strlen(Font)] = '\0';
 
         TextManager[txt_deep].txt_col[0]    = Red;
         TextManager[txt_deep].txt_col[1]    = Green;

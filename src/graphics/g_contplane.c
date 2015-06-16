@@ -245,18 +245,18 @@ int gomp_PrepareCutPlaneZ(int Which , float Zcoord ,
 
     sumxyz         = gomp_GetTranslateArray();
 
-    if(Text1[0] != (char)NULL)
+    if(strlen(Text1) != 0)
         CutPlane.MinDZ = atof(Text1);
     else
         CutPlane.MinDZ = ContourInfo[Which].min;
 
-    if(Text2[0] != (char)NULL)
+    if(strlen(Text2) != 0)
         CutPlane.MaxDZ = atof(Text2);
     else
         CutPlane.MaxDZ = ContourInfo[Which].max;
 
     CutPlane.PlotManZ = CUTPLANE_NO_ACTION;
-    if(Text3[0] != (char)NULL) {
+    if(strlen(Text3) != 0) {
         if(      gomp_StringMatch(Text3 , "sqrt")) {
             CutPlane.PlotManZ = CUTPLANE_SQRT_ACTION;
         } 
@@ -700,18 +700,18 @@ int gomp_PrepareCutPlaneY(int Which , float Ycoord ,
 
     sumxyz         = gomp_GetTranslateArray();
 
-    if(Text1[0] != (char)NULL)
+    if(strlen(Text1) != 0)
         CutPlane.MinDY = atof(Text1);
     else
         CutPlane.MinDY = ContourInfo[Which].min;
 
-    if(Text2[0] != (char)NULL)
+    if(strlen(Text2) != 0)
         CutPlane.MaxDY = atof(Text2);
     else
         CutPlane.MaxDY = ContourInfo[Which].max;
 
     CutPlane.PlotManY = CUTPLANE_NO_ACTION;
-    if(Text3[0] != (char)NULL) {
+    if(strlen(Text3) != 0) {
         if(      gomp_StringMatch(Text3 , "sqrt")) {
             CutPlane.PlotManY = CUTPLANE_SQRT_ACTION;
         } 
@@ -1147,18 +1147,18 @@ int gomp_PrepareCutPlaneX(int Which , float Xcoord ,
 
     sumxyz         = gomp_GetTranslateArray();
 
-    if(Text1[0] != (char)NULL)
+    if(strlen(Text1) != 0)
         CutPlane.MinDX = atof(Text1);
     else
         CutPlane.MinDX = ContourInfo[Which].min;
 
-    if(Text2[0] != (char)NULL)
+    if(strlen(Text2) != 0)
         CutPlane.MaxDX = atof(Text2);
     else
         CutPlane.MaxDX = ContourInfo[Which].max;
 
     CutPlane.PlotManX = CUTPLANE_NO_ACTION;
-    if(Text3[0] != (char)NULL) {
+    if(strlen(Text3) != 0) {
         if(      gomp_StringMatch(Text3 , "sqrt")) {
             CutPlane.PlotManX = CUTPLANE_SQRT_ACTION;
         } 
@@ -2290,22 +2290,22 @@ int gomp_PrepareCutPlaneSpectrumZ(int Which   , const char *Text0,
 
     CutPlaneSpectrum.InUse = 0;
 
-    if(Text0[0] != (char)NULL)
+    if(strlen(Text0) != 0)
         CutPlaneSpectrum.NumBins = atoi(Text0);
     else
         CutPlaneSpectrum.NumBins = NUMBER_BINS;
 
-    if(Text1[0] != (char)NULL)
+    if(strlen(Text1) != 0)
         CutPlaneSpectrum.Min = atof(Text1);
     else
         CutPlaneSpectrum.Min = ContourInfo[Which].min;
 
-    if(Text2[0] != (char)NULL)
+    if(strlen(Text2) != 0)
         CutPlaneSpectrum.Max = atof(Text2);
     else
         CutPlaneSpectrum.Max = ContourInfo[Which].max;
 
-    if(Text3[0] != (char)NULL)
+    if(strlen(Text3) != 0)
         CutPlaneSpectrum.BinCut = atof(Text3);
     else
         CutPlaneSpectrum.BinCut = 1.0;
@@ -2546,22 +2546,22 @@ int gomp_PrepareCutPlaneSpectrumY(int Which   , const char *Text0,
 
     CutPlaneSpectrum.InUse = 0;
 
-    if(Text0[0] != (char)NULL)
+    if(strlen(Text0) != 0)
         CutPlaneSpectrum.NumBins = atoi(Text0);
     else
         CutPlaneSpectrum.NumBins = NUMBER_BINS;
 
-    if(Text1[0] != (char)NULL)
+    if(strlen(Text1) != 0)
         CutPlaneSpectrum.Min = atof(Text1);
     else
         CutPlaneSpectrum.Min = ContourInfo[Which].min;
 
-    if(Text2[0] != (char)NULL)
+    if(strlen(Text2) != 0)
         CutPlaneSpectrum.Max = atof(Text2);
     else
         CutPlaneSpectrum.Max = ContourInfo[Which].max;
 
-    if(Text3[0] != (char)NULL)
+    if(strlen(Text3) != 0)
         CutPlaneSpectrum.BinCut = atof(Text3);
     else
         CutPlaneSpectrum.BinCut = 1.0;
@@ -2800,22 +2800,22 @@ int gomp_PrepareCutPlaneSpectrumX(int Which   , const char *Text0,
 
     CutPlaneSpectrum.InUse = 0;
 
-    if(Text0[0] != (char)NULL)
+    if(strlen(Text0) != 0)
         CutPlaneSpectrum.NumBins = atoi(Text0);
     else
         CutPlaneSpectrum.NumBins = NUMBER_BINS;
 
-    if(Text1[0] != (char)NULL)
+    if(strlen(Text1) != 0)
         CutPlaneSpectrum.Min = atof(Text1);
     else
         CutPlaneSpectrum.Min = ContourInfo[Which].min;
 
-    if(Text2[0] != (char)NULL)
+    if(strlen(Text2) != 0)
         CutPlaneSpectrum.Max = atof(Text2);
     else
         CutPlaneSpectrum.Max = ContourInfo[Which].max;
 
-    if(Text3[0] != (char)NULL)
+    if(strlen(Text3) != 0)
         CutPlaneSpectrum.BinCut = atof(Text3);
     else
         CutPlaneSpectrum.BinCut = 1.0;
@@ -3121,13 +3121,13 @@ int gomp_PrepareCutPlaneXYZ(int Alt , int Which ,
     p3[2] = atof(Text9);
 
 /* scale min */
-    if(*Text10 != (char)NULL) {
+    if(strlen(Text10) != 0) {
         ScaleMin = atof(Text10);
     } else {
         ScaleMin = ContourInfo[Which].min;
     }
 /* scale max */
-    if(*Text11 != (char)NULL) {
+    if(strlen(Text11) != 0) {
         ScaleMax = atof(Text11);
     } else {
         ScaleMax = ContourInfo[Which].max;

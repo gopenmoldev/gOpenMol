@@ -404,7 +404,7 @@ int gomp_OpenLogFile()
 
     LogFile.log_p = fopen(Text,"w");
     
-    if(LogFile.log_p == (FILE *)NULL) {
+    if(LogFile.log_p == NULL) {
         gomp_PrintERROR("?Can't open log file ");
         LogFile.ok = 1;
         return(1);
@@ -439,7 +439,7 @@ int gomp_WriteToLogFile(const char *text)
 {
     if(LogFile.ok) return(0);  /* don't write to log file */
 
-    if(*text == (char)NULL) return(0);
+    if(strlen(text) == 0) return(0);
 
     if(fprintf(LogFile.log_p,"%s\n",text) < 0) {
         printf("?Can't write to log file\n");
@@ -892,7 +892,7 @@ int gomp_Get_proc_info()       /* get process memory */
 
     Working = GetModuleName();
 
-    if(Working[0] == (char)NULL) {
+    if(strlen(Working) == 0) {
         gomp_PrintWARNING("?Lost the program name");
         return(1);
     }
@@ -2018,7 +2018,7 @@ int gomp_ResetNameStack()
 const char *gomp_ShowAtomNameStack()
 /*************************************************************************/
 {
-    static char *AtomNameList = (char *)NULL;
+    static char *AtomNameList = NULL;
     char Text[BUFF_LEN];
     int  i;
 
@@ -2031,7 +2031,7 @@ const char *gomp_ShowAtomNameStack()
         sprintf(Text,"{ } { }");
         AtomNameList = gomp_AllocateCharVector(strlen(Text) + 1);
         strncpy(AtomNameList,Text,strlen(Text));
-        AtomNameList[strlen(Text)] = (char)NULL;
+        AtomNameList[strlen(Text)] = '\0';
 
     } else {
         for(i = 0 ; i < atnam_stack_deep ; i++) {
@@ -2039,11 +2039,11 @@ const char *gomp_ShowAtomNameStack()
             if(i) {
                 AtomNameList = gomp_ReallocateCharVector(AtomNameList , strlen(AtomNameList) + strlen(Text) + 1);
                 strncat(AtomNameList,Text,strlen(Text));
-                AtomNameList[strlen(AtomNameList)] = (char) NULL;
+                AtomNameList[strlen(AtomNameList)] = '\0';
             } else {
                 AtomNameList = gomp_AllocateCharVector(strlen(Text) + 1);
                 strncpy(AtomNameList,Text,strlen(Text));
-                AtomNameList[strlen(Text)] = (char)NULL;
+                AtomNameList[strlen(Text)] = '\0';
             }
         }
     }
@@ -2060,7 +2060,7 @@ const char *gomp_ShowAtomNameStack()
 const char *gomp_ShowResidueNameStack()
 /*************************************************************************/
 {
-    static char *ResidueNameList = (char *)NULL;
+    static char *ResidueNameList = NULL;
     char Text[BUFF_LEN];
     int  i;
 
@@ -2073,7 +2073,7 @@ const char *gomp_ShowResidueNameStack()
         sprintf(Text,"{ } { }");
         ResidueNameList = gomp_AllocateCharVector(strlen(Text) + 1);
         strncpy(ResidueNameList,Text,strlen(Text));
-        ResidueNameList[strlen(Text)] = (char)NULL;
+        ResidueNameList[strlen(Text)] = '\0';
 
     } else {
         for(i = 0 ; i < resnam_stack_deep ; i++) {
@@ -2081,11 +2081,11 @@ const char *gomp_ShowResidueNameStack()
             if(i) {
                 ResidueNameList = gomp_ReallocateCharVector(ResidueNameList , strlen(ResidueNameList) + strlen(Text) + 1);
                 strncat(ResidueNameList,Text,strlen(Text));
-                ResidueNameList[strlen(ResidueNameList)] = (char) NULL;
+                ResidueNameList[strlen(ResidueNameList)] = '\0';
             } else {
                 ResidueNameList = gomp_AllocateCharVector(strlen(Text) + 1);
                 strncpy(ResidueNameList,Text,strlen(Text));
-                ResidueNameList[strlen(Text)] = (char)NULL;
+                ResidueNameList[strlen(Text)] = '\0';
             }
         }
     }
@@ -2096,7 +2096,7 @@ const char *gomp_ShowResidueNameStack()
 const char *gomp_ShowSegmentNameStack()
 /*************************************************************************/
 {
-    static char *SegmentNameList = (char *)NULL;
+    static char *SegmentNameList = NULL;
     char Text[BUFF_LEN];
     int  i;
 
@@ -2109,7 +2109,7 @@ const char *gomp_ShowSegmentNameStack()
         sprintf(Text,"{ } { }");
         SegmentNameList = gomp_AllocateCharVector(strlen(Text) + 1);
         strncpy(SegmentNameList,Text,strlen(Text));
-        SegmentNameList[strlen(Text)] = (char)NULL;
+        SegmentNameList[strlen(Text)] = '\0';
 
     } else {
         for(i = 0 ; i < segment_stack_deep ; i++) {
@@ -2117,11 +2117,11 @@ const char *gomp_ShowSegmentNameStack()
             if(i) {
                 SegmentNameList = gomp_ReallocateCharVector(SegmentNameList , strlen(SegmentNameList) + strlen(Text) + 1);
                 strncat(SegmentNameList,Text,strlen(Text));
-                SegmentNameList[strlen(SegmentNameList)] = (char) NULL;
+                SegmentNameList[strlen(SegmentNameList)] = '\0';
             } else {
                 SegmentNameList = gomp_AllocateCharVector(strlen(Text) + 1);
                 strncpy(SegmentNameList,Text,strlen(Text));
-                SegmentNameList[strlen(Text)] = (char)NULL;
+                SegmentNameList[strlen(Text)] = '\0';
             }
         }
     }
@@ -2150,13 +2150,13 @@ int gomp_ClosePipe2Program()
 /*************************************************************************/
 {
     /* Close pipe and print return value of CHKDSK. */
-    if(chkdsk == (FILE *)NULL) return(0);
+    if(chkdsk == NULL) return(0);
 #if defined(WIN32)
     _pclose( chkdsk );
 #else
     pclose( chkdsk );
 #endif
-    chkdsk = (FILE *)NULL;
+    chkdsk = NULL;
 
     return(0);
 }
@@ -2165,7 +2165,7 @@ int gomp_SendPipe2Program(const char *Command)
 /*************************************************************************/
 {
 
-    if(chkdsk == (FILE *)NULL) {
+    if(chkdsk == NULL) {
         gomp_PrintERROR("no pipe open to write into");
         return(1);
     }

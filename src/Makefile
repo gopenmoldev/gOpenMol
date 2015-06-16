@@ -1,0 +1,49 @@
+##############################################################################
+#                        Copyright (c) 2002 - 2003 by:
+#          Leif Laaksonen, CSC - Scientific Computing Ltd, ESPOO, FINLAND 
+#                      Confidential unpublished property of 
+#                              Leif Laaksonen   
+#                            All rights reserved
+#
+#          Coded by: Eero Häkkinen
+##############################################################################
+
+top_builddir    = .
+top_srcdir      = .
+builddir        = .
+srcdir          = .
+
+build: FORCE ;
+
+all: build-all FORCE ;
+
+include config.mk
+
+include $(makedir)/$(make_config).mk
+
+include $(makedir)/gomapi.mk
+
+include $(makedir)/compile.mk
+
+include $(makedir)/build.mk
+
+include $(makedir)/install.mk
+
+distclean: clean clean-configure-results FORCE
+	-cd plugins && $(MAKE) distclean
+	@$(set_show);for dir in $(SUBDIRS) . utility; do \
+	    $$show $(RM) $$dir/Makefile; \
+	    $(RM) $$dir/Makefile; \
+	done
+
+maintainer-clean: clean-all-mk distclean FORCE
+	$(RM_R) '$(top_builddir)'autom4te.cache
+	$(RM) '$(top_builddir)'configure
+
+clean-configure-results: FORCE
+	$(RM) config.h config.h.in config.mk
+	$(RM) config.cache config.log config.status libtool
+
+FORCE:
+
+.PHONY: FORCE

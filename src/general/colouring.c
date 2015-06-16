@@ -121,15 +121,22 @@ int gomp_ReadColourTable(const char *tbl_name)
     ColLoop--;
 
 /* 1 line is a comment */
-    fgets(inputl,COL_FILE_LINE_LEN,File_p);   /*  */
-
+    if (fgets(inputl,COL_FILE_LINE_LEN,File_p) == NULL) {   /*  */
+      gomp_PrintERROR("? Colour table file - ERROR");
+      gomp_PrintMessage("$ File is empty");
+      return(1);
+    }
 /*  read rest of the file (main loop)    */
 
     col_tbl_max = 0;
 
     for(i = 0 ; i < ColLoop ; i++) {
 
-        fgets(inputl,COL_FILE_LINE_LEN,File_p);
+      if (fgets(inputl,COL_FILE_LINE_LEN,File_p) == NULL) {
+	gomp_PrintERROR("? Colour table file - ERROR");
+	gomp_PrintMessage("$ Colour entry missing");
+	return(1);
+      }
 
         *chelp = '\0';
 

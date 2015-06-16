@@ -1,3 +1,8 @@
+#include <sys/types.h>
+#include <inttypes.h>
+#include <stdlib.h>
+#include <limits.h>
+//#include <maindefs.h>
 #include <gopenmolext.h>
 #include <tcl.h>
 #include "gaussians.h"
@@ -362,7 +367,7 @@ int GetMolecule(ClientData cd,Tcl_Interp* ti,int argc,TCL_CONST char** argv)
     return TCL_OK;
 }
 
-int InList(char s,char* p)
+int InList(char s, const char* p)
 {
     int i;
 
@@ -374,7 +379,7 @@ int InList(char s,char* p)
     return 0;
 }
 
-void ParseAndDiscard(char* stbp,char* pl)
+void ParseAndDiscard(char* stbp, const char* pl)
 {
     int i,len,indx;
 
@@ -391,7 +396,7 @@ void ParseAndDiscard(char* stbp,char* pl)
         stbp[i-indx]=stbp[i];
 }
 
-int ParseAndKeep(char* stbp,char* pl,char* ks)
+int ParseAndKeep(char* stbp, const char* pl,char* ks)
 {
     int i,len,indx,k;
 
@@ -470,7 +475,7 @@ int SaveGrid(ClientData cd,Tcl_Interp* ti,int argc,TCL_CONST char** argv)
     int tival;
     FILE* of;
 
-    data=(float*)atoi(argv[1]);
+    data=(float*)strtol(argv[1], NULL, 10);  // This is probably not safe, we should use a strto* function of the correct size for a float *
     of=fopen(argv[2],"wb");
     if(of==NULL)
     {
